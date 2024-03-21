@@ -58,8 +58,12 @@
 - 패키지 : lowerCase, domain별 패키지 만들기
 - 파일 : camelCase
 - 클래스/메서드/필드값 : pascalCase
-- DTO : Request/Response 내부 클래스에 목적지정보를 담기
-  - e.g. Request : UploadDTO, UpdateDTO, Response : ToEmployerDTO, ToUserDTO
+- DTO : Request/Response + 목적지 정보 (ServiceName/ControllerName) + 기타(전치사+명사)
+  - e.g. Request : CreateDTO, UpdateDTO, Response : EmployerDTO, DetailDTO...
+- Controller : post/detail&listings/update/delete
+- Service : createEntity/getEntity/setEntity/removeEntity
+- Repository : save/find/update/delete + By/With + Entity&Record
+- css : ?
 ### 회의
 - 매일 회의록 작성
   - 진행 상황 보고

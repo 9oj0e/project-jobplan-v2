@@ -10,27 +10,27 @@ public class UserService {
     private final UserJpaRepository userJpaRepository;
 
     @Transactional
-    public User addUser(UserRequest.SaveDTO requestDTO) {
+    public User createUser(UserRequest.JoinDTO requestDTO) {
         User user = requestDTO.toEntity();
 
         return userJpaRepository.save(user);
     }
 
-    public User findUser(UserRequest.LoginDTO requestDTO) {
+    public User getUser(UserRequest.LoginDTO requestDTO) {
         User sessionUser = userJpaRepository.findByUsernameAndPassword(requestDTO.getUsername(), requestDTO.getPassword()).get();
 
         return sessionUser;
     }
 
-    public UserResponse.DTO findUser(int id, User sessionUser) {
+    public UserResponse.DTO getUser(int id, User sessionUser) {
         User user = userJpaRepository.findById(id).get();
 
         return new UserResponse.DTO(user, sessionUser);
     }
 
     @Transactional // 회원수정
-    public User modifyUser(int id, UserRequest.UpdateDTO reqDTO, User sessionUser) {
-        // todo : update
+    public User setUser(int id, UserRequest.UpdateDTO reqDTO, User sessionUser) {
+        // todo : 구직자, 구인자가 필요한 정보를 여기서 받도록.
         User user = userJpaRepository.findById(id).get();
 
         user.setPassword(reqDTO.getPassword());
