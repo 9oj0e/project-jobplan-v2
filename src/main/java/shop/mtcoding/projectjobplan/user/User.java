@@ -1,7 +1,9 @@
 package shop.mtcoding.projectjobplan.user;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Timestamp;
@@ -9,6 +11,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@NoArgsConstructor
 @Entity
 @Data
 @Table(name = "user_tb")
@@ -20,8 +23,8 @@ public class User {
     private String password;
     private String name;
   
-    private String birthdate; // Timestamp..
-    private char gender; // 'M' or 'F'
+    private Timestamp birthdate;
+    private Character gender; // 'M' or 'F'
     private String phoneNumber;
     private String address;
     private String email;
@@ -31,4 +34,21 @@ public class User {
     private String employerIdNumber; // 사업자번호
     private String businessName; // 기업이름
     private Timestamp createdAt;
+
+    @Builder
+    public User(Integer id, String username, String password, String name, Timestamp birthdate, Character gender, String phoneNumber, String address, String email, Boolean isEmployer, String employerIdNumber, String businessName, Timestamp createdAt) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.birthdate = birthdate;
+        this.gender = gender;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.email = email;
+        this.isEmployer = isEmployer;
+        this.employerIdNumber = employerIdNumber;
+        this.businessName = businessName;
+        this.createdAt = createdAt;
+    }
 }
