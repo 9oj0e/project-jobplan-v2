@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 public class UserRequest {
 
     @Data
-    public static class SaveDTO {
+    public static class JoinDTO {
         // 회원 정보
         private String username;
         private String password;

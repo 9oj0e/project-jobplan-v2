@@ -31,8 +31,8 @@ public class UserController {
     }
 
     @PostMapping("/join")
-    public String join(UserRequest.SaveDTO requestDTO) {
-        userService.addUser(requestDTO);
+    public String join(UserRequest.JoinDTO requestDTO) {
+        userService.createUser(requestDTO);
 
         return "redirect:/login-form";
     }
@@ -45,7 +45,7 @@ public class UserController {
 
     @PostMapping("/login")
     public String login(UserRequest.LoginDTO requestDTO) {
-        User sessionUser = userService.findUser(requestDTO);
+        User sessionUser = userService.getUser(requestDTO);
         session.setAttribute("sessionUser", sessionUser);
       
         return "redirect:/";
@@ -61,7 +61,7 @@ public class UserController {
     @GetMapping("/users/{userId}/update-form")
     public String updateForm(@PathVariable Integer userId, HttpServletRequest request) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        UserResponse.DTO user = userService.findUser(userId, sessionUser);
+        UserResponse.DTO user = userService.getUser(userId, sessionUser);
 
         request.setAttribute("user", user);
         // 기업 회원인지..
@@ -74,8 +74,7 @@ public class UserController {
     @PostMapping("/users/{userId}/update")
     public String update(@PathVariable Integer userId, UserRequest.UpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        User newSessionUser = userService.modifyUser(userId, reqDTO, sessionUser);
-
+        User newSessionUser = userService.setUser(userId, reqDTO, sessionUser);
         session.setAttribute("sessionUser", newSessionUser);
 
         return "redirect:/";
