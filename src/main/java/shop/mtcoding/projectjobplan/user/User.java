@@ -4,12 +4,10 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @NoArgsConstructor
 @Entity
@@ -23,7 +21,7 @@ public class User {
     private String password;
     private String name;
   
-    private Timestamp birthdate;
+    private String birthdate;
     private Character gender; // 'M' or 'F'
     private String phoneNumber;
     private String address;
@@ -33,10 +31,11 @@ public class User {
     private Boolean isEmployer; // 사업자인지 userId, employerId
     private String employerIdNumber; // 사업자번호
     private String businessName; // 기업이름
+    @CreationTimestamp
     private Timestamp createdAt;
 
     @Builder
-    public User(Integer id, String username, String password, String name, Timestamp birthdate, Character gender, String phoneNumber, String address, String email, Boolean isEmployer, String employerIdNumber, String businessName, Timestamp createdAt) {
+    public User(Integer id, String username, String password, String name, String birthdate, Character gender, String phoneNumber, String address, String email, Boolean isEmployer, String employerIdNumber, String businessName, Timestamp createdAt) {
         this.id = id;
         this.username = username;
         this.password = password;

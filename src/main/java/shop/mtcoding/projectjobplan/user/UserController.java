@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequiredArgsConstructor
 @Controller
 public class UserController {
-
-    private final UserService userService;
     private final HttpSession session;
-
-    @GetMapping("/user/join-type")
+    private final UserService userService;
+  
+    @GetMapping("/join-type")
     public String joinType() {
+
         return "/user/join-type";
     }
 
@@ -29,13 +29,15 @@ public class UserController {
     }
 
     @PostMapping("/join")
-    public String join() {
+    public String join(UserRequest.SaveDTO requestDTO) {
+        userService.save(requestDTO);
 
         return "redirect:/login-form";
     }
 
     @GetMapping("/login-form")
     public String loginForm() {
+      
         return "/user/login-form";
     }
 
@@ -43,12 +45,14 @@ public class UserController {
     public String login(UserRequest.LoginDTO reqDTO) {
         User sessionUser = userService.findUser(reqDTO);
         session.setAttribute("sessionUser", sessionUser);
+      
         return "redirect:/";
     }
 
     @GetMapping("/logout")
     public String logout() {
         session.invalidate();
+      
         return "redirect:/";
     }
 
