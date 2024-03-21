@@ -20,15 +20,15 @@ spring:
   h2:
     console:
       enabled: true
-  sql:
-    init:
-      data-locations:
-        - classpath:db/data.sql
+#  sql:
+#    init:
+#      data-locations:
+#        - classpath:db/data.sql
   jpa:
     hibernate:
       ddl-auto: create
     show-sql: true
     properties:
       hibernate:
-        format_sql: false
+        format_sql: true
     defer-datasource-initialization: true
