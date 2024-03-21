@@ -24,17 +24,31 @@ public class UserService {
         return sessionUser;
     }
 
-    public UserResponse.DTO findUser(int id) {
+    // 회원수정폼
+    public UserResponse.DTO findUser(int id, User sessionUser) {
         // todo : updateForm
+        User user = userJpaRepository.findById(id).get();
 
-        return null;
+        return new UserResponse.DTO(user, sessionUser);
     }
 
-    @Transactional
-    public UserResponse.DTO modifyUser(int id) {
+    @Transactional // 회원수정
+    public User modifyUser(int id, UserRequest.UpdateDTO reqDTO, User sessionUser) {
         // todo : update
+        User user = userJpaRepository.findById(id).get();
 
-        return null;
+        user.setPassword(reqDTO.getPassword());
+        user.setGender(reqDTO.getGender());
+        user.setPhoneNumber(reqDTO.getPhoneNumber());
+        user.setAddress(reqDTO.getAddress());
+        user.setEmail(reqDTO.getEmail());
+
+        if (sessionUser.getIsEmployer()) {
+            user.setEmployerIdNumber(reqDTO.getEmployerIdNumber());
+            user.setBusinessName(reqDTO.getBusinessName());
+        }
+
+        return user;
     }
 
     @Transactional

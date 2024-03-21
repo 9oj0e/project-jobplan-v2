@@ -4,56 +4,57 @@ INSERT INTO user_tb
  is_employer, employer_id_number, business_name, created_at)
 VALUES ('emp1', '1234', '정현조', '1996-04-01', 'M', '01012345678', '부산', 'jjh123@naver.com',
         true, '0128275512', '네이버', now());
--- INSERT INTO user_tb
--- (username, password, name, birthdate, gender, phone_number, address, email,
---  is_employer, employer_id_number, business_name, created_at)
--- VALUES ('emp2', '1234', '류재성', '1991-10-01', 'M', '01012345678', '부산', 'rjs123@kakao.com',
---         true, '0128275512', '카카오', now());
--- INSERT INTO user_tb
--- (username, password, name, birthdate, gender, phone_number, address, email,
---  is_employer, employer_id_number, business_name, created_at)
--- VALUES ('emp3', '1234', '김정수', '1996-08-01', 'M', '01012345678', '부산', 'kjs123@line.com',
---         true, '0128275512', '라인', now());
--- INSERT INTO user_tb
--- (username, password, name, birthdate, gender, phone_number, address, email,
---  is_employer, employer_id_number, business_name, created_at)
--- VALUES ('emp4', '1234', '김성재', '1998-05-01', 'M', '01012345678', '부산', 'ksj123@coupang.com',
---         true, '0128275512', '쿠팡', now());
--- INSERT INTO user_tb
--- (username, password, name, birthdate, gender, phone_number, address, email,
---  is_employer, employer_id_number, business_name, created_at)
--- VALUES ('emp5', '1234', '최윤정', '2000-04-01', 'F', '01012345678', '부산', 'cyj123@baemin.com',
---         true, '0128275512', '배달의민족', now());
--- INSERT INTO user_tb
--- (username, password, name, birthdate, gender, phone_number, address, email,
---  is_employer, employer_id_number, business_name, created_at)
--- VALUES ('user1', '1234', '홍길동', '2000-01-01', 'M', '01012345678', '서울', 'hgd456@domain.com',
---         false, null, null, now());
--- INSERT INTO user_tb
--- (username, password, name, birthdate, gender, phone_number, address, email,
---  is_employer, employer_id_number, business_name, created_at)
--- VALUES ('user2', '1234', '이가탄', '2000-01-01', 'M', '01012345678', '울산', 'lgt456@domain.com',
---         false, null, null, now());
--- INSERT INTO user_tb
--- (username, password, name, birthdate, gender, phone_number, address, email,
---  is_employer, employer_id_number, business_name, created_at)
--- VALUES ('user3', '1234', '홍금보', '2000-01-01', 'M', '01012345678', '인천', 'hgb456@domain.com',
---         false, null, null, now());
--- INSERT INTO user_tb
--- (username, password, name, birthdate, gender, phone_number, address, email,
---  is_employer, employer_id_number, business_name, created_at)
--- VALUES ('user4', '1234', '김덕배', '2000-01-01', 'M', '01012345678', '제주', 'kdb456@domain.com',
---         false, null, null, now());
--- INSERT INTO user_tb
--- (username, password, name, birthdate, gender, phone_number, address, email,
---  is_employer, employer_id_number, business_name, created_at)
--- VALUES ('user5', '1234', '한만춘', '2000-01-01', 'M', '01012345678', '광주', 'hmc456@domain.com',
---         false, null, null, now());
--- INSERT INTO user_tb
--- (username, password, name, birthdate, gender, phone_number, address, email,
---  is_employer, employer_id_number, business_name, created_at)
--- VALUES ('user6', '1234', '전두광', '1931-01-18', 'M', '01012345678', '대전', 'jdg456@domain.com',
---         false, null, null, now());
+INSERT INTO user_tb
+(username, password, name, birthdate, gender, phone_number, address, email,
+ is_employer, employer_id_number, business_name, created_at)
+VALUES ('emp2', '1234', '류재성', '1991-10-01', 'M', '01012345678', '부산', 'rjs123@kakao.com',
+        true, '0128275512', '카카오', now());
+INSERT INTO user_tb
+(username, password, name, birthdate, gender, phone_number, address, email,
+ is_employer, employer_id_number, business_name, created_at)
+VALUES ('emp3', '1234', '김정수', '1996-08-01', 'M', '01012345678', '부산', 'kjs123@line.com',
+        true, '0128275512', '라인', now());
+INSERT INTO user_tb
+(username, password, name, birthdate, gender, phone_number, address, email,
+ is_employer, employer_id_number, business_name, created_at)
+VALUES ('emp4', '1234', '김성재', '1998-05-01', 'M', '01012345678', '부산', 'ksj123@coupang.com',
+        true, '0128275512', '쿠팡', now());
+INSERT INTO user_tb
+(username, password, name, birthdate, gender, phone_number, address, email,
+ is_employer, employer_id_number, business_name, created_at)
+VALUES ('emp5', '1234', '최윤정', '2000-04-01', 'F', '01012345678', '부산', 'cyj123@baemin.com',
+        true, '0128275512', '배달의민족', now());
+INSERT INTO user_tb
+(username, password, name, birthdate, gender, phone_number, address, email,
+ is_employer, employer_id_number, business_name, created_at)
+VALUES ('user1', '1234', '홍길동', '2000-01-01', 'M', '01012345678', '서울', 'hgd456@domain.com',
+        false, null, null, now());
+INSERT INTO user_tb
+(username, password, name, birthdate, gender, phone_number, address, email,
+ is_employer, employer_id_number, business_name, created_at)
+VALUES ('user2', '1234', '이가탄', '2000-01-01', 'M', '01012345678', '울산', 'lgt456@domain.com',
+        false, null, null, now());
+INSERT INTO user_tb
+(username, password, name, birthdate, gender, phone_number, address, email,
+ is_employer, employer_id_number, business_name, created_at)
+VALUES ('user3', '1234', '홍금보', '2000-01-01', 'M', '01012345678', '인천', 'hgb456@domain.com',
+        false, null, null, now());
+INSERT INTO user_tb
+(username, password, name, birthdate, gender, phone_number, address, email,
+ is_employer, employer_id_number, business_name, created_at)
+VALUES ('user4', '1234', '김덕배', '2000-01-01', 'M', '01012345678', '제주', 'kdb456@domain.com',
+        false, null, null, now());
+INSERT INTO user_tb
+(username, password, name, birthdate, gender, phone_number, address, email,
+ is_employer, employer_id_number, business_name, created_at)
+VALUES ('user5', '1234', '한만춘', '2000-01-01', 'M', '01012345678', '광주', 'hmc456@domain.com',
+        false, null, null, now());
+INSERT INTO user_tb
+(username, password, name, birthdate, gender, phone_number, address, email,
+ is_employer, employer_id_number, business_name, created_at)
+VALUES ('user6', '1234', '전두광', '1931-01-18', 'M', '01012345678', '대전', 'jdg456@domain.com',
+        false, null, null, now());
+        
 -- --board_tb
 -- INSERT INTO board_tb
 -- (employer_id, title, content, field, position, salary, opening_date, closing_date, created_at)

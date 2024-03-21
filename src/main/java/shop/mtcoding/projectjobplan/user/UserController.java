@@ -1,9 +1,11 @@
 package shop.mtcoding.projectjobplan.user;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @RequiredArgsConstructor
@@ -12,7 +14,7 @@ public class UserController {
     private final HttpSession session;
     private final UserService userService;
   
-    @GetMapping("/join-type")
+    @GetMapping("/user/join-type")
     public String joinType() {
 
         return "/user/join-type";
@@ -56,21 +58,27 @@ public class UserController {
         return "redirect:/";
     }
 
-    @GetMapping("/user/{userId}/update-form")
-    public String updateForm() {
+    @GetMapping("/users/{userId}/update-form")
+    public String updateForm(@PathVariable Integer userId, HttpServletRequest request) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        UserResponse.DTO user = userService.findUser(userId, sessionUser);
 
-        /*
+        request.setAttribute("user", user);
+
         // 기업 회원인지..
-        if (user.getIsEmployer())
-            return "/employer/updateForm";
+        if (sessionUser.getIsEmployer())
+            return "/employers/updateForm";
         else
-            return "/user/updateForm";
-        */
-        return "";
+            return "/users/updateForm";
+
     }
 
-    @PostMapping("/user/{userId}/update")
-    public String update() {
+    @PostMapping("/users/{userId}/update")
+    public String update(@PathVariable Integer userId, UserRequest.UpdateDTO reqDTO) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        User newSessionUser = userService.modifyUser(userId, reqDTO, sessionUser);
+
+        session.setAttribute("sessionUser", newSessionUser);
 
         return "redirect:/";
     }
