@@ -20,10 +20,10 @@ spring:
   h2:
     console:
       enabled: true
-#  sql:
-#    init:
-#      data-locations:
-#        - classpath:db/data.sql
+  sql:
+    init:
+      data-locations:
+        - classpath:db/data.sql
   jpa:
     hibernate:
       ddl-auto: create

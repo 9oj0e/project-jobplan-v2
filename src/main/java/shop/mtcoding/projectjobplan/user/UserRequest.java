@@ -2,28 +2,30 @@ package shop.mtcoding.projectjobplan.user;
 
 import lombok.Data;
 
+import java.sql.Timestamp;
+
 public class UserRequest {
 
     @Data
     public static class SaveDTO {
-
+        // 회원 정보
         private String username;
         private String password;
-        private String name;
 
+        // 개인 정보
+        private String name;
         private String birthdate;
         private Character gender; // 'M' or 'F'
         private String phoneNumber;
         private String address;
         private String email;
 
-        // employer, 사업자 항목 nullable
+        // 회사 정보
         private Boolean isEmployer; // 사업자인지 userId, employerId
         private String employerIdNumber; // 사업자번호
         private String businessName; // 기업이름
+
         private Timestamp createdAt;
-
-
 
         public User toEntity(){
             return User.builder()
@@ -41,28 +43,48 @@ public class UserRequest {
                     .createdAt(createdAt)
                     .build();
         }
-
-
-
-
     }
 
     @Data
     public static class UpdateDTO {
-        // toEntity
+        // 회원 정보
         private String password;
+
+        // 개인 정보
         private Character gender;
         private String phoneNumber;
         private String address;
         private String email;
 
+        // 이력서정보
+        private String schoolName;
+        private String major;
+        private String educationLevel; // 고졸/초대졸/대졸
+        private String career; // 회사명+경력
+
+        // 회사 정보
         private String employerIdNumber; // 사업자번호
         private String businessName; // 기업이름
-    }
 
-
-
-    public class LoginDTO {
+        public User toEntity() {
+            return User.builder()
+                    .password(this.password)
+                    .gender(this.gender)
+                    .phoneNumber(this.phoneNumber)
+                    .address(this.address)
+                    .email(this.email)
+                    /*
+                    .schoolName(this.schoolName)
+                    .major(this.major)
+                    .educationLevel(this.educationLevel)
+                    .career(this.career)
+                    */
+                    /*
+                    .employerIdNumber(this.employerIdNumber)
+                    .businessName(this.businessName)
+                    */
+                    .build();
+        }
     }
 
     @Data

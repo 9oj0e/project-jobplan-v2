@@ -14,13 +14,13 @@ public class UserController {
     private final HttpSession session;
     private final UserService userService;
   
-    @GetMapping("/user/join-type")
+    @GetMapping("/users/join-type")
     public String joinType() {
 
         return "/user/join-type";
     }
 
-    @GetMapping("/user/join-form")
+    @GetMapping("/users/join-form")
     public String joinForm(boolean isEmployer) {
 
         if (isEmployer) {
@@ -32,7 +32,7 @@ public class UserController {
 
     @PostMapping("/join")
     public String join(UserRequest.SaveDTO requestDTO) {
-        userService.save(requestDTO);
+        userService.addUser(requestDTO);
 
         return "redirect:/login-form";
     }
@@ -44,8 +44,8 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login(UserRequest.LoginDTO reqDTO) {
-        User sessionUser = userService.findUser(reqDTO);
+    public String login(UserRequest.LoginDTO requestDTO) {
+        User sessionUser = userService.findUser(requestDTO);
         session.setAttribute("sessionUser", sessionUser);
       
         return "redirect:/";
@@ -64,13 +64,11 @@ public class UserController {
         UserResponse.DTO user = userService.findUser(userId, sessionUser);
 
         request.setAttribute("user", user);
-
         // 기업 회원인지..
         if (sessionUser.getIsEmployer())
-            return "/employers/updateForm";
+            return "/employer/update-form";
         else
-            return "/users/updateForm";
-
+            return "/user/update-form";
     }
 
     @PostMapping("/users/{userId}/update")
