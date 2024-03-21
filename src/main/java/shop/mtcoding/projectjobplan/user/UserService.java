@@ -1,6 +1,5 @@
 package shop.mtcoding.projectjobplan.user;
 
-import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,24 +8,21 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class UserService {
     private final UserJpaRepository userJpaRepository;
-    private final EntityManager em;
 
     @Transactional
-    public User addUser() {
-        // todo : join
+    public User addUser(UserRequest.SaveDTO requestDTO) {
+        User user = requestDTO.toEntity();
 
-        return null;
+        return userJpaRepository.save(user);
     }
 
-    public User findUser() {
-        // todo : login
+    public User findUser(UserRequest.LoginDTO requestDTO) {
         User sessionUser = userJpaRepository.findByUsernameAndPassword(requestDTO.getUsername(), requestDTO.getPassword()).get();
+
         return sessionUser;
     }
 
-    // 회원수정폼
     public UserResponse.DTO findUser(int id, User sessionUser) {
-        // todo : updateForm
         User user = userJpaRepository.findById(id).get();
 
         return new UserResponse.DTO(user, sessionUser);
@@ -54,12 +50,6 @@ public class UserService {
     @Transactional
     public void removeUser(int id) {
         // todo : delete
-
-    }
-    @Transactional
-    public User save(UserRequest.SaveDTO requestDTO) {
-        User user = requestDTO.toEntity();
-        return userJpaRepository.save(user);
 
     }
 }

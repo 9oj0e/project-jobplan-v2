@@ -27,30 +27,30 @@
         <div class="div-menu-left">
             {{#sessionUser}}
                 {{#isEmployer}} <!--기업-->
-                    <div><a href="/board/main" class="text-body">채용공고</a></div>
+                    <div><a href="/boards/main" class="text-body">채용공고</a></div>
                 {{/isEmployer}}
                 {{^isEmployer}}
-                    <div><a href="/board/listings" class="text-body">채용공고</a></div>
-                    <div><a href="/resume/main" class="text-body">이력서</a></div>
+                    <div><a href="/boards/listings" class="text-body">채용공고</a></div>
+                    <div><a href="/resumes/main" class="text-body">이력서</a></div>
                 {{/isEmployer}}
                 <div><a href="#" class="text-body text-black-50">커뮤니티</a></div>
             {{/sessionUser}}
             {{^sessionUser}}
-                <div><a href="/board/listings" class="text-body">채용공고</a></div>
-                <div><a href="/resume/main" class="text-body">이력서</a></div>
+                <div><a href="/boards/listings" class="text-body">채용공고</a></div>
+                <div><a href="/resumes/main" class="text-body">이력서</a></div>
             {{/sessionUser}}
         </div>
         <div class="div-menu-right">
             {{#sessionUser}}
                 {{#isEmployer}}
-                    <div><a href="/resume/listings" class="text-body">기업 메인</a></div>
+                    <div><a href="/resumes/listings" class="text-body">기업 메인</a></div>
                 {{/isEmployer}}
-                <div><a href="/user/{{id}}/subscription">구독</a></div>
-                <div><a href="/user/{{sessionUser.id}}" class="text-body">마이페이지</a></div>
+                <div><a href="/users/{{id}}/subscription">구독</a></div>
+                <div><a href="/users/{{sessionUser.id}}" class="text-body">마이페이지</a></div>
                 <div><a href="/logout" class="text-body">로그아웃</a></div>
             {{/sessionUser}}
             {{^sessionUser}}
-                <div><a href="/user/join-type" class="text-body">회원가입</a></div>
+                <div><a href="/users/join-type" class="text-body">회원가입</a></div>
                 <div><a href="/login-form" class="text-body">로그인</a></div>
             {{/sessionUser}}
         </div>

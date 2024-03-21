@@ -2,6 +2,7 @@ package shop.mtcoding.projectjobplan.board;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import shop.mtcoding.projectjobplan.user.User;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -14,7 +15,8 @@ public class Board {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Integer employerId; // 게시자 id
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
     // @Column(nullable = false)
     private String title; // 제목
     private String content; // 내용
@@ -26,7 +28,6 @@ public class Board {
     private Timestamp closingDate; // 마감일
     // closingDate == null -> "상시채용"
     private Timestamp createdAt; // 생성일
-
 
     public String getOpeningDate(){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
