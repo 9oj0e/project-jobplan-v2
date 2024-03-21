@@ -1,0 +1,144 @@
+{{>layout/header}}
+<style>
+
+    * {
+        margin: 0px;
+        box-sizing: border-box;
+    }
+
+    .p-text {
+        font-size: 13px;
+        margin-top: 10px;
+        color: rgb(66, 66, 66);
+    }
+</style>
+<!-- 바디 start -->
+<div class="div-card-container">
+    <div class="card div-card">
+        <div class="card-header card-title">
+            <b>개인 회원가입</b>
+        </div>
+        <div class="card-body">
+            <form action="/join" method="post" enctype="application/x-www-form-urlencoded">
+                <div style="text-align: end"><h4>기본 정보</h4></div>
+                <div>아이디</div>
+                <div class="mb-3">
+                    <input type="text" name="username" id="username" placeholder="Enter username.." value="love"
+                           class="form-control" onchange="check()"
+                           required>
+                </div>
+                <div>비밀번호</div>
+                <div class="mb-3">
+                    <input type="password" name="password" id="password" placeholder="Enter password.." value="1234"
+                           class="form-control"
+                           required>
+                </div>
+                <div style="text-align: end"><h4>개인 정보</h4></div>
+                <div>이름</div>
+                <div class="mb-3">
+                    <input type="text" name="name" pattern="[^(가-힣a-zA-Z)]" id="name" placeholder="Enter name.."
+                           value="JHJO" class="form-control" required>
+                </div>
+                <div>생년월일</div>
+                <div class="mb-3">
+                    <input type="date" name="birthdate" id="birthdate" value="1988-04-01" class="form-control" required>
+                </div>
+                <div>성별</div>
+                <div class="mb-3" style="display: grid; grid-template-columns: 1fr 1fr">
+                    <div style="display: flex; justify-content: center">
+                        <span>남자</span>
+                        <input type="radio" name="gender" id="gender" value='M' required>
+                    </div>
+                    <div style="display: flex; justify-content: center">
+                        <span>여자</span>
+                        <input type="radio" name="gender" id="gender" value='F' required>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <p class="p-text">휴대전화</p>
+                    <input type="tel" pattern="[0-9]{9, 11}" title="번호만 입력하세요" name="phoneNumber" id="phoneNumber"
+                           value="01092730000" class="form-control" required>
+                </div>
+                <!--
+                <p class="p-text">휴대전화</p> // 파싱 어려움
+                <div class="div-phone">
+                    <div class="div-phone-number">
+                        <input type='tel' name='phone1' value="010" class="form-control" readonly>
+                    </div>
+                    <div class="div-hyphen">-</div>
+                    <div class="div-phone-number">
+                        <input type='tel' name='phone2' required class="form-control">
+                    </div>
+                    <div class="div-hyphen">-</div>
+                    <div class="div-phone-number">
+                        <input type='tel' name='phone3' required class="form-control">
+                    </div>
+                </div>
+                -->
+                <div class="mb-3">
+                    <p class="p-text">주소</p>
+                    <input type="text" name="address" id="address" placeholder="Enter address.." value="부산진구 부전동 109-11"
+                           class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <p class="p-text">이메일</p>
+                    <input type="email" name="email" id="email" placeholder="Enter email.." value="greeni@green.ac.kr"
+                           class="form-control" required>
+                </div>
+                <!--
+                <p class="p-text">보유 기술
+                <div class="mb-3 form-control">
+                    <span>java</span>
+                    <input type="checkbox" name="name" value="java">
+                    <span>javaScript</span>
+                    <input type="checkbox" name="name" value="javascript">
+                    <span>Spring</span>
+                    <input type="checkbox" name="name" value="spring">
+                    <span>HTML</span>
+                    <input type="checkbox" name="name" value="html">
+                    <span>jQuery</span>
+                    <input type="checkbox" name="name" value="jQuery">
+                    <span>MySQL</span>
+                    <input type="checkbox" name="name" value="mysql">
+                </div>
+                </p>
+                -->
+                <input type="hidden" name="isEmployer" value="false"> <!--기업 회원 여부 false-->
+                <button type="submit" class="btn btn-primary form-control mt-3">회원가입</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    let isSameCheck = false ;
+
+    function check(){
+        let username = $("#username").val();
+
+        $.ajax({
+            type :"get",
+            url : "/api/username-same-check",
+            data : {username : username}
+        }).done((res)=>{
+            if(res.body==false) {
+                isSameCheck = true;
+                alert("사용가능한 아이디입니다.")
+            }else{
+                isSameCheck = false ;
+                alert("아이디가 중복되었습니다.")
+            }
+        }).fail((res)=>{
+            alert(res.responseJSON.msg);
+        });
+
+
+
+    }
+
+</script>
+
+
+
+        <!-- 바디 end -->
+{{>layout/footer}}

@@ -1,0 +1,197 @@
+{{>layout/header}}
+<!-- 바디 start -->
+<main class="main-size">
+    <div class="div-body">
+        <div class="div-layout" style="height: 600px">
+            <div class="d-flex justify-content-between">
+                <h5>안녕하세요, {{sessionUser.name}}님</h5>
+                <div style="display: flex; justify-content: space-evenly; width: 150px">
+                    <form action="/user/{{sessionUser.id}}/updateForm"> <!-- 수정 하기 -->
+                        <button class="btn btn-outline-warning">
+                            <i class="fa-solid fa-user-pen icon-size"></i>
+                        </button>
+                    </form>
+                    <form action="/user/{{sessionUser.id}}/delete"> <!-- 탈퇴 하기 -->
+                        <button class="btn btn-outline-danger">
+                            <i class="fa-solid fa-user-xmark icon-size"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="div-information">
+                <div>
+                    <div class="card mt-5" style="width:200px">
+                        {{#rating}}
+                            <table class="table borderless">
+                                <tr>
+                                    <td style="text-align: end; padding-bottom: 0; padding-top: 0">평점 ⭐</td>
+                                    <td style="text-align: start; padding-bottom: 0; padding-top: 0">{{rating}}</td>
+                                </tr>
+                            </table>
+                        {{/rating}}
+                        {{#userPic}}
+                            <img class="card-img" src="/upload/{{userPic.imgFilename}}" style="width:100%">
+                        {{/userPic}}
+                        {{^userPic}}
+                            {{#userPic2}}
+                                <img class="card-img" src="/upload/{{userPic2}}"
+                                     onerror="this.src='../images/avatar.png'" style="width:100%">
+                            {{/userPic2}}
+                            {{^userPic2}}
+                                <img class="card-img" src="../images/avatar.png" style="width:100%">
+                            {{/userPic2}}
+                        {{/userPic}}
+                        <div class="card-body">
+                            <h4>{{user.name}}</h4>
+                        </div>
+                        <div class="card-footer">
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; grid-column-gap: 10px">
+                                {{^userPic}}
+                                    <form action="/uploadForm/{{user.id}}" method="get"> <!-- 사진 등록 -->
+                                        <button class="btn btn-primary">
+                                            <i class="fa-solid fa-plus icon-size"></i>
+                                        </button>
+                                    </form>
+                                {{/userPic}}
+                                {{#userPic}}
+                                    <form action="/deleteImg" method="post"> <!-- 사진 삭제 -->
+                                        <input type="hidden" name="userId" value="{{userPic.userId}}">
+                                        <button class="btn btn-outline-primary">
+                                            <i class="fa-solid fa-minus icon-size"></i>
+                                        </button>
+                                    </form>
+                                {{/userPic}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th><h3>개인정보</h3></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th>아이디</th>
+                            <td>{{user.username}}</td>
+                        </tr>
+                        <tr>
+                            <th>이름</th>
+                            <td>{{user.name}}</td>
+                        </tr>
+                        <tr>
+                            <th>생년월일</th>
+                            <td>{{user.birthdate}}</td>
+                        </tr>
+                        <tr>
+                            <th>성별</th>
+                            <td>{{user.gender}}</td>
+                        </tr>
+                        <tr>
+                            <th>휴대전화</th>
+                            <td>{{user.phoneNumber}}</td>
+                        </tr>
+                        <tr>
+                            <th>주소</th>
+                            <td>{{user.address}}</td>
+                        </tr>
+                        <tr>
+                            <th>E-MAIL</th>
+                            <td>{{user.email}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <!--
+                    <div class="form-control">
+                        <div class="mb-3"><b>보유 기술 스택</b></div>
+                        <div>
+                            {{#skillList}}
+                                <span>{{skillName}}</span>
+                            {{/skillList}}
+                            {{^skillList}}
+                                <form action="/user/{{sessionUser.id}}/updateForm">
+                                    <button class="btn btn-outline-primary form-control">추가하기</button>
+                                </form>
+                            {{/skillList}}
+                        </div>
+                    </div>
+                    -->
+                </div>
+            </div>
+        </div>
+        <!--내 이력서 보기-->
+        <div class="div-layout">
+            <div class="div-header d-flex justify-content-between">
+                <h2><b>나의 이력서</b></h2>
+                <form action="/resume/uploadForm" method="get">
+                    <button class="btn btn-primary">추가</button>
+                </form>
+            </div>
+            <div class="div-resume">
+                <table class="table table-hover" style="text-align: center">
+                    <tr>
+                        <td>제목</td>
+                        <td>게시일자</td>
+                        <td></td>
+                    </tr>
+                    {{#resumeList}}
+                        <tr>
+                            <td><a href="/resume/{{id}}">{{title}}</a></td>
+                            <td>{{createdAt}}</td>
+                            <td>
+                                <div style="display: flex; justify-content: end">
+                                    <form action="/resume/{{id}}/updateForm">
+                                        <button class="btn btn-outline-primary">수정</button>&nbsp;
+                                    </form>
+                                    <form action="/resume/{{id}}/delete" method="post">
+                                        <button class="btn btn-primary">삭제</button>
+                                    </form>
+                                    <!--공고별 지원 현황 보기?-->
+                                </div>
+                            </td>
+                        </tr>
+                    {{/resumeList}}
+                </table>
+            </div>
+        </div>
+        <div class="div-layout">
+            <div class="div-header d-flex justify-content-between" style="text-align: end">
+                <h2><b>나의 지원현황</b></h2>
+                <!--전체 보기 버튼?-->
+            </div>
+            <div class="div-resume">
+                <table class="table table-hover" style="text-align: center">
+                    <tr>
+                        <th>이력서 제목</th>
+                        <th>회사명</th>
+                        <th>공고 제목</th>
+                        <th>지원 날짜</th>
+                        <th></th>
+                    </tr>
+                    {{#applyList}}
+                        <tr>
+                            <td><a href="/resume/{{resumeId}}">{{resumeTitle}}</a></td>
+                            <td>{{businessName}}</td>
+                            <td><a href="/board/{{boardId}}">{{boardTitle}}</a></td>
+                            <td>{{appliedAt}}</td>
+                            <td>
+                                <div style="display: flex; justify-content: space-evenly">
+                                    {{#statusOutput}}
+                                        <div>{{statusOutput}}</div>
+                                    {{/statusOutput}}
+                                    {{^statusOutput}}
+                                        <div>대기중</div>
+                                    {{/statusOutput}}
+                                </div>
+                            </td>
+                        </tr>
+                    {{/applyList}}
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- 바디 end -->
+{{>layout/footer}}

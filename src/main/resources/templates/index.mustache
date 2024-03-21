@@ -1,0 +1,82 @@
+{{>layout/header}}
+<!-- 바디 start -->
+<main class="main-size">
+    <div class="row justify-content-end mb-3">
+        <div class="col-md-4">
+            <form action="/static" method="get" class="form-inline">
+                <div class="input-group rounded">
+                    <input class="form-control me-2 rounded-end" type="text" placeholder="기업,채용정보를 입력하세요"
+                           name="keyword" required/>
+                    <a href="#" class="text-body"><i class="fa-solid fa-magnifying-glass icon-search"></i></a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- 광고 창 start -->
+    <div class="div-container">
+        <section class="section-body">
+            <div class="div-ad-img1"></div>
+        </section>
+        <!-- 광고 창 end -->
+        <!-- 추천 채용 정보 start -->
+        <section class="section-body">
+            <div class="div-recommendation mb-20">추천 채용 정보</div>
+            <div class="div-recommendation-img">
+                <div>
+                    <div class="div-recommendation-img-1"></div>
+                    <div class="div-recommendation-text-1">IT,컨텐츠
+                        <span><a href="" class="text-body"><i class="fa-regular fa-star"></i></a></span>
+                    </div>
+                    <div class="div-recommendation-text-2">아이헤이트플라잉버그스</div>
+                </div>
+                <div>
+                    <div class="div-recommendation-img-2"></div>
+                    <div class="div-recommendation-text-1">제조
+                        <span><a href="" class="text-body"><i class="fa-regular fa-star"></i></a></span>
+                    </div>
+                    <div class="div-recommendation-text-2">한솔테크닉스</div>
+                </div>
+                <div>
+                    <div class="div-recommendation-img-3"></div>
+                    <div class="div-recommendation-text-1">IT,컨텐츠
+                        <span><a href="" class="text-body"><i class="fa-regular fa-star"></i></a></span>
+                    </div>
+                    <div class="div-recommendation-text-2">대보정보통신</div>
+                </div>
+            </div>
+        </section>
+        <hr>
+        <section class="section-body">
+            <div class="div-jop-more">
+                <div class="div-recommendation mb-20">채용 정보</div>
+                <a href="/board/listings" class="text-body">
+                    <h6>더보기</h6>
+                </a>
+            </div>
+            <div class="div-recommendation-box">
+                {{#employerList}}
+                    <div>
+                        <div>
+                            <img class="div-company-img" src="../images/{{businessName}}.jpg"
+                                 onerror="this.onerror=null; this.src='../images/chaeyong.jpg';" style="width:100%">
+                        </div>
+                        <div class="btn-like">
+                            <div class="div-recommendation-text-1">{{field}}
+                                <span><a href="" class="text-body"><i class="fa-regular fa-star"></i></a></span>
+                            </div>
+
+                            <div class="div-recommendation-text-2">
+                                <a href="/board/{{id}}" class="text-body">
+                                    {{businessName}}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {{/employerList}}
+            </div>
+        </section>
+    </div>
+    <!-- 추천 채용 정보 end -->
+</main>
+<!-- 바디 end -->
+{{>layout/footer}}

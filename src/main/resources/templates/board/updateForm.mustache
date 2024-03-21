@@ -1,0 +1,84 @@
+{{>layout/header}}
+<!-- 바디 start -->
+<div class="div-card-container">
+    <div class="card div-card">
+        {{#board}}
+        <form action="/board/{{id}}/update" method="post">
+            <div class="card-header card-title">
+                <h2>채용 공고 추가</h2>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <tr>
+                        <td>공고 제목</td>
+                        <td><input name="title" type="text" class="form-control" value="{{title}}"></td>
+                    </tr>
+                    <tr>
+                        <td>채용 분야</td>
+                        <td>
+                            <input name="field" type="text" class="form-control" value="{{field}}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>포지션</td>
+                        <td>
+                            <input name="position" type="text" class="form-control" value="{{position}}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>내용</td>
+                        <td>
+                            <textarea name="content" class="form-control" style="height: 300px">{{content}}</textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>연봉</td>
+                        <td>
+                            <input name="salary" type="text" class="form-control" value="{{salary}}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>게시일</td>
+                        <td>
+                            <input name="openingDate" type="date" class="form-control" value="{{openingDate}}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>마감일</td>
+                        <td>
+                            <input name="closingDate" type="date" class="form-control" value="{{closingDate}}">
+                        </td>
+                    </tr>
+                </table>
+                <br>
+            </div>
+            <h4 class="card-title">요구 스킬</h4>
+            <div class="form-control">
+            <input type="checkbox" name="skill" value="없음">
+            <span>없음</span>
+            <input type="checkbox" name="skill" value="java">
+            <span>java</span>
+            <input type="checkbox" name="skill" value="javaScript">
+            <span>javaScript</span>
+            <input type="checkbox" name="skill" value="Spring">
+            <span>Spring</span>
+            <input type="checkbox" name="skill" value="HTML">
+            <span>HTML</span>
+            <input type="checkbox" name="skill" value="jQuery">
+            <span>jQuery</span>
+            <input type="checkbox" name="skill" value="MySQL">
+            <span>MySQL</span>
+            </div>
+            <br>
+            <div class="card-footer">
+                <div class="button-post-cancel">
+                    <button type="button" onclick="location.href='/board/{{sessionUser.id}}'" class="btn btn-outline-dark">취소</button>
+                    <button type="submit" class="btn btn-outline-dark">등록</button>
+                </div>
+            </div>
+        </form>
+        {{/board}}
+    </div>
+</div>
+<!-- 바디 end -->
+{{>layout/footer}}

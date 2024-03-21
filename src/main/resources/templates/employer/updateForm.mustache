@@ -1,0 +1,68 @@
+{{>layout/header}}
+<div style="display: flex; justify-content: center">
+    <div class="card" style="width: 600px; margin-bottom: 5%">
+        <div class="card-header" style="text-align: end"><b>기업 정보 수정</b></div>
+        <div class="card-body">
+            <form action="/user/{{user.id}}/update" method="post" enctype="application/x-www-form-urlencoded"
+                  onsubmit="return true">
+                <div style="text-align: end"><h4>기본 정보 수정</h4></div>
+                <div>아이디</div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" name="username" value="{{user.username}}"
+                           style="background: #dee2e6" readonly>
+                </div>
+                <div>비밀번호</div>
+                <div class="mb-3">
+                    <input type="password" class="form-control" name="password" placeholder="{{user.password}}"
+                           value="{{user.password}}">
+                </div>
+                <div style="text-align: end"><h4>개인 정보 수정</h4></div>
+                <div>이름</div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" name="name" value="{{user.name}}"
+                           style="background: #dee2e6" readonly>
+                </div>
+                <div>생년월일</div>
+                <div class="mb-3">
+                    <input type="date" class="form-control" name="birthdate" value="{{user.birthdate}}"
+                           style="background: #dee2e6" readonly>
+                </div>
+                <div>성별</div>
+                <div class="mb-3">
+                    <div class="form">
+                        <span>남자</span>
+                        <input type="radio" name="gender" value="M">
+                        <span>여자</span>
+                        <input type="radio" name="gender" value="F">
+                    </div>
+                </div>
+                <div>휴대전화</div>
+                <div class="mb-3">
+                    <input type="tel" class="form-control" name="phoneNumber" value="{{user.phoneNumber}}" required>
+                </div>
+                <div>주소</div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" name="address" value="{{user.address}}">
+                </div>
+                <div>이메일</div>
+                <div class="mb-3">
+                    <input type="email" class="form-control" name="email" value="{{user.email}}">
+                </div>
+                <div style="text-align: end"><h4>기업 정보 수정</h4></div>
+                <div>사업자번호</div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" name="businessName" value="{{user.employerIdNumber}}"
+                           required>
+                </div>
+                <div>회사명</div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" name="businessName" value="{{user.businessName}}" required>
+                </div>
+                </table>
+                <button type="submit" class="btn btn-primary form-control mt-5">수정 완료</button>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- 바디 end -->
+{{>layout/footer}}

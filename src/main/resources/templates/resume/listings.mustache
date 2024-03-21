@@ -1,0 +1,106 @@
+{{>layout/header}}
+<!-- 바디 start -->
+<main class="main-size">
+    <div class="row justify-content-end mb-3">
+        <div class="col-md-4">
+            <form action="/" method="get" class="form-inline">
+                <div class="input-group rounded">
+                    <input class="search-box form-control me-2 rounded-end" type="text" placeholder="기업,채용정보를 입력하세요"
+                           name="keyword" required/>
+                    <a href="#" class="text-body"><i class="fa-solid fa-magnifying-glass icon-search"></i></a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- 광고 창 start -->
+    <div class="div-container">
+        <section>
+            <div class="div-ad-img1"></div>
+        </section>
+        <!-- 광고 창 end -->
+        <!-- 바디 start -->
+        <section>
+            <div class="div-recommendation mb-20">추천 인재</div>
+            <div class="div-recommendation-people">
+                <div onclick="location.href='/resume/1'">
+                    <div class="employer-people-image1"></div>
+                    <div class="div-recommendation-text-1">잘부탁드립니다.
+                        <span><a href="" class="text-body"><i class="fa-regular fa-star"></i></a></span>
+                    </div>
+                    <div class="div-recommendation-text-2">류재성</div>
+                </div>
+                <div onclick="location.href='/resume/1'">
+                    <div class="employer-people-image2"></div>
+                    <div class="div-recommendation-text-1">노력하는 인재입니다.
+                        <span><a href="" class="text-body"><i class="fa-regular fa-star"></i></a></span>
+                    </div>
+                    <div class="div-recommendation-text-2">조정현</div>
+                </div>
+                <div onclick="location.href='/resume/1'">
+                    <div class="employer-people-image3"></div>
+                    <div class="div-recommendation-text-1">열심히 하겠습니다.
+                        <span><a href="" class="text-body"><i class="fa-regular fa-star"></i></a></span>
+                    </div>
+                    <div class="div-recommendation-text-2">장현정</div>
+                </div>
+                <div onclick="location.href='/resume/1'">
+                    <div class="employer-people-image4"></div>
+                    <div class="div-recommendation-text-1">자기개발하는 개발자.
+                        <span><a href="" class="text-body"><i class="fa-regular fa-star"></i></a></span>
+                    </div>
+                    <div class="div-recommendation-text-2">김성재</div>
+                </div>
+                <div onclick="location.href='/resume/1'">
+                    <div class="employer-people-image5"></div>
+                    <div class="div-recommendation-text-1">밤새는 개발자.
+                        <span><a href="" class="text-body"><i class="fa-regular fa-star"></i></a></span>
+                    </div>
+                    <div class="div-recommendation-text-2">이서현</div>
+                </div>
+            </div>
+        </section>
+        <hr>
+        <table class="table">
+            <div class="div-recommendation mb-20">구직자 정보</div>
+            <div class="dropdown">
+            <button type="button" class="btn btn-outline-dark" data-bs-toggle="dropdown">
+                기술을 선택하세요
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" name ="keyword" href="?keyword=java">java</a></li>
+                <li><a class="dropdown-item" name ="keyword" href="?keyword=javaScript">javaScript</a></li>
+                <li><a class="dropdown-item" name ="keyword" href="?keyword=Spring">Spring</a></li>
+                <li><a class="dropdown-item" name ="keyword" href="?keyword=HTML">HTML</a></li>
+                <li><a class="dropdown-item" name ="keyword" href="?keyword=jQuery">jQuery</a></li>
+                <li><a class="dropdown-item" name ="keyword" href="?keyword=MySQL">MySQL</a></li>
+            </ul>
+            </div>
+            <th>이름</th>
+            <th>구직자 정보</th>
+            <th>이력서</th>
+            {{#resumeList}}
+                <tr>
+                    <td class="div-recommendation-text-2">{{name}}</td>
+                    <td>
+                        <div class="div-recommendation-text-1">{{career}}</div>
+                        <div class="div-recommendation-text-2">{{title}}</div>
+                    </td>
+                    <td>
+                        <button class="btn btn-outline-body" onclick="location.href='/resume/{{id}}'">이력서보기</button>
+                    </td>
+                </tr>
+            {{/resumeList}}
+        </table>
+        <div class="d-flex justify-content-center">
+            <ul class="pagination">
+                <li class="page-item {{#first}}disabled{{/first}}"><a class="page-link" href="?page={{prevPage}}">Previous</a></li>
+                {{#numberList}}
+                    <li class="page-item"><a class="page-link" href="?page={{.}}">{{.}}</a></li>
+                {{/numberList}}
+                <li class="page-item {{#last}}disabled{{/last}}"><a class="page-link" href="?page={{nextPage}}">Next</a></li>
+            </ul>
+        </div>
+    </div>
+</main>
+<!-- 바디 end -->
+{{>layout/footer}}
