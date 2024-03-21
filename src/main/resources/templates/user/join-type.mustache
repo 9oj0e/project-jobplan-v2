@@ -24,12 +24,14 @@
         </div>
         <div class="card-body">
             <div class="join-select mt-5 mb-5">
-                <form action="/user/joinForm" method="get">
+                <form action="/user/join-form" method="get">
+                    <input type="hidden" name="isEmployer" value="false">
                     <button class="btn btn-outline-primary form-control">
                         개인 회원
                     </button>
                 </form>
-                <form action="/employer/joinForm" method="get">
+                <form action="/user/join-form" method="get">
+                    <input type="hidden" name="isEmployer" value="true">
                     <button class="btn btn-primary form-control">
                         기업 회원
                     </button>

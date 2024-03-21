@@ -9,8 +9,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class UserController {
 
-    @GetMapping("/user/join-type")
+    private final UserService userService ;
+
+    @GetMapping("/join-type")
     public String joinType() {
+
+
         return "/user/join-type";
     }
 
@@ -24,8 +28,11 @@ public class UserController {
         }
     }
 
+
+
     @PostMapping("/join")
-    public String join() {
+    public String join(UserRequest.SaveDTO requestDTO) {
+        userService.save(requestDTO);
 
         return "redirect:/login-form";
     }
