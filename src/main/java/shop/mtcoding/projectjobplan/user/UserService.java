@@ -20,8 +20,8 @@ public class UserService {
 
     public User findUser() {
         // todo : login
-
-        return null;
+        User sessionUser = userJpaRepository.findByUsernameAndPassword(requestDTO.getUsername(), requestDTO.getPassword()).get();
+        return sessionUser;
     }
 
     public UserResponse.DTO findUser(int id) {

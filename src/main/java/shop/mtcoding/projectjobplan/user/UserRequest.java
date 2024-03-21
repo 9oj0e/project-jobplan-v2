@@ -2,8 +2,6 @@ package shop.mtcoding.projectjobplan.user;
 
 import lombok.Data;
 
-import java.sql.Timestamp;
-
 public class UserRequest {
 
     @Data
@@ -50,5 +48,11 @@ public class UserRequest {
     }
     public static class UpdateDTO {
         // toEntity
+    }
+
+    @Data
+    public static class LoginDTO {
+        private String username;
+        private String password;
     }
 }

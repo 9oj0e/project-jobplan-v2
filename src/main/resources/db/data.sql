@@ -1,9 +1,9 @@
 -- -- user_tb
--- INSERT INTO user_tb
--- (username, password, name, birthdate, gender, phone_number, address, email,
---  is_employer, employer_id_number, business_name, created_at)
--- VALUES ('emp1', '1234', '조정현', '1996-04-01', 'M', '01012345678', '부산', 'jjh123@naver.com',
---         true, '0128275512', '네이버', now());
+INSERT INTO user_tb
+(username, password, name, birthdate, gender, phone_number, address, email,
+ is_employer, employer_id_number, business_name, created_at)
+VALUES ('emp1', '1234', '정현조', '1996-04-01', 'M', '01012345678', '부산', 'jjh123@naver.com',
+        true, '0128275512', '네이버', now());
 -- INSERT INTO user_tb
 -- (username, password, name, birthdate, gender, phone_number, address, email,
 --  is_employer, employer_id_number, business_name, created_at)

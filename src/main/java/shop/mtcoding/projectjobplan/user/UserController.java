@@ -1,5 +1,6 @@
 package shop.mtcoding.projectjobplan.user;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,12 +9,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequiredArgsConstructor
 @Controller
 public class UserController {
-
-    private final UserService userService ;
-
+    private final HttpSession session;
+    private final UserService userService;
+  
     @GetMapping("/join-type")
     public String joinType() {
-
 
         return "/user/join-type";
     }
@@ -28,8 +28,6 @@ public class UserController {
         }
     }
 
-
-
     @PostMapping("/join")
     public String join(UserRequest.SaveDTO requestDTO) {
         userService.save(requestDTO);
@@ -39,15 +37,24 @@ public class UserController {
 
     @GetMapping("/login-form")
     public String loginForm() {
+      
         return "/user/login-form";
     }
 
-    @GetMapping("/login")
-    public String login() {
-
+    @PostMapping("/login")
+    public String login(UserRequest.LoginDTO reqDTO) {
+        User sessionUser = userService.findUser(reqDTO);
+        session.setAttribute("sessionUser", sessionUser);
+      
         return "redirect:/";
     }
 
+    @GetMapping("/logout")
+    public String logout() {
+        session.invalidate();
+      
+        return "redirect:/";
+    }
 
     @GetMapping("/user/{userId}/update-form")
     public String updateForm() {
