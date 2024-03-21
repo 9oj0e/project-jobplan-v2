@@ -59,10 +59,10 @@
 - 파일 : camelCase
 - 클래스/메서드/필드값 : pascalCase
 - DTO : Request/Response + 목적지 정보 (ServiceName/ControllerName) + 기타(전치사+명사)
-  - e.g. Request : CreateDTO, UpdateDTO, Response : EmployerDTO, DetailDTO...
-- Controller : post/detail&listings/update/delete
-- Service : createEntity/getEntity/setEntity/removeEntity
-- Repository : save/find/update/delete + By/With + Entity&Record
+  - e.g. Request : `CreateDTO`, `UpdateDTO`, Response : `EmployerDTO`, `DetailDTO`...
+- Controller : `post`/`detail`&`listings`/`update`/`delete`
+- Service : `createEntity`/`getEntity`/`setEntity`/`removeEntity`
+- Repository : `save`/`find`/`update`/`delete` + By/With + Entity&Record
 - css : ?
 ### 회의
 - 매일 회의록 작성
