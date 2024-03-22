@@ -12,14 +12,15 @@ public class BoardService {
     private final BoardQueryRepository boardQueryRepository;
 
     public BoardResponse.DetailDTO findBoardById(int boardId) {
-        Board board = boardJpaRepository.findBoardById(boardId).get();
+        Board board = boardJpaRepository.findById(boardId).get();
         BoardResponse.DetailDTO responseDTO = new BoardResponse.DetailDTO(board);
+      
         return responseDTO;
     }
 
-    public void createBoard(BoardRequest.SaveDTO requestDTO) {
-        // todo : board/save
+    public Board createBoard(BoardRequest.SaveDTO requestDTO) {
 
+        return boardJpaRepository.save(requestDTO.toEntity());
     }
 
     public Board getBoard(int id) {

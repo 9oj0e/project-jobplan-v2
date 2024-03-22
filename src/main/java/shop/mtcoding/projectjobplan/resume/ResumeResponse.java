@@ -1,9 +1,10 @@
 package shop.mtcoding.projectjobplan.resume;
 
+import lombok.Data;
+
 public class ResumeResponse {
     public static class DetailDTO {
-
-        private Integer id;
+        // 회원 정보
         private Integer userId;
         private String username;
         private String name;
@@ -11,12 +12,13 @@ public class ResumeResponse {
         private String address;
         private String phoneNumber;
         private String email;
-
+      
+        // 이력 정보
+        private Integer id;
         private String schoolName;
         private String major;
         private String educationLevel; // 고졸/초대졸/대졸
         private String career; // 회사명+경력
-
         private String title;
         private String content; // cv, cover letter 자기소개서
 

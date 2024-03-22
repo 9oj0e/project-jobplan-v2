@@ -10,9 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequiredArgsConstructor
 @Controller
 public class BoardController {
-    private final BoardService boardService;
-
     private final HttpSession session;
+    private final BoardService boardService;
 
     @GetMapping("/boards/post-form")
     public String postForm() {
@@ -21,16 +20,17 @@ public class BoardController {
     }
 
     @PostMapping("/boards/post")
-    public String post(@PathVariable int boardId) {
+    public String post(BoardRequest.SaveDTO requestDTO) {
+        Board board = boardService.createBoard(requestDTO);
 
-        return "redirect:/board/" + boardId;
+        return "redirect:/board/" + board.getId();
     }
 
     @GetMapping("/boards/{boardId}")
     public String detail(@PathVariable int boardId) {
         BoardResponse.DetailDTO boardDetail = boardService.findBoardById(boardId);
         session.setAttribute("boardDetail", boardDetail);
-
+      
         return "/board/detail";
     }
 
