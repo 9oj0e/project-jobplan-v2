@@ -27,14 +27,14 @@ public class Board {
     private String salary; // 연봉
 
     // 날짜
-    private String openingDate; // 게시일
-    private String closingDate; // 마감일 == null -> "상시채용"
+    private Timestamp openingDate; // 게시일
+    private Timestamp closingDate; // 마감일 == null -> "상시채용"
 
     @CreationTimestamp
     private Timestamp createdAt; // 생성일
 
     @Builder
-    public Board(Integer id, User user, String title, String content, String field, String position, String salary, String openingDate, String closingDate, Timestamp createdAt) {
+    public Board(Integer id, User user, String title, String content, String field, String position, String salary, Timestamp openingDate, Timestamp closingDate, Timestamp createdAt) {
         this.id = id;
         this.user = user;
         this.title = title;
