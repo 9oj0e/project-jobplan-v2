@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 public class UserResponse {
 
     @Data
-    public static class DTO {
+    public static class UpdateFormDTO {
         // 회원 정보
         private Integer id;
         private String username;
@@ -26,7 +26,7 @@ public class UserResponse {
         private String employerIdNumber; // 사업자번호
         private String businessName; // 기업이름
 
-        public DTO(User user, User sessionUser) {
+        public UpdateFormDTO(User user, User sessionUser) {
             this.id = user.getId();
             this.username = user.getUsername();
             this.password = user.getPassword();
@@ -35,6 +35,7 @@ public class UserResponse {
             this.phoneNumber = user.getPhoneNumber();
             this.address = user.getAddress();
             this.email = user.getEmail();
+
             if (sessionUser.getIsEmployer()) {
                 this.isEmployer = user.getIsEmployer();
                 this.employerIdNumber = user.getEmployerIdNumber();
@@ -42,55 +43,41 @@ public class UserResponse {
             }
         }
     }
+    @Data
+    public static class ProfileDTO{
+        // 회원 정보
+        private Integer id;
+        private String username;
+        private String password;
 
-    @Data
-    public static class UserDTO {
-        private Integer id;
-        private String username;
-        private String birthdate;
-        private Character gender;
-        private String phoneNumber;
-        private String address;
-        private String email;
-        private Boolean isEmployer;
+        // 개인 정보
         private String name;
-        public UserDTO(User user) {
-            this.id = user.getId();
-            this.username = user.getUsername();
-            this.birthdate = user.getBirthdate();
-            this.gender = user.getGender();
-            this.phoneNumber = user.getPhoneNumber();
-            this.address = user.getAddress();
-            this.email = user.getEmail();
-            this.isEmployer = user.getIsEmployer();
-            this.name = user.getName();
-        }
-    }
-    @Data
-    public static class EmployerDTO{
-        private Integer id;
-        private String username;
         private String birthdate;
         private Character gender;
         private String phoneNumber;
         private String address;
         private String email;
+
+        // 기업 정보
         private Boolean isEmployer;
         private String employerIdNumber;
         private String businessName;
-        private String name;
-        public EmployerDTO(User user) {
+
+        public ProfileDTO(User user) {
             this.id = user.getId();
             this.username = user.getUsername();
+            this.password = user.getPassword();
+            this.name = user.getName();
             this.birthdate = user.getBirthdate();
             this.gender = user.getGender();
             this.phoneNumber = user.getPhoneNumber();
             this.address = user.getAddress();
             this.email = user.getEmail();
-            this.isEmployer = user.getIsEmployer();
-            this.employerIdNumber = user.getEmployerIdNumber();
-            this.businessName = user.getBusinessName();
-            this.name = user.getName();
+            if (user.getIsEmployer()) {
+                this.isEmployer = user.getIsEmployer();
+                this.employerIdNumber = user.getEmployerIdNumber();
+                this.businessName = user.getBusinessName();
+            }
         }
     }
 }
