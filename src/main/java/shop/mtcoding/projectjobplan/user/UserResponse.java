@@ -1,8 +1,11 @@
 package shop.mtcoding.projectjobplan.user;
 
 import lombok.Data;
+import shop.mtcoding.projectjobplan.board.Board;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserResponse {
 
@@ -79,18 +82,37 @@ public class UserResponse {
         private String employerIdNumber;
         private String businessName;
         private String name;
-        public EmployerDTO(User user) {
-            this.id = user.getId();
-            this.username = user.getUsername();
-            this.birthdate = user.getBirthdate();
-            this.gender = user.getGender();
-            this.phoneNumber = user.getPhoneNumber();
-            this.address = user.getAddress();
-            this.email = user.getEmail();
-            this.isEmployer = user.getIsEmployer();
-            this.employerIdNumber = user.getEmployerIdNumber();
-            this.businessName = user.getBusinessName();
-            this.name = user.getName();
+        private List<BoardDTO> boardList =new ArrayList<>();
+
+        public EmployerDTO(User sessionUser) {
+            this.id = sessionUser.getId();
+            this.username = sessionUser.getUsername();
+            this.birthdate = sessionUser.getBirthdate();
+            this.gender = sessionUser.getGender();
+            this.phoneNumber = sessionUser.getPhoneNumber();
+            this.address = sessionUser.getAddress();
+            this.email = sessionUser.getEmail();
+            this.isEmployer = sessionUser.getIsEmployer();
+            this.employerIdNumber = sessionUser.getEmployerIdNumber();
+            this.businessName = sessionUser.getBusinessName();
+            this.name = sessionUser.getName();
+
+            this.boardList = sessionUser.getBoards().stream().map(board -> new BoardDTO(board,sessionUser)).toList();
+        }
+        public class BoardDTO{
+            private Integer id;
+            private String title;
+            private String field;
+            private String position;
+            private Timestamp openingDate;
+
+            public BoardDTO(Board board ,User sessionUser) {
+                this.id = board.getId();
+                this.title = board.getTitle();
+                this.field = board.getField();
+                this.position = board.getPosition();
+                this.openingDate = board.getOpeningDate();
+            }
         }
     }
 }

@@ -3,11 +3,16 @@ package shop.mtcoding.projectjobplan.user;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import shop.mtcoding.projectjobplan.board.Board;
+import shop.mtcoding.projectjobplan.board.BoardJpaRepository;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
 public class UserService {
     private final UserJpaRepository userJpaRepository;
+    private final BoardJpaRepository boardJpaRepository ;
 
     @Transactional
     public User createUser(UserRequest.JoinDTO requestDTO) { // join
@@ -55,7 +60,10 @@ public class UserService {
     }
 
     public UserResponse.EmployerDTO findEmployer(int sessionUserId){
-        return new UserResponse.EmployerDTO(userJpaRepository.findById(sessionUserId).get());
+        User user = userJpaRepository.findById(sessionUserId).get() ;
+//        List<Board> boardList = boardJpaRepository.findAllByUserId(sessionUserId);
+
+        return new UserResponse.EmployerDTO(user);
     }
     public UserResponse.UserDTO findUser(int sessionUserId) {
         // todo : updateForm, profile
