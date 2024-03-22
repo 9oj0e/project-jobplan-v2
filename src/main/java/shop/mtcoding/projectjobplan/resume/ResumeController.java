@@ -1,6 +1,7 @@
 package shop.mtcoding.projectjobplan.resume;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequiredArgsConstructor
 @Controller
 public class ResumeController {
+    private final HttpSession session;
     private final ResumeService resumeService;
 
     @GetMapping("/resumes")
@@ -17,24 +19,28 @@ public class ResumeController {
         return "/resume/main";
     }
 
-    @GetMapping("/resume/post-form")
-    public String postForm() {
+    @GetMapping("/resumes/post-form") // 이력서 작성 폼
+    public String postForm(HttpServletRequest request) {
 
         return "/resume/post-form";
     }
 
-    @PostMapping("/resume/post")
-    public String post(@PathVariable int resumeId) {
+    @PostMapping("/resumes/post") // 이력서 작성 action
+    public String post(ResumeRequest.SaveDTO requestDTO) {
+    Resume resume = resumeService.createResume(requestDTO);
 
-        return "redirect:/resume/" + resumeId;
+        return "redirect:/resume/" + resume.getId();
     }
 
-    @GetMapping("/resume/{resumeId}")
+    @GetMapping("/resumes/{resumeId}")
     public String detail(@PathVariable int resumeId) {
+        ResumeResponse.DetailDTO resumeDetail = resumeService.findResumeById(resumeId);
+        session.setAttribute("resumeDetail", resumeDetail);
+
         return "/resume/detail";
     }
 
-    @GetMapping("/resume/listings")
+    @GetMapping("/resumes/listings")
     public String listings() {
 
         return "/resume/listings";
@@ -52,11 +58,13 @@ public class ResumeController {
     @PostMapping("/resumes/{resumeId}/update")
     public String update(@PathVariable int resumeId, ResumeRequest.UpdateDTO requestDTO) {
         resumeService.setResume(resumeId, requestDTO);
+
         return "redirect:/resumes/" + resumeId;
     }
 
-    @PostMapping("/resume/{resumeId}/delete")
+    @PostMapping("/resumes/{resumeId}/delete")
     public String delete(@PathVariable int resumeId) {
+        resumeService.removeResume(resumeId);
 
         return "redirect:/resume/listings";
     }

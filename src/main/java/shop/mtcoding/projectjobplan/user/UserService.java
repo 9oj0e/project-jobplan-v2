@@ -3,11 +3,13 @@ package shop.mtcoding.projectjobplan.user;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import shop.mtcoding.projectjobplan.board.BoardJpaRepository;
 
 @RequiredArgsConstructor
 @Service
 public class UserService {
     private final UserJpaRepository userJpaRepository;
+    private final BoardJpaRepository boardJpaRepository;
 
     @Transactional
     public User createUser(UserRequest.JoinDTO requestDTO) { // join
@@ -22,28 +24,22 @@ public class UserService {
         return sessionUser;
     }
 
-    public UserResponse.DTO getUser(int id, User sessionUser) { // updateForm
+    public UserResponse.UpdateFormDTO getUser(int id, User sessionUser) {
         User user = userJpaRepository.findById(id).get();
 
-        return new UserResponse.DTO(user, sessionUser);
+        return new UserResponse.UpdateFormDTO(user, sessionUser);
+    }
+
+    public UserResponse.ProfileDTO getUser(int sessionUserId) {
+
+        return new UserResponse.ProfileDTO(userJpaRepository.findById(sessionUserId).get());
     }
 
     @Transactional // 회원수정
-    public User setUser(int id, UserRequest.UpdateDTO requestDTO, User sessionUser) {
-        // todo : 구직자, 구인자가 필요한 정보를 여기서 받도록.
+    public User setUser(int id, UserRequest.UpdateDTO requestDTO) {
+        // todo : 구직자, 구인자가 필요한 정보를 여기서 받도록?
         User user = userJpaRepository.findById(id).get();
-
-        user.setPassword(requestDTO.getPassword());
-        user.setGender(requestDTO.getGender());
-        user.setPhoneNumber(requestDTO.getPhoneNumber());
-        user.setAddress(requestDTO.getAddress());
-        user.setEmail(requestDTO.getEmail());
-
-        if (sessionUser.getIsEmployer()) {
-
-            user.setEmployerIdNumber(requestDTO.getEmployerIdNumber());
-            user.setBusinessName(requestDTO.getBusinessName());
-        }
+        user.update(requestDTO);
 
         return user;
     }
@@ -52,13 +48,5 @@ public class UserService {
     public void removeUser(int id) {
         // todo : delete
 
-    }
-
-    public UserResponse.EmployerDTO findEmployer(int sessionUserId){
-        return new UserResponse.EmployerDTO(userJpaRepository.findById(sessionUserId).get());
-    }
-    public UserResponse.UserDTO findUser(int sessionUserId) {
-        // todo : updateForm, profile
-        return new UserResponse.UserDTO(userJpaRepository.findById(sessionUserId).get());
     }
 }

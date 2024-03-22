@@ -58,7 +58,7 @@ public class UserController {
     @GetMapping("/users/{userId}/update-form")
     public String updateForm(@PathVariable Integer userId, HttpServletRequest request) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        UserResponse.DTO user = userService.getUser(userId, sessionUser);
+        UserResponse.UpdateFormDTO user = userService.getUser(sessionUser.getId(), sessionUser);
         request.setAttribute("user", user);
 
         return "/user/update-form";
@@ -67,21 +67,18 @@ public class UserController {
     @PostMapping("/users/{userId}/update")
     public String update(@PathVariable Integer userId, UserRequest.UpdateDTO requestDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        User newSessionUser = userService.setUser(userId, requestDTO, sessionUser);
+        User newSessionUser = userService.setUser(sessionUser.getId(), requestDTO);
         session.setAttribute("sessionUser", newSessionUser);
 
-        return "redirect:/";
+        return "redirect:/users/" + userId;
     }
 
     @GetMapping("/users/{userId}")
-    public String profile(@PathVariable Integer userId, HttpServletRequest request){
+    public String profile(@PathVariable Integer userId, HttpServletRequest request) {
         // todo: NullPointException
-        User sessionUser = (User)session.getAttribute("sessionUser");
-        if (sessionUser.getIsEmployer()){
-            request.setAttribute("user", userService.findEmployer(sessionUser.getId()));
-        }else {
-            request.setAttribute("user", userService.findUser(sessionUser.getId()));
-        }
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        request.setAttribute("user", userService.getUser(sessionUser.getId()));
+
         return "/user/profile";
     }
 }

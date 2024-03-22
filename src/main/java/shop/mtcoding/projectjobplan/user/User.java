@@ -5,9 +5,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.transaction.annotation.Transactional;
+import shop.mtcoding.projectjobplan.board.Board;
+import shop.mtcoding.projectjobplan.resume.Resume;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @Entity
@@ -30,11 +33,12 @@ public class User {
     private String address;
     private String email;
 
-    // 이력 정보
+    /*
+    // 이력 정보 (회원에서 처리할거면)
     private String schoolName;
     private String major;
     private String educationLevel; // 고졸/초대졸/대졸
-    private String career; // 회사명+경력
+    */
 
     // 회사 정보
     private Boolean isEmployer; // 사업자인지 userId, employerId
@@ -44,8 +48,17 @@ public class User {
     @CreationTimestamp
     private Timestamp createdAt;
 
+    @OrderBy("id desc")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE) // Entity 객체의 변수명 == FK의 주인
+    private List<Board> boards = new ArrayList<>();
+
+    @OrderBy("id desc")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE) // Entity 객체의 변수명 == FK의 주인
+    private List<Resume> resumes = new ArrayList<>();
+
+
     @Builder
-    public User(Integer id, String username, String password, String name, String birthdate, Character gender, String phoneNumber, String address, String email, String schoolName, String major, String educationLevel, String career, Boolean isEmployer, String employerIdNumber, String businessName, Timestamp createdAt) {
+    public User(Integer id, String username, String password, String name, String birthdate, Character gender, String phoneNumber, String address, String email, Boolean isEmployer, String employerIdNumber, String businessName, Timestamp createdAt) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -55,13 +68,30 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.address = address;
         this.email = email;
+        /*
         this.schoolName = schoolName;
         this.major = major;
         this.educationLevel = educationLevel;
-        this.career = career;
+        */
         this.isEmployer = isEmployer;
         this.employerIdNumber = employerIdNumber;
         this.businessName = businessName;
         this.createdAt = createdAt;
     }
+
+    public void update(UserRequest.UpdateDTO requestDTO) {
+        this.password = requestDTO.getPassword();
+        this.gender = requestDTO.getGender();
+        this.phoneNumber = requestDTO.getPhoneNumber();
+        this.address = requestDTO.getAddress();
+        this.email = requestDTO.getEmail();
+        /*
+        this.schoolName = schoolName;
+        this.major = major;
+        this.educationLevel = educationLevel;
+        */
+        this.employerIdNumber = requestDTO.getEmployerIdNumber();
+        this.businessName = requestDTO.getBusinessName();
+    }
+
 }

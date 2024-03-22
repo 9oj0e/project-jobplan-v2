@@ -27,7 +27,7 @@ public class UserRequest {
 
         private Timestamp createdAt;
 
-        public User toEntity(){
+        public User toEntity() {
             return User.builder()
                     .username(username)
                     .password(password)
@@ -65,26 +65,6 @@ public class UserRequest {
         // 회사 정보
         private String employerIdNumber; // 사업자번호
         private String businessName; // 기업이름
-
-        public User toEntity() {
-            return User.builder()
-                    .password(this.password)
-                    .gender(this.gender)
-                    .phoneNumber(this.phoneNumber)
-                    .address(this.address)
-                    .email(this.email)
-                    /*
-                    .schoolName(this.schoolName)
-                    .major(this.major)
-                    .educationLevel(this.educationLevel)
-                    .career(this.career)
-                    */
-                    /*
-                    .employerIdNumber(this.employerIdNumber)
-                    .businessName(this.businessName)
-                    */
-                    .build();
-        }
     }
 
     @Data

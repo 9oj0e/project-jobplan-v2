@@ -12,9 +12,16 @@ public class BoardService {
     private final BoardJpaRepository boardJpaRepository;
     private final BoardQueryRepository boardQueryRepository;
 
-    public void createBoard(BoardRequest.SaveDTO requestDTO) {
-        // todo : board/save
+    public BoardResponse.DetailDTO findBoardById(int boardId) {
+        Board board = boardJpaRepository.findById(boardId).get();
+        BoardResponse.DetailDTO responseDTO = new BoardResponse.DetailDTO(board);
+      
+        return responseDTO;
+    }
 
+    public Board createBoard(BoardRequest.SaveDTO requestDTO) {
+
+        return boardJpaRepository.save(requestDTO.toEntity());
     }
 
     public BoardResponse.UpdateDTO getBoard(int id) {
@@ -37,7 +44,8 @@ public class BoardService {
     }
 
     public void removeBoard(int id) {
-        // todo : board/id/delete
+        Board board = boardJpaRepository.findById(id).get();
 
+        boardJpaRepository.delete(board);
     }
 }

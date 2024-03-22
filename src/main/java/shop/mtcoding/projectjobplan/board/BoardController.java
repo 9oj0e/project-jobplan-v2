@@ -1,6 +1,7 @@
 package shop.mtcoding.projectjobplan.board;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,32 +11,35 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequiredArgsConstructor
 @Controller
 public class BoardController {
+    private final HttpSession session;
     private final BoardService boardService;
 
     @GetMapping("/boards/main")
     public String main() {
         return "/board/main";
     }
-
-    @GetMapping("/board/post-form")
+    @GetMapping("/boards/post-form")
     public String postForm() {
 
         return "/board/post-form";
     }
 
-    @PostMapping("/board/post")
-    public String post(@PathVariable int boardId) {
+    @PostMapping("/boards/post")
+    public String post(BoardRequest.SaveDTO requestDTO) {
+        Board board = boardService.createBoard(requestDTO);
 
-        return "redirect:/board/" + boardId;
+        return "redirect:/board/" + board.getId();
     }
 
-    @GetMapping("/board/{boardId}")
+    @GetMapping("/boards/{boardId}")
     public String detail(@PathVariable int boardId) {
-
-        return "redirect:/board/" + boardId;
+        BoardResponse.DetailDTO boardDetail = boardService.findBoardById(boardId);
+        session.setAttribute("boardDetail", boardDetail);
+      
+        return "/board/detail";
     }
 
-    @GetMapping("/board/listings")
+    @GetMapping("/boards/listings")
     public String listings() {
 
         return "/board/listings";
@@ -45,7 +49,6 @@ public class BoardController {
     public String updateForm(@PathVariable int boardId, HttpServletRequest request) {
         BoardResponse.UpdateDTO responseDTO = boardService.getBoard(boardId);
         request.setAttribute("board", responseDTO);
-
         return "/board/update-form";
     }
 
@@ -56,8 +59,9 @@ public class BoardController {
         return "redirect:/board/" + boardId;
     }
 
-    @PostMapping("/board/{boardId}/delete")
+    @PostMapping("/boards/{boardId}/delete")
     public String delete(@PathVariable int boardId) {
+        boardService.removeBoard(boardId);
 
         return "redirect:/board/listings";
     }

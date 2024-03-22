@@ -3,6 +3,7 @@ package shop.mtcoding.projectjobplan.resume;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import shop.mtcoding.projectjobplan.user.UserJpaRepository;
 
 import java.util.List;
 
@@ -11,10 +12,19 @@ import java.util.List;
 public class ResumeService {
     private final ResumeJpaRepository resumeJpaRepository;
     private final ResumeQueryRepository resumeQueryRepository;
+    private final UserJpaRepository userJpaRepository;
 
-    public void createResume(ResumeRequest.SaveDTO requestDTO) {
-        // todo : resume/save
+    @Transactional
+    public Resume createResume(ResumeRequest.SaveDTO requestDTO) {
 
+        return resumeJpaRepository.save(requestDTO.toEntity());
+    }
+
+    public ResumeResponse.DetailDTO findResumeById(int resumeId) {
+        Resume resume = resumeJpaRepository.findById(resumeId).get();
+        ResumeResponse.DetailDTO responseDTO = new ResumeResponse.DetailDTO(resume);
+
+        return responseDTO;
     }
 
     public ResumeResponse.UpdateDTO getResume(int id) {
@@ -37,8 +47,10 @@ public class ResumeService {
         resume.update(requestDTO);
     }
 
+    @Transactional
     public void removeResume(int id) {
-        // todo : resume/id/delete
+        Resume resume = resumeJpaRepository.findById(id).get();
 
+        resumeJpaRepository.delete(resume);
     }
 }
