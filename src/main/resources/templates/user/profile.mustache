@@ -6,12 +6,12 @@
             <div class="d-flex justify-content-between">
                 <h5>안녕하세요, {{sessionUser.name}}님</h5>
                 <div style="display: flex; justify-content: space-evenly; width: 150px">
-                    <form action="/user/{{sessionUser.id}}/updateForm"> <!-- 수정 하기 -->
+                    <form action="/users/{{sessionUser.id}}/update-form"> <!-- 수정 하기 -->
                         <button class="btn btn-outline-warning">
                             <i class="fa-solid fa-user-pen icon-size"></i>
                         </button>
                     </form>
-                    <form action="/user/{{sessionUser.id}}/delete"> <!-- 탈퇴 하기 -->
+                    <form action="/users/{{sessionUser.id}}/delete"> <!-- 탈퇴 하기 -->
                         <button class="btn btn-outline-danger">
                             <i class="fa-solid fa-user-xmark icon-size"></i>
                         </button>
@@ -51,7 +51,7 @@
                                         </form>
                                     {{/pic}}
                                     {{^pic}}
-                                        <form action="/uploadForm/{{user.id}}" method="get">
+                                        <form action="/upload-form/{{user.id}}" method="get">
                                             <button class="btn btn-outline-primary">
                                                 <i class="fa-solid fa-plus icon-size"></i>
                                             </button>
@@ -115,40 +115,40 @@
                         <tbody>
                         <tr>
                             <th>아이디</th>
-                            <td>{{username}}</td>
+                            <td>{{user.username}}</td>
                         </tr>
                         <tr>
                             <th>이름</th>
-                            <td>{{name}}</td>
+                            <td>{{user.name}}</td>
                         </tr>
                         <tr>
                             <th>생년월일</th>
-                            <td>{{birthdate}}</td>
+                            <td>{{user.birthdate}}</td>
                         </tr>
                         <tr>
                             <th>성별</th>
-                            <td>{{gender}}</td>
+                            <td>{{user.gender}}</td>
                         </tr>
                         <tr>
                             <th>휴대전화</th>
-                            <td>{{phoneNumber}}</td>
+                            <td>{{user.phoneNumber}}</td>
                         </tr>
                         <tr>
                             <th>주소</th>
-                            <td>{{address}}</td>
+                            <td>{{user.address}}</td>
                         </tr>
                         <tr>
                             <th>E-MAIL</th>
-                            <td>{{email}}</td>
+                            <td>{{user.email}}</td>
                         </tr>
                         {{#user.isEmployer}}
                             <tr>
                                 <th>사업자번호</th>
-                                <td>{{employerIdNumber}}</td>
+                                <td>{{user.employerIdNumber}}</td>
                             </tr>
                             <tr>
                                 <th>회사명</th>
-                                <td>{{businessName}}</td>
+                                <td>{{user.businessName}}</td>
                             </tr>
                         {{/user.isEmployer}}
                         </tbody>
@@ -249,10 +249,10 @@
                             <td>{{createdAt}}</td>
                             <td>
                                 <div style="display: flex; justify-content: end">
-                                    <form action="/resume/{{id}}/updateForm">
+                                    <form action="/resumes/{{id}}/update-form">
                                         <button class="btn btn-outline-primary">수정</button>&nbsp;
                                     </form>
-                                    <form action="/resume/{{id}}/delete" method="post">
+                                    <form action="/resumes/{{id}}/delete" method="post">
                                         <button class="btn btn-primary">삭제</button>
                                     </form>
                                     <!--공고별 지원 현황 보기?-->
