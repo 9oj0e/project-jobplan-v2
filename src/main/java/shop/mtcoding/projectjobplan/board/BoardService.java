@@ -2,6 +2,7 @@ package shop.mtcoding.projectjobplan.board;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -23,10 +24,10 @@ public class BoardService {
         return boardJpaRepository.save(requestDTO.toEntity());
     }
 
-    public Board getBoard(int id) {
+    public BoardResponse.UpdateDTO getBoard(int id) {
         // todo : board/update-form
 
-        return null;
+        return new BoardResponse.UpdateDTO(boardJpaRepository.findById(id).get());
     }
 
     public List<Board> getAllBoard() {
@@ -35,10 +36,11 @@ public class BoardService {
         return null;
     }
 
-    public Board setBoard(int id) {
+    @Transactional
+    public void setBoard(int id, BoardRequest.UpdateDTO requestDTO) {
         // todo : board/id/update
-
-        return null;
+        Board board = boardJpaRepository.findById(id).get();
+        board.update(requestDTO);
     }
 
     public void removeBoard(int id) {

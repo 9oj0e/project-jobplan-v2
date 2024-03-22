@@ -7,13 +7,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import shop.mtcoding.projectjobplan.user.User;
 
 @RequiredArgsConstructor
 @Controller
 public class ResumeController {
     private final HttpSession session;
     private final ResumeService resumeService;
+
+    @GetMapping("/resumes")
+    public String main(){
+        return "/resume/main";
+    }
 
     @GetMapping("/resumes/post-form") // 이력서 작성 폼
     public String postForm(HttpServletRequest request) {
@@ -32,7 +36,7 @@ public class ResumeController {
     public String detail(@PathVariable int resumeId) {
         ResumeResponse.DetailDTO resumeDetail = resumeService.findResumeById(resumeId);
         session.setAttribute("resumeDetail", resumeDetail);
-      
+
         return "/resume/detail";
     }
 
@@ -43,15 +47,19 @@ public class ResumeController {
     }
 
     @GetMapping("/resumes/{resumeId}/update-form")
-    public String updateForm(@PathVariable int resumeId) {
+    public String updateForm(@PathVariable int resumeId, HttpServletRequest request) {
+        // todo: 권한체크
+        ResumeResponse.UpdateDTO responseDTO = resumeService.getResume(resumeId);
+        request.setAttribute("resume", responseDTO);
 
         return "/resume/update-form";
     }
 
     @PostMapping("/resumes/{resumeId}/update")
-    public String update(@PathVariable int resumeId) {
+    public String update(@PathVariable int resumeId, ResumeRequest.UpdateDTO requestDTO) {
+        resumeService.setResume(resumeId, requestDTO);
 
-        return "redirect:/resume/" + resumeId;
+        return "redirect:/resumes/" + resumeId;
     }
 
     @PostMapping("/resumes/{resumeId}/delete")

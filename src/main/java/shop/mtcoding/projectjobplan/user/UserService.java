@@ -37,7 +37,7 @@ public class UserService {
 
     @Transactional // 회원수정
     public User setUser(int id, UserRequest.UpdateDTO requestDTO) {
-        // todo : 구직자, 구인자가 필요한 정보를 여기서 받도록.
+        // todo : 구직자, 구인자가 필요한 정보를 여기서 받도록?
         User user = userJpaRepository.findById(id).get();
         user.update(requestDTO);
 

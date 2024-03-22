@@ -1,9 +1,6 @@
 package shop.mtcoding.projectjobplan.board;
 
 import lombok.Data;
-import shop.mtcoding.projectjobplan.resume.Resume;
-
-import java.sql.Timestamp;
 
 public class BoardRequest {
 
@@ -31,8 +28,15 @@ public class BoardRequest {
 
         // toEntity
     }
-
+    @Data
     public static class UpdateDTO {
+        private String title;
+        private String field;
+        private String position;
+        private String salary;
+        private String content;
+        private String openingDate;
+        private String closingDate;
         // toEntity
     }
 }

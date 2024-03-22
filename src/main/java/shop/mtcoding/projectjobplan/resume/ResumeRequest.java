@@ -29,7 +29,15 @@ public class ResumeRequest {
         }
     }
 
+    @Data
     public static class UpdateDTO {
+        private String title;
+        private String content;
+        private String schoolName;
+        private String major;
+        private String educationLevel;
+        private String career;
+
         // toEntity
     }
 }

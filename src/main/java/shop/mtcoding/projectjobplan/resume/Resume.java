@@ -31,6 +31,15 @@ public class Resume {
     @CreationTimestamp
     private Timestamp createdAt;
 
+    public void update(ResumeRequest.UpdateDTO requestDTO) {
+        this.title = requestDTO.getTitle();
+        this.content = requestDTO.getContent();
+        this.schoolName = requestDTO.getSchoolName();
+        this.major = requestDTO.getMajor();
+        this.educationLevel = requestDTO.getEducationLevel();
+        this.career = requestDTO.getCareer();
+    }
+
     @Builder
     public Resume(Integer id, User user, String schoolName, String major, String educationLevel, String career, String title, String content, Timestamp createdAt) {
         this.id = id;

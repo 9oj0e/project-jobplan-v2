@@ -1,5 +1,6 @@
 package shop.mtcoding.projectjobplan.board;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,10 @@ public class BoardController {
     private final HttpSession session;
     private final BoardService boardService;
 
+    @GetMapping("/boards/main")
+    public String main() {
+        return "/board/main";
+    }
     @GetMapping("/boards/post-form")
     public String postForm() {
 
@@ -41,13 +46,15 @@ public class BoardController {
     }
 
     @GetMapping("/boards/{boardId}/update-form")
-    public String updateForm(@PathVariable int boardId) {
-
+    public String updateForm(@PathVariable int boardId, HttpServletRequest request) {
+        BoardResponse.UpdateDTO responseDTO = boardService.getBoard(boardId);
+        request.setAttribute("board", responseDTO);
         return "/board/update-form";
     }
 
     @PostMapping("/boards/{boardId}/update")
-    public String update(@PathVariable int boardId) {
+    public String update(@PathVariable int boardId, BoardRequest.UpdateDTO requestDTO) {
+        boardService.setBoard(boardId, requestDTO);
 
         return "redirect:/board/" + boardId;
     }
