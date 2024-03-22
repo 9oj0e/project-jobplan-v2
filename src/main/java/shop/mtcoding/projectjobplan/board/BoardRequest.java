@@ -15,8 +15,8 @@ public class BoardRequest {
         private String position;
         private String salary;
         private String content;
-        private Timestamp openingDate;
-        private Timestamp closingDate;
+        private String openingDate;
+        private String closingDate;
         // toEntity
     }
 }

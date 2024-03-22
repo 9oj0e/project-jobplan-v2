@@ -3,6 +3,7 @@ package shop.mtcoding.projectjobplan.board;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
+import shop.mtcoding.projectjobplan._core.utils.ConvertUtil;
 import shop.mtcoding.projectjobplan.user.User;
 
 import java.sql.Timestamp;
@@ -40,7 +41,7 @@ public class Board {
         this.field = requestDTO.getField();
         this.position = requestDTO.getPosition();
         this.salary = requestDTO.getSalary();
-        this.openingDate = requestDTO.getOpeningDate();
-        this.closingDate = requestDTO.getClosingDate();
+        this.openingDate = ConvertUtil.timestampConverter(requestDTO.getOpeningDate());
+        this.closingDate = ConvertUtil.timestampConverter(requestDTO.getClosingDate());
     }
 }
