@@ -10,19 +10,19 @@ public class UserService {
     private final UserJpaRepository userJpaRepository;
 
     @Transactional
-    public User createUser(UserRequest.JoinDTO requestDTO) {
+    public User createUser(UserRequest.JoinDTO requestDTO) { // join
         User user = requestDTO.toEntity();
 
         return userJpaRepository.save(user);
     }
 
-    public User getUser(UserRequest.LoginDTO requestDTO) {
+    public User getUser(UserRequest.LoginDTO requestDTO) { // login
         User sessionUser = userJpaRepository.findByUsernameAndPassword(requestDTO.getUsername(), requestDTO.getPassword()).get();
 
         return sessionUser;
     }
 
-    public UserResponse.DTO getUser(int id, User sessionUser) {
+    public UserResponse.DTO getUser(int id, User sessionUser) { // updateForm
         User user = userJpaRepository.findById(id).get();
 
         return new UserResponse.DTO(user, sessionUser);
@@ -40,6 +40,7 @@ public class UserService {
         user.setEmail(reqDTO.getEmail());
 
         if (sessionUser.getIsEmployer()) {
+
             user.setEmployerIdNumber(reqDTO.getEmployerIdNumber());
             user.setBusinessName(reqDTO.getBusinessName());
         }

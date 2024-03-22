@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class UserController {
     private final HttpSession session;
     private final UserService userService;
-  
+
     @GetMapping("/users/join-type")
     public String joinType() {
 
@@ -21,13 +21,10 @@ public class UserController {
     }
 
     @GetMapping("/users/join-form")
-    public String joinForm(boolean isEmployer) {
+    public String joinForm(boolean isEmployer, HttpServletRequest request) {
+        request.setAttribute("isEmployer", isEmployer);
 
-        if (isEmployer) {
-            return "/employer/join-form";
-        } else {
-            return "/user/join-form";
-        }
+        return "/user/join-form";
     }
 
     @PostMapping("/join")
@@ -39,7 +36,7 @@ public class UserController {
 
     @GetMapping("/login-form")
     public String loginForm() {
-      
+
         return "/user/login-form";
     }
 
@@ -47,14 +44,14 @@ public class UserController {
     public String login(UserRequest.LoginDTO requestDTO) {
         User sessionUser = userService.getUser(requestDTO);
         session.setAttribute("sessionUser", sessionUser);
-      
+
         return "redirect:/";
     }
 
     @GetMapping("/logout")
     public String logout() {
         session.invalidate();
-      
+
         return "redirect:/";
     }
 
@@ -62,13 +59,9 @@ public class UserController {
     public String updateForm(@PathVariable Integer userId, HttpServletRequest request) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         UserResponse.DTO user = userService.getUser(userId, sessionUser);
-
         request.setAttribute("user", user);
-        // 기업 회원인지..
-        if (sessionUser.getIsEmployer())
-            return "/employer/update-form";
-        else
-            return "/user/update-form";
+
+        return "/user/update-form";
     }
 
     @PostMapping("/users/{userId}/update")
