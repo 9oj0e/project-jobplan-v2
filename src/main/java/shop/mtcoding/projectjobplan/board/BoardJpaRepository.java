@@ -9,7 +9,5 @@ import java.util.List;
 import java.util.Optional;
 
 public interface BoardJpaRepository extends JpaRepository <Board, Integer> {
-
     List<Board> findAllByUserId(@Param("userId")Integer userId);
-
 }

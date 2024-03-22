@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequiredArgsConstructor
 @Controller
 public class BoardController {
+    private final BoardService boardService;
 
     @GetMapping("/board/post-form")
     public String postForm() {
@@ -48,6 +49,7 @@ public class BoardController {
 
     @PostMapping("/board/{boardId}/delete")
     public String delete(@PathVariable int boardId) {
+        boardService.removeBoard(boardId);
 
         return "redirect:/board/listings";
     }

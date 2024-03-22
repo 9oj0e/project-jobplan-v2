@@ -11,7 +11,7 @@ import java.util.List;
 public class UserResponse {
 
     @Data
-    public static class DTO {
+    public static class UpdateFormDTO {
         // 회원 정보
         private Integer id;
         private String username;
@@ -30,7 +30,7 @@ public class UserResponse {
         private String employerIdNumber; // 사업자번호
         private String businessName; // 기업이름
 
-        public DTO(User user, User sessionUser) {
+        public UpdateFormDTO(User user, User sessionUser) {
             this.id = user.getId();
             this.username = user.getUsername();
             this.password = user.getPassword();
@@ -39,6 +39,7 @@ public class UserResponse {
             this.phoneNumber = user.getPhoneNumber();
             this.address = user.getAddress();
             this.email = user.getEmail();
+
             if (sessionUser.getIsEmployer()) {
                 this.isEmployer = user.getIsEmployer();
                 this.employerIdNumber = user.getEmployerIdNumber();
@@ -46,93 +47,45 @@ public class UserResponse {
             }
         }
     }
-
     @Data
-    public static class UserDTO {
+    public static class ProfileDTO{
+        // 회원 정보
         private Integer id;
         private String username;
-        private String birthdate;
-        private Character gender;
-        private String phoneNumber;
-        private String address;
-        private String email;
-        private Boolean isEmployer;
+        private String password;
+
+        // 개인 정보
         private String name;
-        private List<UserDTO.ResumeDTO> resumeList =new ArrayList<>();
-
-        public UserDTO(User sessionUser) {
-            this.id = sessionUser.getId();
-            this.username = sessionUser.getUsername();
-            this.birthdate = sessionUser.getBirthdate();
-            this.gender = sessionUser.getGender();
-            this.phoneNumber = sessionUser.getPhoneNumber();
-            this.address = sessionUser.getAddress();
-            this.email = sessionUser.getEmail();
-            this.isEmployer = sessionUser.getIsEmployer();
-            this.name = sessionUser.getName();
-            this.resumeList = sessionUser.getResumes().stream().map(resume -> new ResumeDTO(resume)).toList();
-
-        }
-
-        public class ResumeDTO{
-            private Integer id ;
-            private String title;
-            private Timestamp createdAt;
-
-            public ResumeDTO(Resume resume) {
-                this.id = resume.getId();
-                this.title = resume.getTitle();
-                this.createdAt = resume.getCreatedAt();
-            }
-        }
-
-
-
-    }
-    @Data
-    public static class EmployerDTO{
-        private Integer id;
-        private String username;
         private String birthdate;
         private Character gender;
         private String phoneNumber;
         private String address;
         private String email;
+        // private List<ResumeDTO> resumeList =new ArrayList<>();
+
+        // 기업 정보
         private Boolean isEmployer;
         private String employerIdNumber;
         private String businessName;
-        private String name;
-        private List<BoardDTO> boardList =new ArrayList<>();
-
-        public EmployerDTO(User sessionUser) {
-            this.id = sessionUser.getId();
-            this.username = sessionUser.getUsername();
-            this.birthdate = sessionUser.getBirthdate();
-            this.gender = sessionUser.getGender();
-            this.phoneNumber = sessionUser.getPhoneNumber();
-            this.address = sessionUser.getAddress();
-            this.email = sessionUser.getEmail();
-            this.isEmployer = sessionUser.getIsEmployer();
-            this.employerIdNumber = sessionUser.getEmployerIdNumber();
-            this.businessName = sessionUser.getBusinessName();
-            this.name = sessionUser.getName();
-
-            this.boardList = sessionUser.getBoards().stream().map(board -> new BoardDTO(board,sessionUser)).toList();
-        }
-        public class BoardDTO{
-            private Integer id;
-            private String title;
-            private String field;
-            private String position;
-            private Timestamp openingDate;
-
-            public BoardDTO(Board board ,User sessionUser) {
-                this.id = board.getId();
-                this.title = board.getTitle();
-                this.field = board.getField();
-                this.position = board.getPosition();
-                this.openingDate = board.getOpeningDate();
+        // private List<BoardDTO> boardList =new ArrayList<>();
+      
+        public ProfileDTO(User user) {
+            this.id = user.getId();
+            this.username = user.getUsername();
+            this.password = user.getPassword();
+            this.name = user.getName();
+            this.birthdate = user.getBirthdate();
+            this.gender = user.getGender();
+            this.phoneNumber = user.getPhoneNumber();
+            this.address = user.getAddress();
+            this.email = user.getEmail();
+            if (user.getIsEmployer()) {
+                this.isEmployer = user.getIsEmployer();
+                this.employerIdNumber = user.getEmployerIdNumber();
+                this.businessName = user.getBusinessName();
             }
+        // this.resumeList = sessionUser.getResumes().stream().map(resume -> new ResumeDTO(resume)).toList();
+        // this.boardList = sessionUser.getBoards().stream().map(board -> new BoardDTO(board,sessionUser)).toList();
         }
     }
 }

@@ -79,7 +79,7 @@
                             <div class="card-footer">
                                 <div style="display: grid; grid-template-columns: 1fr 1fr; grid-column-gap: 10px">
                                     {{^userPic}}
-                                        <form action="/uploadForm/{{user.id}}" method="get"> <!-- 사진 등록 -->
+                                        <form action="/upload-form/{{user.id}}" method="get"> <!-- 사진 등록 -->
                                             <button class="btn btn-primary">
                                                 <i class="fa-solid fa-plus icon-size"></i>
                                             </button>
@@ -161,7 +161,7 @@
                                     <span>{{skillName}}</span>
                                 {{/skillList}}
                         {{^skillList}}
-                                    <form action="/user/{{sessionUser.id}}/updateForm">
+                                    <form action="/users/{{sessionUser.id}}/update-form">
                                         <button class="btn btn-outline-primary form-control">추가하기</button>
                                     </form>
                                 {{/skillList}}
@@ -176,7 +176,7 @@
                                 <span>{{skillName}}</span>
                             {{/skillList}}
                         {{^skillList}}
-                                <form action="/user/{{sessionUser.id}}/updateForm">
+                                <form action="/users/{{sessionUser.id}}/update-form">
                                     <button class="btn btn-outline-primary form-control">추가하기</button>
                                 </form>
                             {{/skillList}}
@@ -192,7 +192,7 @@
         <div class="div-layout">
             <div class="div-header d-flex justify-content-between">
                 <h3><b>공고 관리</b></h3>
-                <form action="/board/uploadForm" method="get" class="justify-content-end">
+                <form action="/boards/upload-form" method="get" class="justify-content-end">
                     <button class="btn btn-primary">추가</button>
                 </form>
             </div>
@@ -209,14 +209,14 @@
                         <tr>
                             <td>{{position}}</td>
                             <td>{{field}}</td>
-                            <td><a href="/board/{{id}}">{{title}}</a></td>
+                            <td><a href="/boards/{{id}}">{{title}}</a></td>
                             <td>{{openingDate}}</td>
                             <td>
                                 <div style="display: flex; justify-content: space-evenly">
-                                    <form action="/user/{{sessionUser.id}}/{{id}}" method="get">
+                                    <form action="/users/{{sessionUser.id}}/{{id}}" method="get">
                                         <button class="btn btn-outline-primary">지원자</button>
                                     </form>
-                                    <form action="/board/{{id}}/update" method="post">
+                                    <form action="/boards/{{id}}/update" method="post">
                                         <button class="btn btn-primary">삭제</button>
                                     </form>
                                 </div>
@@ -232,7 +232,7 @@
         <div class="div-layout">
             <div class="div-header d-flex justify-content-between">
                 <h2><b>나의 이력서</b></h2>
-                <form action="/resume/uploadForm" method="get">
+                <form action="/resumes/upload-form" method="get">
                     <button class="btn btn-primary">추가</button>
                 </form>
             </div>
@@ -245,7 +245,7 @@
                     </tr>
                     {{#user.resumeList}}
                         <tr>
-                            <td><a href="/resume/{{id}}">{{title}}</a></td>
+                            <td><a href="/resumes/{{id}}">{{title}}</a></td>
                             <td>{{createdAt}}</td>
                             <td>
                                 <div style="display: flex; justify-content: end">
@@ -268,7 +268,7 @@
         <div class="div-layout">
             <div class="div-header d-flex justify-content-between">
                 <h3><b>지원자 리스트</b></h3>
-                <form action="/user/{{sessionUser.id}}" method="get" class="justify-content-end">
+                <form action="/users/{{sessionUser.id}}" method="get" class="justify-content-end">
                     <button class="btn btn-primary">전체</button>
                 </form>
             </div>
@@ -282,9 +282,9 @@
                 </tr>
                 {{#applicationList}}
                     <tr>
-                        <td><a href="/board/{{boardId}}">{{boardTitle}}</a></td>
+                        <td><a href="/boards/{{boardId}}">{{boardTitle}}</a></td>
                         <td>{{applicantName}}</td>
-                        <td><a href="/resume/{{resumeId}}">{{resumeTitle}}</a></td>
+                        <td><a href="/resumes/{{resumeId}}">{{resumeTitle}}</a></td>
                         <td>{{appliedAt}}</td>
                         <td>
                             <div style="display: flex; justify-content: space-evenly">
@@ -329,9 +329,9 @@
                     </tr>
                     {{#applyList}}
                         <tr>
-                            <td><a href="/resume/{{resumeId}}">{{resumeTitle}}</a></td>
+                            <td><a href="/resumes/{{resumeId}}">{{resumeTitle}}</a></td>
                             <td>{{businessName}}</td>
-                            <td><a href="/board/{{boardId}}">{{boardTitle}}</a></td>
+                            <td><a href="/boards/{{boardId}}">{{boardTitle}}</a></td>
                             <td>{{appliedAt}}</td>
                             <td>
                                 <div style="display: flex; justify-content: space-evenly">

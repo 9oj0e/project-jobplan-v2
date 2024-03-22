@@ -27,28 +27,22 @@ public class UserService {
         return sessionUser;
     }
 
-    public UserResponse.DTO getUser(int id, User sessionUser) { // updateForm
+    public UserResponse.UpdateFormDTO getUser(int id, User sessionUser) {
         User user = userJpaRepository.findById(id).get();
 
-        return new UserResponse.DTO(user, sessionUser);
+        return new UserResponse.UpdateFormDTO(user, sessionUser);
+    }
+
+    public UserResponse.ProfileDTO getUser(int sessionUserId){
+
+        return new UserResponse.ProfileDTO(userJpaRepository.findById(sessionUserId).get());
     }
 
     @Transactional // 회원수정
-    public User setUser(int id, UserRequest.UpdateDTO reqDTO, User sessionUser) {
+    public User setUser(int id, UserRequest.UpdateDTO requestDTO) {
         // todo : 구직자, 구인자가 필요한 정보를 여기서 받도록.
         User user = userJpaRepository.findById(id).get();
-
-        user.setPassword(reqDTO.getPassword());
-        user.setGender(reqDTO.getGender());
-        user.setPhoneNumber(reqDTO.getPhoneNumber());
-        user.setAddress(reqDTO.getAddress());
-        user.setEmail(reqDTO.getEmail());
-
-        if (sessionUser.getIsEmployer()) {
-
-            user.setEmployerIdNumber(reqDTO.getEmployerIdNumber());
-            user.setBusinessName(reqDTO.getBusinessName());
-        }
+        user.update(requestDTO);
 
         return user;
     }
@@ -57,16 +51,5 @@ public class UserService {
     public void removeUser(int id) {
         // todo : delete
 
-    }
-
-    public UserResponse.EmployerDTO findEmployer(int sessionUserId){
-        User user = userJpaRepository.findById(sessionUserId).get() ;
-//        List<Board> boardList = boardJpaRepository.findAllByUserId(sessionUserId);
-
-        return new UserResponse.EmployerDTO(user);
-    }
-    public UserResponse.UserDTO findUser(int sessionUserId) {
-        // todo : updateForm, profile
-        return new UserResponse.UserDTO(userJpaRepository.findById(sessionUserId).get());
     }
 }
