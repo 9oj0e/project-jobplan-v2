@@ -2,6 +2,7 @@ package shop.mtcoding.projectjobplan.user;
 
 import lombok.Data;
 import shop.mtcoding.projectjobplan.board.Board;
+import shop.mtcoding.projectjobplan.resume.Resume;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -57,17 +58,36 @@ public class UserResponse {
         private String email;
         private Boolean isEmployer;
         private String name;
-        public UserDTO(User user) {
-            this.id = user.getId();
-            this.username = user.getUsername();
-            this.birthdate = user.getBirthdate();
-            this.gender = user.getGender();
-            this.phoneNumber = user.getPhoneNumber();
-            this.address = user.getAddress();
-            this.email = user.getEmail();
-            this.isEmployer = user.getIsEmployer();
-            this.name = user.getName();
+        private List<UserDTO.ResumeDTO> resumeList =new ArrayList<>();
+
+        public UserDTO(User sessionUser) {
+            this.id = sessionUser.getId();
+            this.username = sessionUser.getUsername();
+            this.birthdate = sessionUser.getBirthdate();
+            this.gender = sessionUser.getGender();
+            this.phoneNumber = sessionUser.getPhoneNumber();
+            this.address = sessionUser.getAddress();
+            this.email = sessionUser.getEmail();
+            this.isEmployer = sessionUser.getIsEmployer();
+            this.name = sessionUser.getName();
+            this.resumeList = sessionUser.getResumes().stream().map(resume -> new ResumeDTO(resume)).toList();
+
         }
+
+        public class ResumeDTO{
+            private Integer id ;
+            private String title;
+            private Timestamp createdAt;
+
+            public ResumeDTO(Resume resume) {
+                this.id = resume.getId();
+                this.title = resume.getTitle();
+                this.createdAt = resume.getCreatedAt();
+            }
+        }
+
+
+
     }
     @Data
     public static class EmployerDTO{

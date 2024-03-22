@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.transaction.annotation.Transactional;
 import shop.mtcoding.projectjobplan.board.Board;
+import shop.mtcoding.projectjobplan.resume.Resume;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -50,6 +51,11 @@ public class User {
     @OrderBy("id desc")
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE) // Entity 객체의 변수명 == FK의 주인
     private List<Board> boards = new ArrayList<>();
+
+    @OrderBy("id desc")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE) // Entity 객체의 변수명 == FK의 주인
+    private List<Resume> resumes = new ArrayList<>();
+
 
     @Builder
     public User(Integer id, String username, String password, String name, String birthdate, Character gender, String phoneNumber, String address, String email, String schoolName, String major, String educationLevel, String career, Boolean isEmployer, String employerIdNumber, String businessName, Timestamp createdAt) {
