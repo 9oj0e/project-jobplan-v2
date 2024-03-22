@@ -1,6 +1,7 @@
 package shop.mtcoding.projectjobplan.user;
 
 import lombok.Data;
+import shop.mtcoding.projectjobplan._core.utils.FormatUtil;
 import shop.mtcoding.projectjobplan.board.Board;
 import shop.mtcoding.projectjobplan.resume.Resume;
 
@@ -102,6 +103,9 @@ public class UserResponse {
                 this.position = board.getPosition();
                 this.openingDate = board.getOpeningDate();
             }
+            public String getOpeningDate() {
+                return FormatUtil.timeFormatter(this.openingDate);
+            }
         }
         public class ResumeDTO {
             private Integer id ;
@@ -112,6 +116,10 @@ public class UserResponse {
                 this.id = resume.getId();
                 this.title = resume.getTitle();
                 this.createdAt = resume.getCreatedAt();
+            }
+
+            public String getCreatedAt() {
+                return FormatUtil.timeFormatter(this.createdAt);
             }
         }
     }
