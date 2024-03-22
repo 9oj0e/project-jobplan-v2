@@ -213,10 +213,10 @@
                             <td>{{openingDate}}</td>
                             <td>
                                 <div style="display: flex; justify-content: space-evenly">
-                                    <form action="/user/1/1" method="get">
+                                    <form action="/user/{{sessionUser.id}}/{{id}}" method="get">
                                         <button class="btn btn-outline-primary">지원자</button>
                                     </form>
-                                    <form action="/board/1/update" method="post">
+                                    <form action="/board/{{id}}/update" method="post">
                                         <button class="btn btn-primary">삭제</button>
                                     </form>
                                 </div>
