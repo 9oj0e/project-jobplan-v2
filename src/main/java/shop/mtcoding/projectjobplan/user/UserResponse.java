@@ -61,14 +61,14 @@ public class UserResponse {
         private String phoneNumber;
         private String address;
         private String email;
-        // private List<ResumeDTO> resumeList =new ArrayList<>();
+        private List<ResumeDTO> resumeList =new ArrayList<>();
 
         // 기업 정보
         private Boolean isEmployer;
         private String employerIdNumber;
         private String businessName;
-        // private List<BoardDTO> boardList =new ArrayList<>();
-      
+        private List<BoardDTO> boardList =new ArrayList<>();
+
         public ProfileDTO(User user) {
             this.id = user.getId();
             this.username = user.getUsername();
@@ -83,9 +83,36 @@ public class UserResponse {
                 this.isEmployer = user.getIsEmployer();
                 this.employerIdNumber = user.getEmployerIdNumber();
                 this.businessName = user.getBusinessName();
+                this.boardList = user.getBoards().stream().map(board -> new BoardDTO(board)).toList();
+            } else {
+                this.resumeList = user.getResumes().stream().map(resume -> new ResumeDTO(resume)).toList();
             }
-        // this.resumeList = sessionUser.getResumes().stream().map(resume -> new ResumeDTO(resume)).toList();
-        // this.boardList = sessionUser.getBoards().stream().map(board -> new BoardDTO(board,sessionUser)).toList();
+        }
+        public class BoardDTO {
+            private Integer id;
+            private String title;
+            private String field;
+            private String position;
+            private Timestamp openingDate;
+
+            public BoardDTO(Board board) {
+                this.id = board.getId();
+                this.title = board.getTitle();
+                this.field = board.getField();
+                this.position = board.getPosition();
+                this.openingDate = board.getOpeningDate();
+            }
+        }
+        public class ResumeDTO {
+            private Integer id ;
+            private String title;
+            private Timestamp createdAt;
+
+            public ResumeDTO(Resume resume) {
+                this.id = resume.getId();
+                this.title = resume.getTitle();
+                this.createdAt = resume.getCreatedAt();
+            }
         }
     }
 }
