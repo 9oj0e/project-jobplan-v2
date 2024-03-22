@@ -15,7 +15,7 @@ public class UserResponse {
 
         // 개인 정보
         private String name;
-        private Timestamp birthdate;
+        private String birthdate;
 //        private Character gender; // view에서 분기 처리 하려면.. JS필요
         private String phoneNumber;
         private String address;
@@ -42,4 +42,56 @@ public class UserResponse {
             }
         }
     }
+
+    @Data
+    public static class UserDTO {
+        private Integer id;
+        private String username;
+        private String birthdate;
+        private Character gender;
+        private String phoneNumber;
+        private String address;
+        private String email;
+        private Boolean isEmployer;
+        private String name;
+        public UserDTO(User user) {
+            this.id = user.getId();
+            this.username = user.getUsername();
+            this.birthdate = user.getBirthdate();
+            this.gender = user.getGender();
+            this.phoneNumber = user.getPhoneNumber();
+            this.address = user.getAddress();
+            this.email = user.getEmail();
+            this.isEmployer = user.getIsEmployer();
+            this.name = user.getName();
+        }
+    }
+    @Data
+    public static class EmployerDTO{
+        private Integer id;
+        private String username;
+        private String birthdate;
+        private Character gender;
+        private String phoneNumber;
+        private String address;
+        private String email;
+        private Boolean isEmployer;
+        private String employerIdNumber;
+        private String businessName;
+        private String name;
+        public EmployerDTO(User user) {
+            this.id = user.getId();
+            this.username = user.getUsername();
+            this.birthdate = user.getBirthdate();
+            this.gender = user.getGender();
+            this.phoneNumber = user.getPhoneNumber();
+            this.address = user.getAddress();
+            this.email = user.getEmail();
+            this.isEmployer = user.getIsEmployer();
+            this.employerIdNumber = user.getEmployerIdNumber();
+            this.businessName = user.getBusinessName();
+            this.name = user.getName();
+        }
+    }
 }
+

@@ -32,7 +32,7 @@ public class UserRequest {
                     .username(username)
                     .password(password)
                     .name(name)
-                    .birthdate(Timestamp.valueOf(birthdate))
+                    .birthdate(birthdate)
                     .gender(gender)
                     .phoneNumber(phoneNumber)
                     .address(address)

@@ -24,7 +24,7 @@ public class User {
 
     // 개인 정보
     private String name;
-    private Timestamp birthdate;
+    private String birthdate;
     private Character gender; // 'M' or 'F'
     private String phoneNumber;
     private String address;
@@ -45,7 +45,7 @@ public class User {
     private Timestamp createdAt;
 
     @Builder
-    public User(Integer id, String username, String password, String name, Timestamp birthdate, Character gender, String phoneNumber, String address, String email, String schoolName, String major, String educationLevel, String career, Boolean isEmployer, String employerIdNumber, String businessName, Timestamp createdAt) {
+    public User(Integer id, String username, String password, String name, String birthdate, Character gender, String phoneNumber, String address, String email, String schoolName, String major, String educationLevel, String career, Boolean isEmployer, String employerIdNumber, String businessName, Timestamp createdAt) {
         this.id = id;
         this.username = username;
         this.password = password;
