@@ -35,7 +35,8 @@ public class ResumeService {
     }
 
     public void removeResume(int id) {
-        // todo : resume/id/delete
+        Resume resume = resumeJpaRepository.findById(id).get();
 
+        resumeJpaRepository.delete(resume);
     }
 }
