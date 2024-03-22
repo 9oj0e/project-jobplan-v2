@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.transaction.annotation.Transactional;
 import shop.mtcoding.projectjobplan.board.Board;
 import shop.mtcoding.projectjobplan.resume.Resume;
 

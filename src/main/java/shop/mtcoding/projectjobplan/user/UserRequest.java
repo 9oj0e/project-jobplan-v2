@@ -27,7 +27,7 @@ public class UserRequest {
 
         private Timestamp createdAt;
 
-        public User toEntity(){
+        public User toEntity() {
             return User.builder()
                     .username(username)
                     .password(password)

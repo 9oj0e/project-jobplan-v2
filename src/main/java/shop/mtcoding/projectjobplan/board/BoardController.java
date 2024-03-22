@@ -6,54 +6,53 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import shop.mtcoding.projectjobplan.resume.Resume;
 
 @RequiredArgsConstructor
 @Controller
 public class BoardController {
     private final BoardService boardService;
 
-    private final BoardService boardService;
     private final HttpSession session;
 
-    @GetMapping("/board/post-form")
+    @GetMapping("/boards/post-form")
     public String postForm() {
 
         return "/board/post-form";
     }
 
-    @PostMapping("/board/post")
+    @PostMapping("/boards/post")
     public String post(@PathVariable int boardId) {
 
         return "redirect:/board/" + boardId;
     }
 
-    @GetMapping("/board/{boardId}")
+    @GetMapping("/boards/{boardId}")
     public String detail(@PathVariable int boardId) {
         BoardResponse.DetailDTO boardDetail = boardService.findBoardById(boardId);
         session.setAttribute("boardDetail", boardDetail);
+
         return "/board/detail";
     }
 
-    @GetMapping("/board/listings")
+    @GetMapping("/boards/listings")
     public String listings() {
 
         return "/board/listings";
     }
 
-    @GetMapping("/board/{boardId}/update-form")
+    @GetMapping("/boards/{boardId}/update-form")
     public String updateForm(@PathVariable int boardId) {
 
         return "/board/update-form";
     }
 
-    @PostMapping("/board/{boardId}/update")
+    @PostMapping("/boards/{boardId}/update")
     public String update(@PathVariable int boardId) {
 
         return "redirect:/board/" + boardId;
     }
 
-    @PostMapping("/board/{boardId}/delete")
+    @PostMapping("/boards/{boardId}/delete")
     public String delete(@PathVariable int boardId) {
         boardService.removeBoard(boardId);
 

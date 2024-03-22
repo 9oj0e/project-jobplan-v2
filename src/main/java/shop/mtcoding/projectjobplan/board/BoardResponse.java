@@ -1,9 +1,5 @@
 package shop.mtcoding.projectjobplan.board;
 
-import jakarta.persistence.FetchType;
-import jakarta.persistence.ManyToOne;
-import shop.mtcoding.projectjobplan.user.User;
-
 import java.sql.Timestamp;
 
 public class BoardResponse {
@@ -38,16 +34,4 @@ public class BoardResponse {
             this.closingDate = board.getClosingDate();
         }
     }
-    /*
-    *
-    public String getOpeningDate(){ // todo : 메서드 화
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        return openingDate.toLocalDateTime().format(formatter);
-    }
-
-    public String getClosingDate(){ // todo :
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        return closingDate.toLocalDateTime().format(formatter);
-    }
-    * */
 }

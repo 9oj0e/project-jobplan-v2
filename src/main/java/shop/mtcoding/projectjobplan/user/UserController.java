@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import shop.mtcoding.projectjobplan.board.Board;
 
 @RequiredArgsConstructor
 @Controller
@@ -75,9 +74,9 @@ public class UserController {
     }
 
     @GetMapping("/users/{userId}")
-    public String profile(@PathVariable Integer userId, HttpServletRequest request){
+    public String profile(@PathVariable Integer userId, HttpServletRequest request) {
         // todo: NullPointException
-        User sessionUser = (User)session.getAttribute("sessionUser");
+        User sessionUser = (User) session.getAttribute("sessionUser");
         request.setAttribute("user", userService.getUser(sessionUser.getId()));
 
         return "/user/profile";

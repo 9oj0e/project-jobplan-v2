@@ -21,7 +21,7 @@ public class UserResponse {
         // 개인 정보
         private String name;
         private String birthdate;
-//        private Character gender; // view에서 분기 처리 하려면.. JS필요
+        //        private Character gender; // view에서 분기 처리 하려면.. JS필요
         private String phoneNumber;
         private String address;
         private String email;
@@ -48,8 +48,9 @@ public class UserResponse {
             }
         }
     }
+
     @Data
-    public static class ProfileDTO{
+    public static class ProfileDTO {
         // 회원 정보
         private Integer id;
         private String username;
@@ -62,13 +63,13 @@ public class UserResponse {
         private String phoneNumber;
         private String address;
         private String email;
-        private List<ResumeDTO> resumeList =new ArrayList<>();
+        private List<ResumeDTO> resumeList = new ArrayList<>();
 
         // 기업 정보
         private Boolean isEmployer;
         private String employerIdNumber;
         private String businessName;
-        private List<BoardDTO> boardList =new ArrayList<>();
+        private List<BoardDTO> boardList = new ArrayList<>();
 
         public ProfileDTO(User user) {
             this.id = user.getId();
@@ -89,6 +90,7 @@ public class UserResponse {
                 this.resumeList = user.getResumes().stream().map(resume -> new ResumeDTO(resume)).toList();
             }
         }
+
         public class BoardDTO {
             private Integer id;
             private String title;
@@ -103,12 +105,14 @@ public class UserResponse {
                 this.position = board.getPosition();
                 this.openingDate = board.getOpeningDate();
             }
+
             public String getOpeningDate() {
                 return FormatUtil.timeFormatter(this.openingDate);
             }
         }
+
         public class ResumeDTO {
-            private Integer id ;
+            private Integer id;
             private String title;
             private Timestamp createdAt;
 

@@ -1,9 +1,5 @@
 package shop.mtcoding.projectjobplan.resume;
 
-import jakarta.persistence.FetchType;
-import jakarta.persistence.ManyToOne;
-import shop.mtcoding.projectjobplan.user.User;
-
 public class ResumeResponse {
     public static class DetailDTO {
 
