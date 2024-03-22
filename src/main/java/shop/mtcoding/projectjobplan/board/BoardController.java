@@ -11,6 +11,7 @@ import shop.mtcoding.projectjobplan.resume.Resume;
 @RequiredArgsConstructor
 @Controller
 public class BoardController {
+    private final BoardService boardService;
 
     private final BoardService boardService;
     private final HttpSession session;
@@ -54,6 +55,7 @@ public class BoardController {
 
     @PostMapping("/board/{boardId}/delete")
     public String delete(@PathVariable int boardId) {
+        boardService.removeBoard(boardId);
 
         return "redirect:/board/listings";
     }

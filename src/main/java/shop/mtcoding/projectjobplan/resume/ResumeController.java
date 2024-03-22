@@ -54,6 +54,7 @@ public class ResumeController {
 
     @PostMapping("/resume/{resumeId}/delete")
     public String delete(@PathVariable int resumeId) {
+        resumeService.removeResume(resumeId);
 
         return "redirect:/resume/listings";
     }

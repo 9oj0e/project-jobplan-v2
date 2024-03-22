@@ -41,7 +41,8 @@ public class BoardService {
     }
 
     public void removeBoard(int id) {
-        // todo : board/id/delete
+        Board board = boardJpaRepository.findById(id).get();
 
+        boardJpaRepository.delete(board);
     }
 }
