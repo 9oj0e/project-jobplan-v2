@@ -1,8 +1,12 @@
 package shop.mtcoding.projectjobplan.user;
 
 import lombok.Data;
+import shop.mtcoding.projectjobplan.board.Board;
+import shop.mtcoding.projectjobplan.resume.Resume;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserResponse {
 
@@ -57,12 +61,14 @@ public class UserResponse {
         private String phoneNumber;
         private String address;
         private String email;
+        // private List<ResumeDTO> resumeList =new ArrayList<>();
 
         // 기업 정보
         private Boolean isEmployer;
         private String employerIdNumber;
         private String businessName;
-
+        // private List<BoardDTO> boardList =new ArrayList<>();
+      
         public ProfileDTO(User user) {
             this.id = user.getId();
             this.username = user.getUsername();
@@ -78,6 +84,8 @@ public class UserResponse {
                 this.employerIdNumber = user.getEmployerIdNumber();
                 this.businessName = user.getBusinessName();
             }
+        // this.resumeList = sessionUser.getResumes().stream().map(resume -> new ResumeDTO(resume)).toList();
+        // this.boardList = sessionUser.getBoards().stream().map(board -> new BoardDTO(board,sessionUser)).toList();
         }
     }
 }

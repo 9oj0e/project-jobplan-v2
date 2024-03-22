@@ -3,11 +3,16 @@ package shop.mtcoding.projectjobplan.user;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import shop.mtcoding.projectjobplan.board.Board;
+import shop.mtcoding.projectjobplan.board.BoardJpaRepository;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
 public class UserService {
     private final UserJpaRepository userJpaRepository;
+    private final BoardJpaRepository boardJpaRepository ;
 
     @Transactional
     public User createUser(UserRequest.JoinDTO requestDTO) { // join
