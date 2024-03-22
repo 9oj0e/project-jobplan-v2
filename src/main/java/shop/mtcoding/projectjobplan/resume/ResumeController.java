@@ -1,5 +1,6 @@
 package shop.mtcoding.projectjobplan.resume;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +11,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class ResumeController {
     private final ResumeService resumeService;
+
+    @GetMapping("/resumes")
+    public String main(){
+        return "/resume/main";
+    }
 
     @GetMapping("/resume/post-form")
     public String postForm() {
@@ -25,8 +31,7 @@ public class ResumeController {
 
     @GetMapping("/resume/{resumeId}")
     public String detail(@PathVariable int resumeId) {
-
-        return "redirect:/resume/" + resumeId;
+        return "/resume/detail";
     }
 
     @GetMapping("/resume/listings")
@@ -35,16 +40,19 @@ public class ResumeController {
         return "/resume/listings";
     }
 
-    @GetMapping("/resume/{resumeId}/update-form")
-    public String updateForm(@PathVariable int resumeId) {
+    @GetMapping("/resumes/{resumeId}/update-form")
+    public String updateForm(@PathVariable int resumeId, HttpServletRequest request) {
+        // todo: 권한체크
+        ResumeResponse.UpdateDTO respDTO = resumeService.getResume(resumeId);
+        request.setAttribute("resume", respDTO);
 
         return "/resume/update-form";
     }
 
-    @PostMapping("/resume/{resumeId}/update")
-    public String update(@PathVariable int resumeId) {
-
-        return "redirect:/resume/" + resumeId;
+    @PostMapping("/resumes/{resumeId}/update")
+    public String update(@PathVariable int resumeId, ResumeRequest.UpdateDTO reqDTO) {
+        resumeService.setResume(resumeId, reqDTO);
+        return "redirect:/resumes/" + resumeId;
     }
 
     @PostMapping("/resume/{resumeId}/delete")

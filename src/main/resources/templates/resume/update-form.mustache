@@ -2,12 +2,12 @@
 <!-- 바디 start -->
 <div class="div-card-container">
     <div class="card div-card">
-        <form action="/resume/{{resume.id}}/update" method="post">
+        <form action="/resumes/{{resume.id}}/update" method="post">
             <div class="card-header card-title">
                 <h2>이력서 수정</h2>
             </div>
             <div class="card-body">
-                {{#sessionUser}}
+                {{#resume}}
                     <h4 class="card-title">개인 정보</h4>
                     <table class="table">
                         <tr>
@@ -42,8 +42,7 @@
                             </td>
                         </tr>
                     </table>
-                {{/sessionUser}}
-                {{#resume}}
+
                     <table class="table">
                         <h4 class="card-title">이력서 제목</h4>
                         <tr>
@@ -118,7 +117,7 @@
             </div>
             <div class="card-footer">
                 <div class="button-post-cancel">
-                    <button type="button" onclick="location.href='/user/{{sessionUser.id}}'" class="btn btn-outline-dark">취소</button>
+                    <button type="button" onclick="location.href='/users/{{sessionUser.id}}'" class="btn btn-outline-dark">취소</button>
                     <button type="submit" class="btn btn-outline-dark">수정</button>
                 </div>
             </div>
