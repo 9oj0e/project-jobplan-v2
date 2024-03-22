@@ -79,4 +79,16 @@ public class UserController {
 
         return "redirect:/";
     }
+
+    @GetMapping("/users/{userId}")
+    public String profile(@PathVariable Integer userId, HttpServletRequest request){
+        // todo: NullPointException
+        User sessionUser = (User)session.getAttribute("sessionUser");
+        if (sessionUser.getIsEmployer()){
+            request.setAttribute("user", userService.findEmployer(sessionUser.getId()));
+        }else {
+            request.setAttribute("user", userService.findUser(sessionUser.getId()));
+        }
+        return "/user/profile";
+    }
 }

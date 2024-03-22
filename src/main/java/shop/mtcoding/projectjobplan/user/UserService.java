@@ -52,4 +52,12 @@ public class UserService {
         // todo : delete
 
     }
+
+    public UserResponse.EmployerDTO findEmployer(int sessionUserId){
+        return new UserResponse.EmployerDTO(userJpaRepository.findById(sessionUserId).get());
+    }
+    public UserResponse.UserDTO findUser(int sessionUserId) {
+        // todo : updateForm, profile
+        return new UserResponse.UserDTO(userJpaRepository.findById(sessionUserId).get());
+    }
 }
