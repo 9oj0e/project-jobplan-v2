@@ -11,6 +11,12 @@ public class BoardService {
     private final BoardJpaRepository boardJpaRepository;
     private final BoardQueryRepository boardQueryRepository;
 
+    public BoardResponse.DetailDTO findBoardById(int boardId) {
+        Board board = boardJpaRepository.findBoardById(boardId).get();
+        BoardResponse.DetailDTO respDTO = new BoardResponse.DetailDTO(board);
+        return respDTO;
+    }
+
     public void createBoard(BoardRequest.SaveDTO requestDTO) {
         // todo : board/save
 

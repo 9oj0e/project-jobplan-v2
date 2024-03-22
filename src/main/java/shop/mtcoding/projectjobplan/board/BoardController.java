@@ -1,15 +1,20 @@
 package shop.mtcoding.projectjobplan.board;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import shop.mtcoding.projectjobplan.resume.Resume;
 
 @RequiredArgsConstructor
 @Controller
 public class BoardController {
     private final BoardService boardService;
+
+    private final BoardService boardService;
+    private final HttpSession session;
 
     @GetMapping("/board/post-form")
     public String postForm() {
@@ -25,8 +30,9 @@ public class BoardController {
 
     @GetMapping("/board/{boardId}")
     public String detail(@PathVariable int boardId) {
-
-        return "redirect:/board/" + boardId;
+        BoardResponse.DetailDTO boardDetail = boardService.findBoardById(boardId);
+        session.setAttribute("boardDetail", boardDetail);
+        return "/board/detail";
     }
 
     @GetMapping("/board/listings")

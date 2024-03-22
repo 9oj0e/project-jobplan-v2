@@ -134,7 +134,7 @@
                     {{#sessionUser}}
                         {{^isEmployer}}
                             {{^hasRated}}
-                                <form action="/board/{{boardDetail.id}}/rate" method="post">
+                                <form action="/boards/{{boardDetail.id}}/rate" method="post">
                                     <div>
                                         <select name="rate" style="text-align: center; width: 100%">
                                             <option value="1">1점</option>
