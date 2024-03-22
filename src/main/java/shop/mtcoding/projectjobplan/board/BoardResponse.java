@@ -1,5 +1,7 @@
 package shop.mtcoding.projectjobplan.board;
 
+import shop.mtcoding.projectjobplan._core.utils.FormatUtil;
+
 import java.sql.Timestamp;
 
 public class BoardResponse {
@@ -32,6 +34,12 @@ public class BoardResponse {
             this.salary = board.getSalary();
             this.openingDate = board.getOpeningDate();
             this.closingDate = board.getClosingDate();
+        }
+        public String getOpeningDate() {
+            return FormatUtil.timeFormatter(this.openingDate);
+        }
+        public String getClosingDate() {
+            return FormatUtil.timeFormatter(this.closingDate);
         }
     }
 }
