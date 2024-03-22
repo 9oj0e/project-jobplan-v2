@@ -29,7 +29,7 @@ public class ResumeController {
 
     @GetMapping("/resume/{resumeId}")
     public String detail(@PathVariable int resumeId) {
-        Resume resumeDetail = resumeService.findResumeById(resumeId);
+        ResumeResponse.DetailDTO resumeDetail = resumeService.findResumeById(resumeId);
         session.setAttribute("resumeDetail", resumeDetail);
         return "/resume/detail";
     }

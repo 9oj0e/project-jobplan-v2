@@ -56,7 +56,7 @@
                 <table class="table">
                     <tr>
                         <td>근무 지역</td>
-                        <td>{{user.address}}</td>
+                        <td>{{address}}</td>
                     </tr>
                     <tr>
                         <td>채용 분야</td>
@@ -86,11 +86,11 @@
                 <table class="table">
                     <tr>
                         <td>전화</td>
-                        <td>{{user.phoneNumber}}</td>
+                        <td>{{phoneNumber}}</td>
                     </tr>
                     <tr>
                         <td>이메일</td>
-                        <td>{{user.email}}</td>
+                        <td>{{email}}</td>
                     </tr>
                 </table>
             </div>
@@ -124,10 +124,10 @@
                         <img class="card-img-top" src="/upload/{{imgFilename}}" style="width:100%">
                     {{/pic}}
                     {{^pic}}
-                        <img class="card-img-top" src="../images/{{boardDetail.user.businessName}}.jpg"
+                        <img class="card-img-top" src="../images/{{boardDetail.businessName}}.jpg"
                              onerror="this.onerror=null; this.src='../images/chaeyong.jpg';" style="width:100%">
                     {{/pic}}
-                    <h4 class="card-title text-center">{{boardDetail.user.businessName}}</h4>
+                    <h4 class="card-title text-center">{{boardDetail.businessName}}</h4>
                 </div>
                 <div class="card-footer" style="text-align: center;">
                     <!-- 평가 버튼 -->

@@ -29,7 +29,7 @@ public class BoardController {
 
     @GetMapping("/board/{boardId}")
     public String detail(@PathVariable int boardId) {
-        Board boardDetail = boardService.findBoardById(boardId);
+        BoardResponse.DetailDTO boardDetail = boardService.findBoardById(boardId);
         session.setAttribute("boardDetail", boardDetail);
         return "/board/detail";
     }
