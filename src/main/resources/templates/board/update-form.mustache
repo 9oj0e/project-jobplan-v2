@@ -3,7 +3,7 @@
 <div class="div-card-container">
     <div class="card div-card">
         {{#board}}
-        <form action="/board/{{id}}/update" method="post">
+        <form action="/boards/{{id}}/update" method="post">
             <div class="card-header card-title">
                 <h2>채용 공고 추가</h2>
             </div>
@@ -72,7 +72,7 @@
             <br>
             <div class="card-footer">
                 <div class="button-post-cancel">
-                    <button type="button" onclick="location.href='/board/{{sessionUser.id}}'" class="btn btn-outline-dark">취소</button>
+                    <button type="button" onclick="location.href='/boards/{{sessionUser.id}}'" class="btn btn-outline-dark">취소</button>
                     <button type="submit" class="btn btn-outline-dark">등록</button>
                 </div>
             </div>

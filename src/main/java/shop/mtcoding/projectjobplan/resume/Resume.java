@@ -31,12 +31,12 @@ public class Resume {
     @CreationTimestamp
     private Timestamp createdAt;
 
-    public void update(ResumeRequest.UpdateDTO reqDTO){
-        this.title = reqDTO.getTitle();
-        this.content = reqDTO.getContent();
-        this.schoolName = reqDTO.getSchoolName();
-        this.major = reqDTO.getMajor();
-        this.educationLevel = reqDTO.getEducationLevel();
-        this.career = reqDTO.getCareer();
+    public void update(ResumeRequest.UpdateDTO requestDTO){
+        this.title = requestDTO.getTitle();
+        this.content = requestDTO.getContent();
+        this.schoolName = requestDTO.getSchoolName();
+        this.major = requestDTO.getMajor();
+        this.educationLevel = requestDTO.getEducationLevel();
+        this.career = requestDTO.getCareer();
     }
 }

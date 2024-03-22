@@ -29,20 +29,20 @@ public class UserService {
     }
 
     @Transactional // 회원수정
-    public User setUser(int id, UserRequest.UpdateDTO reqDTO, User sessionUser) {
+    public User setUser(int id, UserRequest.UpdateDTO requestDTO, User sessionUser) {
         // todo : 구직자, 구인자가 필요한 정보를 여기서 받도록.
         User user = userJpaRepository.findById(id).get();
 
-        user.setPassword(reqDTO.getPassword());
-        user.setGender(reqDTO.getGender());
-        user.setPhoneNumber(reqDTO.getPhoneNumber());
-        user.setAddress(reqDTO.getAddress());
-        user.setEmail(reqDTO.getEmail());
+        user.setPassword(requestDTO.getPassword());
+        user.setGender(requestDTO.getGender());
+        user.setPhoneNumber(requestDTO.getPhoneNumber());
+        user.setAddress(requestDTO.getAddress());
+        user.setEmail(requestDTO.getEmail());
 
         if (sessionUser.getIsEmployer()) {
 
-            user.setEmployerIdNumber(reqDTO.getEmployerIdNumber());
-            user.setBusinessName(reqDTO.getBusinessName());
+            user.setEmployerIdNumber(requestDTO.getEmployerIdNumber());
+            user.setBusinessName(requestDTO.getBusinessName());
         }
 
         return user;

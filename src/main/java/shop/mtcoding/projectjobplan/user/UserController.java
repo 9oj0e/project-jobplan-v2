@@ -65,9 +65,9 @@ public class UserController {
     }
 
     @PostMapping("/users/{userId}/update")
-    public String update(@PathVariable Integer userId, UserRequest.UpdateDTO reqDTO) {
+    public String update(@PathVariable Integer userId, UserRequest.UpdateDTO requestDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        User newSessionUser = userService.setUser(userId, reqDTO, sessionUser);
+        User newSessionUser = userService.setUser(userId, requestDTO, sessionUser);
         session.setAttribute("sessionUser", newSessionUser);
 
         return "redirect:/";

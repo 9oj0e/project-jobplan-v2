@@ -7,13 +7,15 @@ public class ResumeResponse {
 
     @Data
     public static class UpdateDTO{
+        // 유저 정보
         private String name;
         private String birthdate;
         private String phoneNumber;
         private String email;
         private String address;
 
-        private Integer id;
+        // 이력서 정보
+        private Integer id; // resumeId
         private String title;
         private String schoolName;
         private String educationLevel;

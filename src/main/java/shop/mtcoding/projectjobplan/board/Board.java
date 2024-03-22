@@ -33,4 +33,14 @@ public class Board {
 
     @CreationTimestamp
     private Timestamp createdAt; // 생성일
+
+    public void update(BoardRequest.UpdateDTO requestDTO){
+        this.title = requestDTO.getTitle();
+        this.content = requestDTO.getContent();
+        this.field = requestDTO.getField();
+        this.position = requestDTO.getPosition();
+        this.salary = requestDTO.getSalary();
+        this.openingDate = requestDTO.getOpeningDate();
+        this.closingDate = requestDTO.getClosingDate();
+    }
 }

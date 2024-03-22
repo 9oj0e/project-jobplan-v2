@@ -43,15 +43,15 @@ public class ResumeController {
     @GetMapping("/resumes/{resumeId}/update-form")
     public String updateForm(@PathVariable int resumeId, HttpServletRequest request) {
         // todo: 권한체크
-        ResumeResponse.UpdateDTO respDTO = resumeService.getResume(resumeId);
-        request.setAttribute("resume", respDTO);
+        ResumeResponse.UpdateDTO responseDTO = resumeService.getResume(resumeId);
+        request.setAttribute("resume", responseDTO);
 
         return "/resume/update-form";
     }
 
     @PostMapping("/resumes/{resumeId}/update")
-    public String update(@PathVariable int resumeId, ResumeRequest.UpdateDTO reqDTO) {
-        resumeService.setResume(resumeId, reqDTO);
+    public String update(@PathVariable int resumeId, ResumeRequest.UpdateDTO requestDTO) {
+        resumeService.setResume(resumeId, requestDTO);
         return "redirect:/resumes/" + resumeId;
     }
 

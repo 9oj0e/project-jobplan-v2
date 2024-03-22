@@ -30,11 +30,11 @@ public class ResumeService {
     }
 
     @Transactional
-    public void setResume(int id, ResumeRequest.UpdateDTO reqDTO) {
+    public void setResume(int id, ResumeRequest.UpdateDTO requestDTO) {
         // todo : resume/id/update
         Resume resume = resumeJpaRepository.findById(id).get();
 
-        resume.update(reqDTO);
+        resume.update(requestDTO);
     }
 
     public void removeResume(int id) {
