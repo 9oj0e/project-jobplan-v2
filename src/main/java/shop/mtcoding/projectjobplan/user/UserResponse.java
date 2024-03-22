@@ -16,12 +16,13 @@ public class UserResponse {
         // 개인 정보
         private String name;
         private String birthdate;
-//        private Character gender;
+//        private Character gender; // view에서 분기 처리 하려면.. JS필요
         private String phoneNumber;
         private String address;
         private String email;
 
         // 회사 정보
+        private Boolean isEmployer;
         private String employerIdNumber; // 사업자번호
         private String businessName; // 기업이름
 
@@ -35,6 +36,7 @@ public class UserResponse {
             this.address = user.getAddress();
             this.email = user.getEmail();
             if (sessionUser.getIsEmployer()) {
+                this.isEmployer = user.getIsEmployer();
                 this.employerIdNumber = user.getEmployerIdNumber();
                 this.businessName = user.getBusinessName();
             }
