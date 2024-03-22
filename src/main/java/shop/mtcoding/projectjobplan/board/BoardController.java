@@ -10,22 +10,25 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class BoardController {
 
-    @GetMapping("/board/post-form")
+    private final BoardService boardService;
+
+    @GetMapping("/boards/post-form")
     public String postForm() {
 
         return "/board/post-form";
     }
 
-    @PostMapping("/board/post")
-    public String post(@PathVariable int boardId) {
+    @PostMapping("/boards/post")
+    public String post(BoardRequest.SaveDTO reqDTO) {
+        Board board = boardService.createBoard(reqDTO);
 
-        return "redirect:/board/" + boardId;
+        return "redirect:/board/" + board.getId();
     }
 
     @GetMapping("/board/{boardId}")
     public String detail(@PathVariable int boardId) {
 
-        return "redirect:/board/" + boardId;
+        return "/board/" + boardId;
     }
 
     @GetMapping("/board/listings")

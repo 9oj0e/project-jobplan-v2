@@ -11,9 +11,11 @@ public class BoardService {
     private final BoardJpaRepository boardJpaRepository;
     private final BoardQueryRepository boardQueryRepository;
 
-    public void createBoard(BoardRequest.SaveDTO requestDTO) {
+    // 공고 작성
+    public Board createBoard(BoardRequest.SaveDTO requestDTO) {
         // todo : board/save
 
+        return boardJpaRepository.save(requestDTO.toEntity());
     }
 
     public Board getBoard(int id) {
