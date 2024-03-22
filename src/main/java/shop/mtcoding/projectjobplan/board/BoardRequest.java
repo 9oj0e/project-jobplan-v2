@@ -31,6 +31,7 @@ public class BoardRequest {
 
         // toEntity
     }
+
     public static class UpdateDTO {
         // toEntity
     }

@@ -28,6 +28,7 @@ public class ResumeRequest {
                     .build();
         }
     }
+
     public static class UpdateDTO {
         // toEntity
     }

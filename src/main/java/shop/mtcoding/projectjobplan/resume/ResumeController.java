@@ -12,7 +12,6 @@ import shop.mtcoding.projectjobplan.user.User;
 @RequiredArgsConstructor
 @Controller
 public class ResumeController {
-
     private final HttpSession session;
     private final ResumeService resumeService;
 
@@ -23,38 +22,41 @@ public class ResumeController {
     }
 
     @PostMapping("/resumes/post") // 이력서 작성 action
-    public String post(ResumeRequest.SaveDTO reqDTO) {
-        Resume resume = resumeService.createResume(reqDTO);
+    public String post(ResumeRequest.SaveDTO requestDTO) {
+    Resume resume = resumeService.createResume(requestDTO);
 
         return "redirect:/resume/" + resume.getId();
     }
 
-    @GetMapping("/resume/{resumeId}")
+    @GetMapping("/resumes/{resumeId}")
     public String detail(@PathVariable int resumeId) {
-
-        return "/resume/" + resumeId;
+        ResumeResponse.DetailDTO resumeDetail = resumeService.findResumeById(resumeId);
+        session.setAttribute("resumeDetail", resumeDetail);
+      
+        return "/resume/detail";
     }
 
-    @GetMapping("/resume/listings")
+    @GetMapping("/resumes/listings")
     public String listings() {
 
         return "/resume/listings";
     }
 
-    @GetMapping("/resume/{resumeId}/update-form")
+    @GetMapping("/resumes/{resumeId}/update-form")
     public String updateForm(@PathVariable int resumeId) {
 
         return "/resume/update-form";
     }
 
-    @PostMapping("/resume/{resumeId}/update")
+    @PostMapping("/resumes/{resumeId}/update")
     public String update(@PathVariable int resumeId) {
 
         return "redirect:/resume/" + resumeId;
     }
 
-    @PostMapping("/resume/{resumeId}/delete")
+    @PostMapping("/resumes/{resumeId}/delete")
     public String delete(@PathVariable int resumeId) {
+        resumeService.removeResume(resumeId);
 
         return "redirect:/resume/listings";
     }

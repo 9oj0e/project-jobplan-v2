@@ -7,15 +7,13 @@ import org.hibernate.annotations.CreationTimestamp;
 import shop.mtcoding.projectjobplan.user.User;
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 @Entity
 @Data
 @Table(name = "board_tb")
 public class Board {
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)

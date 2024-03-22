@@ -1,13 +1,18 @@
 package shop.mtcoding.projectjobplan.user;
 
 import lombok.Data;
+import shop.mtcoding.projectjobplan._core.utils.FormatUtil;
+import shop.mtcoding.projectjobplan.board.Board;
+import shop.mtcoding.projectjobplan.resume.Resume;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserResponse {
 
     @Data
-    public static class DTO {
+    public static class UpdateFormDTO {
         // 회원 정보
         private Integer id;
         private String username;
@@ -16,7 +21,7 @@ public class UserResponse {
         // 개인 정보
         private String name;
         private String birthdate;
-//        private Character gender; // view에서 분기 처리 하려면.. JS필요
+        //        private Character gender; // view에서 분기 처리 하려면.. JS필요
         private String phoneNumber;
         private String address;
         private String email;
@@ -26,7 +31,7 @@ public class UserResponse {
         private String employerIdNumber; // 사업자번호
         private String businessName; // 기업이름
 
-        public DTO(User user, User sessionUser) {
+        public UpdateFormDTO(User user, User sessionUser) {
             this.id = user.getId();
             this.username = user.getUsername();
             this.password = user.getPassword();
@@ -35,6 +40,7 @@ public class UserResponse {
             this.phoneNumber = user.getPhoneNumber();
             this.address = user.getAddress();
             this.email = user.getEmail();
+
             if (sessionUser.getIsEmployer()) {
                 this.isEmployer = user.getIsEmployer();
                 this.employerIdNumber = user.getEmployerIdNumber();
@@ -44,53 +50,81 @@ public class UserResponse {
     }
 
     @Data
-    public static class UserDTO {
+    public static class ProfileDTO {
+        // 회원 정보
         private Integer id;
         private String username;
-        private String birthdate;
-        private Character gender;
-        private String phoneNumber;
-        private String address;
-        private String email;
-        private Boolean isEmployer;
+        private String password;
+
+        // 개인 정보
         private String name;
-        public UserDTO(User user) {
-            this.id = user.getId();
-            this.username = user.getUsername();
-            this.birthdate = user.getBirthdate();
-            this.gender = user.getGender();
-            this.phoneNumber = user.getPhoneNumber();
-            this.address = user.getAddress();
-            this.email = user.getEmail();
-            this.isEmployer = user.getIsEmployer();
-            this.name = user.getName();
-        }
-    }
-    @Data
-    public static class EmployerDTO{
-        private Integer id;
-        private String username;
         private String birthdate;
         private Character gender;
         private String phoneNumber;
         private String address;
         private String email;
+        private List<ResumeDTO> resumeList = new ArrayList<>();
+
+        // 기업 정보
         private Boolean isEmployer;
         private String employerIdNumber;
         private String businessName;
-        private String name;
-        public EmployerDTO(User user) {
+        private List<BoardDTO> boardList = new ArrayList<>();
+
+        public ProfileDTO(User user) {
             this.id = user.getId();
             this.username = user.getUsername();
+            this.password = user.getPassword();
+            this.name = user.getName();
             this.birthdate = user.getBirthdate();
             this.gender = user.getGender();
             this.phoneNumber = user.getPhoneNumber();
             this.address = user.getAddress();
             this.email = user.getEmail();
-            this.isEmployer = user.getIsEmployer();
-            this.employerIdNumber = user.getEmployerIdNumber();
-            this.businessName = user.getBusinessName();
-            this.name = user.getName();
+            if (user.getIsEmployer()) {
+                this.isEmployer = user.getIsEmployer();
+                this.employerIdNumber = user.getEmployerIdNumber();
+                this.businessName = user.getBusinessName();
+                this.boardList = user.getBoards().stream().map(board -> new BoardDTO(board)).toList();
+            } else {
+                this.resumeList = user.getResumes().stream().map(resume -> new ResumeDTO(resume)).toList();
+            }
+        }
+
+        public class BoardDTO {
+            private Integer id;
+            private String title;
+            private String field;
+            private String position;
+            private Timestamp openingDate;
+
+            public BoardDTO(Board board) {
+                this.id = board.getId();
+                this.title = board.getTitle();
+                this.field = board.getField();
+                this.position = board.getPosition();
+                this.openingDate = board.getOpeningDate();
+            }
+
+            public String getOpeningDate() {
+                return FormatUtil.timeFormatter(this.openingDate);
+            }
+        }
+
+        public class ResumeDTO {
+            private Integer id;
+            private String title;
+            private Timestamp createdAt;
+
+            public ResumeDTO(Resume resume) {
+                this.id = resume.getId();
+                this.title = resume.getTitle();
+                this.createdAt = resume.getCreatedAt();
+            }
+
+            public String getCreatedAt() {
+                return FormatUtil.timeFormatter(this.createdAt);
+            }
         }
     }
 }

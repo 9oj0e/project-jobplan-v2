@@ -16,12 +16,17 @@ public class ResumeService {
     private final ResumeQueryRepository resumeQueryRepository;
     private final UserJpaRepository userJpaRepository;
 
-    // 이력서 작성
     @Transactional
     public Resume createResume(ResumeRequest.SaveDTO requestDTO) {
-        // todo : resumes/post
+  
         return resumeJpaRepository.save(requestDTO.toEntity());
-
+    }
+  
+    public ResumeResponse.DetailDTO findResumeById(int resumeId) {
+        Resume resume = resumeJpaRepository.findResumeById(resumeId).get();
+        ResumeResponse.DetailDTO responseDTO = new ResumeResponse.DetailDTO(resume);
+  
+        return responseDTO;
     }
 
     public Resume getResume(int id) {
@@ -35,15 +40,17 @@ public class ResumeService {
 
         return null;
     }
-
+  
     public Resume setResume(int id) {
         // todo : resume/id/update
 
         return null;
     }
-
+    
+    @Transactional
     public void removeResume(int id) {
-        // todo : resume/id/delete
+        Resume resume = resumeJpaRepository.findById(id).get();
 
+        resumeJpaRepository.delete(resume);
     }
 }

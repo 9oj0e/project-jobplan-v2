@@ -8,7 +8,6 @@ import org.hibernate.annotations.CreationTimestamp;
 import shop.mtcoding.projectjobplan.user.User;
 
 import java.sql.Timestamp;
-import java.time.LocalDate;
 
 @NoArgsConstructor
 @Entity
