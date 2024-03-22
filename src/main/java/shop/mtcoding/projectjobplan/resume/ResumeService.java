@@ -2,6 +2,10 @@ package shop.mtcoding.projectjobplan.resume;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import shop.mtcoding.projectjobplan.user.User;
+import shop.mtcoding.projectjobplan.user.UserJpaRepository;
+import shop.mtcoding.projectjobplan.user.UserResponse;
 
 import java.util.List;
 
@@ -10,9 +14,13 @@ import java.util.List;
 public class ResumeService {
     private final ResumeJpaRepository resumeJpaRepository;
     private final ResumeQueryRepository resumeQueryRepository;
+    private final UserJpaRepository userJpaRepository;
 
-    public void createResume(ResumeRequest.SaveDTO requestDTO) {
-        // todo : resume/save
+    // 이력서 작성
+    @Transactional
+    public Resume createResume(ResumeRequest.SaveDTO requestDTO) {
+        // todo : resumes/post
+        return resumeJpaRepository.save(requestDTO.toEntity());
 
     }
 
