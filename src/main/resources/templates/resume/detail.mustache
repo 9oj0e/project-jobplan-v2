@@ -81,15 +81,15 @@
                     </tr>
                     <tr>
                         <td>이름</td>
-                        <td>{{name}}</td>
+                        <td>{{user.name}}</td>
                     </tr>
                     <tr>
                         <td>나이</td>
-                        <td>{{birthyear}}년 생</td>
+                        <td>{{user.birthdate}}년 생</td>
                     </tr>
                     <tr>
                         <td>주소</td>
-                        <td>{{address}}</td>
+                        <td>{{user.address}}</td>
                     </tr>
                 </table>
             </div>
@@ -97,9 +97,9 @@
                 <table class="table table-borderless">
                     <tr>
                         <td style="background-color: transparent; text-align: end">전화</td>
-                        <td style="background-color: transparent">{{phoneNumber}}</td>
+                        <td style="background-color: transparent">{{user.phoneNumber}}</td>
                         <td style="background-color: transparent; text-align: end">이메일</td>
-                        <td style="background-color: transparent">{{email}}</td>
+                        <td style="background-color: transparent">{{user.email}}</td>
                     </tr>
                 </table>
             </div>
@@ -125,7 +125,7 @@
                     {{^userPic}}
                         <img class="card-img" src="../images/people.jpg" alt="Card image" style="width:100%">
                     {{/userPic}}
-                    <h4 class="card-title text-center">{{resumeDetail.name}}</h4>
+                    <h4 class="card-title text-center">{{resumeDetail.user.name}}</h4>
                 </div>
                 <div class="card-footer" style="text-align: center;">
                     {{#sessionUser}}

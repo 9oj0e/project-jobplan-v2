@@ -1,15 +1,19 @@
 package shop.mtcoding.projectjobplan.resume;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import shop.mtcoding.projectjobplan.user.User;
 
 @RequiredArgsConstructor
 @Controller
 public class ResumeController {
     private final ResumeService resumeService;
+    private final HttpSession session;
 
     @GetMapping("/resume/post-form")
     public String postForm() {
@@ -25,8 +29,9 @@ public class ResumeController {
 
     @GetMapping("/resume/{resumeId}")
     public String detail(@PathVariable int resumeId) {
-
-        return "redirect:/resume/" + resumeId;
+        Resume resumeDetail = resumeService.findResumeById(resumeId);
+        session.setAttribute("resumeDetail", resumeDetail);
+        return "/resume/detail";
     }
 
     @GetMapping("/resume/listings")

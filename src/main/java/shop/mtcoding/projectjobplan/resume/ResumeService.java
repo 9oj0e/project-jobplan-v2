@@ -11,6 +11,11 @@ public class ResumeService {
     private final ResumeJpaRepository resumeJpaRepository;
     private final ResumeQueryRepository resumeQueryRepository;
 
+    public Resume findResumeById(int resumeId) {
+        Resume resume = resumeJpaRepository.findResumeById(resumeId).get();
+        return resume;
+    }
+
     public void createResume(ResumeRequest.SaveDTO requestDTO) {
         // todo : resume/save
 
