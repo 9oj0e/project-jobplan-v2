@@ -14,7 +14,7 @@ public class ApplyResponse {
         private String resumeTitle; // 이력서 제목
         private String businessName; // 지원한 회사 이름
         private String boardTitle; // 지원한 공고 제목
-        private Timestamp appliedAt; // 공고 지원 날짜
+        private String appliedAt; // 공고 지원 날짜
 
 
         public ApplyDTO(Apply apply, User sessionUser) {
