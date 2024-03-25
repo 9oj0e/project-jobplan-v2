@@ -26,13 +26,22 @@ public class ApplyService {
         // todo : (기업) 공고별 지원자 보기
     }
 
-    public List<ApplyResponse.ApplyDTO> getAllBoardByResumeId(User sessionUser) {
+    public List<ApplyResponse.ApplyDTO> getAllBoardByUserId(User sessionUser) {
         // todo : (개인) 지원 현황 보기
         Sort sort = Sort.by(Sort.Direction.DESC, "resumeId");
-        List<Apply> applyList = applyJpaRepository.findAll(sort);
+        List<Apply> applyList = applyJpaRepository.findByBoardUserId(sessionUser.getId());
 
         return applyList.stream().map(apply -> new ApplyResponse.ApplyDTO(apply, sessionUser)).toList();
     }
+
+    public List<ApplyResponse.ApplyDTO> getAllResumeByUserId(User sessionUser) {
+        // todo : (개인) 지원 현황 보기
+        Sort sort = Sort.by(Sort.Direction.DESC, "resumeId");
+        List<Apply> applyList = applyJpaRepository.findByResumeUserId(sessionUser.getId());
+
+        return applyList.stream().map(apply -> new ApplyResponse.ApplyDTO(apply, sessionUser)).toList();
+    }
+
 
 //    public List<BoardResponse.MainDTO> 글목록조회() {
 //        Sort sort = Sort.by(Sort.Direction.DESC, "id");

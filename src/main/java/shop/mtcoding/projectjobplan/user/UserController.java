@@ -79,6 +79,7 @@ public class UserController {
     public String profile(@PathVariable Integer userId, HttpServletRequest request, HttpSession session) {
         // todo: NullPointException
         User sessionUser = (User) session.getAttribute("sessionUser");
+
         UserResponse.ProfileDTO profileDTO = userService.getUserProfileDTO(sessionUser);
         request.setAttribute("profileDTO", profileDTO); //
 

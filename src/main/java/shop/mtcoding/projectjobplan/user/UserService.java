@@ -62,8 +62,13 @@ public class UserService {
 
     public UserResponse.ProfileDTO getUserProfileDTO(User sessionUser) {
         User user = userJpaRepository.findById(sessionUser.getId()).get();
-        List<ApplyResponse.ApplyDTO> applyList = applyService.getAllBoardByResumeId(sessionUser);
-        return new UserResponse.ProfileDTO(user, applyList);
+        if(sessionUser.getIsEmployer()){
+            List<ApplyResponse.ApplyDTO> applyList = applyService.getAllBoardByUserId(sessionUser);
+            return new UserResponse.ProfileDTO(user, applyList);
+        }else{
+            List<ApplyResponse.ApplyDTO> applyList = applyService.getAllResumeByUserId(sessionUser);
+            return new UserResponse.ProfileDTO(user, applyList);
+        }
     }
 
 }
