@@ -86,20 +86,11 @@
                         <div class="div-recommendation-text-2">{{title}}</div>
                     </td>
                     <td>
-                        <button class="btn btn-outline-body" onclick="location.href='/resume/{{id}}'">이력서보기</button>
+                        <button class="btn btn-outline-body" onclick="location.href='/resumes/{{id}}'">이력서보기</button>
                     </td>
                 </tr>
             {{/resumeList}}
         </table>
-        <div class="d-flex justify-content-center">
-            <ul class="pagination">
-                <li class="page-item {{#first}}disabled{{/first}}"><a class="page-link" href="?page={{prevPage}}">Previous</a></li>
-                {{#numberList}}
-                    <li class="page-item"><a class="page-link" href="?page={{.}}">{{.}}</a></li>
-                {{/numberList}}
-                <li class="page-item {{#last}}disabled{{/last}}"><a class="page-link" href="?page={{nextPage}}">Next</a></li>
-            </ul>
-        </div>
     </div>
 </main>
 <!-- 바디 end -->

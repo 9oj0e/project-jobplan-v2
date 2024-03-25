@@ -36,10 +36,13 @@ public class ResumeService {
         return new ResumeResponse.UpdateDTO(resumeJpaRepository.findById(id).get());
     }
 
-    public List<Resume> getAllResume() {
-        // todo : resume/listings
+    public List<ResumeResponse.MainDTO> getAllResume() {
+        // todo : pagination
+        List<ResumeResponse.MainDTO> responseDTO = new ArrayList<>();
+        List<Resume> resumeList = resumeJpaRepository.findAllResume();
+        resumeList.stream().forEach(resume -> responseDTO.add(new ResumeResponse.MainDTO(resume)));
 
-        return null;
+        return responseDTO;
     }
 
     public List<ApplyResponse.ApplyFormDTO> getAllResumeByUserId(int id) {
