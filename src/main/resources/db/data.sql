@@ -213,40 +213,41 @@ INSERT INTO resume_tb
 (user_id, title, content, school_name, major, education_level, career, created_at)
 VALUES (11, '여전할 것인가, 역전할 것인가.', '지식을 지속적으로 업데이트하고 팀원들과의 지식 공유를 통해 팀 전체의 역량을 향상시키는 데 관심이 있습니다. 내부 교육 세션을 주도하고 기술 블로그에 기여하여 조직 내에서 지식 공유 문화를 유지하고 발전시켰습니다.', '하나고등학교', '전공', '고졸', '신입', now());
 
--- -- apply_tb
--- INSERT INTO apply_tb
--- (resume_id, resume_user_id, board_id, board_user_id, created_at, status)
--- VALUES (1, 6, 1, 1, now(), 1);
--- INSERT INTO apply_tb
--- (resume_id, resume_user_id, board_id, board_user_id, created_at, status)
--- VALUES (2, 7, 2, 1, now(), 0);
--- INSERT INTO apply_tb
--- (resume_id, resume_user_id, board_id, board_user_id, created_at)
--- VALUES (3, 8, 3, 1, now());
--- INSERT INTO apply_tb
--- (resume_id, resume_user_id, board_id, board_user_id, created_at)
--- VALUES (4, 9, 4, 1, now());
--- INSERT INTO apply_tb
--- (resume_id, resume_user_id, board_id, board_user_id, created_at)
--- VALUES (5, 10, 1, 1, now());
--- INSERT INTO apply_tb
--- (resume_id, resume_user_id, board_id, board_user_id, created_at)
--- VALUES (6, 11, 2, 1, now());
--- INSERT INTO apply_tb
--- (resume_id, resume_user_id, board_id, board_user_id, created_at, status)
--- VALUES (1, 6, 5, 2, now(), 1);
--- INSERT INTO apply_tb
--- (resume_id, resume_user_id, board_id, board_user_id, created_at, status)
--- VALUES (2, 7, 6, 2, now(), 0);
--- INSERT INTO apply_tb
--- (resume_id, resume_user_id, board_id, board_user_id, created_at)
--- VALUES (3, 8, 7, 2, now());
--- INSERT INTO apply_tb
--- (resume_id, resume_user_id, board_id, board_user_id, created_at)
--- VALUES (4, 9, 8, 2, now());
--- INSERT INTO apply_tb
--- (resume_id, resume_user_id, board_id, board_user_id, created_at)
--- VALUES (5, 10, 5, 2, now());
+-- apply_tb
+INSERT INTO apply_tb
+(resume_id, board_id,  created_at, status)
+VALUES (1,  1,  now(), 1);
+INSERT INTO apply_tb
+(resume_id,  board_id,  created_at, status)
+VALUES (2,  2, now(), 0);
+INSERT INTO apply_tb
+(resume_id, board_id,  created_at)
+VALUES (3,  3,  now());
+INSERT INTO apply_tb
+(resume_id,  board_id,  created_at)
+VALUES (4,  4,  now());
+INSERT INTO apply_tb
+(resume_id,  board_id,  created_at)
+VALUES (5,  1,  now());
+INSERT INTO apply_tb
+(resume_id,  board_id,  created_at)
+VALUES (6,  2,  now());
+INSERT INTO apply_tb
+(resume_id,  board_id,  created_at, status)
+VALUES (1,  5,  now(), 1);
+INSERT INTO apply_tb
+(resume_id,  board_id,  created_at, status)
+VALUES (2, 6,  now(), 0);
+INSERT INTO apply_tb
+(resume_id,  board_id,  created_at)
+VALUES (3, 7,  now());
+INSERT INTO apply_tb
+(resume_id,  board_id,  created_at)
+VALUES (4,  8,  now());
+INSERT INTO apply_tb
+(resume_id,  board_id,  created_at)
+VALUES (5,  5, now());
+
 -- -- 평점
 -- -- INSERT INTO rating_tb
 -- -- (rater_id, subject_id, rate)

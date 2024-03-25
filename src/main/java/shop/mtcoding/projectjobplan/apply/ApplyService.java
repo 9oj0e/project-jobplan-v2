@@ -1,8 +1,10 @@
 package shop.mtcoding.projectjobplan.apply;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import shop.mtcoding.projectjobplan.board.Board;
+import shop.mtcoding.projectjobplan.user.User;
 
 import java.util.List;
 
@@ -24,9 +26,20 @@ public class ApplyService {
         // todo : (기업) 공고별 지원자 보기
     }
 
-    public void getAllBoardByResumeId(int resumeId) {
+    public List<ApplyResponse.ApplyDTO> getAllBoardByResumeId(User sessionUser) {
         // todo : (개인) 지원 현황 보기
+        Sort sort = Sort.by(Sort.Direction.DESC, "resumeId");
+        List<Apply> applyList = applyJpaRepository.findAll(sort);
+
+        return applyList.stream().map(apply -> new ApplyResponse.ApplyDTO(apply, sessionUser)).toList();
     }
+
+//    public List<BoardResponse.MainDTO> 글목록조회() {
+//        Sort sort = Sort.by(Sort.Direction.DESC, "id");
+//        List<Board> boardList = boardJPARepository.findAll(sort);
+//
+//        return boardList.stream().map(board -> new BoardResponse.MainDTO(board)).toList();
+//    }
 
     public void updateApply(ApplyRequest.UpdateDTO requestDTO) {
         // todo : 합격/불합격 처리
