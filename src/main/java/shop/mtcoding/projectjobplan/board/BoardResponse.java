@@ -74,45 +74,24 @@ public class BoardResponse {
     }
 
     @Data
-    public static class MainDTO {
+    public static class IndexDTO {
         // 공고 정보
         private Integer id;
         private String title;
-        private String content;
         private String field;
         private String position;
-        private String salary;
-        private Timestamp openingDate;
-        private Timestamp closingDate;
 
         // 게시자 정보 (기업)
         private Integer userId;
-        private String username;
-        private String address;
         private String businessName;
 
-        public MainDTO(Board board) {
+        public IndexDTO(Board board) {
             this.id = board.getId();
             this.title = board.getTitle();
-            this.content = board.getContent();
             this.field = board.getField();
             this.position = board.getPosition();
-            this.salary = board.getSalary();
-            this.openingDate = board.getOpeningDate();
-            this.closingDate = board.getClosingDate();
             this.userId = board.getUser().getId();
-            this.username = board.getUser().getUsername();
-            this.address = board.getUser().getAddress();
             this.businessName = board.getUser().getBusinessName();
-        }
-        List<Board> boardList;
-
-        public String getOpeningDate() {
-            return FormatUtil.timeFormatter(this.openingDate);
-        }
-
-        public String getClosingDate() {
-            return FormatUtil.timeFormatter(this.closingDate);
         }
     }
 }

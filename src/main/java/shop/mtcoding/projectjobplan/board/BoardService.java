@@ -24,11 +24,11 @@ public class BoardService {
         return new BoardResponse.DetailDTO(board);
     }
 
-    public List<BoardResponse.MainDTO> getAllBoard() {
+    public List<BoardResponse.IndexDTO> getAllBoard() {
         // todo : board/listings
         List<Board> boardList = boardJpaRepository.findAll();
-        List<BoardResponse.MainDTO> responseDTO = new ArrayList<>();
-        boardList.stream().forEach(board -> {responseDTO.add(new BoardResponse.MainDTO(board));
+        List<BoardResponse.IndexDTO> responseDTO = new ArrayList<>();
+        boardList.stream().forEach(board -> {responseDTO.add(new BoardResponse.IndexDTO(board));
         });
 
         return responseDTO;
