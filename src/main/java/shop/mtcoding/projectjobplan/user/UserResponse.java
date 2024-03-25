@@ -2,6 +2,7 @@ package shop.mtcoding.projectjobplan.user;
 
 import lombok.Data;
 import shop.mtcoding.projectjobplan._core.utils.FormatUtil;
+import shop.mtcoding.projectjobplan.apply.ApplyResponse;
 import shop.mtcoding.projectjobplan.board.Board;
 import shop.mtcoding.projectjobplan.resume.Resume;
 
@@ -70,8 +71,9 @@ public class UserResponse {
         private String employerIdNumber;
         private String businessName;
         private List<BoardDTO> boardList = new ArrayList<>();
+        private List<ApplyResponse.ApplyDTO> applyList  ;
 
-        public ProfileDTO(User user) {
+        public ProfileDTO(User user, List<ApplyResponse.ApplyDTO> applyList) {
             this.id = user.getId();
             this.username = user.getUsername();
             this.password = user.getPassword();
@@ -89,6 +91,8 @@ public class UserResponse {
             } else {
                 this.resumeList = user.getResumes().stream().map(resume -> new ResumeDTO(resume)).toList();
             }
+            this.applyList = applyList;
+
         }
 
         public class BoardDTO {
@@ -126,6 +130,19 @@ public class UserResponse {
                 return FormatUtil.timeFormatter(this.createdAt);
             }
         }
+
+        public static class UserApplyInfo {
+            private User user;
+            private List<ApplyResponse.ApplyDTO> applyList;
+
+            public UserApplyInfo(User user, List<ApplyResponse.ApplyDTO> applyList) {
+                this.user = user;
+                this.applyList = applyList;
+            }
+
+        }
     }
+
+
 }
 

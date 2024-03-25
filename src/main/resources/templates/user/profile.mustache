@@ -1,5 +1,6 @@
 {{>layout/header}}
 <!-- 바디 start -->
+{{#profileDTO}}
 <main class="main-size">
     <div class="div-body">
         <div class="div-layout" style="height: 600px">
@@ -74,12 +75,12 @@
                                 {{/userPic2}}
                             {{/userPic}}
                             <div class="card-body">
-                                <h4>{{user.name}}</h4>
+                                <h4>{{name}}</h4>
                             </div>
                             <div class="card-footer">
                                 <div style="display: grid; grid-template-columns: 1fr 1fr; grid-column-gap: 10px">
                                     {{^userPic}}
-                                        <form action="/upload-form/{{user.id}}" method="get"> <!-- 사진 등록 -->
+                                        <form action="/upload-form/{{id}}" method="get"> <!-- 사진 등록 -->
                                             <button class="btn btn-primary">
                                                 <i class="fa-solid fa-plus icon-size"></i>
                                             </button>
@@ -101,56 +102,56 @@
                 <div>
                     <table class="table">
                         <thead>
-                        {{#user.isEmployer}}
+                        {{#isEmployer}}
                             <tr>
                                 <th><h3>기업정보</h3></th>
                             </tr>
-                        {{/user.isEmployer}}
-                        {{^user.isEmployer}}
+                        {{/isEmployer}}
+                        {{^isEmployer}}
                             <tr>
                                 <th><h3>개인정보</h3></th>
                             </tr>
-                        {{/user.isEmployer}}
+                        {{/isEmployer}}
                         </thead>
                         <tbody>
                         <tr>
                             <th>아이디</th>
-                            <td>{{user.username}}</td>
+                            <td>{{username}}</td>
                         </tr>
                         <tr>
                             <th>이름</th>
-                            <td>{{user.name}}</td>
+                            <td>{{name}}</td>
                         </tr>
                         <tr>
                             <th>생년월일</th>
-                            <td>{{user.birthdate}}</td>
+                            <td>{{birthdate}}</td>
                         </tr>
                         <tr>
                             <th>성별</th>
-                            <td>{{user.gender}}</td>
+                            <td>{{gender}}</td>
                         </tr>
                         <tr>
                             <th>휴대전화</th>
-                            <td>{{user.phoneNumber}}</td>
+                            <td>{{phoneNumber}}</td>
                         </tr>
                         <tr>
                             <th>주소</th>
-                            <td>{{user.address}}</td>
+                            <td>{{address}}</td>
                         </tr>
                         <tr>
                             <th>E-MAIL</th>
-                            <td>{{user.email}}</td>
+                            <td>{{email}}</td>
                         </tr>
-                        {{#user.isEmployer}}
+                        {{#isEmployer}}
                             <tr>
                                 <th>사업자번호</th>
-                                <td>{{user.employerIdNumber}}</td>
+                                <td>{{employerIdNumber}}</td>
                             </tr>
                             <tr>
                                 <th>회사명</th>
-                                <td>{{user.businessName}}</td>
+                                <td>{{businessName}}</td>
                             </tr>
-                        {{/user.isEmployer}}
+                        {{/isEmployer}}
                         </tbody>
                     </table>
                     <!-- 기업
@@ -186,7 +187,8 @@
                 </div>
             </div>
         </div>
-        {{#user.isEmployer}}
+
+        {{#isEmployer}}
             <!-- 내 공고 보기 -->
             <div class="div-layout">
                 <div class="div-header d-flex justify-content-between">
@@ -204,7 +206,7 @@
                             <th>게시일</th>
                             <th></th>
                         </tr>
-                        {{#user.boardList}}
+                        {{#boardList}}
                             <tr>
                                 <td>{{position}}</td>
                                 <td>{{field}}</td>
@@ -221,12 +223,12 @@
                                     </div>
                                 </td>
                             </tr>
-                        {{/user.boardList}}
+                        {{/boardList}}
                     </table>
                 </div>
             </div>
-        {{/user.isEmployer}}
-        {{^user.isEmployer}}
+        {{/isEmployer}}
+        {{^isEmployer}}
             <!--내 이력서 보기-->
             <div class="div-layout">
                 <div class="div-header d-flex justify-content-between">
@@ -242,7 +244,7 @@
                             <td>게시일자</td>
                             <td></td>
                         </tr>
-                        {{#user.resumeList}}
+                        {{#resumeList}}
                             <tr>
                                 <td><a href="/resumes/{{id}}">{{title}}</a></td>
                                 <td>{{createdAt}}</td>
@@ -258,12 +260,12 @@
                                     </div>
                                 </td>
                             </tr>
-                        {{/user.resumeList}}
+                        {{/resumeList}}
                     </table>
                 </div>
             </div>
-        {{/user.isEmployer}}
-        {{#user.isEmployer}}
+        {{/isEmployer}}
+        {{#isEmployer}}
             <div class="div-layout">
                 <div class="div-header d-flex justify-content-between">
                     <h3><b>지원자 리스트</b></h3>
@@ -279,7 +281,7 @@
                         <th>지원 날짜</th>
                         <th></th>
                     </tr>
-                    {{#applicationList}}
+                    {{#applyList}}
                         <tr>
                             <td><a href="/boards/{{boardId}}">{{boardTitle}}</a></td>
                             <td>{{applicantName}}</td>
@@ -307,11 +309,11 @@
                                 </div>
                             </td>
                         </tr>
-                    {{/applicationList}}
+                    {{/applyList}}
                 </table>
             </div>
-        {{/user.isEmployer}}
-        {{^user.isEmployer}}
+        {{/isEmployer}}
+        {{^isEmployer}}
             <div class="div-layout">
                 <div class="div-header d-flex justify-content-between" style="text-align: end">
                     <h2><b>나의 지원현황</b></h2>
@@ -347,7 +349,9 @@
                     </table>
                 </div>
             </div>
-        {{/user.isEmployer}}
+        {{/isEmployer}}
+        {{/profileDTO}}
+
     </div>
 </main>
 <!-- 바디 end -->
