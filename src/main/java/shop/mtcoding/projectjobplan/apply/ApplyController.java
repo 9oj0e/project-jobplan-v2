@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import shop.mtcoding.projectjobplan.board.BoardResponse;
 import shop.mtcoding.projectjobplan.board.BoardService;
 import shop.mtcoding.projectjobplan.resume.Resume;
@@ -22,10 +23,10 @@ public class ApplyController {
     private final HttpSession session;
     private final BoardService boardService;
     private final ResumeService resumeService;
+    private final ApplyService applyService;
 
     @GetMapping("/boards/{boardId}/apply-form")
     public String applyForm(@PathVariable int boardId, HttpServletRequest request) {
-        // todo : 지원하기 Form
         User user = (User) session.getAttribute("sessionUser");
 
         BoardResponse.DetailDTO respDTO = boardService.getBoardInDetail(boardId);
@@ -38,8 +39,9 @@ public class ApplyController {
     }
 
     @PostMapping("/boards/{boardId}/apply")
-    public String apply(int boardId, ApplyRequest.ApplyDTO requestDTO) {
+    public String apply(@PathVariable int boardId, ApplyRequest.ApplyDTO reqDTO) {
         // todo : 지원하기
+        applyService.createApply(reqDTO);
 
         return "redirect:/boards/" + boardId;
     }
