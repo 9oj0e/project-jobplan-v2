@@ -8,6 +8,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ResumeJpaRepository extends JpaRepository <Resume, Integer> {
-    @Query("SELECT r FROM Resume r JOIN fetch r.user")
+    @Query("SELECT r FROM Resume r JOIN fetch r.user order by r.createdAt desc")
     List<Resume> findAllResume();
 }

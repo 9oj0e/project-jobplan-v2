@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Controller
 public class BoardController {
@@ -41,7 +43,9 @@ public class BoardController {
     }
 
     @GetMapping("/boards/listings")
-    public String listings() {
+    public String listings(HttpServletRequest request) {
+        List<BoardResponse.ListingsDTO> responseDTO = boardService.getAllBoard();
+        request.setAttribute("boardList", responseDTO);
 
         return "/board/listings";
     }
