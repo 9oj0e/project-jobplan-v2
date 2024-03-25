@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import shop.mtcoding.projectjobplan.user.UserJpaRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -33,10 +34,13 @@ public class ResumeService {
         return new ResumeResponse.UpdateDTO(resumeJpaRepository.findById(id).get());
     }
 
-    public List<Resume> getAllResume() {
-        // todo : resume/listings
+    public List<ResumeResponse.MainDTO> getAllResume() {
+        // todo : pagination
+        List<ResumeResponse.MainDTO> responseDTO = new ArrayList<>();
+        List<Resume> resumeList = resumeJpaRepository.findAllResume();
+        resumeList.stream().forEach(resume -> responseDTO.add(new ResumeResponse.MainDTO(resume)));
 
-        return null;
+        return responseDTO;
     }
 
     @Transactional

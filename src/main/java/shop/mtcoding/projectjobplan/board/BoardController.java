@@ -18,7 +18,7 @@ public class BoardController {
 
     @GetMapping({"/", "/boards"})
     public String index(HttpServletRequest request) {
-        List<BoardResponse.IndexDTO> responseDTO = boardService.getAllBoard();
+        List<BoardResponse.IndexDTO> responseDTO = boardService.getAllBoardOnIndex();
         request.setAttribute("boardList", responseDTO);
 
         return "/index";
@@ -51,7 +51,9 @@ public class BoardController {
     }
 
     @GetMapping("/boards/listings")
-    public String listings() {
+    public String listings(HttpServletRequest request) {
+        List<BoardResponse.ListingsDTO> responseDTO = boardService.getAllBoard();
+        request.setAttribute("boardList", responseDTO);
 
         return "/board/listings";
     }

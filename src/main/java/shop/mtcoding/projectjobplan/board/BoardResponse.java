@@ -72,6 +72,31 @@ public class BoardResponse {
     }
 
     @Data
+    public static class ListingsDTO {
+        // board_tb
+        private Integer id;
+        private String title;
+        private String salary;
+        private Timestamp closingDate;
+
+        // user_tb
+        private String address;
+        private String businessName;
+
+        public ListingsDTO(Board board) {
+            this.id = board.getId();
+            this.title = board.getTitle();
+            this.salary = board.getSalary();
+            this.closingDate = board.getClosingDate();
+            this.address = board.getUser().getAddress();
+            this.businessName = board.getUser().getBusinessName();
+        }
+
+        public String getClosingDate() {
+            return FormatUtil.timeFormatter(closingDate);
+        }
+    }
+    @Data
     public static class IndexDTO {
         // 공고 정보
         private Integer id;
