@@ -34,13 +34,6 @@ public class ApplyService {
         return applyList.stream().map(apply -> new ApplyResponse.ApplyDTO(apply, sessionUser)).toList();
     }
 
-//    public List<BoardResponse.MainDTO> 글목록조회() {
-//        Sort sort = Sort.by(Sort.Direction.DESC, "id");
-//        List<Board> boardList = boardJPARepository.findAll(sort);
-//
-//        return boardList.stream().map(board -> new BoardResponse.MainDTO(board)).toList();
-//    }
-
     public void updateApply(ApplyRequest.UpdateDTO requestDTO) {
         // todo : 합격/불합격 처리
     }

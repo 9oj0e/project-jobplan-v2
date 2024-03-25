@@ -27,6 +27,33 @@ public class ApplyResponse {
                 this.appliedAt = apply.getCreatedAt();
             }
         }
+
+        public String getBoardTitle(){
+            String input = this.boardTitle; // 입력받은 문자열
+            int maxLength = 8; // 최대 길이
+
+            String output;
+            if (input.length() > maxLength) {
+                output = input.substring(0, maxLength) + "...";
+            } else {
+                output = input;
+            }
+
+            return output;
+        }
+        public String getResumeTitle(){
+            String input = this.resumeTitle; // 입력받은 문자열
+            int maxLength = 8; // 최대 길이
+
+            String output;
+            if (input.length() > maxLength) {
+                output = input.substring(0, maxLength) + "...";
+            } else {
+                output = input;
+            }
+
+            return output;
+        }
     }
 
 
