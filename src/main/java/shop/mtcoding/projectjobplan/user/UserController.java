@@ -7,12 +7,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import shop.mtcoding.projectjobplan.apply.ApplyService;
 
 @RequiredArgsConstructor
 @Controller
 public class UserController {
     private final HttpSession session;
     private final UserService userService;
+    private final ApplyService applyService;
 
     @GetMapping("/users/join-type")
     public String joinType() {
@@ -78,6 +80,7 @@ public class UserController {
         // todo: NullPointException
         User sessionUser = (User) session.getAttribute("sessionUser");
         request.setAttribute("user", userService.getUser(sessionUser.getId()));
+        request.setAttribute("applyList", applyService.getAllBoardByResumeId(sessionUser));
 
         return "/user/profile";
     }

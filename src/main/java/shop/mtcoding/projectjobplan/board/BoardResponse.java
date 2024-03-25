@@ -8,7 +8,6 @@ import java.sql.Timestamp;
 import java.util.List;
 
 public class BoardResponse {
-
     @Data
     public static class UpdateDTO {
         private Integer id; // boardId
@@ -19,7 +18,6 @@ public class BoardResponse {
         private String content;
         private Timestamp openingDate;
         private Timestamp closingDate;
-
 
         public UpdateDTO(Board board) {
             this.id = board.getId();
