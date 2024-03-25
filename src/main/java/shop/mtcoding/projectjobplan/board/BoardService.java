@@ -12,22 +12,15 @@ public class BoardService {
     private final BoardJpaRepository boardJpaRepository;
     private final BoardQueryRepository boardQueryRepository;
 
-    public BoardResponse.DetailDTO findBoardById(int boardId) {
-        Board board = boardJpaRepository.findById(boardId).get();
-        BoardResponse.DetailDTO responseDTO = new BoardResponse.DetailDTO(board);
-      
-        return responseDTO;
-    }
-
     public Board createBoard(BoardRequest.SaveDTO requestDTO) {
 
         return boardJpaRepository.save(requestDTO.toEntity());
     }
 
-    public BoardResponse.UpdateDTO getBoard(int id) {
-        // todo : board/update-form
+    public BoardResponse.DetailDTO getBoardInDetail(int id) {
+        Board board = boardJpaRepository.findById(id).get();
 
-        return new BoardResponse.UpdateDTO(boardJpaRepository.findById(id).get());
+        return new BoardResponse.DetailDTO(board);
     }
 
     public List<Board> getAllBoard() {
@@ -36,10 +29,15 @@ public class BoardService {
         return null;
     }
 
+    public BoardResponse.UpdateDTO getBoard(int id) {
+
+        return new BoardResponse.UpdateDTO(boardJpaRepository.findById(id).get());
+    }
+
     @Transactional
     public void setBoard(int id, BoardRequest.UpdateDTO requestDTO) {
-        // todo : board/id/update
         Board board = boardJpaRepository.findById(id).get();
+
         board.update(requestDTO);
     }
 
