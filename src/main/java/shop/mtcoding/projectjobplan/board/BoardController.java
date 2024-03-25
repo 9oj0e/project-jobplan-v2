@@ -16,6 +16,14 @@ public class BoardController {
     private final HttpSession session;
     private final BoardService boardService;
 
+    @GetMapping({"/", "/boards"})
+    public String index(HttpServletRequest request) {
+        List<BoardResponse.IndexDTO> responseDTO = boardService.getAllBoardOnIndex();
+        request.setAttribute("boardList", responseDTO);
+
+        return "/index";
+    }
+
     @GetMapping("/boards/main")
     public String main() {
         return "/board/main";

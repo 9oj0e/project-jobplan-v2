@@ -2,12 +2,15 @@ package shop.mtcoding.projectjobplan.board;
 
 import lombok.Data;
 import shop.mtcoding.projectjobplan._core.utils.FormatUtil;
+import shop.mtcoding.projectjobplan.user.User;
+
 import java.sql.Timestamp;
+import java.util.List;
 
 public class BoardResponse {
 
     @Data
-    public static class UpdateDTO{
+    public static class UpdateDTO {
         private Integer id; // boardId
         private String title;
         private String field;
@@ -29,6 +32,7 @@ public class BoardResponse {
             this.closingDate = board.getClosingDate();
         }
     }
+
     public static class DetailDTO {
         private Integer id;
         private String address;
@@ -59,16 +63,18 @@ public class BoardResponse {
             this.openingDate = board.getOpeningDate();
             this.closingDate = board.getClosingDate();
         }
+
         public String getOpeningDate() {
             return FormatUtil.timeFormatter(this.openingDate);
         }
+
         public String getClosingDate() {
             return FormatUtil.timeFormatter(this.closingDate);
         }
     }
 
     @Data
-    public static class ListingsDTO{
+    public static class ListingsDTO {
         // board_tb
         private Integer id;
         private String title;
@@ -90,6 +96,27 @@ public class BoardResponse {
 
         public String getClosingDate() {
             return FormatUtil.timeFormatter(closingDate);
+        }
+    }
+    @Data
+    public static class IndexDTO {
+        // 공고 정보
+        private Integer id;
+        private String title;
+        private String field;
+        private String position;
+
+        // 게시자 정보 (기업)
+        private Integer userId;
+        private String businessName;
+
+        public IndexDTO(Board board) {
+            this.id = board.getId();
+            this.title = board.getTitle();
+            this.field = board.getField();
+            this.position = board.getPosition();
+            this.userId = board.getUser().getId();
+            this.businessName = board.getUser().getBusinessName();
         }
     }
 }

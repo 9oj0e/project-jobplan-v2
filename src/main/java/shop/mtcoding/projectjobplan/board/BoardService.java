@@ -33,6 +33,16 @@ public class BoardService {
         return responseDTO;
     }
 
+    public List<BoardResponse.IndexDTO> getAllBoardOnIndex() {
+        List<Board> boardList = boardJpaRepository.findAll();
+        List<BoardResponse.IndexDTO> responseDTO = new ArrayList<>();
+        boardList.stream().forEach(board -> {
+            responseDTO.add(new BoardResponse.IndexDTO(board));
+        });
+
+        return responseDTO;
+    }
+
     public BoardResponse.UpdateDTO getBoard(int id) {
 
         return new BoardResponse.UpdateDTO(boardJpaRepository.findById(id).get());
