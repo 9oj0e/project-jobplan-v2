@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Controller
 public class ResumeController {
@@ -41,7 +43,9 @@ public class ResumeController {
     }
 
     @GetMapping("/resumes/listings")
-    public String listings() {
+    public String listings(HttpServletRequest request) {
+        List<ResumeResponse.MainDTO> responseDTO = resumeService.getAllResume();
+        request.setAttribute("resumeList", responseDTO);
 
         return "/resume/listings";
     }
