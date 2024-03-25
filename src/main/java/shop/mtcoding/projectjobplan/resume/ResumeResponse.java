@@ -34,6 +34,7 @@ public class ResumeResponse {
             this.educationLevel = resume.getEducationLevel();
             this.major = resume.getMajor();
             this.career = resume.getCareer();
+            this.content = resume.getContent();
         }
     }
 

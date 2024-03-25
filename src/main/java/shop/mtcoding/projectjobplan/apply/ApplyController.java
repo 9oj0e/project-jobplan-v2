@@ -5,17 +5,34 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import shop.mtcoding.projectjobplan.board.BoardResponse;
+import shop.mtcoding.projectjobplan.board.BoardService;
+import shop.mtcoding.projectjobplan.resume.Resume;
+import shop.mtcoding.projectjobplan.resume.ResumeService;
 import shop.mtcoding.projectjobplan.user.User;
+
+import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Controller
 public class ApplyController {
     private final HttpSession session;
+    private final BoardService boardService;
+    private final ResumeService resumeService;
 
     @GetMapping("/boards/{boardId}/apply-form")
-    public String applyForm(int boardId, HttpServletRequest request) {
+    public String applyForm(@PathVariable int boardId, HttpServletRequest request) {
         // todo : 지원하기 Form
+        User user = (User) session.getAttribute("sessionUser");
+
+        BoardResponse.DetailDTO respDTO = boardService.getBoardInDetail(boardId);
+        request.setAttribute("board", respDTO);
+
+        List<ApplyResponse.ApplyFormDTO> resumeList = resumeService.getAllResumeByUserId(user.getId());
+        request.setAttribute("resumeList", resumeList);
 
         return "/apply/apply-form";
     }

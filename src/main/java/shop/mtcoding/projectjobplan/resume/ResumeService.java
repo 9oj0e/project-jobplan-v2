@@ -3,9 +3,12 @@ package shop.mtcoding.projectjobplan.resume;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import shop.mtcoding.projectjobplan.apply.ApplyResponse;
 import shop.mtcoding.projectjobplan.user.UserJpaRepository;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -37,6 +40,14 @@ public class ResumeService {
         // todo : resume/listings
 
         return null;
+    }
+
+    public List<ApplyResponse.ApplyFormDTO> getAllResumeByUserId(int id) {
+        List<Resume> resumeList = resumeJpaRepository.findByUserId(id);
+        List<ApplyResponse.ApplyFormDTO> responseDTO = new ArrayList<>();
+        resumeList.stream().forEach(resume -> {responseDTO.add(new ApplyResponse.ApplyFormDTO(resume));});
+
+        return responseDTO;
     }
 
     @Transactional
