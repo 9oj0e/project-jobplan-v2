@@ -45,8 +45,9 @@ public class Board {
         this.openingDate = ConvertUtil.timestampConverter(requestDTO.getOpeningDate());
         this.closingDate = ConvertUtil.timestampConverter(requestDTO.getClosingDate());
     }
+
     @Builder
-    public Board(Integer id, User user, String title, String content, String field, String position, String salary, Timestamp openingDate, Timestamp closingDate, Timestamp createdAt) {
+    public Board(Integer id, User user, String title, String content, String field, String position, String salary, String openingDate, String closingDate, Timestamp createdAt) {
         this.id = id;
         this.user = user;
         this.title = title;

@@ -18,6 +18,7 @@ public class BoardController {
     public String main() {
         return "/board/main";
     }
+
     @GetMapping("/boards/post-form")
     public String postForm() {
 
@@ -33,9 +34,9 @@ public class BoardController {
 
     @GetMapping("/boards/{boardId}")
     public String detail(@PathVariable int boardId) {
-        BoardResponse.DetailDTO boardDetail = boardService.findBoardById(boardId);
+        BoardResponse.DetailDTO boardDetail = boardService.getBoardInDetail(boardId);
         session.setAttribute("boardDetail", boardDetail);
-      
+
         return "/board/detail";
     }
 
