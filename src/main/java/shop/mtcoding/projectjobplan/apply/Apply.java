@@ -2,6 +2,7 @@ package shop.mtcoding.projectjobplan.apply;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import shop.mtcoding.projectjobplan._core.utils.FormatUtil;
 import shop.mtcoding.projectjobplan.board.Board;
 import shop.mtcoding.projectjobplan.resume.Resume;
 
@@ -22,4 +23,8 @@ public class Apply {
     // board_id, board_user_id
     private Boolean status;
     private Timestamp createdAt;
+
+    public String getCreatedAt() {
+        return FormatUtil.timeFormatter(createdAt);
+    }
 }
