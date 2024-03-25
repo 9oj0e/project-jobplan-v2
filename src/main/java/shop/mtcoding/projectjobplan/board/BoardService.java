@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -23,10 +24,14 @@ public class BoardService {
         return new BoardResponse.DetailDTO(board);
     }
 
-    public List<Board> getAllBoard() {
+    public List<BoardResponse.MainDTO> getAllBoard() {
         // todo : board/listings
+        List<Board> boardList = boardJpaRepository.findAll();
+        List<BoardResponse.MainDTO> responseDTO = new ArrayList<>();
+        boardList.stream().forEach(board -> {responseDTO.add(new BoardResponse.MainDTO(board));
+        });
 
-        return null;
+        return responseDTO;
     }
 
     public BoardResponse.UpdateDTO getBoard(int id) {
