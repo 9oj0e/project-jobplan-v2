@@ -15,7 +15,7 @@
         <div class="card-body" style="margin-left: 3%; margin-right: 3%">
             <form action="/board/{{board.id}}/apply" method="post" enctype="application/x-www-form-urlencoded">
                 <input type="hidden" name="boardId" value="{{board.id}}">
-                <input type="hidden" name="boardUserId" value="{{board.employerId}}">
+                <input type="hidden" name="boardUserId" value="board.employerId">
                 <input type="hidden" name="resumeUserId" value="{{sessionUser.id}}">
                 <div style="text-align: end; margin-top: 30px"><h5><b>이력서 선택</b></h5></div>
                 <hr style="margin-top: 0; margin-bottom: 0;">
@@ -23,16 +23,16 @@
                     {{#resumeList}}
                         <tr>
                             <td>
-                                <form action="/resume/{{id}}/updateForm" method="get">
+                                <form action="/resumes/{{resumeId}}/update-form" method="get">
                                     <button class="btn btn-outline-primary">수정</button>
                                 </form>
                             </td>
                             <td><small>{{createdAt}}</small></td>
                             <td style="text-align: center">
-                                <a href="/resume/{{id}}"><small>{{title}}</small></a>
+                                <a href="/resumes/{{resumeId}}"><small>{{title}}</small></a>
                             </td>
                             <td>
-                                <input type="radio" name="resumeId" value="{{id}}">
+                                <input type="radio" name="resumeId" value="{{resumeId}}">
                             </td>
                         </tr>
                     {{/resumeList}}

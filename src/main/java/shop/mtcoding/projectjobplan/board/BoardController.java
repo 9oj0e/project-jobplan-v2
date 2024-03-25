@@ -8,11 +8,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Controller
 public class BoardController {
     private final HttpSession session;
     private final BoardService boardService;
+
+    @GetMapping({"/", "/boards"})
+    public String index(HttpServletRequest request) {
+        List<BoardResponse.IndexDTO> responseDTO = boardService.getAllBoardOnIndex();
+        request.setAttribute("boardList", responseDTO);
+
+        return "/index";
+    }
 
     @GetMapping("/boards/main")
     public String main() {
@@ -41,7 +51,9 @@ public class BoardController {
     }
 
     @GetMapping("/boards/listings")
-    public String listings() {
+    public String listings(HttpServletRequest request) {
+        List<BoardResponse.ListingsDTO> responseDTO = boardService.getAllBoard();
+        request.setAttribute("boardList", responseDTO);
 
         return "/board/listings";
     }

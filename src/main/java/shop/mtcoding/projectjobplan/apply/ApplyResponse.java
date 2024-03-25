@@ -1,11 +1,31 @@
 package shop.mtcoding.projectjobplan.apply;
 
 import lombok.Data;
+
+import shop.mtcoding.projectjobplan._core.utils.FormatUtil;
+import shop.mtcoding.projectjobplan.resume.Resume;
 import shop.mtcoding.projectjobplan.user.User;
 
 import java.sql.Timestamp;
 
+@Data
 public class ApplyResponse {
+    public static class ApplyFormDTO {
+        private Integer resumeId;
+        private String title;
+        private Timestamp createdAt;
+
+        public ApplyFormDTO(Resume resume) {
+            this.resumeId = resume.getId();
+            this.title = resume.getTitle();
+            this.createdAt = resume.getCreatedAt();
+        }
+
+        public String getCreatedAt() {
+            return FormatUtil.timeFormatter(this.createdAt);
+        }
+    }
+
 
     @Data
     public static class ApplyDTO {
@@ -15,6 +35,7 @@ public class ApplyResponse {
         private String businessName; // 지원한 회사 이름
         private String boardTitle; // 지원한 공고 제목
         private String appliedAt; // 공고 지원 날짜
+
 
 
         public ApplyDTO(Apply apply, User sessionUser) {
@@ -55,8 +76,6 @@ public class ApplyResponse {
             return output;
         }
     }
-
-
-
-
 }
+
+

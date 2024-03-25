@@ -34,6 +34,7 @@ public class ResumeResponse {
             this.educationLevel = resume.getEducationLevel();
             this.major = resume.getMajor();
             this.career = resume.getCareer();
+            this.content = resume.getContent();
         }
     }
 
@@ -73,6 +74,24 @@ public class ResumeResponse {
             this.career = resume.getCareer();
             this.title = resume.getTitle();
             this.content = resume.getContent();
+        }
+    }
+
+    @Data
+    public static class MainDTO{
+        // resume_tb
+        private Integer id;
+        private String career;
+        private String title;
+
+        // user_tb
+        private String name;
+
+        public MainDTO(Resume resume) {
+            this.id = resume.getId();
+            this.career = resume.getCareer();
+            this.title = resume.getTitle();
+            this.name = resume.getUser().getName();
         }
     }
 }
