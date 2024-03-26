@@ -1,6 +1,7 @@
 package shop.mtcoding.projectjobplan.board;
 
 import lombok.Data;
+import shop.mtcoding.projectjobplan.user.User;
 
 public class BoardRequest {
 
@@ -14,8 +15,9 @@ public class BoardRequest {
         private String openingDate;
         private String closingDate;
 
-        public Board toEntity() {
+        public Board toEntity(User user) {
             return Board.builder()
+                    .user(user)
                     .title(title)
                     .field(field)
                     .position(position)

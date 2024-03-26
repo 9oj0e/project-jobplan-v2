@@ -3,6 +3,8 @@ package shop.mtcoding.projectjobplan.board;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import shop.mtcoding.projectjobplan.user.User;
+import shop.mtcoding.projectjobplan.user.UserJpaRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,9 +15,9 @@ public class BoardService {
     private final BoardJpaRepository boardJpaRepository;
     private final BoardQueryRepository boardQueryRepository;
 
-    public Board createBoard(BoardRequest.SaveDTO requestDTO) {
+    public Board createBoard(BoardRequest.SaveDTO requestDTO, User sessionUser) {
 
-        return boardJpaRepository.save(requestDTO.toEntity());
+        return boardJpaRepository.save(requestDTO.toEntity(sessionUser));
     }
 
     public BoardResponse.DetailDTO getBoardInDetail(int id) {
@@ -26,14 +28,14 @@ public class BoardService {
 
     public List<BoardResponse.ListingsDTO> getAllBoard() { // board/listings
         List<BoardResponse.ListingsDTO> responseDTO = new ArrayList<>();
-        List<Board> boardList = boardJpaRepository.findAllBoard();
+        List<Board> boardList = boardJpaRepository.findAllBoardJoinUser().get();
         boardList.stream().forEach(board -> responseDTO.add(new BoardResponse.ListingsDTO(board)));
 
         return responseDTO;
     }
 
     public List<BoardResponse.IndexDTO> getAllBoardOnIndex() { // index
-        List<Board> boardList = boardJpaRepository.findAll();
+        List<Board> boardList = boardJpaRepository.findAllJoinUser().get();
         List<BoardResponse.IndexDTO> responseDTO = new ArrayList<>();
         boardList.stream().forEach(board -> {
             responseDTO.add(new BoardResponse.IndexDTO(board));

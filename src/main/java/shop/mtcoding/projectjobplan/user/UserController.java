@@ -75,7 +75,10 @@ public class UserController {
     }
 
     @GetMapping({"/users/{userId}", "/users/{userId}/boards/{boardId}"})
-    public String profile(@PathVariable Integer userId, @PathVariable(required = false) Integer boardId, HttpServletRequest request) {
+    public String profile(
+            @PathVariable Integer userId,
+            @PathVariable(required = false) Integer boardId,
+            HttpServletRequest request) {
         // todo: NullPointException
         User sessionUser = (User) session.getAttribute("sessionUser");
         UserResponse.ProfileDTO profileDTO = userService.getUser(sessionUser, boardId);

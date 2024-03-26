@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import shop.mtcoding.projectjobplan.apply.ApplyResponse;
+import shop.mtcoding.projectjobplan.user.User;
 import shop.mtcoding.projectjobplan.user.UserJpaRepository;
 
 import java.util.ArrayList;
@@ -15,12 +16,11 @@ import java.util.Optional;
 public class ResumeService {
     private final ResumeJpaRepository resumeJpaRepository;
     private final ResumeQueryRepository resumeQueryRepository;
-    private final UserJpaRepository userJpaRepository;
 
     @Transactional
-    public Resume createResume(ResumeRequest.SaveDTO requestDTO) {
+    public Resume createResume(ResumeRequest.SaveDTO requestDTO, User sessionUser) {
 
-        return resumeJpaRepository.save(requestDTO.toEntity());
+        return resumeJpaRepository.save(requestDTO.toEntity(sessionUser));
     }
 
     public ResumeResponse.DetailDTO findResumeById(int resumeId) {
@@ -31,7 +31,6 @@ public class ResumeService {
     }
 
     public ResumeResponse.UpdateDTO getResume(int id) {
-        // todo : resume/update-form
 
         return new ResumeResponse.UpdateDTO(resumeJpaRepository.findById(id).get());
     }
@@ -47,7 +46,6 @@ public class ResumeService {
 
     @Transactional
     public void setResume(int id, ResumeRequest.UpdateDTO requestDTO) {
-        // todo : resume/id/update
         Resume resume = resumeJpaRepository.findById(id).get();
 
         resume.update(requestDTO);
