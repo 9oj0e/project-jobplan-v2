@@ -3,13 +3,19 @@ package shop.mtcoding.projectjobplan.user;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import shop.mtcoding.projectjobplan.apply.ApplyResponse;
+import shop.mtcoding.projectjobplan.apply.ApplyService;
 import shop.mtcoding.projectjobplan.board.BoardJpaRepository;
+
+import java.util.List;
+import java.util.NoSuchElementException;
 
 @RequiredArgsConstructor
 @Service
 public class UserService {
     private final UserJpaRepository userJpaRepository;
     private final BoardJpaRepository boardJpaRepository;
+    private final ApplyService applyService ;
 
     @Transactional
     public User createUser(UserRequest.JoinDTO requestDTO) { // join
@@ -30,10 +36,13 @@ public class UserService {
         return new UserResponse.UpdateFormDTO(user, sessionUser);
     }
 
-    public UserResponse.ProfileDTO getUser(int sessionUserId) {
-
-        return new UserResponse.ProfileDTO(userJpaRepository.findById(sessionUserId).get());
-    }
+//    public UserResponse.ProfileDTO getUser(User sessionUser) {
+//       User user = userJpaRepository.findById(sessionUser.getId()).get();
+//        List<ApplyResponse.ApplyDTO> applyList = applyService.getAllBoardByResumeId(sessionUser);
+//
+//
+//        return new UserResponse.ProfileDTO(user,applyList)  ;
+//    }
 
     @Transactional // 회원수정
     public User setUser(int id, UserRequest.UpdateDTO requestDTO) {
@@ -49,4 +58,17 @@ public class UserService {
         // todo : delete
 
     }
+
+
+    public UserResponse.ProfileDTO getUserProfileDTO(User sessionUser) {
+        User user = userJpaRepository.findById(sessionUser.getId()).get();
+        if(sessionUser.getIsEmployer()){
+            List<ApplyResponse.ApplyDTO> applyList = applyService.getAllBoardByUserId(sessionUser);
+            return new UserResponse.ProfileDTO(user, applyList);
+        }else{
+            List<ApplyResponse.ApplyDTO> applyList = applyService.getAllResumeByUserId(sessionUser);
+            return new UserResponse.ProfileDTO(user, applyList);
+        }
+    }
+
 }

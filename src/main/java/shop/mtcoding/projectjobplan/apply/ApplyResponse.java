@@ -32,7 +32,8 @@ public class ApplyResponse {
         private String businessName; // 지원한 회사 이름
         private String boardTitle; // 지원한 공고 제목
         private String appliedAt; // 공고 지원 날짜
-
+        private Boolean status;
+        private String applicantName ;
 
 
         public ApplyDTO(Apply apply, User sessionUser) {
@@ -43,7 +44,16 @@ public class ApplyResponse {
                 this.businessName = apply.getBoard().getUser().getBusinessName();
                 this.boardTitle = apply.getBoard().getTitle();
                 this.appliedAt = apply.getCreatedAt();
+            } else{
+                this.boardId = apply.getBoard().getId();
+                this.resumeId = apply.getResume().getId();
+                this.resumeTitle = apply.getResume().getTitle();
+                this.businessName = apply.getBoard().getUser().getBusinessName();
+                this.boardTitle = apply.getBoard().getTitle();
+                this.appliedAt = apply.getCreatedAt();
+                this.applicantName = apply.getResume().getUser().getName();
             }
+
         }
 
         public String getBoardTitle(){
