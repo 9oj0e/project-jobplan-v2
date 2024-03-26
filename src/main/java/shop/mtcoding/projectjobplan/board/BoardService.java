@@ -24,8 +24,7 @@ public class BoardService {
         return new BoardResponse.DetailDTO(board);
     }
 
-    public List<BoardResponse.ListingsDTO> getAllBoard() {
-        // todo : board/listings
+    public List<BoardResponse.ListingsDTO> getAllBoard() { // board/listings
         List<BoardResponse.ListingsDTO> responseDTO = new ArrayList<>();
         List<Board> boardList = boardJpaRepository.findAllBoard();
         boardList.stream().forEach(board -> responseDTO.add(new BoardResponse.ListingsDTO(board)));
@@ -33,7 +32,7 @@ public class BoardService {
         return responseDTO;
     }
 
-    public List<BoardResponse.IndexDTO> getAllBoardOnIndex() {
+    public List<BoardResponse.IndexDTO> getAllBoardOnIndex() { // index
         List<Board> boardList = boardJpaRepository.findAll();
         List<BoardResponse.IndexDTO> responseDTO = new ArrayList<>();
         boardList.stream().forEach(board -> {

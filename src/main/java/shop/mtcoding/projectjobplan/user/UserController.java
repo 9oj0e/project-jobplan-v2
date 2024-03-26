@@ -14,7 +14,6 @@ import shop.mtcoding.projectjobplan.apply.ApplyService;
 public class UserController {
     private final HttpSession session;
     private final UserService userService;
-    private final ApplyService applyService;
 
     @GetMapping("/users/join-type")
     public String joinType() {
@@ -79,7 +78,6 @@ public class UserController {
     public String profile(@PathVariable Integer userId, HttpServletRequest request) {
         // todo: NullPointException
         User sessionUser = (User) session.getAttribute("sessionUser");
-
         UserResponse.ProfileDTO profileDTO = userService.getUser(sessionUser);
         request.setAttribute("profileDTO", profileDTO);
 

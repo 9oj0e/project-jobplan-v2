@@ -30,6 +30,13 @@ public class ApplyService {
         applyJpaRepository.save(apply);
     }
 
+    public ApplyResponse.ApplyFormDTO getApplyForm(int boardId, User sessionUser) {
+        Board board = boardJpaRepository.findById(boardId).get();
+        List<Resume> resumeList = resumeJpaRepository.findByUserId(sessionUser.getId()).get();
+
+        return new ApplyResponse.ApplyFormDTO(board, resumeList);
+    }
+
     @Transactional
     public void updateApply(ApplyRequest.UpdateDTO requestDTO) {
         Apply apply = applyJpaRepository.findById(requestDTO.getId()).get();
