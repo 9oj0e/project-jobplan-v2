@@ -3,6 +3,8 @@ package shop.mtcoding.projectjobplan.board;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import shop.mtcoding.projectjobplan.user.User;
+import shop.mtcoding.projectjobplan.user.UserJpaRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,10 +14,11 @@ import java.util.List;
 public class BoardService {
     private final BoardJpaRepository boardJpaRepository;
     private final BoardQueryRepository boardQueryRepository;
+    private final UserJpaRepository userJpaRepository;
 
-    public Board createBoard(BoardRequest.SaveDTO requestDTO) {
+    public Board createBoard(BoardRequest.SaveDTO requestDTO, User sessionUser) {
 
-        return boardJpaRepository.save(requestDTO.toEntity());
+        return boardJpaRepository.save(requestDTO.toEntity(sessionUser));
     }
 
     public BoardResponse.DetailDTO getBoardInDetail(int id) {
