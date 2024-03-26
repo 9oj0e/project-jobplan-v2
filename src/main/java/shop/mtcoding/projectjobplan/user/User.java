@@ -93,5 +93,4 @@ public class User {
         this.employerIdNumber = requestDTO.getEmployerIdNumber();
         this.businessName = requestDTO.getBusinessName();
     }
-
 }

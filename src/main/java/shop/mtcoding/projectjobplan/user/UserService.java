@@ -3,19 +3,19 @@ package shop.mtcoding.projectjobplan.user;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import shop.mtcoding.projectjobplan.apply.Apply;
+import shop.mtcoding.projectjobplan.apply.ApplyJpaRepository;
 import shop.mtcoding.projectjobplan.apply.ApplyResponse;
 import shop.mtcoding.projectjobplan.apply.ApplyService;
 import shop.mtcoding.projectjobplan.board.BoardJpaRepository;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @RequiredArgsConstructor
 @Service
 public class UserService {
     private final UserJpaRepository userJpaRepository;
-    private final BoardJpaRepository boardJpaRepository;
-    private final ApplyService applyService ;
+    private final ApplyJpaRepository applyJpaRepository;
 
     @Transactional
     public User createUser(UserRequest.JoinDTO requestDTO) { // join
@@ -30,19 +30,29 @@ public class UserService {
         return sessionUser;
     }
 
-    public UserResponse.UpdateFormDTO getUser(int id, User sessionUser) {
-        User user = userJpaRepository.findById(id).get();
-
-        return new UserResponse.UpdateFormDTO(user, sessionUser);
+    public UserResponse.ProfileDTO getUser(User sessionUser, Integer boardId) {
+        User user = userJpaRepository.findById(sessionUser.getId()).get();
+        List<Apply> applyList;
+        if (sessionUser.getIsEmployer()) {
+            if (boardId == null) {
+                // (기업) 모든 지원자 현황 보기
+                applyList = applyJpaRepository.findByBoardUserId(user.getId());
+            } else {
+                // (기업) 공고별 지원자 보기
+                applyList = applyJpaRepository.findByBoardId(boardId);
+            }
+        } else {
+            // (개인) 지원 현황 보기
+            applyList = applyJpaRepository.findByResumeUserId(user.getId());
+        }
+        return new UserResponse.ProfileDTO(user, applyList);
     }
 
-//    public UserResponse.ProfileDTO getUser(User sessionUser) {
-//       User user = userJpaRepository.findById(sessionUser.getId()).get();
-//        List<ApplyResponse.ApplyDTO> applyList = applyService.getAllBoardByResumeId(sessionUser);
-//
-//
-//        return new UserResponse.ProfileDTO(user,applyList)  ;
-//    }
+    public UserResponse.UpdateFormDTO getUser(int id) {
+        User user = userJpaRepository.findById(id).get();
+
+        return new UserResponse.UpdateFormDTO(user);
+    }
 
     @Transactional // 회원수정
     public User setUser(int id, UserRequest.UpdateDTO requestDTO) {
@@ -56,29 +66,5 @@ public class UserService {
     @Transactional
     public void removeUser(int id) {
         // todo : delete
-
     }
-
-
-    public UserResponse.ProfileDTO getUserProfileDTO(User sessionUser, Integer boardId) {
-        User user = userJpaRepository.findById(sessionUser.getId()).get();
-        if (boardId != null){
-            if(sessionUser.getIsEmployer()){
-                List<ApplyResponse.ApplyDTO> applyList = applyService.getAllByBoardIdAndUserId(sessionUser, boardId);
-                return new UserResponse.ProfileDTO(user, applyList);
-            }else{
-                List<ApplyResponse.ApplyDTO> applyList = applyService.getAllByBoardIdAndUserId(sessionUser, boardId);
-                return new UserResponse.ProfileDTO(user, applyList);
-            }
-        }else {
-            if(sessionUser.getIsEmployer()){
-                List<ApplyResponse.ApplyDTO> applyList = applyService.getAllBoardByUserId(sessionUser);
-                return new UserResponse.ProfileDTO(user, applyList);
-            }else{
-                List<ApplyResponse.ApplyDTO> applyList = applyService.getAllResumeByUserId(sessionUser);
-                return new UserResponse.ProfileDTO(user, applyList);
-            }
-        }
-    }
-
 }

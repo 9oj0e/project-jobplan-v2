@@ -14,7 +14,6 @@ import java.util.List;
 public class BoardService {
     private final BoardJpaRepository boardJpaRepository;
     private final BoardQueryRepository boardQueryRepository;
-    private final UserJpaRepository userJpaRepository;
 
     public Board createBoard(BoardRequest.SaveDTO requestDTO, User sessionUser) {
 
@@ -27,17 +26,16 @@ public class BoardService {
         return new BoardResponse.DetailDTO(board);
     }
 
-    public List<BoardResponse.ListingsDTO> getAllBoard() {
-        // todo : board/listings
+    public List<BoardResponse.ListingsDTO> getAllBoard() { // board/listings
         List<BoardResponse.ListingsDTO> responseDTO = new ArrayList<>();
-        List<Board> boardList = boardJpaRepository.findAllBoard();
+        List<Board> boardList = boardJpaRepository.findAllBoardJoinUser().get();
         boardList.stream().forEach(board -> responseDTO.add(new BoardResponse.ListingsDTO(board)));
 
         return responseDTO;
     }
 
-    public List<BoardResponse.IndexDTO> getAllBoardOnIndex() {
-        List<Board> boardList = boardJpaRepository.findAll();
+    public List<BoardResponse.IndexDTO> getAllBoardOnIndex() { // index
+        List<Board> boardList = boardJpaRepository.findAllJoinUser().get();
         List<BoardResponse.IndexDTO> responseDTO = new ArrayList<>();
         boardList.stream().forEach(board -> {
             responseDTO.add(new BoardResponse.IndexDTO(board));

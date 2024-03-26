@@ -18,7 +18,7 @@ public class ResumeController {
     private final ResumeService resumeService;
 
     @GetMapping("/resumes/main")
-    public String main(){
+    public String main() {
         return "/resume/main";
     }
 
@@ -31,7 +31,7 @@ public class ResumeController {
     @PostMapping("/resumes/post") // 이력서 작성 action
     public String post(ResumeRequest.SaveDTO requestDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-    Resume resume = resumeService.createResume(requestDTO, sessionUser);
+        Resume resume = resumeService.createResume(requestDTO, sessionUser);
 
         return "redirect:/resume/" + resume.getId();
     }

@@ -14,7 +14,6 @@ import shop.mtcoding.projectjobplan.apply.ApplyService;
 public class UserController {
     private final HttpSession session;
     private final UserService userService;
-    private final ApplyService applyService;
 
     @GetMapping("/users/join-type")
     public String joinType() {
@@ -60,7 +59,7 @@ public class UserController {
     @GetMapping("/users/{userId}/update-form")
     public String updateForm(@PathVariable Integer userId, HttpServletRequest request) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        UserResponse.UpdateFormDTO user = userService.getUser(sessionUser.getId(), sessionUser);
+        UserResponse.UpdateFormDTO user = userService.getUser(sessionUser.getId());
         request.setAttribute("user", user);
 
         return "/user/update-form";
@@ -76,12 +75,14 @@ public class UserController {
     }
 
     @GetMapping({"/users/{userId}", "/users/{userId}/boards/{boardId}"})
-    public String profile(@PathVariable Integer userId,@PathVariable(required = false) Integer boardId, HttpServletRequest request, HttpSession session) {
+    public String profile(
+            @PathVariable Integer userId,
+            @PathVariable(required = false) Integer boardId,
+            HttpServletRequest request) {
         // todo: NullPointException
         User sessionUser = (User) session.getAttribute("sessionUser");
-
-        UserResponse.ProfileDTO profileDTO = userService.getUserProfileDTO(sessionUser,boardId);
-        request.setAttribute("profileDTO", profileDTO); //
+        UserResponse.ProfileDTO profileDTO = userService.getUser(sessionUser, boardId);
+        request.setAttribute("profileDTO", profileDTO);
 
         return "/user/profile";
     }

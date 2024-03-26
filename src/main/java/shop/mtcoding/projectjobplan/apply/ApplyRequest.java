@@ -7,12 +7,12 @@ public class ApplyRequest {
     public static class ApplyDTO {
         private Integer resumeId;
         private Integer boardId;
+        // toEntity 가능?
     }
     
     @Data
     public static class UpdateDTO {
-        private Integer resumeId;
-        private Integer boardId;
+        private Integer id;
         private Boolean status;
     }
 }

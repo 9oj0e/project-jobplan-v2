@@ -2,95 +2,49 @@ package shop.mtcoding.projectjobplan.apply;
 
 import lombok.Data;
 import shop.mtcoding.projectjobplan._core.utils.FormatUtil;
+import shop.mtcoding.projectjobplan.board.Board;
 import shop.mtcoding.projectjobplan.resume.Resume;
 import shop.mtcoding.projectjobplan.user.User;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
-@Data
 public class ApplyResponse {
-    public static class ApplyFormDTO {
-        private Integer resumeId;
-        private String title;
-        private Timestamp createdAt;
-
-        public ApplyFormDTO(Resume resume) {
-            this.resumeId = resume.getId();
-            this.title = resume.getTitle();
-            this.createdAt = resume.getCreatedAt();
-        }
-
-        public String getCreatedAt() {
-            return FormatUtil.timeFormatter(this.createdAt);
-        }
-    }
-
     @Data
-    public static class ApplyDTO {
-        private Integer resumeId; // 이력서 id
-        private Integer boardId; // 공고 id
-        private String resumeTitle; // 이력서 제목
-        private String businessName; // 지원한 회사 이름
-        private String boardTitle; // 지원한 공고 제목
-        private String appliedAt; // 공고 지원 날짜
-        private Boolean status;
-        private String applicantName ;
+    public static class ApplyFormDTO {
+        // 공고 정보
+        private Integer boardId;
+        private String boardTitle;
+        private String businessName;
+        private Timestamp closingDate;
+        // 이력서 리스트
+        private List<ResumeDTO> resumeList = new ArrayList<>();
 
-        public String getStatusOutput(){
-            try {
-                if (this.status) return "합격";
-                else if (!this.status) return "불합격";
-                else return null;
-            } catch (Exception e) {
-                return null;
-            }
+        public ApplyFormDTO(Board board, List<Resume> resumeList) {
+            this.boardId = board.getId();
+            this.boardTitle = board.getTitle();
+            this.businessName = board.getUser().getBusinessName();
+            this.closingDate = board.getClosingDate();
+            this.resumeList = resumeList.stream().map(resume -> new ResumeDTO(resume)).toList();
         }
 
+        // 이력서 정보
+        public class ResumeDTO {
+            private Integer resumeId;
+            private String resumeTitle;
+            private Timestamp createdAt;
 
-        public ApplyDTO(Apply apply, User sessionUser) {
-            if (!sessionUser.getIsEmployer()) {
-                this.boardId = apply.getBoard().getId();
-                this.resumeId = apply.getResume().getId();
-                this.resumeTitle = apply.getResume().getTitle();
-                this.businessName = apply.getBoard().getUser().getBusinessName();
-                this.boardTitle = apply.getBoard().getTitle();
-                this.appliedAt = apply.getCreatedAt();
-            } else{
-                this.boardId = apply.getBoard().getId();
-                this.resumeId = apply.getResume().getId();
-                this.resumeTitle = apply.getResume().getTitle();
-                this.businessName = apply.getBoard().getUser().getBusinessName();
-                this.boardTitle = apply.getBoard().getTitle();
-                this.appliedAt = apply.getCreatedAt();
-                this.applicantName = apply.getResume().getUser().getName();
+            public ResumeDTO(Resume resume) {
+                this.resumeId = resume.getId();
+                this.resumeTitle = resume.getTitle();
+                this.createdAt = resume.getCreatedAt();
             }
-
+            public String getCreatedAt() {
+                return FormatUtil.timeFormatter(this.createdAt);
+            }
         }
-
-        public String getBoardTitle(){
-            String input = this.boardTitle; // 입력받은 문자열
-            int maxLength = 8; // 최대 길이
-
-            String output;
-            if (input.length() > maxLength) {
-                output = input.substring(0, maxLength) + "...";
-            } else {
-                output = input;
-            }
-
-            return output;
-        }
-        public String getResumeTitle(){
-            String input = this.resumeTitle; // 입력받은 문자열
-            int maxLength = 8; // 최대 길이
-
-            String output;
-            if (input.length() > maxLength) {
-                output = input.substring(0, maxLength) + "...";
-            } else {
-                output = input;
-            }
-
-            return output;
+        private String getClosingDate() {
+            return FormatUtil.timeFormatter(this.closingDate);
         }
     }
 }

@@ -16,7 +16,6 @@ import java.util.Optional;
 public class ResumeService {
     private final ResumeJpaRepository resumeJpaRepository;
     private final ResumeQueryRepository resumeQueryRepository;
-    private final UserJpaRepository userJpaRepository;
 
     @Transactional
     public Resume createResume(ResumeRequest.SaveDTO requestDTO, User sessionUser) {
@@ -32,7 +31,6 @@ public class ResumeService {
     }
 
     public ResumeResponse.UpdateDTO getResume(int id) {
-        // todo : resume/update-form
 
         return new ResumeResponse.UpdateDTO(resumeJpaRepository.findById(id).get());
     }
@@ -40,23 +38,14 @@ public class ResumeService {
     public List<ResumeResponse.MainDTO> getAllResume() {
         // todo : pagination
         List<ResumeResponse.MainDTO> responseDTO = new ArrayList<>();
-        List<Resume> resumeList = resumeJpaRepository.findAllResume();
+        List<Resume> resumeList = resumeJpaRepository.findAllResume().get();
         resumeList.stream().forEach(resume -> responseDTO.add(new ResumeResponse.MainDTO(resume)));
-
-        return responseDTO;
-    }
-
-    public List<ApplyResponse.ApplyFormDTO> getAllResumeByUserId(int id) {
-        List<Resume> resumeList = resumeJpaRepository.findByUserId(id);
-        List<ApplyResponse.ApplyFormDTO> responseDTO = new ArrayList<>();
-        resumeList.stream().forEach(resume -> {responseDTO.add(new ApplyResponse.ApplyFormDTO(resume));});
 
         return responseDTO;
     }
 
     @Transactional
     public void setResume(int id, ResumeRequest.UpdateDTO requestDTO) {
-        // todo : resume/id/update
         Resume resume = resumeJpaRepository.findById(id).get();
 
         resume.update(requestDTO);

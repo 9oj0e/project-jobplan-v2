@@ -2,6 +2,7 @@ package shop.mtcoding.projectjobplan.user;
 
 import lombok.Data;
 import shop.mtcoding.projectjobplan._core.utils.FormatUtil;
+import shop.mtcoding.projectjobplan.apply.Apply;
 import shop.mtcoding.projectjobplan.apply.ApplyResponse;
 import shop.mtcoding.projectjobplan.board.Board;
 import shop.mtcoding.projectjobplan.resume.Resume;
@@ -22,7 +23,7 @@ public class UserResponse {
         // 개인 정보
         private String name;
         private String birthdate;
-        //        private Character gender; // view에서 분기 처리 하려면.. JS필요
+        // private Character gender; // view에서 분기 처리 하려면.. JS필요
         private String phoneNumber;
         private String address;
         private String email;
@@ -32,7 +33,7 @@ public class UserResponse {
         private String employerIdNumber; // 사업자번호
         private String businessName; // 기업이름
 
-        public UpdateFormDTO(User user, User sessionUser) {
+        public UpdateFormDTO(User user) {
             this.id = user.getId();
             this.username = user.getUsername();
             this.password = user.getPassword();
@@ -42,7 +43,7 @@ public class UserResponse {
             this.address = user.getAddress();
             this.email = user.getEmail();
 
-            if (sessionUser.getIsEmployer()) {
+            if (user.getIsEmployer()) {
                 this.isEmployer = user.getIsEmployer();
                 this.employerIdNumber = user.getEmployerIdNumber();
                 this.businessName = user.getBusinessName();
@@ -71,9 +72,11 @@ public class UserResponse {
         private String employerIdNumber;
         private String businessName;
         private List<BoardDTO> boardList = new ArrayList<>();
-        private List<ApplyResponse.ApplyDTO> applyList  ;
 
-        public ProfileDTO(User user, List<ApplyResponse.ApplyDTO> applyList) {
+        // 지원자 현황 및 지원 현황
+        private List<ApplyDTO> applyList;
+
+        public ProfileDTO(User user, List<Apply> applyList) {
             this.id = user.getId();
             this.username = user.getUsername();
             this.password = user.getPassword();
@@ -91,8 +94,7 @@ public class UserResponse {
             } else {
                 this.resumeList = user.getResumes().stream().map(resume -> new ResumeDTO(resume)).toList();
             }
-            this.applyList = applyList;
-
+            this.applyList = applyList.stream().map(apply -> new ApplyDTO(apply)).toList();
         }
 
         public class BoardDTO {
@@ -113,6 +115,10 @@ public class UserResponse {
             public String getOpeningDate() {
                 return FormatUtil.timeFormatter(this.openingDate);
             }
+
+            public String getTitle() {
+                return FormatUtil.stringFormatter(this.title);
+            }
         }
 
         public class ResumeDTO {
@@ -126,23 +132,61 @@ public class UserResponse {
                 this.createdAt = resume.getCreatedAt();
             }
 
+            public String getTitle() {
+                return FormatUtil.stringFormatter(this.title);
+            }
+
             public String getCreatedAt() {
                 return FormatUtil.timeFormatter(this.createdAt);
             }
         }
 
-        public static class UserApplyInfo {
-            private User user;
-            private List<ApplyResponse.ApplyDTO> applyList;
+        public class ApplyDTO {
+            // 이력서 정보
+            private Integer resumeId;
+            private String resumeTitle;
+            private String applicantName;
 
-            public UserApplyInfo(User user, List<ApplyResponse.ApplyDTO> applyList) {
-                this.user = user;
-                this.applyList = applyList;
+            // 공고 정보
+            private Integer boardId;
+            private String boardTitle;
+            private String businessName;
+
+            // 지원 정보
+            private Integer id;
+            private Boolean status;
+            private String createdAt;
+
+            public ApplyDTO(Apply apply) {
+                this.resumeId = apply.getResume().getId();
+                this.resumeTitle = apply.getResume().getTitle();
+                this.applicantName = apply.getResume().getUser().getName();
+                this.boardId = apply.getBoard().getId();
+                this.boardTitle = apply.getBoard().getTitle();
+                this.businessName = apply.getBoard().getUser().getBusinessName();
+                this.id = apply.getId();
+                this.createdAt = apply.getCreatedAt();
+                this.status = apply.getStatus();
             }
 
+            public String getResumeTitle() {
+                return FormatUtil.stringFormatter(this.resumeTitle);
+            }
+
+            public String getBoardTitle() {
+                return FormatUtil.stringFormatter(this.boardTitle);
+            }
+
+            public String getStatus() {
+                try {
+                    if (this.status) return "합격";
+                    else if (!this.status) return "불합격";
+                    else return null;
+                } catch (Exception e) {
+                    return null;
+                }
+            }
         }
     }
-
-
 }
 

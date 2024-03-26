@@ -78,7 +78,7 @@ public class ResumeResponse {
     }
 
     @Data
-    public static class MainDTO{
+    public static class MainDTO {
         // resume_tb
         private Integer id;
         private String career;
