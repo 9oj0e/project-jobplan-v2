@@ -30,18 +30,22 @@ public class UserService {
         return sessionUser;
     }
 
-    public UserResponse.ProfileDTO getUser(User sessionUser) {
+    public UserResponse.ProfileDTO getUser(User sessionUser, Integer boardId) {
         User user = userJpaRepository.findById(sessionUser.getId()).get();
+        List<Apply> applyList;
         if (sessionUser.getIsEmployer()) {
-            // (기업) 모든 지원자 현황 보기
-            List<Apply> applyList = applyJpaRepository.findByBoardUserId(sessionUser.getId());
-            // todo : (기업) 공고별 지원자 보기
-            return new UserResponse.ProfileDTO(user, applyList);
+            if (boardId == null) {
+                // (기업) 모든 지원자 현황 보기
+                applyList = applyJpaRepository.findByBoardUserId(user.getId());
+            } else {
+                // (기업) 공고별 지원자 보기
+                applyList = applyJpaRepository.findByBoardId(boardId);
+            }
         } else {
             // (개인) 지원 현황 보기
-            List<Apply> applyList = applyJpaRepository.findByResumeUserId(sessionUser.getId());
-            return new UserResponse.ProfileDTO(user, applyList);
+            applyList = applyJpaRepository.findByResumeUserId(user.getId());
         }
+        return new UserResponse.ProfileDTO(user, applyList);
     }
 
     public UserResponse.UpdateFormDTO getUser(int id) {
