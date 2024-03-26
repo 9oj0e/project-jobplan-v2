@@ -75,12 +75,12 @@ public class UserController {
         return "redirect:/users/" + userId;
     }
 
-    @GetMapping("/users/{userId}")
-    public String profile(@PathVariable Integer userId, HttpServletRequest request, HttpSession session) {
+    @GetMapping({"/users/{userId}", "/users/{userId}/boards/{boardId}"})
+    public String profile(@PathVariable Integer userId,@PathVariable(required = false) Integer boardId, HttpServletRequest request, HttpSession session) {
         // todo: NullPointException
         User sessionUser = (User) session.getAttribute("sessionUser");
 
-        UserResponse.ProfileDTO profileDTO = userService.getUserProfileDTO(sessionUser);
+        UserResponse.ProfileDTO profileDTO = userService.getUserProfileDTO(sessionUser,boardId);
         request.setAttribute("profileDTO", profileDTO); //
 
         return "/user/profile";

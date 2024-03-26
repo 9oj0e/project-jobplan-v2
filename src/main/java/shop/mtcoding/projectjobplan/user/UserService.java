@@ -60,14 +60,24 @@ public class UserService {
     }
 
 
-    public UserResponse.ProfileDTO getUserProfileDTO(User sessionUser) {
+    public UserResponse.ProfileDTO getUserProfileDTO(User sessionUser, Integer boardId) {
         User user = userJpaRepository.findById(sessionUser.getId()).get();
-        if(sessionUser.getIsEmployer()){
-            List<ApplyResponse.ApplyDTO> applyList = applyService.getAllBoardByUserId(sessionUser);
-            return new UserResponse.ProfileDTO(user, applyList);
-        }else{
-            List<ApplyResponse.ApplyDTO> applyList = applyService.getAllResumeByUserId(sessionUser);
-            return new UserResponse.ProfileDTO(user, applyList);
+        if (boardId != null){
+            if(sessionUser.getIsEmployer()){
+                List<ApplyResponse.ApplyDTO> applyList = applyService.getAllByBoardIdAndUserId(sessionUser, boardId);
+                return new UserResponse.ProfileDTO(user, applyList);
+            }else{
+                List<ApplyResponse.ApplyDTO> applyList = applyService.getAllByBoardIdAndUserId(sessionUser, boardId);
+                return new UserResponse.ProfileDTO(user, applyList);
+            }
+        }else {
+            if(sessionUser.getIsEmployer()){
+                List<ApplyResponse.ApplyDTO> applyList = applyService.getAllBoardByUserId(sessionUser);
+                return new UserResponse.ProfileDTO(user, applyList);
+            }else{
+                List<ApplyResponse.ApplyDTO> applyList = applyService.getAllResumeByUserId(sessionUser);
+                return new UserResponse.ProfileDTO(user, applyList);
+            }
         }
     }
 
