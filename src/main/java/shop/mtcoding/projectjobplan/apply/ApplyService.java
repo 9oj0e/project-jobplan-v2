@@ -73,9 +73,6 @@ public class ApplyService {
 //        return boardList.stream().map(board -> new BoardResponse.MainDTO(board)).toList();
 //    }
 
-    public void updateApply(ApplyRequest.UpdateDTO requestDTO) {
-        // todo : 합격/불합격 처리
-    }
 
 
 }

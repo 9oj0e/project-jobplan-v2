@@ -6,7 +6,7 @@
             <!-- 수정 삭제 버튼 -->
             {{#boardDetail.boardOwner}}
                 <div class="mb-3"> <!-- 수정 하기 -->
-                    <form action="/board/{{boardDetail.id}}/updateForm" method="get">
+                    <form action="/board/{{boardDetail.id}}/update-form" method="get">
                         <button class="btn btn-warning">
                             <i class="fa-regular fa-file-word icon-size"></i>
                         </button>
@@ -51,7 +51,7 @@
             <div class="card-header card-title">
                 <h3>{{title}}</h3>
             </div>
-            <div class="card-body" style="margin-left: 5%; margin-right: 5%">
+            <div class="card-body" style=" margin-left: 5%; margin-right: 5%">
                 <h4 class="card-title">조건</h4>
                 <table class="table">
                     <tr>
@@ -169,7 +169,7 @@
                 {{/sessionUser}}
                 {{^sessionUser}}
                     <div>
-                        <form action="/loginForm" method="get">
+                        <form action="/login-form" method="get">
                             <button class="btn btn-primary form-control">지원</button>
                         </form>
                     </div>
