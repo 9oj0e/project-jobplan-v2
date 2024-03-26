@@ -49,6 +49,12 @@ public class ApplyService {
         // todo : (기업) 공고별 지원자 보기
     }
 
+    public List<ApplyResponse.ApplyDTO> getAllByBoardIdAndUserId(User sessionUser, Integer boardId){
+        List<Apply> applyList = applyJpaRepository.findByBoardIdAndUserId(sessionUser.getId(), boardId);
+
+        return applyList.stream().map(apply -> new ApplyResponse.ApplyDTO(apply, sessionUser)).toList();
+    }
+
     public List<ApplyResponse.ApplyDTO> getAllBoardByUserId(User sessionUser) {
         // todo : (개인) 지원 현황 보기
         Sort sort = Sort.by(Sort.Direction.DESC, "resumeId");
