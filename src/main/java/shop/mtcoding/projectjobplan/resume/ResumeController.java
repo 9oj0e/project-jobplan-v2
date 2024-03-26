@@ -16,7 +16,7 @@ public class ResumeController {
     private final HttpSession session;
     private final ResumeService resumeService;
 
-    @GetMapping("/resumes")
+    @GetMapping("/resumes/main")
     public String main(){
         return "/resume/main";
     }

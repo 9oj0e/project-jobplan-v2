@@ -49,15 +49,15 @@
                         <form action="/users/{{id}}" method="get">
                             <button class="btn btn-outline-light btn-light text-primary">이력서 관리</button>
                         </form>
-                        <form action="/resume/uploadForm" method="get">
+                        <form action="/resumes/post-form" method="get">
                             <button class="btn btn-outline-primary btn-primary text-white">이력서 작성</button>
                         </form>
                     {{/sessionUser}}
                     {{^sessionUser}}
-                        <form action="/loginForm" method="get">
+                        <form action="/login-form" method="get">
                             <button class="btn btn-outline-light btn-light text-primary">이력서 관리</button>
                         </form>
-                        <form action="/loginForm" method="get">
+                        <form action="/login-form" method="get">
                             <button class="btn btn-outline-primary btn-primary text-white">이력서 작성</button>
                         </form>
                     {{/sessionUser}}

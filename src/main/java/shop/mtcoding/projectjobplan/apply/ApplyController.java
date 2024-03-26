@@ -49,7 +49,6 @@ public class ApplyController {
     public String update(ApplyRequest.UpdateDTO requestDTO) {
         // todo : 지원자 합격 / 불합격 처리
         User user = (User) session.getAttribute("sessionUser");
-
         return "redirect:/user/" + user.getId();
     }
 }
