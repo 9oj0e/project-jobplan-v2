@@ -47,4 +47,11 @@ public class ApplyService {
 
         return applyList.stream().map(apply -> new ApplyResponse.ApplyDTO(apply, sessionUser)).toList();
     }
+
+    @Transactional
+    public void updateApply(ApplyRequest.UpdateDTO requestDTO) { // todo : 합격/불합격 처리
+        Apply apply = applyJpaRepository.findByIdByBoardIdAndResumeId(requestDTO.getBoardId(), requestDTO.getResumeId());
+
+        apply.update(requestDTO);
+    }
 }

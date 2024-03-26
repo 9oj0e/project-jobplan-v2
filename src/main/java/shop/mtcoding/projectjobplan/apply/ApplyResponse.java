@@ -26,6 +26,7 @@ public class ApplyResponse {
 
     @Data
     public static class ApplyDTO {
+        private Integer id;
         private Integer resumeId; // 이력서 id
         private Integer boardId; // 공고 id
         private String resumeTitle; // 이력서 제목
@@ -47,23 +48,16 @@ public class ApplyResponse {
 
 
         public ApplyDTO(Apply apply, User sessionUser) {
-            if (!sessionUser.getIsEmployer()) {
-                this.boardId = apply.getBoard().getId();
-                this.resumeId = apply.getResume().getId();
-                this.resumeTitle = apply.getResume().getTitle();
-                this.businessName = apply.getBoard().getUser().getBusinessName();
-                this.boardTitle = apply.getBoard().getTitle();
-                this.appliedAt = apply.getCreatedAt();
-            } else{
-                this.boardId = apply.getBoard().getId();
-                this.resumeId = apply.getResume().getId();
-                this.resumeTitle = apply.getResume().getTitle();
-                this.businessName = apply.getBoard().getUser().getBusinessName();
-                this.boardTitle = apply.getBoard().getTitle();
-                this.appliedAt = apply.getCreatedAt();
+            this.id = apply.getId();
+            this.boardId = apply.getBoard().getId();
+            this.resumeId = apply.getResume().getId();
+            this.resumeTitle = apply.getResume().getTitle();
+            this.businessName = apply.getBoard().getUser().getBusinessName();
+            this.boardTitle = apply.getBoard().getTitle();
+            this.appliedAt = apply.getCreatedAt();
+            if (sessionUser.getIsEmployer()) {
                 this.applicantName = apply.getResume().getUser().getName();
             }
-
         }
 
         public String getBoardTitle(){

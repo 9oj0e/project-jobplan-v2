@@ -20,10 +20,13 @@ public interface ApplyJpaRepository extends JpaRepository<Apply, Integer> {
 //        // todo : (개인) 지원 현황
 //    Optional<List<?>> findByResumeUserId(int resumeUserId);
 
-    @Query("select a from Apply a where a.board.user.id = :userId")
+    @Query("SELECT a FROM Apply a WHERE a.board.user.id = :userId")
     List<Apply> findByBoardUserId(@Param("userId")int userId);
 
 
-    @Query("select a from Apply a where a.resume.user.id = :userId")
+    @Query("SELECT a FROM Apply a WHERE a.resume.user.id = :userId")
     List<Apply> findByResumeUserId(@Param("userId")int userId);
+
+    @Query("SELECT a FROM Apply a WHERE a.board.id = :boardId AND a.resume.id = :resumeId")
+    Apply findByIdByBoardIdAndResumeId(@Param("boardId") Integer boardId, @Param("resumeId") Integer resumeId);
 }
