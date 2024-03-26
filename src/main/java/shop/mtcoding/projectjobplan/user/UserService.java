@@ -8,13 +8,11 @@ import shop.mtcoding.projectjobplan.apply.ApplyService;
 import shop.mtcoding.projectjobplan.board.BoardJpaRepository;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @RequiredArgsConstructor
 @Service
 public class UserService {
     private final UserJpaRepository userJpaRepository;
-    private final BoardJpaRepository boardJpaRepository;
     private final ApplyService applyService ;
 
     @Transactional
@@ -63,7 +61,7 @@ public class UserService {
     public UserResponse.ProfileDTO getUserProfileDTO(User sessionUser) {
         User user = userJpaRepository.findById(sessionUser.getId()).get();
         if(sessionUser.getIsEmployer()){
-            List<ApplyResponse.ApplyDTO> applyList = applyService.getAllBoardByUserId(sessionUser);
+            List<ApplyResponse.ApplyDTO> applyList = applyService.getAllResumeByBoardUserId(sessionUser);
             return new UserResponse.ProfileDTO(user, applyList);
         }else{
             List<ApplyResponse.ApplyDTO> applyList = applyService.getAllResumeByUserId(sessionUser);
