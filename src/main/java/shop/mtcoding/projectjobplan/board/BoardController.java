@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import shop.mtcoding.projectjobplan.user.User;
 
 import java.util.List;
 
@@ -37,7 +38,8 @@ public class BoardController {
 
     @PostMapping("/boards/post")
     public String post(BoardRequest.SaveDTO requestDTO) {
-        Board board = boardService.createBoard(requestDTO);
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        Board board = boardService.createBoard(requestDTO, sessionUser);
 
         return "redirect:/board/" + board.getId();
     }
