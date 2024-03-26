@@ -1,11 +1,9 @@
 package shop.mtcoding.projectjobplan.apply;
 
 import lombok.Data;
-
 import shop.mtcoding.projectjobplan._core.utils.FormatUtil;
 import shop.mtcoding.projectjobplan.resume.Resume;
 import shop.mtcoding.projectjobplan.user.User;
-
 import java.sql.Timestamp;
 
 @Data
@@ -25,7 +23,6 @@ public class ApplyResponse {
             return FormatUtil.timeFormatter(this.createdAt);
         }
     }
-
 
     @Data
     public static class ApplyDTO {

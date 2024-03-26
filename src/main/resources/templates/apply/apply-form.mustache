@@ -13,7 +13,7 @@
             </div>
         {{/board}}
         <div class="card-body" style="margin-left: 3%; margin-right: 3%">
-            <form action="/board/{{board.id}}/apply" method="post" enctype="application/x-www-form-urlencoded">
+            <form action="/boards/{{board.id}}/apply" method="post" enctype="application/x-www-form-urlencoded">
                 <input type="hidden" name="boardId" value="{{board.id}}">
                 <input type="hidden" name="boardUserId" value="board.employerId">
                 <input type="hidden" name="resumeUserId" value="{{sessionUser.id}}">
