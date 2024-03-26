@@ -35,6 +35,16 @@ public class ApplyResponse {
         private Boolean status;
         private String applicantName ;
 
+        public String getStatusOutput(){
+            try {
+                if (this.status) return "합격";
+                else if (!this.status) return "불합격";
+                else return null;
+            } catch (Exception e) {
+                return null;
+            }
+        }
+
 
         public ApplyDTO(Apply apply, User sessionUser) {
             if (!sessionUser.getIsEmployer()) {
