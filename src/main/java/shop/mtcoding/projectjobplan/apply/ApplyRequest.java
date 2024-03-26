@@ -12,8 +12,9 @@ public class ApplyRequest {
     
     @Data
     public static class UpdateDTO {
-        private Integer resumeId;
-        private Integer boardId;
+        private Integer id;
+//        private Integer resumeId;
+//        private Integer boardId;
         private Boolean status;
     }
 }

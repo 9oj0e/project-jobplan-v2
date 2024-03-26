@@ -30,27 +30,9 @@ public class ApplyService {
         applyJpaRepository.save(apply);
     }
 
-    public List<ApplyResponse.ApplyDTO> getAllResumeByBoardUserId(User sessionUser) { // (기업) 모든 지원자 현황 보기
-        Sort sort = Sort.by(Sort.Direction.DESC, "boardId");
-        List<Apply> applyList = applyJpaRepository.findByBoardUserId(sessionUser.getId());
-
-        return applyList.stream().map(apply -> new ApplyResponse.ApplyDTO(apply, sessionUser)).toList();
-    }
-
-    public void getAllResumeByBoardId(int boardId) {
-        // todo : (기업) 공고별 지원자 보기
-    }
-
-    public List<ApplyResponse.ApplyDTO> getAllResumeByUserId(User sessionUser) { // (개인) 지원 현황 보기
-        Sort sort = Sort.by(Sort.Direction.DESC, "resumeId");
-        List<Apply> applyList = applyJpaRepository.findByResumeUserId(sessionUser.getId());
-
-        return applyList.stream().map(apply -> new ApplyResponse.ApplyDTO(apply, sessionUser)).toList();
-    }
-
     @Transactional
-    public void updateApply(ApplyRequest.UpdateDTO requestDTO) { // todo : 합격/불합격 처리
-        Apply apply = applyJpaRepository.findByIdByBoardIdAndResumeId(requestDTO.getBoardId(), requestDTO.getResumeId());
+    public void updateApply(ApplyRequest.UpdateDTO requestDTO) {
+        Apply apply = applyJpaRepository.findById(requestDTO.getId()).get();
 
         apply.update(requestDTO);
     }

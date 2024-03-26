@@ -60,7 +60,7 @@ public class UserController {
     @GetMapping("/users/{userId}/update-form")
     public String updateForm(@PathVariable Integer userId, HttpServletRequest request) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        UserResponse.UpdateFormDTO user = userService.getUser(sessionUser.getId(), sessionUser);
+        UserResponse.UpdateFormDTO user = userService.getUser(sessionUser.getId());
         request.setAttribute("user", user);
 
         return "/user/update-form";
@@ -76,12 +76,12 @@ public class UserController {
     }
 
     @GetMapping("/users/{userId}")
-    public String profile(@PathVariable Integer userId, HttpServletRequest request, HttpSession session) {
+    public String profile(@PathVariable Integer userId, HttpServletRequest request) {
         // todo: NullPointException
         User sessionUser = (User) session.getAttribute("sessionUser");
 
-        UserResponse.ProfileDTO profileDTO = userService.getUserProfileDTO(sessionUser);
-        request.setAttribute("profileDTO", profileDTO); //
+        UserResponse.ProfileDTO profileDTO = userService.getUser(sessionUser);
+        request.setAttribute("profileDTO", profileDTO);
 
         return "/user/profile";
     }

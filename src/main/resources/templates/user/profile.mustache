@@ -1,7 +1,7 @@
 {{>layout/header}}
 <!-- 바디 start -->
 {{#profileDTO}}
-<main class="main-size">
+    <main class="main-size">
     <div class="div-body">
         <div class="div-layout" style="height: 600px">
             <div class="d-flex justify-content-between">
@@ -187,8 +187,7 @@
                 </div>
             </div>
         </div>
-
-        {{#isEmployer}}
+    {{#isEmployer}}
             <!-- 내 공고 보기 -->
             <div class="div-layout">
                 <div class="div-header d-flex justify-content-between">
@@ -227,8 +226,8 @@
                     </table>
                 </div>
             </div>
-        {{/isEmployer}}
-        {{^isEmployer}}
+    {{/isEmployer}}
+    {{^isEmployer}}
             <!--내 이력서 보기-->
             <div class="div-layout">
                 <div class="div-header d-flex justify-content-between">
@@ -264,8 +263,8 @@
                     </table>
                 </div>
             </div>
-        {{/isEmployer}}
-        {{#isEmployer}}
+    {{/isEmployer}}
+    {{#isEmployer}}
             <div class="div-layout">
                 <div class="div-header d-flex justify-content-between">
                     <h3><b>지원자 리스트</b></h3>
@@ -286,34 +285,32 @@
                             <td><a href="/boards/{{boardId}}">{{boardTitle}}</a></td>
                             <td>{{applicantName}}</td>
                             <td><a href="/resumes/{{resumeId}}">{{resumeTitle}}</a></td>
-                            <td>{{appliedAt}}</td>
+                            <td>{{createdAt}}</td>
                             <td>
                                 <div style="display: flex; justify-content: space-evenly">
-                                    {{#statusOutput}}
-                                        <div>{{statusOutput}}</div>
-                                    {{/statusOutput}}
-                                    {{^statusOutput}}
+                                    {{#status}}
+                                        <div>{{status}}</div>
+                                    {{/status}}
+                                    {{^status}}
                                         <form action="/apply/update" method="post">
                                             <input name="status" type="hidden" value="0">
-                                            <input name="resumeId" type="hidden" value="{{resumeId}}">
-                                            <input name="boardId" type="hidden" value="{{boardId}}">
+                                            <input name="id" type="hidden" value="{{id}}">
                                             <button class="btn btn-outline-danger">불합격</button>
                                         </form>
                                         <form action="/apply/update" method="post">
                                             <input name="status" type="hidden" value="1">
-                                            <input name="resumeId" type="hidden" value="{{resumeId}}">
-                                            <input name="boardId" type="hidden" value="{{boardId}}">
+                                            <input name="id" type="hidden" value="{{id}}">
                                             <button class="btn btn-outline-primary">합격</button>
                                         </form>
-                                    {{/statusOutput}}
+                                    {{/status}}
                                 </div>
                             </td>
                         </tr>
                     {{/applyList}}
                 </table>
             </div>
-        {{/isEmployer}}
-        {{^isEmployer}}
+    {{/isEmployer}}
+    {{^isEmployer}}
             <div class="div-layout">
                 <div class="div-header d-flex justify-content-between" style="text-align: end">
                     <h2><b>나의 지원현황</b></h2>
@@ -333,15 +330,15 @@
                                 <td><a href="/resumes/{{resumeId}}">{{resumeTitle}}</a></td>
                                 <td>{{businessName}}</td>
                                 <td><a href="/boards/{{boardId}}">{{boardTitle}}</a></td>
-                                <td>{{appliedAt}}</td>
+                                <td>{{createdAt}}</td>
                                 <td>
                                     <div style="display: flex; justify-content: space-evenly">
-                                        {{#statusOutput}}
-                                            <div>{{statusOutput}}</div>
-                                        {{/statusOutput}}
-                                        {{^statusOutput}}
+                                        {{#status}}
+                                            <div>{{status}}</div>
+                                        {{/status}}
+                                        {{^status}}
                                             <div>대기중</div>
-                                        {{/statusOutput}}
+                                        {{/status}}
                                     </div>
                                 </td>
                             </tr>
@@ -349,10 +346,9 @@
                     </table>
                 </div>
             </div>
-        {{/isEmployer}}
-        {{/profileDTO}}
-
-    </div>
+    {{/isEmployer}}
+{{/profileDTO}}
+</div>
 </main>
 <!-- 바디 end -->
 {{>layout/footer}}
