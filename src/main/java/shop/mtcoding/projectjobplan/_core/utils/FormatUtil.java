@@ -21,4 +21,8 @@ public class FormatUtil {
         }
         return output;
     }
+
+    public static Double 소수점한자리(Double num){
+        return (double) Math.round(num * 10) / 10;
+    }
 }

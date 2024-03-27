@@ -17,7 +17,7 @@ public class RatingService {
     private final ResumeJpaRepository resumeJpaRepository;
 
     @Transactional // 공고 주인 평가
-    public void createRating(User sessionUser, RatingRequest.rateBoardUser requestDTO) {
+    public void createRating(User sessionUser, RatingRequest.RateBoardUser requestDTO) {
         Board board = boardJpaRepository.findById(requestDTO.getBoardId()).get();
         Rating rating = new Rating(sessionUser, board, requestDTO.getRating());
 
@@ -25,7 +25,7 @@ public class RatingService {
     }
 
     @Transactional // 이력서 주인 평가
-    public void createRating(User sessionUser, RatingRequest.rateResumeUser requestDTO) {
+    public void createRating(User sessionUser, RatingRequest.RateResumeUser requestDTO) {
         Resume resume = resumeJpaRepository.findById(requestDTO.getResumeId()).get();
         Rating rating = new Rating(sessionUser, resume, requestDTO.getRating());
 

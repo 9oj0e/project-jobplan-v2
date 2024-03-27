@@ -67,6 +67,9 @@ public class UserResponse {
         private String email;
         private List<ResumeDTO> resumeList = new ArrayList<>();
 
+        // 평점
+        private Double rating;
+
         // 기업 정보
         private Boolean isEmployer;
         private String employerIdNumber;
@@ -76,7 +79,7 @@ public class UserResponse {
         // 지원자 현황 및 지원 현황
         private List<ApplyDTO> applyList;
 
-        public ProfileDTO(User user, List<Apply> applyList) {
+        public ProfileDTO(User user, List<Apply> applyList, Double rate) {
             this.id = user.getId();
             this.username = user.getUsername();
             this.password = user.getPassword();
@@ -86,6 +89,7 @@ public class UserResponse {
             this.phoneNumber = user.getPhoneNumber();
             this.address = user.getAddress();
             this.email = user.getEmail();
+            this.rating = rate;
             if (user.getIsEmployer()) {
                 this.isEmployer = user.getIsEmployer();
                 this.employerIdNumber = user.getEmployerIdNumber();
@@ -96,6 +100,8 @@ public class UserResponse {
             }
             this.applyList = applyList.stream().map(apply -> new ApplyDTO(apply)).toList();
         }
+
+        public Double getRating(){return FormatUtil.소수점한자리(this.rating);}
 
         public class BoardDTO {
             private Integer id;

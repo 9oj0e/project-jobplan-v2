@@ -14,7 +14,7 @@ public class RatingController {
     private final RatingService ratingService;
 
     @PostMapping("/boards/{boardId}/rate")
-    public String rateBoard(@PathVariable int boardId, RatingRequest.rateBoardUser requestDTO) {
+    public String rateBoard(@PathVariable int boardId, RatingRequest.RateBoardUser requestDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         ratingService.createRating(sessionUser, requestDTO);
 
@@ -22,7 +22,7 @@ public class RatingController {
     }
 
     @PostMapping("/resumes/{resumeId}/rate")
-    public String rateResume(@PathVariable int resumeId, RatingRequest.rateResumeUser requestDTO) {
+    public String rateResume(@PathVariable int resumeId, RatingRequest.RateResumeUser requestDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         ratingService.createRating(sessionUser, requestDTO);
 

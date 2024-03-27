@@ -111,14 +111,14 @@
             <div class="card" style="width:200px">
                 <div class="card-body" style="padding-left: 0; padding-right: 0">
                     <div class="card-title">
-                        {{#rating}}
+                        {{#boardDetail.rating}}
                             <table class="table">
                                 <tr>
                                     <td style="text-align: end; padding-bottom: 0; padding-top: 0">평점 ⭐</td>
-                                    <td style="text-align: start; padding-bottom: 0; padding-top: 0">{{rating}}</td>
+                                    <td style="text-align: start; padding-bottom: 0; padding-top: 0">{{boardDetail.rating}}</td>
                                 </tr>
                             </table>
-                        {{/rating}}
+                        {{/boardDetail.rating}}
                     </div>
                     {{#pic}}
                         <img class="card-img-top" src="/upload/{{imgFilename}}" style="width:100%">
