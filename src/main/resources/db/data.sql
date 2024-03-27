@@ -54,7 +54,7 @@ INSERT INTO user_tb
  is_employer, employer_id_number, business_name, created_at)
 VALUES ('user6', '1234', '전두광', '1931-01-18', 'M', '01012345678', '대전', 'jdg456@domain.com',
         false, null, null, now());
-        
+
 --board_tb
 INSERT INTO board_tb
 (user_id, title, content, field, position, salary, opening_date, closing_date, created_at)
@@ -160,103 +160,135 @@ VALUES (5, '광고 솔루션 백앤드 개발자',
 -- resume_tb
 INSERT INTO resume_tb
 (user_id, title, content, school_name, major, education_level, career, created_at)
-VALUES (6, '새싹을 틔울 수 있는 씨앗이 되겠습니다.', '저는 컴퓨터 공학을 전공한 전문적인 IT 개발자로서, 프로그래밍에 대한 열정과 경험이 풍부합니다. 사용자 중심의 솔루션을 개발하여 비즈니스 문제를 해결하는 것을 즐기며, 끊임없이 새로운 기술을 익히고 발전시키는 것에 흥미를 느낍니다.', '서울대학교', '컴퓨터공학', '대졸', '백앤드 1년', now());
+VALUES (6, '새싹을 틔울 수 있는 씨앗이 되겠습니다.',
+        '저는 컴퓨터 공학을 전공한 전문적인 IT 개발자로서, 프로그래밍에 대한 열정과 경험이 풍부합니다. 사용자 중심의 솔루션을 개발하여 비즈니스 문제를 해결하는 것을 즐기며, 끊임없이 새로운 기술을 익히고 발전시키는 것에 흥미를 느낍니다.',
+        '서울대학교', '컴퓨터공학', '대졸', '백앤드 1년', now());
 INSERT INTO resume_tb
 (user_id, title, content, school_name, major, education_level, career, created_at)
-VALUES (7, '돌쇠 같이 일하는 미친아이 입사지원서.', '다양한 프로그래밍 언어 및 기술 스택에 대한 깊은 이해와 경험을 보유하고 있습니다. 주로 Java와 Python을 사용하여 웹 및 애플리케이션을 개발하였으며, Spring Framework 및 Django와 같은 프레임워크를 활용하여 프로젝트를 구축했습니다.', '영남대학교', '소프트웨어공학', '대졸', '프론트 1년', now());
+VALUES (7, '돌쇠 같이 일하는 미친아이 입사지원서.',
+        '다양한 프로그래밍 언어 및 기술 스택에 대한 깊은 이해와 경험을 보유하고 있습니다. 주로 Java와 Python을 사용하여 웹 및 애플리케이션을 개발하였으며, Spring Framework 및 Django와 같은 프레임워크를 활용하여 프로젝트를 구축했습니다.',
+        '영남대학교', '소프트웨어공학', '대졸', '프론트 1년', now());
 INSERT INTO resume_tb
 (user_id, title, content, school_name, major, education_level, career, created_at)
-VALUES (8, '대한민국 최고의 개발자를 꿈꿉니다.', '최근에는 은행 업계에서 작업했으며, 온라인 뱅킹 플랫폼의 보안 강화 및 성능 향상을 위한 프로젝트에 참여했습니다. 이를 통해 대용량 데이터 처리 및 보안 강화에 대한 전문 지식을 쌓았습니다.', '구미대학교', '컴퓨터공학', '초대졸', '풀스택 1년', now());
+VALUES (8, '대한민국 최고의 개발자를 꿈꿉니다.',
+        '최근에는 은행 업계에서 작업했으며, 온라인 뱅킹 플랫폼의 보안 강화 및 성능 향상을 위한 프로젝트에 참여했습니다. 이를 통해 대용량 데이터 처리 및 보안 강화에 대한 전문 지식을 쌓았습니다.',
+        '구미대학교', '컴퓨터공학', '초대졸', '풀스택 1년', now());
 INSERT INTO resume_tb
 (user_id, title, content, school_name, major, education_level, career, created_at)
-VALUES (9, '매일 30분으로 내가 이뤄낸 것.', '팀에서의 원활한 소통과 협업을 중요하게 생각합니다. Agile 방법론을 따르며, 주기적인 스크럼 회의를 통해 팀원들과의 소통을 촉진하고 프로젝트 일정을 관리합니다.', '부천대학교', '소프트웨어공학', '초대졸', '신입', now());
+VALUES (9, '매일 30분으로 내가 이뤄낸 것.',
+        '팀에서의 원활한 소통과 협업을 중요하게 생각합니다. Agile 방법론을 따르며, 주기적인 스크럼 회의를 통해 팀원들과의 소통을 촉진하고 프로젝트 일정을 관리합니다.', '부천대학교',
+        '소프트웨어공학', '초대졸', '신입', now());
 INSERT INTO resume_tb
 (user_id, title, content, school_name, major, education_level, career, created_at)
-VALUES (10, '학점 2.3에서 편입 후 4.2로.', '새로운 기술 및 도구에 대한 학습에 적극적으로 참여하며, 온라인 코스를 통해 지속적인 전문적인 발전을 추구합니다.', '대구과학고등학교', '전공', '고졸', '신입', now());
+VALUES (10, '학점 2.3에서 편입 후 4.2로.', '새로운 기술 및 도구에 대한 학습에 적극적으로 참여하며, 온라인 코스를 통해 지속적인 전문적인 발전을 추구합니다.', '대구과학고등학교', '전공',
+        '고졸', '신입', now());
 INSERT INTO resume_tb
 (user_id, title, content, school_name, major, education_level, career, created_at)
-VALUES (11, '목표를 달성하기 위해 실행한 3단계 실행 계획.', '지속적인 성장과 함께 사용자 중심의 혁신적인 솔루션을 개발하여 비즈니스 가치를 극대화하는데 기여하고 싶습니다. 함께 일하는 팀원들과의 긍정적인 협력을 통해 동료들과 함께 성장하는 기회를 소중히 여기며, IT 업계의 발전에 기여하고자 합니다.', '하나고등학교', '전공', '고졸', '신입', now());
+VALUES (11, '목표를 달성하기 위해 실행한 3단계 실행 계획.',
+        '지속적인 성장과 함께 사용자 중심의 혁신적인 솔루션을 개발하여 비즈니스 가치를 극대화하는데 기여하고 싶습니다. 함께 일하는 팀원들과의 긍정적인 협력을 통해 동료들과 함께 성장하는 기회를 소중히 여기며, IT 업계의 발전에 기여하고자 합니다.',
+        '하나고등학교', '전공', '고졸', '신입', now());
 INSERT INTO resume_tb
 (user_id, title, content, school_name, major, education_level, career, created_at)
-VALUES (6, '꿈꾸고 믿고 대담해지고 실천하자.', '이전 프로젝트에서 팀 리더로서 프로젝트 일정 및 리소스를 관리하고, 팀원 간의 업무 분담을 조정하여 프로젝트 성과를 극대화했습니다. 이를 통해 리더십과 조직 능력을 키우는 데 중점을 두었습니다.', '서울대학교', '컴퓨터공학', '대졸', '백앤드 1년', now());
+VALUES (6, '꿈꾸고 믿고 대담해지고 실천하자.',
+        '이전 프로젝트에서 팀 리더로서 프로젝트 일정 및 리소스를 관리하고, 팀원 간의 업무 분담을 조정하여 프로젝트 성과를 극대화했습니다. 이를 통해 리더십과 조직 능력을 키우는 데 중점을 두었습니다.',
+        '서울대학교', '컴퓨터공학', '대졸', '백앤드 1년', now());
 INSERT INTO resume_tb
 (user_id, title, content, school_name, major, education_level, career, created_at)
-VALUES (7, '코드를 개선하는 개발자.', '복잡한 기술적 문제에 직면했을 때 신속하고 효과적으로 해결하는 능력을 갖추고 있습니다. 이를 통해 프로젝트 진행 중 발생하는 도전에 대응하여 효율적인 해결책을 제시하고 구현할 수 있습니다.', '영남대학교', '소프트웨어공학', '대졸', '프론트 1년', now());
+VALUES (7, '코드를 개선하는 개발자.',
+        '복잡한 기술적 문제에 직면했을 때 신속하고 효과적으로 해결하는 능력을 갖추고 있습니다. 이를 통해 프로젝트 진행 중 발생하는 도전에 대응하여 효율적인 해결책을 제시하고 구현할 수 있습니다.',
+        '영남대학교', '소프트웨어공학', '대졸', '프론트 1년', now());
 INSERT INTO resume_tb
 (user_id, title, content, school_name, major, education_level, career, created_at)
-VALUES (8, '당신은 내가 넘어야 할 작은 산에 불과하다.', 'Clean Code와 같은 최적화된 코딩 관행을 따르고, 코드 품질을 유지하고 개선하는 데 주력했습니다. 코드 리뷰를 통해 팀 내 개발자들과 함께 고품질의 소프트웨어를 개발하는 데 기여했습니다.', '구미대학교', '컴퓨터공학', '초대졸', '풀스택 1년', now());
+VALUES (8, '당신은 내가 넘어야 할 작은 산에 불과하다.',
+        'Clean Code와 같은 최적화된 코딩 관행을 따르고, 코드 품질을 유지하고 개선하는 데 주력했습니다. 코드 리뷰를 통해 팀 내 개발자들과 함께 고품질의 소프트웨어를 개발하는 데 기여했습니다.',
+        '구미대학교', '컴퓨터공학', '초대졸', '풀스택 1년', now());
 INSERT INTO resume_tb
 (user_id, title, content, school_name, major, education_level, career, created_at)
-VALUES (9, 'Java 개발자', '사용자 요구사항을 이해하고 그에 맞는 솔루션을 개발하는 과정에서 항상 고객의 관점을 고려합니다. 사용자 피드백을 수용하여 제품을 지속적으로 향상시키는 데 주력했습니다.', '부천대학교', '소프트웨어공학', '초대졸', '신입', now());
+VALUES (9, 'Java 개발자', '사용자 요구사항을 이해하고 그에 맞는 솔루션을 개발하는 과정에서 항상 고객의 관점을 고려합니다. 사용자 피드백을 수용하여 제품을 지속적으로 향상시키는 데 주력했습니다.',
+        '부천대학교', '소프트웨어공학', '초대졸', '신입', now());
 INSERT INTO resume_tb
 (user_id, title, content, school_name, major, education_level, career, created_at)
-VALUES (10, '자전거는 계속 나아가지 않으면 쓰러진다.', '코드 테스트와 자동화된 테스트 스위트를 통해 소프트웨어 품질을 보증합니다. 유닛 테스트, 통합 테스트 및 기능 테스트를 통해 버그를 최소화하고 안정적인 제품을 제공합니다.', '대구과학고등학교', '전공', '고졸', '신입', now());
+VALUES (10, '자전거는 계속 나아가지 않으면 쓰러진다.',
+        '코드 테스트와 자동화된 테스트 스위트를 통해 소프트웨어 품질을 보증합니다. 유닛 테스트, 통합 테스트 및 기능 테스트를 통해 버그를 최소화하고 안정적인 제품을 제공합니다.', '대구과학고등학교',
+        '전공', '고졸', '신입', now());
 INSERT INTO resume_tb
 (user_id, title, content, school_name, major, education_level, career, created_at)
-VALUES (11, '한번 물면 쉽게 놓지 않습니다.', '기술적인 개념을 비전문가에게도 이해하기 쉽게 설명하는 능력을 보유하고 있습니다. 커뮤니케이션을 통해 팀 간의 협력을 촉진하고 프로젝트의 목표 달성에 기여했습니다.', '하나고등학교', '전공', '고졸', '신입', now());
+VALUES (11, '한번 물면 쉽게 놓지 않습니다.',
+        '기술적인 개념을 비전문가에게도 이해하기 쉽게 설명하는 능력을 보유하고 있습니다. 커뮤니케이션을 통해 팀 간의 협력을 촉진하고 프로젝트의 목표 달성에 기여했습니다.', '하나고등학교', '전공',
+        '고졸', '신입', now());
 INSERT INTO resume_tb
 (user_id, title, content, school_name, major, education_level, career, created_at)
 VALUES (6, '대한민국의 미래.', '이력서내용', '서울대학교', '컴퓨터공학', '대졸', '백앤드 1년', now());
 INSERT INTO resume_tb
 (user_id, title, content, school_name, major, education_level, career, created_at)
-VALUES (7, '10년후 대한민국을 책임질 인재.', '다양한 산업 분야에서의 프로젝트 경험을 통해 해당 산업에 대한 깊은 이해를 갖추고 있습니다. 특정 산업 도메인에서의 요구 사항과 동향을 파악하여 최적의 기술 솔루션을 제공하는 데 기여하고 있습니다.', '영남대학교', '소프트웨어공학', '대졸', '프론트 1년', now());
+VALUES (7, '10년후 대한민국을 책임질 인재.',
+        '다양한 산업 분야에서의 프로젝트 경험을 통해 해당 산업에 대한 깊은 이해를 갖추고 있습니다. 특정 산업 도메인에서의 요구 사항과 동향을 파악하여 최적의 기술 솔루션을 제공하는 데 기여하고 있습니다.',
+        '영남대학교', '소프트웨어공학', '대졸', '프론트 1년', now());
 INSERT INTO resume_tb
 (user_id, title, content, school_name, major, education_level, career, created_at)
-VALUES (8, '회복의 유일한 길은 다시 시작하는 것이다.', '문제 해결 과정에서 창의적이고 혁신적인 접근 방식을 채택하여 기존의 해결책을 개선하고 새로운 아이디어를 발전시키는 데 관심을 갖고 있습니다. 이를 통해 프로젝트의 경쟁력을 향상시키는데 기여하고 있습니다.', '구미대학교', '컴퓨터공학', '초대졸', '풀스택 1년', now());
+VALUES (8, '회복의 유일한 길은 다시 시작하는 것이다.',
+        '문제 해결 과정에서 창의적이고 혁신적인 접근 방식을 채택하여 기존의 해결책을 개선하고 새로운 아이디어를 발전시키는 데 관심을 갖고 있습니다. 이를 통해 프로젝트의 경쟁력을 향상시키는데 기여하고 있습니다.',
+        '구미대학교', '컴퓨터공학', '초대졸', '풀스택 1년', now());
 INSERT INTO resume_tb
 (user_id, title, content, school_name, major, education_level, career, created_at)
-VALUES (9, '배우는 것은 산에 오르는 것과 같다.', 'Agile 방법론을 적극적으로 채택하여 빠르게 변화하는 요구사항에 유연하게 대응하고, 지속적인 개선을 통해 소프트웨어를 효율적으로 개발하고 제공합니다. 스크럼 및 칸반 등의 Agile 방법론을 활용하여 팀 내 협업과 프로세스를 최적화했습니다.', '부천대학교', '소프트웨어공학', '초대졸', '신입', now());
+VALUES (9, '배우는 것은 산에 오르는 것과 같다.',
+        'Agile 방법론을 적극적으로 채택하여 빠르게 변화하는 요구사항에 유연하게 대응하고, 지속적인 개선을 통해 소프트웨어를 효율적으로 개발하고 제공합니다. 스크럼 및 칸반 등의 Agile 방법론을 활용하여 팀 내 협업과 프로세스를 최적화했습니다.',
+        '부천대학교', '소프트웨어공학', '초대졸', '신입', now());
 INSERT INTO resume_tb
 (user_id, title, content, school_name, major, education_level, career, created_at)
-VALUES (10, '혁신은 180도 다른 시선에서 나온다.', '프로젝트 관련 문서 작성 및 관리에 주의를 기울여 왔습니다. 요구 사항 명세서, 기술 문서, 사용자 매뉴얼 등을 작성하여 프로젝트의 투명성을 유지하고 팀원 간의 이해를 돕는 역할을 수행했습니다.', '대구과학고등학교', '전공', '고졸', '신입', now());
+VALUES (10, '혁신은 180도 다른 시선에서 나온다.',
+        '프로젝트 관련 문서 작성 및 관리에 주의를 기울여 왔습니다. 요구 사항 명세서, 기술 문서, 사용자 매뉴얼 등을 작성하여 프로젝트의 투명성을 유지하고 팀원 간의 이해를 돕는 역할을 수행했습니다.',
+        '대구과학고등학교', '전공', '고졸', '신입', now());
 INSERT INTO resume_tb
 (user_id, title, content, school_name, major, education_level, career, created_at)
-VALUES (11, '여전할 것인가, 역전할 것인가.', '지식을 지속적으로 업데이트하고 팀원들과의 지식 공유를 통해 팀 전체의 역량을 향상시키는 데 관심이 있습니다. 내부 교육 세션을 주도하고 기술 블로그에 기여하여 조직 내에서 지식 공유 문화를 유지하고 발전시켰습니다.', '하나고등학교', '전공', '고졸', '신입', now());
+VALUES (11, '여전할 것인가, 역전할 것인가.',
+        '지식을 지속적으로 업데이트하고 팀원들과의 지식 공유를 통해 팀 전체의 역량을 향상시키는 데 관심이 있습니다. 내부 교육 세션을 주도하고 기술 블로그에 기여하여 조직 내에서 지식 공유 문화를 유지하고 발전시켰습니다.',
+        '하나고등학교', '전공', '고졸', '신입', now());
 
 -- apply_tb
 INSERT INTO apply_tb
-(resume_id, board_id,  created_at, status)
-VALUES (1,  1,  now(), 1);
+    (resume_id, board_id, created_at, status)
+VALUES (1, 1, now(), 1);
 INSERT INTO apply_tb
-(resume_id,  board_id,  created_at, status)
-VALUES (2,  2, now(), 0);
+    (resume_id, board_id, created_at, status)
+VALUES (2, 2, now(), 0);
 INSERT INTO apply_tb
-(resume_id, board_id,  created_at)
-VALUES (3,  3,  now());
+    (resume_id, board_id, created_at)
+VALUES (3, 3, now());
 INSERT INTO apply_tb
-(resume_id,  board_id,  created_at)
-VALUES (4,  4,  now());
+    (resume_id, board_id, created_at)
+VALUES (4, 4, now());
 INSERT INTO apply_tb
-(resume_id,  board_id,  created_at)
-VALUES (5,  1,  now());
+    (resume_id, board_id, created_at)
+VALUES (5, 1, now());
 INSERT INTO apply_tb
-(resume_id,  board_id,  created_at)
-VALUES (6,  2,  now());
+    (resume_id, board_id, created_at)
+VALUES (6, 2, now());
 INSERT INTO apply_tb
-(resume_id,  board_id,  created_at, status)
-VALUES (1,  5,  now(), 1);
+    (resume_id, board_id, created_at, status)
+VALUES (1, 5, now(), 1);
 INSERT INTO apply_tb
-(resume_id,  board_id,  created_at, status)
-VALUES (2, 6,  now(), 0);
+    (resume_id, board_id, created_at, status)
+VALUES (2, 6, now(), 0);
 INSERT INTO apply_tb
-(resume_id,  board_id,  created_at)
-VALUES (3, 7,  now());
+    (resume_id, board_id, created_at)
+VALUES (3, 7, now());
 INSERT INTO apply_tb
-(resume_id,  board_id,  created_at)
-VALUES (4,  8,  now());
+    (resume_id, board_id, created_at)
+VALUES (4, 8, now());
 INSERT INTO apply_tb
-(resume_id,  board_id,  created_at)
-VALUES (5,  5, now());
+    (resume_id, board_id, created_at)
+VALUES (5, 5, now());
 
 -- 평점
 INSERT INTO rating_tb
-(rater_id, subject_id, rating, created_at)
+    (rater_id, subject_id, rating, created_at)
 VALUES (1, 6, 5, now());
 INSERT INTO rating_tb
-(rater_id, subject_id, rating, created_at)
+    (rater_id, subject_id, rating, created_at)
 VALUES (1, 6, 4, now());
 INSERT INTO rating_tb
-(rater_id, subject_id, rating, created_at)
+    (rater_id, subject_id, rating, created_at)
 VALUES (1, 6, 3, now());
 
 -- -- subscribe_tb (기업이 이력서를 구독)
