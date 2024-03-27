@@ -26,7 +26,7 @@
                 {{#sessionUser}}
                     {{^subscribe}}
                         <div class="mb-3"> <!-- 구독하기 -->
-                            <form action="/resume/{{resumeDetail.id}}/subscribe" method="post">
+                            <form action="/resumes/{{resumeDetail.id}}/subscribe" method="post">
                                 <button class="btn btn-outline-dark">
                                     <i class="fa-regular fa-bookmark icon-size"></i>
                                 </button>
@@ -35,7 +35,7 @@
                     {{/subscribe}}
                     {{#subscribe}}
                         <div class="mb-3"> <!-- 구독 취소 -->
-                            <form action="/resume/{{resumeDetail.id}}/unsubscribe" method="post">
+                            <form action="/resumes/{{resumeDetail.id}}/unsubscribe" method="post">
                                 <button class="btn btn-outline-dark">
                                     <i class="fa-solid fa-bookmark icon-size"></i>
                                 </button>
