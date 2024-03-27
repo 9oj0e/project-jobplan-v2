@@ -10,4 +10,6 @@ public interface UserJpaRepository extends JpaRepository<User, Integer> {
 
     // 암호화시, username으로 찾기
     Optional<User> findByUsername(@Param("username") String username);
+
+
 }

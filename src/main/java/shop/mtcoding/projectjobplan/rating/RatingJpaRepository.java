@@ -7,6 +7,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.Optional;
 
 public interface RatingJpaRepository extends JpaRepository<Rating, Integer> {
-    @Query("SELECT AVG(r.rating) FROM Rating r WHERE r.subject = :boardUserId")
-    Optional<Double> findRatingAvgByBoardUserId(@Param("boardUserId") Integer boardUserId);
+    @Query("SELECT AVG(r.rating) FROM Rating r WHERE r.subject.id = :id")
+    Optional<Double> findRatingAvgByBoardUserId(@Param("id") Integer id);
 }

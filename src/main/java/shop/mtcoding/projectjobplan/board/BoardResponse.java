@@ -73,9 +73,7 @@ public class BoardResponse {
         }
 
         public Double getRating(){
-            Double rating = (double) Math.round(this.rating * 10) / 10;
-
-            return this.rating;
+            return FormatUtil.소수점한자리(this.rating);
         }
     }
 
