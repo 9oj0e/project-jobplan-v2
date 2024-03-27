@@ -17,9 +17,9 @@ public class SubscribeResponse {
 
         public DTO(User user, List<Subscribe> subscription) {
             if (user.getIsEmployer()) {
-                this.boardList = subscription.stream().map(subscribe -> new BoardDTO(subscribe.getBoard())).toList();
-            } else {
                 this.resumeList = subscription.stream().map(subscribe -> new ResumeDTO(subscribe.getResume())).toList();
+            } else {
+                this.boardList = subscription.stream().map(subscribe -> new BoardDTO(subscribe.getBoard())).toList();
             }
         }
 
@@ -51,12 +51,12 @@ public class SubscribeResponse {
         // (기업) 이력서 구독 목록
         public class ResumeDTO {
             private Integer resumeId;
-            private String resumeUsername;
+            private String resumeUserName;
             private String title;
 
             public ResumeDTO(Resume resume) {
                 this.resumeId = resume.getId();
-                this.resumeUsername = resume.getUser().getUsername();
+                this.resumeUserName = resume.getUser().getName();
                 this.title = resume.getTitle();
             }
         }

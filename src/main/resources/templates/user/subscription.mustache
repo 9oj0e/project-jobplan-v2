@@ -34,7 +34,7 @@
             {{#subscription}}
                 {{#resumeList}}
                     <tr>
-                        <td>{{resumeUsername}}</td>
+                        <td>{{resumeUserName}}</td>
                         <td style="text-align: start">
                             <a href="/resume/{{resumeId}}">{{title}}</a>
                         </td>
@@ -45,6 +45,11 @@
                         </td>
                     </tr>
                 {{/resumeList}}
+            {{/subscription}}
+            {{^subscription}}
+                <tr>
+                    표시할 내용이 없습니다.
+                </tr>
             {{/subscription}}
             <!--
             <tr>
@@ -104,6 +109,11 @@
                         </td>
                     </tr>
                 {{/boardList}}
+            {{/subscription}}
+            {{^subscription}}
+                <tr>
+                    표시할 내용이 없습니다.
+                </tr>
             {{/subscription}}
         </table>
         <div class="d-flex justify-content-center">
