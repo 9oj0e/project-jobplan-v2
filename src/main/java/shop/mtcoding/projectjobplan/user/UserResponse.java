@@ -79,7 +79,7 @@ public class UserResponse {
         // 지원자 현황 및 지원 현황
         private List<ApplyDTO> applyList;
 
-        public ProfileDTO(User user, List<Apply> applyList, Double rate) {
+        public ProfileDTO(User user, List<Apply> applyList, Double rating) {
             this.id = user.getId();
             this.username = user.getUsername();
             this.password = user.getPassword();
@@ -89,7 +89,7 @@ public class UserResponse {
             this.phoneNumber = user.getPhoneNumber();
             this.address = user.getAddress();
             this.email = user.getEmail();
-            this.rating = rate;
+            this.rating = rating;
             if (user.getIsEmployer()) {
                 this.isEmployer = user.getIsEmployer();
                 this.employerIdNumber = user.getEmployerIdNumber();

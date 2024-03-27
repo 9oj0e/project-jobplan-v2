@@ -14,7 +14,6 @@ import java.util.List;
 @Service
 public class BoardService {
     private final BoardJpaRepository boardJpaRepository;
-    private final BoardQueryRepository boardQueryRepository;
     private final RatingJpaRepository ratingJpaRepository;
 
     public Board createBoard(BoardRequest.SaveDTO requestDTO, User sessionUser) {
@@ -24,9 +23,9 @@ public class BoardService {
 
     public BoardResponse.DetailDTO getBoardInDetail(int id) {
         Board board = boardJpaRepository.findById(id).get();
-        Double rate = ratingJpaRepository.findRatingAvgByBoardUserId(5).orElse(0.0);
+        Double rating = ratingJpaRepository.findRatingAvgByBoardUserId(5).orElse(0.0);
 
-        return new BoardResponse.DetailDTO(board, rate);
+        return new BoardResponse.DetailDTO(board, rating);
     }
 
     public List<BoardResponse.ListingsDTO> getAllBoard() { // board/listings
