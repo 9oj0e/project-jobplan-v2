@@ -8,6 +8,7 @@ import shop.mtcoding.projectjobplan.apply.ApplyJpaRepository;
 import shop.mtcoding.projectjobplan.apply.ApplyResponse;
 import shop.mtcoding.projectjobplan.apply.ApplyService;
 import shop.mtcoding.projectjobplan.board.BoardJpaRepository;
+import shop.mtcoding.projectjobplan.rating.RatingJpaRepository;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ import java.util.List;
 public class UserService {
     private final UserJpaRepository userJpaRepository;
     private final ApplyJpaRepository applyJpaRepository;
+    private final RatingJpaRepository ratingJpaRepository;
 
     @Transactional
     public User createUser(UserRequest.JoinDTO requestDTO) { // join
@@ -45,7 +47,9 @@ public class UserService {
             // (개인) 지원 현황 보기
             applyList = applyJpaRepository.findByResumeUserId(user.getId());
         }
-        return new UserResponse.ProfileDTO(user, applyList);
+        Double rate = ratingJpaRepository.findRatingAvgByUserId(sessionUser.getId()).orElse(0.0);
+
+        return new UserResponse.ProfileDTO(user, applyList, rate);
     }
 
     public UserResponse.UpdateFormDTO getUser(int id) {
