@@ -35,12 +35,13 @@ public class Subscribe {
     @CreationTimestamp
     private Timestamp createdAt;
 
-    @Builder
-    public Subscribe(Integer id, Board board, Resume resume, User user, Timestamp createdAt) {
-        this.id = id;
+    public Subscribe(User user, Board board) {
         this.board = board;
+        this.user = user;
+    }
+
+    public Subscribe(User user, Resume resume) {
         this.resume = resume;
         this.user = user;
-        this.createdAt = createdAt;
     }
 }

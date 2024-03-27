@@ -18,28 +18,22 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Controller
 public class SubscribeController {
-
     private final HttpSession session;
     private final SubscribeService subscribeService;
-    private final BoardJpaRepository boardJpaRepository;
-    private final ResumeJpaRepository resumeJpaRepository;
 
-    // 공고 구독
-    @PostMapping("/boards/{boardId}/subscribe")
+    @PostMapping("/boards/{boardId}/subscribe") // 공고 구독
     public String subscribeBoard(@PathVariable int boardId) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        Board board = boardJpaRepository.findById(boardId).get();
-        subscribeService.uploadByBoardId(board, sessionUser);
+        subscribeService.createBoardSubscription(sessionUser, boardId);
 
-        return "redirect:/board/" + boardId;
+        return "redirect:/boards/" + boardId;
     }
-    // 이력서 구독
-    @PostMapping("/resumes/{resumeId}/subscribe")
+
+    @PostMapping("/resumes/{resumeId}/subscribe") // 이력서 구독
     public String subscribeResume(@PathVariable int resumeId) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        Resume resume = resumeJpaRepository.findById(resumeId).get();
-        subscribeService.uploadByResumeId(resume, sessionUser);
+        subscribeService.createResumeSubscription(sessionUser, resumeId);
 
-        return "redirect:/resume/" + resumeId;
+        return "redirect:/resumes/" + resumeId;
     }
 }
