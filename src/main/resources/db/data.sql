@@ -248,16 +248,17 @@ INSERT INTO apply_tb
 (resume_id,  board_id,  created_at)
 VALUES (5,  5, now());
 
--- -- 평점
--- -- INSERT INTO rating_tb
--- -- (rater_id, subject_id, rate)
--- -- VALUES (1, 6, 5);
--- -- INSERT INTO rating_tb
--- -- (rater_id, subject_id, rate)
--- -- VALUES (1, 6, 4);
--- -- INSERT INTO rating_tb
--- -- (rater_id, subject_id, rate)
--- -- VALUES (1, 6, 3);
+-- 평점
+INSERT INTO rating_tb
+(rater_id, subject_id, rate, created_at)
+VALUES (1, 6, 5, now());
+INSERT INTO rating_tb
+(rater_id, subject_id, rate, created_at)
+VALUES (1, 6, 4, now());
+INSERT INTO rating_tb
+(rater_id, subject_id, rate, created_at)
+VALUES (1, 6, 3, now());
+
 -- -- subscribe_tb (기업이 이력서를 구독)
 -- INSERT INTO subscribe_tb
 -- (resume_id, resume_user_id, board_id, board_user_id, created_at)
