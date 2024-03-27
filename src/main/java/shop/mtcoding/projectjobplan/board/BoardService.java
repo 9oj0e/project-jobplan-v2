@@ -3,6 +3,7 @@ package shop.mtcoding.projectjobplan.board;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import shop.mtcoding.projectjobplan.rating.RatingJpaRepository;
 import shop.mtcoding.projectjobplan.user.User;
 import shop.mtcoding.projectjobplan.user.UserJpaRepository;
 
@@ -14,6 +15,7 @@ import java.util.List;
 public class BoardService {
     private final BoardJpaRepository boardJpaRepository;
     private final BoardQueryRepository boardQueryRepository;
+    private final RatingJpaRepository ratingJpaRepository;
 
     public Board createBoard(BoardRequest.SaveDTO requestDTO, User sessionUser) {
 
@@ -22,8 +24,9 @@ public class BoardService {
 
     public BoardResponse.DetailDTO getBoardInDetail(int id) {
         Board board = boardJpaRepository.findById(id).get();
+        Double rate = ratingJpaRepository.findRatingAvgByBoardUserId(board.getUser().getId()).get();
 
-        return new BoardResponse.DetailDTO(board);
+        return new BoardResponse.DetailDTO(board, rate);
     }
 
     public List<BoardResponse.ListingsDTO> getAllBoard() { // board/listings
