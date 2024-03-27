@@ -1,7 +1,6 @@
 package shop.mtcoding.projectjobplan.rating;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import shop.mtcoding.projectjobplan.board.Board;
@@ -14,20 +13,22 @@ import shop.mtcoding.projectjobplan.user.User;
 @Service
 public class RatingService {
     private final RatingJpaRepository ratingJpaRepository;
-    private final BoardJpaRepository boardJpaRepository ;
-    private final ResumeJpaRepository resumeJpaRepository ;
+    private final BoardJpaRepository boardJpaRepository;
+    private final ResumeJpaRepository resumeJpaRepository;
 
-    @Transactional
-    public void 별점주기공고(User sessionUser, int boardId, Double rate) {
-        Board board = boardJpaRepository.findById(boardId).get();
-        Rating rating = new Rating(sessionUser, board, rate);
+    @Transactional // 공고 주인 평가
+    public void createRating(User sessionUser, RatingRequest.rateBoardUser requestDTO) {
+        Board board = boardJpaRepository.findById(requestDTO.getBoardId()).get();
+        Rating rating = new Rating(sessionUser, board, requestDTO.getRating());
+
         ratingJpaRepository.save(rating);
     }
 
-    @Transactional
-    public void 별점주기이력서(User sessionUser, int resumeId, Double rate) {
-        Resume resume = resumeJpaRepository.findById(resumeId).get();
-        Rating rating = new Rating(sessionUser,resume,rate);
+    @Transactional // 이력서 주인 평가
+    public void createRating(User sessionUser, RatingRequest.rateResumeUser requestDTO) {
+        Resume resume = resumeJpaRepository.findById(requestDTO.getResumeId()).get();
+        Rating rating = new Rating(sessionUser, resume, requestDTO.getRating());
+
         ratingJpaRepository.save(rating);
     }
 }
