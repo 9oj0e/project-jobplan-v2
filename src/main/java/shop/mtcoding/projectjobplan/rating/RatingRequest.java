@@ -9,6 +9,7 @@ public class RatingRequest {
         private Integer raterId;
         private Integer boardId;
         private Integer rating;
+
     }
     @Data
     public static class rateResumeUser {

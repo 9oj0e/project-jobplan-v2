@@ -131,7 +131,7 @@
                     {{#sessionUser}}
                         {{#isEmployer}}
                             {{^hasRated}}
-                                <form action="/resume/{{resumeDetail.id}}/rate" method="post">
+                                <form action="/resumes/{{resumeDetail.id}}/rate" method="post">
                                     <div>
                                         <select name="rate" style="text-align: center; width: 100%">
                                             <option value="1">1점</option>
