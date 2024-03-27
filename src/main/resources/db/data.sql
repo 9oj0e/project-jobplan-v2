@@ -291,7 +291,7 @@ INSERT INTO rating_tb
     (rater_id, subject_id, rating, created_at)
 VALUES (1, 6, 3, now());
 
--- -- subscribe_tb (기업이 이력서를 구독)
+-- -- subscribe_tb (기업이 이력서를 구독) todo : dummy 수정
 -- INSERT INTO subscribe_tb
 -- (resume_id, resume_user_id, board_id, board_user_id, created_at)
 -- VALUES (1, null, null, 1, now());
@@ -335,6 +335,7 @@ VALUES (1, 6, 3, now());
 -- INSERT INTO subscribe_tb
 -- (resume_id, resume_user_id, board_id, board_user_id, created_at)
 -- VALUES (null, 8, 7, null, now());
+
 -- -- skill_tb
 -- insert into skill_tb(board_id,employer_id,user_id,skill_name) values (1,1,null,'java');
 -- insert into skill_tb(board_id,employer_id,user_id,skill_name) values (1,1,null,'javaScript');

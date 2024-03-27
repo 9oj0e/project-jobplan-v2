@@ -1,8 +1,10 @@
 package shop.mtcoding.projectjobplan.subscribe;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import shop.mtcoding.projectjobplan.board.Board;
@@ -18,28 +20,35 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Controller
 public class SubscribeController {
-
     private final HttpSession session;
     private final SubscribeService subscribeService;
-    private final BoardJpaRepository boardJpaRepository;
-    private final ResumeJpaRepository resumeJpaRepository;
 
-    // 공고 구독
-    @PostMapping("/boards/{boardId}/subscribe")
+    @PostMapping("/boards/{boardId}/subscribe") // 공고 구독
     public String subscribeBoard(@PathVariable int boardId) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        Board board = boardJpaRepository.findById(boardId).get();
-        subscribeService.uploadByBoardId(board, sessionUser);
+        subscribeService.createBoardSubscription(sessionUser, boardId);
 
-        return "redirect:/board/" + boardId;
+        return "redirect:/boards/" + boardId;
     }
-    // 이력서 구독
-    @PostMapping("/resumes/{resumeId}/subscribe")
+
+    @PostMapping("/resumes/{resumeId}/subscribe") // 이력서 구독
     public String subscribeResume(@PathVariable int resumeId) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        Resume resume = resumeJpaRepository.findById(resumeId).get();
-        subscribeService.uploadByResumeId(resume, sessionUser);
+        subscribeService.createResumeSubscription(sessionUser, resumeId);
 
-        return "redirect:/resume/" + resumeId;
+        return "redirect:/resumes/" + resumeId;
+    }
+
+    @GetMapping("/users/{userId}/subscription") // 구독 리스트
+    public String subscription(@PathVariable int userId, HttpServletRequest request) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        SubscribeResponse.DTO subscription = subscribeService.getSubscription(sessionUser.getId());
+        /* todo : null일 때 표시할 내용이 없다고 알리는 방법?
+        if (subscription.getBoardList().isEmpty() && subscription.getResumeList().isEmpty()) {
+            request.setAttribute("subscription", false);
+        }
+        */
+        request.setAttribute("subscription", subscription);
+        return "user/subscription";
     }
 }
