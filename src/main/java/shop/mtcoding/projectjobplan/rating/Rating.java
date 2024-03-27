@@ -28,21 +28,21 @@ public class Rating {
     private User subject;
 
     @Column(nullable = false)
-    private Double rate;
+    private Double rating;
 
     // 이력서 주인이 공고를 보고 공고 주인을 평가
-    public Rating(User sessionUser, Board board, Double rate) {
+    public Rating(User sessionUser, Board board, Integer rating) {
         this.rater = sessionUser;
         this.subject = board.getUser();
-        this.rate = rate;
+        this.rating = Double.valueOf(rating);
     }
 
 
     // 공고 주인이 이력서를 보고 이력서 주인을 평가
-    public Rating(User sessionUser, Resume resume, Double rate) {
+    public Rating(User sessionUser, Resume resume, Integer rating) {
         this.rater = sessionUser;
         this.subject = resume.getUser();
-        this.rate = rate;
+        this.rating = Double.valueOf(rating);
     }
 
     @CreationTimestamp

@@ -250,13 +250,13 @@ VALUES (5,  5, now());
 
 -- 평점
 INSERT INTO rating_tb
-(rater_id, subject_id, rate, created_at)
+(rater_id, subject_id, rating, created_at)
 VALUES (1, 6, 5, now());
 INSERT INTO rating_tb
-(rater_id, subject_id, rate, created_at)
+(rater_id, subject_id, rating, created_at)
 VALUES (1, 6, 4, now());
 INSERT INTO rating_tb
-(rater_id, subject_id, rate, created_at)
+(rater_id, subject_id, rating, created_at)
 VALUES (1, 6, 3, now());
 
 -- -- subscribe_tb (기업이 이력서를 구독)
