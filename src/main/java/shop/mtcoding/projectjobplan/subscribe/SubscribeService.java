@@ -43,4 +43,18 @@ public class SubscribeService {
 
         return new SubscribeResponse.DTO(user, subscription);
     }
+
+    @Transactional
+    public void removeBoardSubscription(int boardId, int userId) {
+        Subscribe subscribe = subscribeJpaRepository.findByBoardIdAndUserId(boardId, userId).get();
+
+        subscribeJpaRepository.delete(subscribe);
+    }
+
+    @Transactional
+    public void removeResumeSubscription(int resumeId, int userId) {
+        Subscribe subscribe = subscribeJpaRepository.findByResumeIdAndUserId(resumeId, userId).get();
+
+        subscribeJpaRepository.delete(subscribe);
+    }
 }

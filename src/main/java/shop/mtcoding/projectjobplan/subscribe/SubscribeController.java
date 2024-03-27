@@ -56,6 +56,7 @@ public class SubscribeController {
     @PostMapping("/boards/{boardId}/unsubscribe")
     public String unsubscribeBoard(@PathVariable int boardId, @RequestParam boolean fromSubscription) {
         User sessionUser = (User) session.getAttribute("sessionUser");
+        subscribeService.removeBoardSubscription(boardId, sessionUser.getId());
 
         if (fromSubscription) {
             return "redirect:/users/" + sessionUser.getId();
@@ -67,6 +68,7 @@ public class SubscribeController {
     @PostMapping("/resumes/{resumeId}/unsubscribe")
     public String unsubscribeResume(@PathVariable int resumeId, @RequestParam boolean fromSubscription) {
         User sessionUser = (User) session.getAttribute("sessionUser");
+        subscribeService.removeResumeSubscription(resumeId, sessionUser.getId());
 
         if (fromSubscription) {
             return "redirect:/users/" + sessionUser.getId();
