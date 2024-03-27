@@ -1,8 +1,10 @@
 package shop.mtcoding.projectjobplan.subscribe;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import shop.mtcoding.projectjobplan.board.Board;
@@ -35,5 +37,14 @@ public class SubscribeController {
         subscribeService.createResumeSubscription(sessionUser, resumeId);
 
         return "redirect:/resumes/" + resumeId;
+    }
+
+    @GetMapping("/users/{userId}/subscription") // 구독 리스트
+    public String subscription(@PathVariable int userId, HttpServletRequest request) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        SubscribeResponse.DTO subscription = subscribeService.getSubscription(sessionUser.getId());
+        request.setAttribute("subscription", subscription);
+
+        return "user/subscription";
     }
 }

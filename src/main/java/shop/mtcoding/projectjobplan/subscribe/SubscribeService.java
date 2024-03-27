@@ -8,13 +8,16 @@ import shop.mtcoding.projectjobplan.board.BoardJpaRepository;
 import shop.mtcoding.projectjobplan.resume.Resume;
 import shop.mtcoding.projectjobplan.resume.ResumeJpaRepository;
 import shop.mtcoding.projectjobplan.user.User;
+import shop.mtcoding.projectjobplan.user.UserJpaRepository;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
 public class SubscribeService {
     private final SubscribeJpaRepository subscribeJpaRepository;
+    private final UserJpaRepository userJpaRepository;
     private final BoardJpaRepository boardJpaRepository;
     private final ResumeJpaRepository resumeJpaRepository;
 
@@ -32,5 +35,12 @@ public class SubscribeService {
         Subscribe subscribe = new Subscribe(sessionUser, resume);
 
         subscribeJpaRepository.save(subscribe);
+    }
+
+    public SubscribeResponse.DTO getSubscription(int userId) {
+        User user = userJpaRepository.findById(userId).get();
+        List<Subscribe> subscription = subscribeJpaRepository.findByUserId(userId).get();
+
+        return new SubscribeResponse.DTO(user, subscription);
     }
 }
