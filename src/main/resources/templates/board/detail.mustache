@@ -23,8 +23,8 @@
             {{/boardDetail.boardOwner}}
             <!-- 구독하기 버튼 -->
             {{^boardDetail.boardOwner}}
-                {{^sessionUser.isEmployer}}
-                    {{^boardDetail.isSubscribe}}
+                {{#sessionUser}}
+                    {{^boardDetail.hasSubscribed}}
                         <div class="mb-3"> <!-- 구독 -->
                             <form action="/boards/{{boardDetail.id}}/subscribe" method="post">
                                 <button class="btn btn-outline-dark">
@@ -41,8 +41,9 @@
                                     <i class="fa-solid fa-bookmark icon-size"></i>
                                 </button>
                             </form>
-                  {{/boardDetail.isSubscribe}}
-                {{/sessionUser.isEmployer}}
+                        </div>
+                    {{/boardDetail.hasSubscribed}}
+                {{/sessionUser}}
             {{/boardDetail.boardOwner}}
         </div>
     </div>
