@@ -13,7 +13,7 @@
                     </form>
                 </div>
                 <div class="mb-3"> <!-- 삭제 하기 -->
-                    <form action="/resume/{{resumeDetail.id}}/delete" method="post"
+                    <form action="/resumes/{{resumeDetail.id}}/delete" method="post"
                           onsubmit="return false">
                         <button class="btn btn-danger">
                             <i class="fa-regular fa-trash-can icon-size"></i>
@@ -110,14 +110,14 @@
             <div class="card" style="width:200px">
                 <div class="card-body" style="padding-left: 0; padding-right: 0">
                     <div class="card-title">
-                        {{#rating}}
+                        {{#resumeDetail.rating}}
                             <table class="table">
                                 <tr>
                                     <td style="text-align: end; padding-bottom: 0; padding-top: 0">평점 ⭐</td>
-                                    <td style="text-align: start; padding-bottom: 0; padding-top: 0">{{rating}}</td>
+                                    <td style="text-align: start; padding-bottom: 0; padding-top: 0">{{resumeDetail.rating}}</td>
                                 </tr>
                             </table>
-                        {{/rating}}
+                        {{/resumeDetail.rating}}
                     </div>
                     {{#userPic}}
                         <img class="card-img" src="/upload/{{userPic.imgFilename}}" style="width:100%">

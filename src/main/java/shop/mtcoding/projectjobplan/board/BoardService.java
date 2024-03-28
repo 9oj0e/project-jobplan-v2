@@ -24,7 +24,7 @@ public class BoardService {
 
     public BoardResponse.DetailDTO getBoardInDetail(int id) {
         Board board = boardJpaRepository.findById(id).get();
-        Double rate = ratingJpaRepository.findRatingAvgByBoardUserId(5).orElse(0.0);
+        Double rate = ratingJpaRepository.findRatingAvgByUserId(board.getUser().getId()).orElse(0.0);
 
         return new BoardResponse.DetailDTO(board, rate);
     }
