@@ -3,6 +3,8 @@ package shop.mtcoding.projectjobplan.resume;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import shop.mtcoding.projectjobplan._core.errors.exception.Exception403;
+import shop.mtcoding.projectjobplan._core.errors.exception.Exception404;
 import shop.mtcoding.projectjobplan.apply.ApplyResponse;
 import shop.mtcoding.projectjobplan.rating.RatingJpaRepository;
 import shop.mtcoding.projectjobplan.user.User;
@@ -33,11 +35,6 @@ public class ResumeService {
         return responseDTO;
     }
 
-    public ResumeResponse.UpdateDTO getResume(int id) {
-
-        return new ResumeResponse.UpdateDTO(resumeJpaRepository.findById(id).get());
-    }
-
     public List<ResumeResponse.MainDTO> getAllResume() {
         // todo : pagination
         List<ResumeResponse.MainDTO> responseDTO = new ArrayList<>();
@@ -47,16 +44,44 @@ public class ResumeService {
         return responseDTO;
     }
 
-    @Transactional
-    public void setResume(int id, ResumeRequest.UpdateDTO requestDTO) {
-        Resume resume = resumeJpaRepository.findById(id).get();
+    // 이력서수정폼
+    public ResumeResponse.UpdateDTO getResume(int id, User sessionUser) {
+        // 조회 및 예외처리
+        Resume resume = resumeJpaRepository.findById(id)
+                .orElseThrow(() -> new Exception404("해당 이력서를 찾을 수 없습니다."));
+
+        // 권한 처리
+        if (sessionUser.getId() != resume.getUser().getId()) {
+            throw new Exception403("해당 이력서의 수정페이지로 이동할 권한이 없습니다.");
+        }
+
+        return new ResumeResponse.UpdateDTO(resumeJpaRepository.findById(id).get());
+    }
+
+    @Transactional // 이력서수정
+    public void setResume(int id, ResumeRequest.UpdateDTO requestDTO, User sessionUser) {
+        // 조회 및 예외처리
+        Resume resume = resumeJpaRepository.findById(id)
+                .orElseThrow(() -> new Exception404("해당 이력서를 찾을 수 없습니다."));
+
+        // 권한 처리
+        if (sessionUser.getId() != resume.getUser().getId()) {
+            throw new Exception403("해당 이력서를 수정할 권한이 없습니다.");
+        }
 
         resume.update(requestDTO);
     }
 
-    @Transactional
-    public void removeResume(int id) {
-        Resume resume = resumeJpaRepository.findById(id).get();
+    @Transactional // 이력서삭제
+    public void removeResume(int id, User sessionUser) {
+        // 조회 및 예외처리
+        Resume resume = resumeJpaRepository.findById(id)
+                .orElseThrow(() -> new Exception404("해당 이력서를 찾을 수 없습니다."));
+
+        // 권한 처리
+        if (sessionUser.getId() != resume.getUser().getId()) {
+            throw new Exception403("해당 이력서를 삭제할 권한이 없습니다.");
+        }
 
         resumeJpaRepository.delete(resume);
     }

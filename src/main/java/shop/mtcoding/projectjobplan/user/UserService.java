@@ -3,6 +3,9 @@ package shop.mtcoding.projectjobplan.user;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import shop.mtcoding.projectjobplan._core.errors.exception.Exception400;
+import shop.mtcoding.projectjobplan._core.errors.exception.Exception401;
+import shop.mtcoding.projectjobplan._core.errors.exception.Exception404;
 import shop.mtcoding.projectjobplan.apply.Apply;
 import shop.mtcoding.projectjobplan.apply.ApplyJpaRepository;
 import shop.mtcoding.projectjobplan.apply.ApplyResponse;
@@ -11,6 +14,7 @@ import shop.mtcoding.projectjobplan.board.BoardJpaRepository;
 import shop.mtcoding.projectjobplan.rating.RatingJpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -22,12 +26,18 @@ public class UserService {
     @Transactional
     public User createUser(UserRequest.JoinDTO requestDTO) { // join
         User user = requestDTO.toEntity();
+        Optional<User> userOP = userJpaRepository.findByUsername(requestDTO.getUsername());
+
+        if (userOP.isPresent()) {
+            throw new Exception400("중복된 유저입니다.");
+        }
 
         return userJpaRepository.save(user);
     }
 
     public User getUser(UserRequest.LoginDTO requestDTO) { // login
-        User sessionUser = userJpaRepository.findByUsernameAndPassword(requestDTO.getUsername(), requestDTO.getPassword()).get();
+        User sessionUser = userJpaRepository.findByUsernameAndPassword(requestDTO.getUsername(), requestDTO.getPassword())
+                .orElseThrow(() -> new Exception401("아이디 또는 비밀번호가 틀렸습니다."));
 
         return sessionUser;
     }
@@ -52,8 +62,10 @@ public class UserService {
         return new UserResponse.ProfileDTO(user, applyList, rating);
     }
 
+    // 회원수정폼
     public UserResponse.UpdateFormDTO getUser(int id) {
-        User user = userJpaRepository.findById(id).get();
+        User user = userJpaRepository.findById(id)
+                .orElseThrow(() -> new Exception404("회원 정보를 찾을 수 없습니다."));
 
         return new UserResponse.UpdateFormDTO(user);
     }
@@ -61,7 +73,9 @@ public class UserService {
     @Transactional // 회원수정
     public User setUser(int id, UserRequest.UpdateDTO requestDTO) {
         // todo : 구직자, 구인자가 필요한 정보를 여기서 받도록?
-        User user = userJpaRepository.findById(id).get();
+        User user = userJpaRepository.findById(id)
+                        .orElseThrow(() -> new Exception404("회원 정보를 찾을 수 없습니다."));
+
         user.update(requestDTO);
 
         return user;
