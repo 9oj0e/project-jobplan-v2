@@ -24,25 +24,28 @@
             <!-- 구독하기 버튼 -->
             {{^boardDetail.boardOwner}}
                 {{#sessionUser}}
-                    {{^boardDetail.hasSubscribed}}
-                        <div class="mb-3"> <!-- 구독 -->
-                            <form action="/boards/{{boardDetail.id}}/subscribe" method="post">
-                                <button class="btn btn-outline-dark">
-                                    <i class="fa-regular fa-bookmark icon-size"></i>
-                                </button>
-                            </form>
-                        </div>
-                    {{/boardDetail.hasSubscribed}}
-                    {{#boardDetail.hasSubscribed}}
-                        <div class="mb-3"> <!-- 구독 취소 -->
-                            <form action="/boards/{{boardDetail.id}}/unsubscribe" method="post">
-                                <input type="hidden" name="fromSubscription" value="false">
-                                <button class="btn btn-outline-dark">
-                                    <i class="fa-solid fa-bookmark icon-size"></i>
-                                </button>
-                            </form>
-                        </div>
-                    {{/boardDetail.hasSubscribed}}
+                    {{^isEmployer}}
+                        {{^boardDetail.hasSubscribed}}
+                            <div class="mb-3"> <!-- 구독 -->
+                                <form action="/boards/{{boardDetail.id}}/subscribe" method="post">
+                                    <button class="btn btn-outline-dark">
+                                        <i class="fa-regular fa-bookmark icon-size"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        {{/boardDetail.hasSubscribed}}
+                        {{#boardDetail.hasSubscribed}}
+                            <div class="mb-3"> <!-- 구독 취소 -->
+                                <form action="/boards/{{boardDetail.id}}/unsubscribe" method="post">
+                                    <input type="hidden" name="fromSubscription" value="false">
+                                    <button class="btn btn-outline-dark">
+                                        <i class="fa-solid fa-bookmark icon-size"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        {{/boardDetail.hasSubscribed}}
+                    {{/isEmployer}}
+
                 {{/sessionUser}}
             {{/boardDetail.boardOwner}}
         </div>
