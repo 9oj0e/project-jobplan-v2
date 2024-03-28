@@ -16,10 +16,4 @@ public class SkillController {
 
         return "redirect:/users/" + userId;
     }
-
-    @PostMapping("/users/{userId}/skill/update")
-    public String update(@PathVariable int userId, SkillRequest.DTO requestDTO) {
-
-        return "redirect:/users/" + userId;
-    }
 }

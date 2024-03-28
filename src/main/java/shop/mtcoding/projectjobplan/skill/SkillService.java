@@ -18,6 +18,7 @@ public class SkillService {
     @Transactional
     public void createSkillList(SkillRequest.DTO dto, int userId){
         User user = userJpaRepository.findById(userId).get();
+
         List<Skill> skillList = new ArrayList<>();
         for (String skillName: dto.getSkill()){
             Skill skill = Skill.builder()
@@ -27,6 +28,10 @@ public class SkillService {
             skillList.add(skill);
         }
         // dto.getSkill().stream().forEach(s -> new Skill(user, s));
+        List<Skill> skillFound = skillJpaRepository.findByUserId(userId).orElse(null);
+        if (skillFound != null){
+            skillJpaRepository.deleteAll(skillFound);
+        }
 
         skillJpaRepository.saveAll(skillList);
     }
