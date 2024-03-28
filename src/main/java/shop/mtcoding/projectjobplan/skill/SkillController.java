@@ -1,15 +1,14 @@
 package shop.mtcoding.projectjobplan.skill;
 
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import shop.mtcoding.projectjobplan.user.User;
 
 @RequiredArgsConstructor
 @Controller
 public class SkillController {
+    private final SkillService skillService;
 
     @PostMapping("/users/{userId}/skill/add")
     public String add(@PathVariable int userId, SkillRequest.DTO requestDTO){

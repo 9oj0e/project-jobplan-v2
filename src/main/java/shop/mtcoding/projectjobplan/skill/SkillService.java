@@ -19,16 +19,14 @@ public class SkillService {
     public void createSkillList(SkillRequest.DTO dto, int userId){
         User user = userJpaRepository.findById(userId).get();
         List<Skill> skillList = new ArrayList<>();
-        /*
         for (String skillName: dto.getSkill()){
             Skill skill = Skill.builder()
                     .user(user)
                     .name(skillName)
                     .build();
-            skills.add(skill);
+            skillList.add(skill);
         }
-        */
-        skillList.stream().map(skill -> new Skill(user, skill.getName())).toList();
+        // dto.getSkill().stream().forEach(s -> new Skill(user, s));
 
         skillJpaRepository.saveAll(skillList);
     }
