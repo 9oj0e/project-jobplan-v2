@@ -27,7 +27,7 @@ public class BoardService {
     public Board createBoard(BoardRequest.SaveDTO requestDTO, User sessionUser) {
         Board board = boardJpaRepository.save(requestDTO.toEntity(sessionUser));
         List<Skill> skillList = new ArrayList<>();
-        for (String skillName: requestDTO.getSkill()){
+        for (String skillName : requestDTO.getSkill()) {
             Skill skill = Skill.builder()
                     .board(board)
                     .name(skillName)
