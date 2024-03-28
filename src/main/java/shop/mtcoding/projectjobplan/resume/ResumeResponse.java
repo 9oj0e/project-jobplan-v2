@@ -62,7 +62,9 @@ public class ResumeResponse {
         // 평점
         private Double rating;
 
-        public DetailDTO(Resume resume, Double rating) {
+        private Boolean resumeOwner; // 이력서 주인 여부 확인
+
+        public DetailDTO(Resume resume, Double rating, Boolean isResumeOwner) {
             this.id = resume.getId();
             this.userId = resume.getUser().getId();
             this.username = resume.getUser().getUsername();
@@ -80,6 +82,8 @@ public class ResumeResponse {
             this.content = resume.getContent();
 
             this.rating = rating;
+
+            this.resumeOwner = isResumeOwner;
         }
         public Double getRating(){
             return FormatUtil.소수점한자리(this.rating);
