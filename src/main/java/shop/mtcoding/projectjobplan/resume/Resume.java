@@ -5,9 +5,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import shop.mtcoding.projectjobplan.apply.Apply;
+import shop.mtcoding.projectjobplan.subscribe.Subscribe;
 import shop.mtcoding.projectjobplan.user.User;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @Entity
@@ -30,6 +34,12 @@ public class Resume {
 
     @CreationTimestamp
     private Timestamp createdAt;
+
+    @OneToMany(mappedBy = "resume", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE) // Entity 객체의 변수명 == FK의 주인
+    private List<Apply> applies = new ArrayList<>();
+
+    @OneToMany(mappedBy = "resume", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE) // Entity 객체의 변수명 == FK의 주인
+    private List<Subscribe> subscribes = new ArrayList<>();
 
     public void update(ResumeRequest.UpdateDTO requestDTO) {
         this.title = requestDTO.getTitle();
