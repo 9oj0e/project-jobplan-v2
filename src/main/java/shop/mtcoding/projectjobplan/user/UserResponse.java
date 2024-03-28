@@ -82,7 +82,14 @@ public class UserResponse {
 
         // tech stack 기술
         private List<SkillDTO> skillList;
-
+        private Boolean hasSkill;
+        private Boolean hasSkill() {
+            if (this.skillList.isEmpty()) {
+                return false;
+            } else {
+                return true;
+            }
+        }
         public ProfileDTO(User user, List<Apply> applyList, Double rating) {
             this.id = user.getId();
             this.username = user.getUsername();

@@ -241,21 +241,21 @@
                     {{^isEmployer}}
                         <div class="form-control">
                             <div class="mb-3"><b>보유 기술 스택</b>
-                                {{#skillList}}
-                                    <button class="btn btn-outline-primary form-control" data-bs-toggle="modal"
+                                {{#hasSkill}}
+                                    <button class="btn btn-outline-primary" data-bs-toggle="modal"
                                             data-bs-target="#skillForm">수정하기
                                     </button>
-                                {{/skillList}}
+                                {{/hasSkill}}
                             </div>
                             <div>
                                 {{#skillList}}
-                                    <span>{{skillName}}</span>
+                                    <span class="btn btn-outline-success">{{skillName}}</span>
                                 {{/skillList}}
-                                {{^skillList}}
+                                {{^hasSkill}}
                                     <button class="btn btn-outline-primary form-control" data-bs-toggle="modal"
                                             data-bs-target="#skillForm">추가하기
                                     </button>
-                                {{/skillList}}
+                                {{/hasSkill}}
                             </div>
                         </div>
                     {{/isEmployer}}
