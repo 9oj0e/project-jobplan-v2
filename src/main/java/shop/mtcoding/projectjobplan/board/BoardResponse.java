@@ -48,7 +48,7 @@ public class BoardResponse {
         private Timestamp openingDate; // 게시일
         private Timestamp closingDate; // 마감일 == null -> "상시채용"
 
-        public DetailDTO(Board board, Double rate) {
+        public DetailDTO(Board board, Double rating) {
             this.id = board.getId();
             this.address = board.getUser().getAddress();
             this.phoneNumber = board.getUser().getPhoneNumber();
@@ -59,7 +59,7 @@ public class BoardResponse {
             this.field = board.getField();
             this.position = board.getPosition();
             this.salary = board.getSalary();
-            this.rating = rate;
+            this.rating = rating;
             this.openingDate = board.getOpeningDate();
             this.closingDate = board.getClosingDate();
         }

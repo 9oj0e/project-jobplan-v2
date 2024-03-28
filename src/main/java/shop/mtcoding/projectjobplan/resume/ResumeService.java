@@ -15,7 +15,6 @@ import java.util.Optional;
 @Service
 public class ResumeService {
     private final ResumeJpaRepository resumeJpaRepository;
-    private final ResumeQueryRepository resumeQueryRepository;
 
     @Transactional
     public Resume createResume(ResumeRequest.SaveDTO requestDTO, User sessionUser) {

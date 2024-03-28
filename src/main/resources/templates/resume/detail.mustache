@@ -36,6 +36,7 @@
                     {{#subscribe}}
                         <div class="mb-3"> <!-- 구독 취소 -->
                             <form action="/resumes/{{resumeDetail.id}}/unsubscribe" method="post">
+                                <input type="hidden" name="fromSubscription" value="false">
                                 <button class="btn btn-outline-dark">
                                     <i class="fa-solid fa-bookmark icon-size"></i>
                                 </button>

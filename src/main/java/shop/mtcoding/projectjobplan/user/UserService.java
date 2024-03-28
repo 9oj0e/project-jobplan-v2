@@ -47,9 +47,9 @@ public class UserService {
             // (개인) 지원 현황 보기
             applyList = applyJpaRepository.findByResumeUserId(user.getId());
         }
-        Double rate = ratingJpaRepository.findRatingAvgByUserId(sessionUser.getId()).orElse(0.0);
+        Double rating = ratingJpaRepository.findRatingAvgByUserId(sessionUser.getId()).orElse(0.0);
 
-        return new UserResponse.ProfileDTO(user, applyList, rate);
+        return new UserResponse.ProfileDTO(user, applyList, rating);
     }
 
     public UserResponse.UpdateFormDTO getUser(int id) {
