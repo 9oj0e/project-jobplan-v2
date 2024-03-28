@@ -23,8 +23,8 @@
             {{/resumeDetail.resumeOwner}}
             {{^resumeDetail.resumeOwner}}
                 <!-- 구독하기 버튼 -->
-                {{#sessionUser}}
-                    {{^subscribe}}
+                {{#sessionUser.isEmployer}}
+                    {{^resumeDetail.isSubscribe}}
                         <div class="mb-3"> <!-- 구독하기 -->
                             <form action="/resumes/{{resumeDetail.id}}/subscribe" method="post">
                                 <button class="btn btn-outline-dark">
@@ -32,8 +32,8 @@
                                 </button>
                             </form>
                         </div>
-                    {{/subscribe}}
-                    {{#subscribe}}
+                    {{/resumeDetail.isSubscribe}}
+                    {{#resumeDetail.isSubscribe}}
                         <div class="mb-3"> <!-- 구독 취소 -->
                             <form action="/resumes/{{resumeDetail.id}}/unsubscribe" method="post">
                                 <input type="hidden" name="fromSubscription" value="false">
@@ -42,8 +42,8 @@
                                 </button>
                             </form>
                         </div>
-                    {{/subscribe}}
-                {{/sessionUser}}
+                    {{/resumeDetail.isSubscribe}}
+                {{/sessionUser.isEmployer}}
             {{/resumeDetail.resumeOwner}}
         </div>
     </div>

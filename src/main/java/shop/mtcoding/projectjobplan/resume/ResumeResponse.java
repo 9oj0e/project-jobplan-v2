@@ -61,10 +61,9 @@ public class ResumeResponse {
 
         // 평점
         private Double rating;
+        private Boolean isSubscribe ;
 
-        private Boolean resumeOwner; // 이력서 주인 여부 확인
-
-        public DetailDTO(Resume resume, Double rating, Boolean isResumeOwner) {
+        public DetailDTO(Resume resume, Double rating,Boolean isSubscribe) {
             this.id = resume.getId();
             this.userId = resume.getUser().getId();
             this.username = resume.getUser().getUsername();
@@ -82,8 +81,8 @@ public class ResumeResponse {
             this.content = resume.getContent();
 
             this.rating = rating;
+            this.isSubscribe = isSubscribe;
 
-            this.resumeOwner = isResumeOwner;
         }
         public Double getRating(){
             return FormatUtil.numberFormatter(this.rating);

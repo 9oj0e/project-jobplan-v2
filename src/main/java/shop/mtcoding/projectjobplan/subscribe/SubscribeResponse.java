@@ -53,11 +53,15 @@ public class SubscribeResponse {
             private Integer resumeId;
             private String resumeUserName;
             private String title;
+            private String birthdate ;
+            private String email ;
 
             public ResumeDTO(Resume resume) {
                 this.resumeId = resume.getId();
                 this.resumeUserName = resume.getUser().getName();
                 this.title = resume.getTitle();
+                this.birthdate = resume.getUser().getBirthdate();
+                this.email = resume.getUser().getEmail();
             }
         }
     }

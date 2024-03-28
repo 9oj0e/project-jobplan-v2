@@ -25,7 +25,7 @@ public class BoardService {
         return boardJpaRepository.save(requestDTO.toEntity(sessionUser));
     }
 
-    public BoardResponse.DetailDTO getBoardInDetail(int id, int sessionUserId) {
+    public BoardResponse.DetailDTO getBoardInDetail(int id, User sessionUser) {
         Board board = boardJpaRepository.findById(id).get();
         Boolean boardOwner = false;
         if (board.getUser().getId() == sessionUserId) boardOwner = true;

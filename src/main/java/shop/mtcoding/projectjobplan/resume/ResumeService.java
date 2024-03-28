@@ -7,6 +7,7 @@ import shop.mtcoding.projectjobplan._core.errors.exception.Exception403;
 import shop.mtcoding.projectjobplan._core.errors.exception.Exception404;
 import shop.mtcoding.projectjobplan.apply.ApplyResponse;
 import shop.mtcoding.projectjobplan.rating.RatingJpaRepository;
+import shop.mtcoding.projectjobplan.subscribe.SubscribeService;
 import shop.mtcoding.projectjobplan.user.User;
 import shop.mtcoding.projectjobplan.user.UserJpaRepository;
 
@@ -19,6 +20,7 @@ import java.util.Optional;
 public class ResumeService {
     private final ResumeJpaRepository resumeJpaRepository;
     private final RatingJpaRepository ratingJpaRepository;
+    private final SubscribeService subscribeService ;
 
     @Transactional
     public Resume createResume(ResumeRequest.SaveDTO requestDTO, User sessionUser) {
@@ -26,13 +28,12 @@ public class ResumeService {
         return resumeJpaRepository.save(requestDTO.toEntity(sessionUser));
     }
 
-    public ResumeResponse.DetailDTO findResumeById(int resumeId, int sessionUserId) {
+    public ResumeResponse.DetailDTO findResumeById(int resumeId,User sessionUser) {
         Resume resume = resumeJpaRepository.findById(resumeId).get();
-        Boolean resumeOwner = false;
-        if (resume.getUser().getId() == sessionUserId) resumeOwner = true;
         Double rate = ratingJpaRepository.findRatingAvgByUserId(resume.getUser().getId()).orElse(0.0);
+        Boolean isSubscribe = subscribeService.checkResumeSubscription(resumeId,sessionUser.getId());
 
-        ResumeResponse.DetailDTO responseDTO = new ResumeResponse.DetailDTO(resume, rate, resumeOwner);
+        ResumeResponse.DetailDTO responseDTO = new ResumeResponse.DetailDTO(resume, rate,isSubscribe);
 
         return responseDTO;
     }
