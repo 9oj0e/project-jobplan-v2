@@ -62,7 +62,7 @@ public class ResumeResponse {
         // 평점
         private Double rating;
 
-        public DetailDTO(Resume resume, Double rate) {
+        public DetailDTO(Resume resume, Double rating) {
             this.id = resume.getId();
             this.userId = resume.getUser().getId();
             this.username = resume.getUser().getUsername();
@@ -79,7 +79,7 @@ public class ResumeResponse {
             this.title = resume.getTitle();
             this.content = resume.getContent();
 
-            this.rating = rate;
+            this.rating = rating;
         }
         public Double getRating(){
             return FormatUtil.소수점한자리(this.rating);
