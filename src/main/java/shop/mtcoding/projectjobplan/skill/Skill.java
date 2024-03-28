@@ -3,11 +3,13 @@ package shop.mtcoding.projectjobplan.skill;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import shop.mtcoding.projectjobplan.board.Board;
 import shop.mtcoding.projectjobplan.user.User;
 
 import java.util.List;
 
+@NoArgsConstructor
 @Data
 @Entity
 @Table(name = "skill_tb")

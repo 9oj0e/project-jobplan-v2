@@ -12,7 +12,10 @@ import shop.mtcoding.projectjobplan.apply.ApplyResponse;
 import shop.mtcoding.projectjobplan.apply.ApplyService;
 import shop.mtcoding.projectjobplan.board.BoardJpaRepository;
 import shop.mtcoding.projectjobplan.rating.RatingJpaRepository;
+import shop.mtcoding.projectjobplan.skill.Skill;
+import shop.mtcoding.projectjobplan.skill.SkillJpaRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +24,7 @@ import java.util.Optional;
 public class UserService {
     private final UserJpaRepository userJpaRepository;
     private final ApplyJpaRepository applyJpaRepository;
+    private final SkillJpaRepository skillJpaRepository;
     private final RatingJpaRepository ratingJpaRepository;
 
     @Transactional
@@ -45,6 +49,7 @@ public class UserService {
     public UserResponse.ProfileDTO getUser(User sessionUser, Integer boardId) {
         User user = userJpaRepository.findById(sessionUser.getId()).get();
         List<Apply> applyList;
+        List<Skill> skillList = new ArrayList<>();
         if (sessionUser.getIsEmployer()) {
             if (boardId == null) {
                 // (기업) 모든 지원자 현황 보기
@@ -74,7 +79,7 @@ public class UserService {
     public User setUser(int id, UserRequest.UpdateDTO requestDTO) {
         // todo : 구직자, 구인자가 필요한 정보를 여기서 받도록?
         User user = userJpaRepository.findById(id)
-                        .orElseThrow(() -> new Exception404("회원 정보를 찾을 수 없습니다."));
+                .orElseThrow(() -> new Exception404("회원 정보를 찾을 수 없습니다."));
 
         user.update(requestDTO);
 
