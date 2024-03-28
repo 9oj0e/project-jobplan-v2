@@ -21,11 +21,13 @@ public class BoardService {
         return boardJpaRepository.save(requestDTO.toEntity(sessionUser));
     }
 
-    public BoardResponse.DetailDTO getBoardInDetail(int id) {
+    public BoardResponse.DetailDTO getBoardInDetail(int id, int sessionUserId) {
         Board board = boardJpaRepository.findById(id).get();
+        Boolean boardOwner = false;
+        if (board.getUser().getId() == sessionUserId) boardOwner = true;
         Double rate = ratingJpaRepository.findRatingAvgByUserId(board.getUser().getId()).orElse(0.0);
 
-        return new BoardResponse.DetailDTO(board, rate);
+        return new BoardResponse.DetailDTO(board, rate, boardOwner);
     }
 
     public List<BoardResponse.ListingsDTO> getAllBoard() { // board/listings
