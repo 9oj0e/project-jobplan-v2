@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import shop.mtcoding.projectjobplan.apply.ApplyResponse;
 import shop.mtcoding.projectjobplan.rating.RatingJpaRepository;
+import shop.mtcoding.projectjobplan.subscribe.SubscribeService;
 import shop.mtcoding.projectjobplan.user.User;
 import shop.mtcoding.projectjobplan.user.UserJpaRepository;
 
@@ -17,6 +18,7 @@ import java.util.Optional;
 public class ResumeService {
     private final ResumeJpaRepository resumeJpaRepository;
     private final RatingJpaRepository ratingJpaRepository;
+    private final SubscribeService subscribeService ;
 
     @Transactional
     public Resume createResume(ResumeRequest.SaveDTO requestDTO, User sessionUser) {
@@ -24,11 +26,12 @@ public class ResumeService {
         return resumeJpaRepository.save(requestDTO.toEntity(sessionUser));
     }
 
-    public ResumeResponse.DetailDTO findResumeById(int resumeId) {
+    public ResumeResponse.DetailDTO findResumeById(int resumeId,int sessionUserId) {
         Resume resume = resumeJpaRepository.findById(resumeId).get();
         Double rate = ratingJpaRepository.findRatingAvgByUserId(resume.getUser().getId()).orElse(0.0);
+        Boolean isSubscribe = subscribeService.checkResumeSubscription(resumeId,sessionUserId);
 
-        ResumeResponse.DetailDTO responseDTO = new ResumeResponse.DetailDTO(resume, rate);
+        ResumeResponse.DetailDTO responseDTO = new ResumeResponse.DetailDTO(resume, rate,isSubscribe);
 
         return responseDTO;
     }
