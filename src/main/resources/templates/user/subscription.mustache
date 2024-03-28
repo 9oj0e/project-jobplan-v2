@@ -36,10 +36,10 @@
                     <tr>
                         <td>{{resumeUserName}}</td>
                         <td style="text-align: start">
-                            <a href="/resume/{{resumeId}}">{{title}}</a>
+                            <a href="/resumes/{{resumeId}}">{{title}}</a>
                         </td>
                         <td>
-                            <form action="/resume/{{resumeId}}/unsubscribe" method="post">
+                            <form action="/resumes/{{resumeId}}/unsubscribe" method="post">
                                 <input type="hidden" name="fromSubscription" value="true">
                                 <button class="btn btn-danger">구독 취소</button>
                             </form>

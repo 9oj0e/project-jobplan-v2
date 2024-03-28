@@ -61,8 +61,9 @@ public class ResumeResponse {
 
         // 평점
         private Double rating;
+        private Boolean isSubscribe ;
 
-        public DetailDTO(Resume resume, Double rating) {
+        public DetailDTO(Resume resume, Double rating, Boolean isSubscribe) {
             this.id = resume.getId();
             this.userId = resume.getUser().getId();
             this.username = resume.getUser().getUsername();
@@ -80,6 +81,7 @@ public class ResumeResponse {
             this.content = resume.getContent();
 
             this.rating = rating;
+            this.isSubscribe = isSubscribe;
         }
         public Double getRating(){
             return FormatUtil.소수점한자리(this.rating);
