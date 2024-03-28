@@ -53,25 +53,29 @@ public class ResumeController {
         return "/resume/listings";
     }
 
+    // 이력서수정폼
     @GetMapping("/resumes/{resumeId}/update-form")
     public String updateForm(@PathVariable int resumeId, HttpServletRequest request) {
-        // todo: 권한체크
-        ResumeResponse.UpdateDTO responseDTO = resumeService.getResume(resumeId);
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        ResumeResponse.UpdateDTO responseDTO = resumeService.getResume(resumeId, sessionUser);
         request.setAttribute("resume", responseDTO);
 
         return "/resume/update-form";
     }
 
+    // 이력서수정
     @PostMapping("/resumes/{resumeId}/update")
     public String update(@PathVariable int resumeId, ResumeRequest.UpdateDTO requestDTO) {
-        resumeService.setResume(resumeId, requestDTO);
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        resumeService.setResume(resumeId, requestDTO, sessionUser);
 
         return "redirect:/resumes/" + resumeId;
     }
 
     @PostMapping("/resumes/{resumeId}/delete")
     public String delete(@PathVariable int resumeId) {
-        resumeService.removeResume(resumeId);
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        resumeService.removeResume(resumeId, sessionUser);
 
         return "redirect:/resume/listings";
     }

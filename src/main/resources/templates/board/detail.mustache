@@ -24,7 +24,7 @@
             <!-- 구독하기 버튼 -->
             {{^boardDetail.boardOwner}}
                 {{#sessionUser}}
-                    {{^subscribe}}
+                    {{^boardDetail.hasSubscribed}}
                         <div class="mb-3"> <!-- 구독 -->
                             <form action="/boards/{{boardDetail.id}}/subscribe" method="post">
                                 <button class="btn btn-outline-dark">
@@ -32,8 +32,8 @@
                                 </button>
                             </form>
                         </div>
-                    {{/subscribe}}
-                    {{#subscribe}}
+                    {{/boardDetail.hasSubscribed}}
+                    {{#boardDetail.hasSubscribed}}
                         <div class="mb-3"> <!-- 구독 취소 -->
                             <form action="/boards/{{boardDetail.id}}/unsubscribe" method="post">
                                 <input type="hidden" name="fromSubscription" value="false">
@@ -42,7 +42,7 @@
                                 </button>
                             </form>
                         </div>
-                    {{/subscribe}}
+                    {{/boardDetail.hasSubscribed}}
                 {{/sessionUser}}
             {{/boardDetail.boardOwner}}
         </div>

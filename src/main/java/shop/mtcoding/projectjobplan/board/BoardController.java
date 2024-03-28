@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import shop.mtcoding.projectjobplan.subscribe.SubscribeService;
 import shop.mtcoding.projectjobplan.user.User;
 
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.List;
 public class BoardController {
     private final HttpSession session;
     private final BoardService boardService;
+    private final SubscribeService subscribeService;
 
     @GetMapping({"/", "/boards"})
     public String index(HttpServletRequest request) {
@@ -46,7 +48,7 @@ public class BoardController {
 
     @GetMapping("/boards/{boardId}")
     public String detail(@PathVariable int boardId, HttpServletRequest request) {
-        User sessionUser = (User)session.getAttribute("sessionUser");
+        User sessionUser = (User) session.getAttribute("sessionUser");
         BoardResponse.DetailDTO boardDetail = boardService.getBoardInDetail(boardId, sessionUser.getId());
         request.setAttribute("boardDetail", boardDetail);
 
@@ -61,23 +63,28 @@ public class BoardController {
         return "/board/listings";
     }
 
+    // 공고수정폼
     @GetMapping("/boards/{boardId}/update-form")
     public String updateForm(@PathVariable int boardId, HttpServletRequest request) {
-        BoardResponse.UpdateDTO responseDTO = boardService.getBoard(boardId);
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        BoardResponse.UpdateDTO responseDTO = boardService.getBoard(boardId, sessionUser);
         request.setAttribute("board", responseDTO);
         return "/board/update-form";
     }
 
+    // 공고수정
     @PostMapping("/boards/{boardId}/update")
     public String update(@PathVariable int boardId, BoardRequest.UpdateDTO requestDTO) {
-        boardService.setBoard(boardId, requestDTO);
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        boardService.setBoard(boardId, requestDTO, sessionUser);
 
         return "redirect:/board/" + boardId;
     }
 
     @PostMapping("/boards/{boardId}/delete")
     public String delete(@PathVariable int boardId) {
-        boardService.removeBoard(boardId);
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        boardService.removeBoard(boardId, sessionUser);
 
         return "redirect:/board/listings";
     }
