@@ -56,9 +56,9 @@ public class ResumeController {
 
     // 이력서수정폼
     @GetMapping("/resumes/{resumeId}/update-form")
-    public @ResponseBody String updateForm(@PathVariable int resumeId, HttpServletRequest request) {
+    public String updateForm(@PathVariable int resumeId, HttpServletRequest request) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        ResumeResponse.UpdateDTO responseDTO = resumeService.getResume(resumeId, sessionUser);
+        ResumeResponse.UpdateFormDTO responseDTO = resumeService.getResume(resumeId, sessionUser);
         request.setAttribute("resume", responseDTO);
 
         return "resume/update-form";

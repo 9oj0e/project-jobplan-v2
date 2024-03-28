@@ -9,9 +9,9 @@ import shop.mtcoding.projectjobplan._core.utils.ConvertUtil;
 import shop.mtcoding.projectjobplan.apply.Apply;
 import shop.mtcoding.projectjobplan.subscribe.Subscribe;
 import shop.mtcoding.projectjobplan.user.User;
-
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import shop.mtcoding.projectjobplan.skill.Skill;
 import java.util.List;
 
 @NoArgsConstructor
@@ -32,6 +32,9 @@ public class Board {
     private String field; // 채용 분야
     private String position; // 포지션
     private String salary; // 연봉
+
+    @OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE)
+    private List<Skill> skillList;
 
     // 날짜
     private Timestamp openingDate; // 게시일

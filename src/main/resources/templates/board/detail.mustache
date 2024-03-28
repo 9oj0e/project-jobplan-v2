@@ -23,6 +23,7 @@
             <!-- 구독하기 버튼 -->
             {{^boardDetail.boardOwner}}
                 {{#sessionUser}}
+                    {{^isEmployer}}
                     {{^boardDetail.hasSubscribed}}
                         <div class="mb-3"> <!-- 구독 -->
                             <form action="/boards/{{boardDetail.id}}/subscribe" method="post">
@@ -42,7 +43,8 @@
                             </form>
                         </div>
                     {{/boardDetail.hasSubscribed}}
-                {{/sessionUser}}
+                    {{/isEmployer}}
+                    {{/sessionUser}}
             {{/boardDetail.boardOwner}}
         </div>
     </div>
