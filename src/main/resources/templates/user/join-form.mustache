@@ -24,6 +24,10 @@
         </div>
         <div class="card-body">
             <form action="/join" method="post" enctype="application/x-www-form-urlencoded">
+                {{^isEmployer}}
+                    <input type="hidden" name="isEmployer" value="false"> <!--개인 회원 여부 true-->
+                {{/isEmployer}}
+
                 <div style="text-align: end"><h4>기본 정보</h4></div>
                 <div>아이디</div>
                 <div class="mb-3">
@@ -79,6 +83,8 @@
                     <input type="email" name="email" id="email" placeholder="Enter email.." value="ssar@nate.com"
                            class="form-control" required>
                 </div>
+
+
                 {{#isEmployer}}
                     <div style="text-align: end"><h4>기업 정보</h4></div>
                     <input type="hidden" name="isEmployer" value="true"> <!--기업 회원 여부 true-->

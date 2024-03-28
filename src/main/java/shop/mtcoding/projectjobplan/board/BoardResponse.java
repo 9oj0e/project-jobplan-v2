@@ -68,6 +68,24 @@ public class BoardResponse {
             this.hasSubscribed = hasSubscribed;
         }
 
+
+        public DetailDTO(Board board, Double rating) {
+            this.id = board.getId();
+            this.address = board.getUser().getAddress();
+            this.phoneNumber = board.getUser().getPhoneNumber();
+            this.email = board.getUser().getEmail();
+            this.businessName = board.getUser().getBusinessName();
+            this.title = board.getTitle();
+            this.content = board.getContent();
+            this.field = board.getField();
+            this.position = board.getPosition();
+            this.salary = board.getSalary();
+            this.rating = rating;
+            this.openingDate = board.getOpeningDate();
+            this.closingDate = board.getClosingDate();
+
+        }
+
         public String getOpeningDate() {
             return FormatUtil.timeFormatter(this.openingDate);
         }
@@ -79,6 +97,7 @@ public class BoardResponse {
         public Double getRating(){
             return FormatUtil.numberFormatter(this.rating);
         }
+
     }
 
     @Data
