@@ -77,6 +77,6 @@ public class ResumeController {
         User sessionUser = (User) session.getAttribute("sessionUser");
         resumeService.removeResume(resumeId, sessionUser);
 
-        return "redirect:/resume/listings";
+        return "redirect:/users/"+sessionUser.getId();
     }
 }

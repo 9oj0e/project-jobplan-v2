@@ -85,6 +85,6 @@ public class BoardController {
         User sessionUser = (User) session.getAttribute("sessionUser");
         boardService.removeBoard(boardId, sessionUser);
 
-        return "redirect:/board/listings";
+        return "redirect:/users/"+sessionUser.getId();
     }
 }
