@@ -28,22 +28,27 @@
         <table class="table">
             <tr>
                 <th>이름</th>
-                <th style="text-align: start">이력서 제목</th>
+                <th style="text-align: center">이력서 제목</th>
+                <th>생년월일</th>
+                <th>EMAIL</th>
                 <th></th>
             </tr>
             {{#subscription}}
                 {{#resumeList}}
                     <tr>
                         <td>{{resumeUserName}}</td>
-                        <td style="text-align: start">
+                        <td style="text-align: center">
                             <a href="/resumes/{{resumeId}}">{{title}}</a>
                         </td>
+                        <td>{{birthdate}}</td>
+                        <td>{{email}}</td>
                         <td>
                             <form action="/resumes/{{resumeId}}/unsubscribe" method="post">
                                 <input type="hidden" name="fromSubscription" value="true">
                                 <button class="btn btn-danger">구독 취소</button>
                             </form>
                         </td>
+
                     </tr>
                 {{/resumeList}}
             {{/subscription}}
