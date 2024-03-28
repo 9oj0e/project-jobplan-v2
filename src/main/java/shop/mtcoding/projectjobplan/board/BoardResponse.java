@@ -68,6 +68,7 @@ public class BoardResponse {
             this.hasSubscribed = hasSubscribed;
         }
 
+
         public DetailDTO(Board board, Double rating) {
             this.id = board.getId();
             this.address = board.getUser().getAddress();
@@ -82,6 +83,7 @@ public class BoardResponse {
             this.rating = rating;
             this.openingDate = board.getOpeningDate();
             this.closingDate = board.getClosingDate();
+
         }
 
         public String getOpeningDate() {
@@ -95,6 +97,7 @@ public class BoardResponse {
         public Double getRating(){
             return FormatUtil.numberFormatter(this.rating);
         }
+
     }
 
     @Data
