@@ -2,7 +2,8 @@
 <!-- 바디 start -->
 <div class="modal" id="skillForm" tabindex="-1">
     <div class="modal-dialog">
-        <form {{^skillList}}action="/users/{{sessionUser.id}}/skill/add"{{/skillList}}{{#skillList}}action="/users/{{sessionUser.id}}/skill/update"{{/skillList}} method="post">
+        <form {{^skillList}}action="/users/{{sessionUser.id}}/skill/add"{{/skillList}}{{#skillList}}action="/users/{{sessionUser.id}}/skill/update"{{/skillList}}
+              method="post">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">기술 스택</h5>
@@ -240,10 +241,13 @@
                         -->
                     {{^isEmployer}}
                         <div class="form-control">
-                            <div class="mb-3"><b>보유 기술 스택</b>
+                            <div class="mb-3" style="display: flex; justify-content: space-between">
+                                <div>
+                                    <b>보유 기술 스택</b>
+                                </div>
                                 {{#hasSkill}}
                                     <button class="btn btn-outline-primary" data-bs-toggle="modal"
-                                            data-bs-target="#skillForm">수정하기
+                                            data-bs-target="#skillForm">수정
                                     </button>
                                 {{/hasSkill}}
                             </div>
