@@ -8,6 +8,7 @@ import shop.mtcoding.projectjobplan.board.Board;
 import shop.mtcoding.projectjobplan.user.User;
 
 import java.util.List;
+
 @NoArgsConstructor
 @Data
 @Entity

@@ -7,8 +7,10 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 import java.util.Optional;
 
-public interface SkillJpaRepository extends JpaRepository<Skill, Integer> {
+import java.util.List;
+import java.util.Optional;
 
+public interface SkillJpaRepository extends JpaRepository<Skill, Integer> {
     @Query("DELETE FROM Skill s WHERE s.user.id = :userId")
     void deleteByUserId(@Param("userId") Integer id);
 

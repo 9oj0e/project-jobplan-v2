@@ -6,6 +6,7 @@ import shop.mtcoding.projectjobplan.apply.Apply;
 import shop.mtcoding.projectjobplan.apply.ApplyResponse;
 import shop.mtcoding.projectjobplan.board.Board;
 import shop.mtcoding.projectjobplan.resume.Resume;
+import shop.mtcoding.projectjobplan.skill.Skill;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -79,6 +80,16 @@ public class UserResponse {
         // 지원자 현황 및 지원 현황
         private List<ApplyDTO> applyList;
 
+        // tech stack 기술
+        private List<SkillDTO> skillList;
+        private Boolean hasSkill;
+        private Boolean hasSkill() {
+            if (this.skillList.isEmpty()) {
+                return false;
+            } else {
+                return true;
+            }
+        }
         public ProfileDTO(User user, List<Apply> applyList, Double rating) {
             this.id = user.getId();
             this.username = user.getUsername();
@@ -97,11 +108,14 @@ public class UserResponse {
                 this.boardList = user.getBoards().stream().map(board -> new BoardDTO(board)).toList();
             } else {
                 this.resumeList = user.getResumes().stream().map(resume -> new ResumeDTO(resume)).toList();
+                this.skillList = user.getSkills().stream().map(skill -> new SkillDTO(skill.getName())).toList();
             }
             this.applyList = applyList.stream().map(apply -> new ApplyDTO(apply)).toList();
         }
 
-        public Double getRating(){return FormatUtil.numberFormatter(this.rating);}
+        public Double getRating() {
+            return FormatUtil.numberFormatter(this.rating);
+        }
 
         public class BoardDTO {
             private Integer id;
@@ -191,6 +205,13 @@ public class UserResponse {
                 } catch (Exception e) {
                     return null;
                 }
+            }
+        }
+        public class SkillDTO {
+            private String skillName;
+
+            public SkillDTO(String skillName) {
+                this.skillName = skillName;
             }
         }
     }
