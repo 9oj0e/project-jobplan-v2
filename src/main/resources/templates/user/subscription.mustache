@@ -39,7 +39,8 @@
                             <a href="/resume/{{resumeId}}">{{title}}</a>
                         </td>
                         <td>
-                            <form action="/users/{{resumeId}}/unsubscribeResume" method="post">
+                            <form action="/resume/{{resumeId}}/unsubscribe" method="post">
+                                <input type="hidden" name="fromSubscription" value="true">
                                 <button class="btn btn-danger">구독 취소</button>
                             </form>
                         </td>
@@ -103,7 +104,8 @@
                         <td>{{salary}}</td>
                         <td>{{closingDate}}</td>
                         <td>
-                            <form action="/users/{{boardId}}/unsubscribeBoard" method="post">
+                            <form action="/boards/{{boardId}}/unsubscribe" method="post">
+                                <input type="hidden" name="fromSubscription" value="true">
                                 <button class="btn btn-danger">구독 취소</button>
                             </form>
                         </td>

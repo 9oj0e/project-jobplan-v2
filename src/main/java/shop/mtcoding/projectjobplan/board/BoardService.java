@@ -14,7 +14,6 @@ import java.util.List;
 @Service
 public class BoardService {
     private final BoardJpaRepository boardJpaRepository;
-    private final BoardQueryRepository boardQueryRepository;
     private final RatingJpaRepository ratingJpaRepository;
 
     public Board createBoard(BoardRequest.SaveDTO requestDTO, User sessionUser) {

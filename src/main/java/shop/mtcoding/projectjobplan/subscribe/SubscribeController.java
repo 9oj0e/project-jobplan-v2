@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import shop.mtcoding.projectjobplan.board.Board;
 import shop.mtcoding.projectjobplan.board.BoardJpaRepository;
 import shop.mtcoding.projectjobplan.board.BoardService;
@@ -50,5 +51,29 @@ public class SubscribeController {
         */
         request.setAttribute("subscription", subscription);
         return "user/subscription";
+    }
+
+    @PostMapping("/boards/{boardId}/unsubscribe")
+    public String unsubscribeBoard(@PathVariable int boardId, @RequestParam boolean fromSubscription) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        subscribeService.removeBoardSubscription(boardId, sessionUser.getId());
+
+        if (fromSubscription) {
+            return "redirect:/users/" + sessionUser.getId();
+        } else {
+            return "redirect:/boards/" + boardId;
+        }
+    }
+
+    @PostMapping("/resumes/{resumeId}/unsubscribe")
+    public String unsubscribeResume(@PathVariable int resumeId, @RequestParam boolean fromSubscription) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        subscribeService.removeResumeSubscription(resumeId, sessionUser.getId());
+
+        if (fromSubscription) {
+            return "redirect:/users/" + sessionUser.getId();
+        } else {
+            return "redirect:/resumes/" + resumeId;
+        }
     }
 }

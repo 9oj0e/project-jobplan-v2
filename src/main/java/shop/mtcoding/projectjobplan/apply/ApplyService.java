@@ -17,7 +17,6 @@ import java.util.List;
 @Service
 public class ApplyService {
     private final ApplyJpaRepository applyJpaRepository;
-    private final ApplyQueryRepository applyQueryRepository;
     private final ResumeJpaRepository resumeJpaRepository;
     private final BoardJpaRepository boardJpaRepository;
 

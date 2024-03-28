@@ -16,7 +16,6 @@ import java.util.Optional;
 @Service
 public class ResumeService {
     private final ResumeJpaRepository resumeJpaRepository;
-    private final ResumeQueryRepository resumeQueryRepository;
     private final RatingJpaRepository ratingJpaRepository;
 
     @Transactional
