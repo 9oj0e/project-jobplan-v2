@@ -83,6 +83,7 @@ public class BoardService {
     }
 
     // 공고삭제
+    @Transactional
     public void removeBoard(int id, User sessionUser) {
         // 조회 및 예외 처리
         Board board = boardJpaRepository.findById(id)

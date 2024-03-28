@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import shop.mtcoding.projectjobplan.user.User;
 
 import java.util.List;
@@ -55,12 +56,12 @@ public class ResumeController {
 
     // 이력서수정폼
     @GetMapping("/resumes/{resumeId}/update-form")
-    public String updateForm(@PathVariable int resumeId, HttpServletRequest request) {
+    public @ResponseBody String updateForm(@PathVariable int resumeId, HttpServletRequest request) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         ResumeResponse.UpdateDTO responseDTO = resumeService.getResume(resumeId, sessionUser);
         request.setAttribute("resume", responseDTO);
 
-        return "/resume/update-form";
+        return "resume/update-form";
     }
 
     // 이력서수정
@@ -77,6 +78,6 @@ public class ResumeController {
         User sessionUser = (User) session.getAttribute("sessionUser");
         resumeService.removeResume(resumeId, sessionUser);
 
-        return "redirect:/resume/listings";
+        return "redirect:/users/" + sessionUser.getId();
     }
 }
