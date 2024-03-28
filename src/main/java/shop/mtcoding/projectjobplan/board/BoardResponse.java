@@ -9,7 +9,7 @@ import java.util.List;
 
 public class BoardResponse {
     @Data
-    public static class UpdateDTO {
+    public static class UpdateFormDTO {
         private Integer id; // boardId
         private String title;
         private String field;
@@ -19,7 +19,7 @@ public class BoardResponse {
         private Timestamp openingDate;
         private Timestamp closingDate;
 
-        public UpdateDTO(Board board) {
+        public UpdateFormDTO(Board board) {
             this.id = board.getId();
             this.title = board.getTitle();
             this.field = board.getField();

@@ -35,6 +35,7 @@ public class BoardService {
             skillList.add(skill);
         }
         // dto.getSkill().stream().forEach(s -> new Skill(user, s));
+
         skillJpaRepository.saveAll(skillList);
 
         return board;
@@ -72,7 +73,7 @@ public class BoardService {
     }
 
     // 공고수정폼
-    public BoardResponse.UpdateDTO getBoard(int boardId, User sessionUser) {
+    public BoardResponse.UpdateFormDTO getBoard(int boardId, User sessionUser) {
         // 조회 및 예외 처리
         Board board = boardJpaRepository.findById(boardId)
                 .orElseThrow(() -> new Exception404("해당 공고를 찾을 수 없습니다."));
@@ -82,7 +83,7 @@ public class BoardService {
             throw new Exception403("해당 공고의 수정페이지로 이동할 권한이 없습니다.");
         }
 
-        return new BoardResponse.UpdateDTO(boardJpaRepository.findById(boardId).get());
+        return new BoardResponse.UpdateFormDTO(boardJpaRepository.findById(boardId).get());
     }
 
     @Transactional // 공고수정
@@ -91,11 +92,25 @@ public class BoardService {
         Board board = boardJpaRepository.findById(boardId)
                 .orElseThrow(() -> new Exception404("해당 공고를 찾을 수 없습니다."));
 
+        List<Skill> skillList = new ArrayList<>();
+
+        for (String skillName: requestDTO.getSkill()){
+            Skill skill = Skill.builder()
+                    .board(board)
+                    .name(skillName)
+                    .build();
+            skillList.add(skill);
+        }
         // 권한 처리
         if (sessionUser.getId() != board.getUser().getId()) {
             throw new Exception403("해당 공고를 수정할 권한이 없습니다.");
         }
-
+        List<Skill> skillFound = skillJpaRepository.findByBoardId(boardId).orElse(null);
+        if (skillFound != null){
+            skillJpaRepository.deleteAll(skillFound);
+        }
+        // 스킬 수정
+        skillJpaRepository.saveAll(skillList);
         // 글 수정
         board.update(requestDTO);
     }
