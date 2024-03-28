@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import shop.mtcoding.projectjobplan.rating.RatingJpaRepository;
+import shop.mtcoding.projectjobplan.subscribe.SubscribeService;
 import shop.mtcoding.projectjobplan.user.User;
 import shop.mtcoding.projectjobplan.user.UserJpaRepository;
 
@@ -15,17 +16,19 @@ import java.util.List;
 public class BoardService {
     private final BoardJpaRepository boardJpaRepository;
     private final RatingJpaRepository ratingJpaRepository;
+    private final SubscribeService subscribeService;
 
     public Board createBoard(BoardRequest.SaveDTO requestDTO, User sessionUser) {
 
         return boardJpaRepository.save(requestDTO.toEntity(sessionUser));
     }
 
-    public BoardResponse.DetailDTO getBoardInDetail(int id) {
+    public BoardResponse.DetailDTO getBoardInDetail(int id, int sessionUserId) {
         Board board = boardJpaRepository.findById(id).get();
         Double rate = ratingJpaRepository.findRatingAvgByUserId(board.getUser().getId()).orElse(0.0);
+        Boolean isSubscribe = subscribeService.checkBoardSubscription(id, sessionUserId);
 
-        return new BoardResponse.DetailDTO(board, rate);
+        return new BoardResponse.DetailDTO(board, rate, isSubscribe);
     }
 
     public List<BoardResponse.ListingsDTO> getAllBoard() { // board/listings
