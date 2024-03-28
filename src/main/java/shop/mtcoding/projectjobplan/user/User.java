@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import shop.mtcoding.projectjobplan.board.Board;
 import shop.mtcoding.projectjobplan.resume.Resume;
+import shop.mtcoding.projectjobplan.skill.Skill;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -55,6 +56,9 @@ public class User {
     @OrderBy("id desc")
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE) // Entity 객체의 변수명 == FK의 주인
     private List<Resume> resumes = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    private List<Skill> skills = new ArrayList<>();
 
 
     @Builder
