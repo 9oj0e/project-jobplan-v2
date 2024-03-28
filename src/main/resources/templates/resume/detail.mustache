@@ -23,7 +23,7 @@
             {{/resumeDetail.resumeOwner}}
             {{^resumeDetail.resumeOwner}}
                 <!-- 구독하기 버튼 -->
-                {{#sessionUser}}
+                {{#sessionUser.isEmployer}}
                     {{^resumeDetail.isSubscribe}}
                         <div class="mb-3"> <!-- 구독하기 -->
                             <form action="/resumes/{{resumeDetail.id}}/subscribe" method="post">
@@ -43,7 +43,7 @@
                             </form>
                         </div>
                     {{/resumeDetail.isSubscribe}}
-                {{/sessionUser}}
+                {{/sessionUser.isEmployer}}
             {{/resumeDetail.resumeOwner}}
         </div>
     </div>

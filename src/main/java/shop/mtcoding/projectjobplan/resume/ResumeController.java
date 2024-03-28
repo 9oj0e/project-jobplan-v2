@@ -39,7 +39,7 @@ public class ResumeController {
     @GetMapping("/resumes/{resumeId}")
     public String detail(@PathVariable int resumeId,HttpServletRequest request) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        ResumeResponse.DetailDTO resumeDetail = resumeService.findResumeById(resumeId,sessionUser.getId());
+        ResumeResponse.DetailDTO resumeDetail = resumeService.findResumeById(resumeId,sessionUser);
         request.setAttribute("resumeDetail", resumeDetail);
 
         return "/resume/detail";

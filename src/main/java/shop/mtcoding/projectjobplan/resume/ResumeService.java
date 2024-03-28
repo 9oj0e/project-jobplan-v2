@@ -26,10 +26,10 @@ public class ResumeService {
         return resumeJpaRepository.save(requestDTO.toEntity(sessionUser));
     }
 
-    public ResumeResponse.DetailDTO findResumeById(int resumeId,int sessionUserId) {
+    public ResumeResponse.DetailDTO findResumeById(int resumeId,User sessionUser) {
         Resume resume = resumeJpaRepository.findById(resumeId).get();
         Double rate = ratingJpaRepository.findRatingAvgByUserId(resume.getUser().getId()).orElse(0.0);
-        Boolean isSubscribe = subscribeService.checkResumeSubscription(resumeId,sessionUserId);
+        Boolean isSubscribe = subscribeService.checkResumeSubscription(resumeId,sessionUser.getId());
 
         ResumeResponse.DetailDTO responseDTO = new ResumeResponse.DetailDTO(resume, rate,isSubscribe);
 

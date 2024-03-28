@@ -23,10 +23,10 @@ public class BoardService {
         return boardJpaRepository.save(requestDTO.toEntity(sessionUser));
     }
 
-    public BoardResponse.DetailDTO getBoardInDetail(int id, int sessionUserId) {
+    public BoardResponse.DetailDTO getBoardInDetail(int id, User sessionUser) {
         Board board = boardJpaRepository.findById(id).get();
         Double rate = ratingJpaRepository.findRatingAvgByUserId(board.getUser().getId()).orElse(0.0);
-        Boolean isSubscribe = subscribeService.checkBoardSubscription(id, sessionUserId);
+        Boolean isSubscribe = subscribeService.checkBoardSubscription(id, sessionUser.getId());
 
         return new BoardResponse.DetailDTO(board, rate, isSubscribe);
     }
