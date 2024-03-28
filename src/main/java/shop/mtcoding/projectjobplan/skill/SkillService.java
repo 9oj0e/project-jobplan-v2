@@ -30,4 +30,9 @@ public class SkillService {
 
         skillJpaRepository.saveAll(skillList);
     }
+
+    public List<Skill> getSkillList(int userId) {
+
+        return skillJpaRepository.findAllByUserId(userId).get();
+    }
 }
