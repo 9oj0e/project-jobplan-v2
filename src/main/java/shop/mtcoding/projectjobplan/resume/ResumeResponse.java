@@ -82,7 +82,7 @@ public class ResumeResponse {
             this.rating = rating;
         }
         public Double getRating(){
-            return FormatUtil.소수점한자리(this.rating);
+            return FormatUtil.numberFormatter(this.rating);
         }
     }
 
