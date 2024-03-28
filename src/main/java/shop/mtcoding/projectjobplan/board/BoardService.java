@@ -6,6 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 import shop.mtcoding.projectjobplan._core.errors.exception.Exception403;
 import shop.mtcoding.projectjobplan._core.errors.exception.Exception404;
 import shop.mtcoding.projectjobplan.rating.RatingJpaRepository;
+import shop.mtcoding.projectjobplan.skill.Skill;
+import shop.mtcoding.projectjobplan.skill.SkillJpaRepository;
 import shop.mtcoding.projectjobplan.subscribe.SubscribeService;
 import shop.mtcoding.projectjobplan.user.User;
 import shop.mtcoding.projectjobplan.user.UserJpaRepository;
@@ -19,10 +21,23 @@ public class BoardService {
     private final BoardJpaRepository boardJpaRepository;
     private final RatingJpaRepository ratingJpaRepository;
     private final SubscribeService subscribeService;
+    private final SkillJpaRepository skillJpaRepository;
 
+    @Transactional
     public Board createBoard(BoardRequest.SaveDTO requestDTO, User sessionUser) {
+        Board board = boardJpaRepository.save(requestDTO.toEntity(sessionUser));
+        List<Skill> skillList = new ArrayList<>();
+        for (String skillName: requestDTO.getSkill()){
+            Skill skill = Skill.builder()
+                    .board(board)
+                    .name(skillName)
+                    .build();
+            skillList.add(skill);
+        }
+        // dto.getSkill().stream().forEach(s -> new Skill(user, s));
+        skillJpaRepository.saveAll(skillList);
 
-        return boardJpaRepository.save(requestDTO.toEntity(sessionUser));
+        return board;
     }
 
     public BoardResponse.DetailDTO getBoardInDetail(int id, User sessionUser) {
@@ -86,6 +101,7 @@ public class BoardService {
     }
 
     // 공고삭제
+    @Transactional
     public void removeBoard(int id, User sessionUser) {
         // 조회 및 예외 처리
         Board board = boardJpaRepository.findById(id)
