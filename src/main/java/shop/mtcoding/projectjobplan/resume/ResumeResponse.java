@@ -1,6 +1,7 @@
 package shop.mtcoding.projectjobplan.resume;
 
 import lombok.Data;
+import shop.mtcoding.projectjobplan._core.utils.FormatUtil;
 
 public class ResumeResponse {
 
@@ -58,7 +59,10 @@ public class ResumeResponse {
         private String title;
         private String content; // cv, cover letter 자기소개서
 
-        public DetailDTO(Resume resume) {
+        // 평점
+        private Double rating;
+
+        public DetailDTO(Resume resume, Double rate) {
             this.id = resume.getId();
             this.userId = resume.getUser().getId();
             this.username = resume.getUser().getUsername();
@@ -74,6 +78,11 @@ public class ResumeResponse {
             this.career = resume.getCareer();
             this.title = resume.getTitle();
             this.content = resume.getContent();
+
+            this.rating = rate;
+        }
+        public Double getRating(){
+            return FormatUtil.소수점한자리(this.rating);
         }
     }
 

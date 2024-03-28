@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import shop.mtcoding.projectjobplan.apply.ApplyResponse;
+import shop.mtcoding.projectjobplan.rating.RatingJpaRepository;
 import shop.mtcoding.projectjobplan.user.User;
 import shop.mtcoding.projectjobplan.user.UserJpaRepository;
 
@@ -15,6 +16,7 @@ import java.util.Optional;
 @Service
 public class ResumeService {
     private final ResumeJpaRepository resumeJpaRepository;
+    private final RatingJpaRepository ratingJpaRepository;
 
     @Transactional
     public Resume createResume(ResumeRequest.SaveDTO requestDTO, User sessionUser) {
@@ -24,7 +26,9 @@ public class ResumeService {
 
     public ResumeResponse.DetailDTO findResumeById(int resumeId) {
         Resume resume = resumeJpaRepository.findById(resumeId).get();
-        ResumeResponse.DetailDTO responseDTO = new ResumeResponse.DetailDTO(resume);
+        Double rate = ratingJpaRepository.findRatingAvgByUserId(resume.getUser().getId()).orElse(0.0);
+
+        ResumeResponse.DetailDTO responseDTO = new ResumeResponse.DetailDTO(resume, rate);
 
         return responseDTO;
     }
