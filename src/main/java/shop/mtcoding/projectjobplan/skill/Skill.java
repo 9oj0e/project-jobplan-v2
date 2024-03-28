@@ -1,9 +1,12 @@
 package shop.mtcoding.projectjobplan.skill;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 import shop.mtcoding.projectjobplan.board.Board;
 import shop.mtcoding.projectjobplan.user.User;
+
+import java.util.List;
 
 @Data
 @Entity
@@ -19,4 +22,16 @@ public class Skill {
 
     @ManyToOne
     private Board board; // 공고에서 필요한 스킬 등록
+
+    @Builder
+    public Skill(String name, User user, Board board) {
+        this.name = name;
+        this.user = user;
+        this.board = board;
+    }
+
+    public Skill(User user, String name) {
+        this.user = user;
+        this.name = name;
+    }
 }
