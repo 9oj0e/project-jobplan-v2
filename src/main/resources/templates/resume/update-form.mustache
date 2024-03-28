@@ -8,8 +8,9 @@
             </div>
             <div class="card-body">
                 {{#resume}}
-                    <h4 class="card-title">개인 정보</h4>
-                    <table class="table">
+                    <h4>개인 정보</h4>
+                    <hr>
+                    <table class="table mb-5">
                         <tr>
                             <td>이름</td>
                             <td>
@@ -42,15 +43,9 @@
                             </td>
                         </tr>
                     </table>
-
-                    <table class="table">
-                        <h4 class="card-title">이력서 제목</h4>
-                        <tr>
-                            <td>제목</td>
-                            <td>
-                                <input name="title" type="text" value="{{title}}" readonly class="form-control">
-                            </td>
-                        </tr>
+                    <h4>학력 정보</h4>
+                    <hr>
+                    <table class="table mb-5">
                         <tr>
                             <td>학교명</td>
                             <td>
@@ -75,49 +70,45 @@
                             </td>
                         </tr>
                     </table>
-                    <h4 class="card-title">보유 스킬</h4>
-                    <table class="table">
+                    <h4>이력서 내용</h4>
+                    <hr>
+                    <table class="table mb-5">
                         <tr>
+                            <td>제목</td>
                             <td>
-                                <div class=form-control style="display: flex; justify-content: space-evenly">
-                                    <input type="checkbox" name="skill" value="java">
-                                    <span>java</span>
-                                    <input type="checkbox" name="skill" value="javaScript">
-                                    <span>javaScript</span>
-                                    <input type="checkbox" name="skill" value="Spring">
-                                    <span>Spring</span>
-                                    <input type="checkbox" name="skill" value="HTML">
-                                    <span>HTML</span>
-                                    <input type="checkbox" name="skill" value="jQuery">
-                                    <span>jQuery</span>
-                                    <input type="checkbox" name="skill" value="MySQL">
-                                    <span>MySQL</span>
-                                    <input type="checkbox" name="skill" value="없음">
-                                    <span>없음</span>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                    <h4 class="card-title">경력 사항</h4>
-                    <table class="table">
-                        <tr>
-                            <td>경력 정보</td>
-                            <td>
-                                <textarea name="career" class="form-control" style="height: 100px">{{career}}</textarea>
+                                <input name="title" type="text" value="{{title}}" readonly class="form-control">
                             </td>
                         </tr>
                         <tr>
                             <td>자기소개서</td>
-                            <td>
-                                <textarea name="content" class="form-control" style="height: 300px">{{content}}</textarea>
+                            <td style="width: 415px">
+                                <textarea name="content" class="form-control"
+                                          style="height: 300px">{{content}}</textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>경력 정보</td>
+                            <td style="width: 415px">
+                                <textarea name="career" class="form-control" style="height: 100px">{{career}}</textarea>
                             </td>
                         </tr>
                     </table>
+                    <h4>보유 스킬</h4>
+                    <div class="form-control mb-5">
+                        {{#skillList}}
+                            <btn class="btn btn-light">{{skillName}}</btn>
+                        {{/skillList}}
+                        {{^skillList}}
+                            <btn class="btn btn-outline-light form-control">없음</btn>
+                        {{/skillList}}
+                    </div>
                 {{/resume}}
             </div>
             <div class="card-footer">
                 <div class="button-post-cancel">
-                    <button type="button" onclick="location.href='/users/{{sessionUser.id}}'" class="btn btn-outline-dark">취소</button>
+                    <button type="button" onclick="location.href='/users/{{sessionUser.id}}'"
+                            class="btn btn-outline-dark">취소
+                    </button>
                     <button type="submit" class="btn btn-outline-dark">수정</button>
                 </div>
             </div>

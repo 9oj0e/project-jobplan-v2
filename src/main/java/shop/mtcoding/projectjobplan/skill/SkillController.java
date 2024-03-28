@@ -10,12 +10,16 @@ import shop.mtcoding.projectjobplan.user.User;
 @RequiredArgsConstructor
 @Controller
 public class SkillController {
-    private final HttpSession session;
-    private final SkillService skillService;
 
     @PostMapping("/users/{userId}/skill/add")
     public String add(@PathVariable int userId, SkillRequest.DTO requestDTO){
         skillService.createSkillList(requestDTO, userId);
+
+        return "redirect:/users/" + userId;
+    }
+
+    @PostMapping("/users/{userId}/skill/update")
+    public String update(@PathVariable int userId, SkillRequest.DTO requestDTO) {
 
         return "redirect:/users/" + userId;
     }
