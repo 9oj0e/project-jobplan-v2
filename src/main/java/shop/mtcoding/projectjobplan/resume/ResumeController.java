@@ -23,7 +23,7 @@ public class ResumeController {
     }
 
     @GetMapping("/resumes/post-form") // 이력서 작성 폼
-    public String postForm(HttpServletRequest request) {
+    public String postForm() {
 
         return "/resume/post-form";
     }
@@ -57,7 +57,7 @@ public class ResumeController {
     @GetMapping("/resumes/{resumeId}/update-form")
     public String updateForm(@PathVariable int resumeId, HttpServletRequest request) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        ResumeResponse.UpdateDTO responseDTO = resumeService.getResume(resumeId, sessionUser);
+        ResumeResponse.UpdateFormDTO responseDTO = resumeService.getResume(resumeId, sessionUser);
         request.setAttribute("resume", responseDTO);
 
         return "/resume/update-form";

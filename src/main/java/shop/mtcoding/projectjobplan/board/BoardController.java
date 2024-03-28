@@ -65,7 +65,7 @@ public class BoardController {
     @GetMapping("/boards/{boardId}/update-form")
     public String updateForm(@PathVariable int boardId, HttpServletRequest request) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        BoardResponse.UpdateDTO responseDTO = boardService.getBoard(boardId, sessionUser);
+        BoardResponse.UpdateFormDTO responseDTO = boardService.getBoard(boardId, sessionUser);
         request.setAttribute("board", responseDTO);
 
         return "/board/update-form";
@@ -77,7 +77,7 @@ public class BoardController {
         User sessionUser = (User) session.getAttribute("sessionUser");
         boardService.setBoard(boardId, requestDTO, sessionUser);
 
-        return "redirect:/board/" + boardId;
+        return "redirect:/boards/" + boardId;
     }
 
     @PostMapping("/boards/{boardId}/delete")

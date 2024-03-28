@@ -58,8 +58,8 @@
                         <td>졸업형태</td>
                         <td>
                             <select name="educationLevel" class="form-control">
-                                <option value="중졸">중졸</option>
                                 <option value="고졸">고졸</option>
+                                <option value="초대졸">초대졸</option>
                                 <option value="대졸">대졸</option>
                             </select>
                         </td>
@@ -93,15 +93,6 @@
                         </td>
                     </tr>
                 </table>
-                <h4>보유 스킬</h4>
-                <div class="form-control mb-5">
-                    {{#skillList}}
-                        <btn class="btn btn-light">{{skillName}}</btn>
-                    {{/skillList}}
-                    {{^skillList}}
-                        <btn class="btn btn-outline-light form-control">없음</btn>
-                    {{/skillList}}
-                </div>
             </div>
             <div class="card-footer">
                 <div class="button-post-cancel">

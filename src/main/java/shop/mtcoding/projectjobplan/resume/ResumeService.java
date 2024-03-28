@@ -20,7 +20,7 @@ import java.util.Optional;
 public class ResumeService {
     private final ResumeJpaRepository resumeJpaRepository;
     private final RatingJpaRepository ratingJpaRepository;
-    private final SubscribeService subscribeService ;
+    private final SubscribeService subscribeService;
 
     @Transactional
     public Resume createResume(ResumeRequest.SaveDTO requestDTO, User sessionUser) {
@@ -33,8 +33,8 @@ public class ResumeService {
         Boolean resumeOwner = false;
         if (resume.getUser().getId() == sessionUserId) resumeOwner = true;
         Double rate = ratingJpaRepository.findRatingAvgByUserId(resume.getUser().getId()).orElse(0.0);
-        Boolean hasSubscribed = subscribeService.checkResumeSubscription(resumeId,sessionUserId);
-        ResumeResponse.DetailDTO responseDTO = new ResumeResponse.DetailDTO(resume, rate, resumeOwner,hasSubscribed);
+        Boolean hasSubscribed = subscribeService.checkResumeSubscription(resumeId, sessionUserId);
+        ResumeResponse.DetailDTO responseDTO = new ResumeResponse.DetailDTO(resume, rate, resumeOwner, hasSubscribed);
 
         return responseDTO;
     }
@@ -49,7 +49,7 @@ public class ResumeService {
     }
 
     // 이력서수정폼
-    public ResumeResponse.UpdateDTO getResume(int id, User sessionUser) {
+    public ResumeResponse.UpdateFormDTO getResume(int id, User sessionUser) {
         // 조회 및 예외처리
         Resume resume = resumeJpaRepository.findById(id)
                 .orElseThrow(() -> new Exception404("해당 이력서를 찾을 수 없습니다."));
@@ -59,7 +59,7 @@ public class ResumeService {
             throw new Exception403("해당 이력서의 수정페이지로 이동할 권한이 없습니다.");
         }
 
-        return new ResumeResponse.UpdateDTO(resumeJpaRepository.findById(id).get());
+        return new ResumeResponse.UpdateFormDTO(resumeJpaRepository.findById(id).get());
     }
 
     @Transactional // 이력서수정
