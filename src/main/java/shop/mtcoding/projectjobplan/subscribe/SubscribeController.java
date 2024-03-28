@@ -59,7 +59,7 @@ public class SubscribeController {
         subscribeService.removeBoardSubscription(boardId, sessionUser.getId());
 
         if (fromSubscription) {
-            return "redirect:/users/" + sessionUser.getId()+"/subscription";
+            return "redirect:/users/" + sessionUser.getId() + "/subscription";
         } else {
             return "redirect:/boards/" + boardId;
         }
@@ -71,7 +71,7 @@ public class SubscribeController {
         subscribeService.removeResumeSubscription(resumeId, sessionUser.getId());
 
         if (fromSubscription) {
-            return "redirect:/users/" + sessionUser.getId()+"/subscription";
+            return "redirect:/users/" + sessionUser.getId() + "/subscription";
         } else {
             return "redirect:/resumes/" + resumeId;
         }
