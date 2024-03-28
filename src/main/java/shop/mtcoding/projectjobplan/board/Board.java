@@ -6,9 +6,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import shop.mtcoding.projectjobplan._core.utils.ConvertUtil;
+import shop.mtcoding.projectjobplan.skill.Skill;
 import shop.mtcoding.projectjobplan.user.User;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @NoArgsConstructor
 @Entity
@@ -28,6 +30,9 @@ public class Board {
     private String field; // 채용 분야
     private String position; // 포지션
     private String salary; // 연봉
+
+    @OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE)
+    private List<Skill> skillList;
 
     // 날짜
     private Timestamp openingDate; // 게시일
