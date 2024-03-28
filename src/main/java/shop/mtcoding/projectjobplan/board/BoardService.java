@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import shop.mtcoding.projectjobplan._core.errors.exception.Exception403;
 import shop.mtcoding.projectjobplan._core.errors.exception.Exception404;
+import shop.mtcoding.projectjobplan.apply.Apply;
+import shop.mtcoding.projectjobplan.apply.ApplyJpaRepository;
 import shop.mtcoding.projectjobplan.rating.RatingJpaRepository;
 import shop.mtcoding.projectjobplan.subscribe.SubscribeService;
 import shop.mtcoding.projectjobplan.user.User;
@@ -19,6 +21,7 @@ public class BoardService {
     private final BoardJpaRepository boardJpaRepository;
     private final RatingJpaRepository ratingJpaRepository;
     private final SubscribeService subscribeService;
+    private final ApplyJpaRepository applyJpaRepository;
 
     public Board createBoard(BoardRequest.SaveDTO requestDTO, User sessionUser) {
 
@@ -86,16 +89,23 @@ public class BoardService {
     }
 
     // 공고삭제
+    @Transactional
     public void removeBoard(int id, User sessionUser) {
         // 조회 및 예외 처리
         Board board = boardJpaRepository.findById(id)
                 .orElseThrow(() -> new Exception404("해당 공고를 찾을 수 없습니다."));
-
         // 권한 처리
         if (sessionUser.getId() != board.getUser().getId()) {
             throw new Exception403("해당 공고를 삭제할 권한이 없습니다.");
         }
+        System.out.println("3");
 
+        applyJpaRepository.findByBoardId(id);
+        System.out.println("4");
+        System.out.println("5");
+        applyJpaRepository.deleteApplyByBoardId(id);
+        System.out.println("6");
         boardJpaRepository.delete(board);
+        System.out.println("7");
     }
 }

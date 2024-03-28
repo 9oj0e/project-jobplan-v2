@@ -1,6 +1,7 @@
 package shop.mtcoding.projectjobplan.apply;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -20,4 +21,8 @@ public interface ApplyJpaRepository extends JpaRepository<Apply, Integer> {
     // (개인) 지원 현황
     @Query("SELECT a FROM Apply a WHERE a.resume.user.id = :userId")
     List<Apply> findByResumeUserId(@Param("userId")int userId);
+
+    @Modifying
+    @Query("delete from Apply a where a.board.id = :boardId")
+    void deleteApplyByBoardId(@Param("boardId") int boardId);
 }

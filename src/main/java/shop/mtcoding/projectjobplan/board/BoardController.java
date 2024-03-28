@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import shop.mtcoding.projectjobplan.apply.ApplyService;
 import shop.mtcoding.projectjobplan.subscribe.SubscribeService;
 import shop.mtcoding.projectjobplan.user.User;
 
@@ -18,6 +19,7 @@ public class BoardController {
     private final HttpSession session;
     private final BoardService boardService;
     private final SubscribeService subscribeService;
+    private final ApplyService applyService;
 
     @GetMapping({"/", "/boards"})
     public String index(HttpServletRequest request) {
@@ -83,8 +85,11 @@ public class BoardController {
 
     @PostMapping("/boards/{boardId}/delete")
     public String delete(@PathVariable int boardId) {
+        System.out.println("1");
         User sessionUser = (User) session.getAttribute("sessionUser");
+        System.out.println("2");
         boardService.removeBoard(boardId, sessionUser);
+        System.out.println("8");
 
         return "redirect:/users/" + sessionUser.getId();
     }
