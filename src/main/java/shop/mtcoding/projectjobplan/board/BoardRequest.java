@@ -3,6 +3,8 @@ package shop.mtcoding.projectjobplan.board;
 import lombok.Data;
 import shop.mtcoding.projectjobplan.user.User;
 
+import java.util.List;
+
 public class BoardRequest {
 
     @Data
@@ -14,6 +16,8 @@ public class BoardRequest {
         private String salary;
         private String openingDate;
         private String closingDate;
+
+        private List<String> skill;
 
         public Board toEntity(User user) {
             return Board.builder()
@@ -39,6 +43,8 @@ public class BoardRequest {
         private String content;
         private String openingDate;
         private String closingDate;
+
+        private List<String> skill;
         // toEntity
     }
 }

@@ -43,13 +43,14 @@ public class BoardResponse {
         private String field; // 채용 분야
         private String position; // 포지션
         private String salary; // 연봉
+        private Boolean boardOwner; // 공고 주인 여부
         private Double rating; // 평점
-        private Boolean isSubscribe;
+        private Boolean hasSubscribed;
 
         private Timestamp openingDate; // 게시일
         private Timestamp closingDate; // 마감일 == null -> "상시채용"
 
-        public DetailDTO(Board board, Double rating, Boolean isSubscribe) {
+        public DetailDTO(Board board, Double rating, Boolean isBoardOwner, Boolean hasSubscribed) {
             this.id = board.getId();
             this.address = board.getUser().getAddress();
             this.phoneNumber = board.getUser().getPhoneNumber();
@@ -63,7 +64,8 @@ public class BoardResponse {
             this.rating = rating;
             this.openingDate = board.getOpeningDate();
             this.closingDate = board.getClosingDate();
-            this.isSubscribe = isSubscribe;
+            this.boardOwner = isBoardOwner;
+            this.hasSubscribed = hasSubscribed;
         }
 
         public String getOpeningDate() {
@@ -75,7 +77,7 @@ public class BoardResponse {
         }
 
         public Double getRating(){
-            return FormatUtil.소수점한자리(this.rating);
+            return FormatUtil.numberFormatter(this.rating);
         }
     }
 

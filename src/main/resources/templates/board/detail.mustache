@@ -6,14 +6,14 @@
             <!-- 수정 삭제 버튼 -->
             {{#boardDetail.boardOwner}}
                 <div class="mb-3"> <!-- 수정 하기 -->
-                    <form action="/board/{{boardDetail.id}}/update-form" method="get">
+                    <form action="/boards/{{boardDetail.id}}/update-form" method="get">
                         <button class="btn btn-warning">
                             <i class="fa-regular fa-file-word icon-size"></i>
                         </button>
                     </form>
                 </div>
                 <div class="mb-3"> <!-- 삭제 하기 -->
-                    <form action="/board/{{boardDetail.id}}/delete" method="post"
+                    <form action="/boards/{{boardDetail.id}}/delete" method="post"
                           onsubmit="return false">
                         <button class="btn btn-danger">
                             <i class="fa-regular fa-trash-can icon-size"></i>
@@ -24,7 +24,7 @@
             <!-- 구독하기 버튼 -->
             {{^boardDetail.boardOwner}}
                 {{#sessionUser}}
-                    {{^boardDetail.isSubscribe}}
+                    {{^boardDetail.hasSubscribed}}
                         <div class="mb-3"> <!-- 구독 -->
                             <form action="/boards/{{boardDetail.id}}/subscribe" method="post">
                                 <button class="btn btn-outline-dark">
@@ -32,8 +32,8 @@
                                 </button>
                             </form>
                         </div>
-                    {{/boardDetail.isSubscribe}}
-                    {{#boardDetail.isSubscribe}}
+                    {{/boardDetail.hasSubscribed}}
+                    {{#boardDetail.hasSubscribed}}
                         <div class="mb-3"> <!-- 구독 취소 -->
                             <form action="/boards/{{boardDetail.id}}/unsubscribe" method="post">
                                 <input type="hidden" name="fromSubscription" value="false">
@@ -42,7 +42,7 @@
                                 </button>
                             </form>
                         </div>
-                    {{/boardDetail.isSubscribe}}
+                    {{/boardDetail.hasSubscribed}}
                 {{/sessionUser}}
             {{/boardDetail.boardOwner}}
         </div>

@@ -26,11 +26,13 @@ public class ResumeService {
         return resumeJpaRepository.save(requestDTO.toEntity(sessionUser));
     }
 
-    public ResumeResponse.DetailDTO findResumeById(int resumeId) {
+    public ResumeResponse.DetailDTO findResumeById(int resumeId, int sessionUserId) {
         Resume resume = resumeJpaRepository.findById(resumeId).get();
+        Boolean resumeOwner = false;
+        if (resume.getUser().getId() == sessionUserId) resumeOwner = true;
         Double rate = ratingJpaRepository.findRatingAvgByUserId(resume.getUser().getId()).orElse(0.0);
 
-        ResumeResponse.DetailDTO responseDTO = new ResumeResponse.DetailDTO(resume, rate);
+        ResumeResponse.DetailDTO responseDTO = new ResumeResponse.DetailDTO(resume, rate, resumeOwner);
 
         return responseDTO;
     }

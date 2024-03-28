@@ -101,7 +101,7 @@ public class UserResponse {
             this.applyList = applyList.stream().map(apply -> new ApplyDTO(apply)).toList();
         }
 
-        public Double getRating(){return FormatUtil.소수점한자리(this.rating);}
+        public Double getRating(){return FormatUtil.numberFormatter(this.rating);}
 
         public class BoardDTO {
             private Integer id;

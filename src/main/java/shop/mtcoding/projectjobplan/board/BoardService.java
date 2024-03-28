@@ -27,10 +27,12 @@ public class BoardService {
 
     public BoardResponse.DetailDTO getBoardInDetail(int id, int sessionUserId) {
         Board board = boardJpaRepository.findById(id).get();
+        Boolean boardOwner = false;
+        if (board.getUser().getId() == sessionUserId) boardOwner = true;
         Double rate = ratingJpaRepository.findRatingAvgByUserId(board.getUser().getId()).orElse(0.0);
-        Boolean isSubscribe = subscribeService.checkBoardSubscription(id, sessionUserId);
+        Boolean hasSubscribed = subscribeService.checkBoardSubscription(id, sessionUserId);
 
-        return new BoardResponse.DetailDTO(board, rate, isSubscribe);
+        return new BoardResponse.DetailDTO(board, rate, boardOwner, hasSubscribed);
     }
 
     public List<BoardResponse.ListingsDTO> getAllBoard() { // board/listings
