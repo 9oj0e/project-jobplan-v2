@@ -2,69 +2,71 @@
 <!-- 바디 start -->
 <div class="modal" id="skillForm" tabindex="-1">
     <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">기술 스택</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <form {{^skillList}}action="/users/{{sessionUser.id}}/skill/add"{{/skillList}}{{#skillList}}action="/users/{{sessionUser.id}}/skill/update"{{/skillList}} method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">기술 스택</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h4 class="card-title">스킬 추가</h4>
+                    <table class="table">
+                        <tr>
+                            <td>
+                                <div>java</div>
+                            </td>
+                            <td style="text-align: center">
+                                <input type="checkbox" name="skill" value="java">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div>javaScript</div>
+                            </td>
+                            <td style="text-align: center">
+                                <input type="checkbox" name="skill" value="javaScript">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div>Spring</div>
+                            </td>
+                            <td style="text-align: center">
+                                <input type="checkbox" name="skill" value="Spring">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div>HTML</div>
+                            </td>
+                            <td style="text-align: center">
+                                <input type="checkbox" name="skill" value="HTML">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div>jQuery</div>
+                            </td>
+                            <td style="text-align: center">
+                                <input type="checkbox" name="skill" value="jQuery">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div>MySQL</div>
+                            </td>
+                            <td style="text-align: center">
+                                <input type="checkbox" name="skill" value="MySQL">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                    <button type="submit" class="btn btn-primary">완료</button>
+                </div>
             </div>
-            <div class="modal-body">
-                <h4 class="card-title">스킬 추가</h4>
-                <table class="table">
-                    <tr>
-                        <td>
-                            <div>java</div>
-                        </td>
-                        <td style="text-align: center">
-                            <input type="checkbox" name="skill" value="java">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div>javaScript</div>
-                        </td>
-                        <td style="text-align: center">
-                            <input type="checkbox" name="skill" value="javaScript">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div>Spring</div>
-                        </td>
-                        <td style="text-align: center">
-                            <input type="checkbox" name="skill" value="Spring">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div>HTML</div>
-                        </td>
-                        <td style="text-align: center">
-                            <input type="checkbox" name="skill" value="HTML">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div>jQuery</div>
-                        </td>
-                        <td style="text-align: center">
-                            <input type="checkbox" name="skill" value="jQuery">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div>MySQL</div>
-                        </td>
-                        <td style="text-align: center">
-                            <input type="checkbox" name="skill" value="MySQL">
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                <button type="button" class="btn btn-primary">완료</button>
-            </div>
-        </div>
+        </form>
     </div>
 </div>
 {{#profileDTO}}
@@ -237,25 +239,25 @@
                         </div>
                         -->
                     {{^isEmployer}}
-                    <div class="form-control">
-                        <div class="mb-3"><b>보유 기술 스택</b>
-                            {{#skillList}}
-                            <button class="btn btn-outline-primary form-control" data-bs-toggle="modal"
-                                    data-bs-target="#skillForm">수정하기
-                            </button>
-                            {{/skillList}}
+                        <div class="form-control">
+                            <div class="mb-3"><b>보유 기술 스택</b>
+                                {{#skillList}}
+                                    <button class="btn btn-outline-primary form-control" data-bs-toggle="modal"
+                                            data-bs-target="#skillForm">수정하기
+                                    </button>
+                                {{/skillList}}
+                            </div>
+                            <div>
+                                {{#skillList}}
+                                    <span>{{skillName}}</span>
+                                {{/skillList}}
+                                {{^skillList}}
+                                    <button class="btn btn-outline-primary form-control" data-bs-toggle="modal"
+                                            data-bs-target="#skillForm">추가하기
+                                    </button>
+                                {{/skillList}}
+                            </div>
                         </div>
-                        <div>
-                            {{#skillList}}
-                                <span>{{skillName}}</span>
-                            {{/skillList}}
-                            {{^skillList}}
-                                <button class="btn btn-outline-primary form-control" data-bs-toggle="modal"
-                                        data-bs-target="#skillForm">추가하기
-                                </button>
-                            {{/skillList}}
-                        </div>
-                    </div>
                     {{/isEmployer}}
                 </div>
             </div>
