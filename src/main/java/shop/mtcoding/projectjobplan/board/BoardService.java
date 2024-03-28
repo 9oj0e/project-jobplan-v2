@@ -8,19 +8,20 @@ import shop.mtcoding.projectjobplan._core.errors.exception.Exception404;
 import shop.mtcoding.projectjobplan.rating.RatingJpaRepository;
 import shop.mtcoding.projectjobplan.skill.Skill;
 import shop.mtcoding.projectjobplan.skill.SkillJpaRepository;
-import shop.mtcoding.projectjobplan.subscribe.SubscribeService;
+import shop.mtcoding.projectjobplan.subscribe.Subscribe;
+import shop.mtcoding.projectjobplan.subscribe.SubscribeJpaRepository;
 import shop.mtcoding.projectjobplan.user.User;
-import shop.mtcoding.projectjobplan.user.UserJpaRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
 public class BoardService {
     private final BoardJpaRepository boardJpaRepository;
     private final RatingJpaRepository ratingJpaRepository;
-    private final SubscribeService subscribeService;
+    private final SubscribeJpaRepository subscribeJpaRepository;
     private final SkillJpaRepository skillJpaRepository;
 
     @Transactional
@@ -34,24 +35,23 @@ public class BoardService {
                     .build();
             skillList.add(skill);
         }
-        // dto.getSkill().stream().forEach(s -> new Skill(user, s));
-
         skillJpaRepository.saveAll(skillList);
 
         return board;
     }
 
-    public BoardResponse.DetailDTO getBoardInDetail(int id, User sessionUser) {
-        Board board = boardJpaRepository.findById(id).get();
-        Boolean boardOwner = false;
+    public BoardResponse.DetailDTO getBoardInDetail(int boardId, Integer sessionUserId) {
+        Board board = boardJpaRepository.findById(boardId).get();
         Double rating = ratingJpaRepository.findRatingAvgByUserId(board.getUser().getId()).orElse(0.0);
-        if (sessionUser != null) {
-            if (board.getUser().getId() == sessionUser.getId()) boardOwner = true;
-            Boolean hasSubscribed = subscribeService.checkBoardSubscription(id, sessionUser.getId());
-            return new BoardResponse.DetailDTO(board, rating, boardOwner, hasSubscribed);
-        }
-        return new BoardResponse.DetailDTO(board, rating);
 
+        boolean isBoardOwner = false;
+        boolean hasSubscribed = false;
+        if (sessionUserId != null) {
+            isBoardOwner = board.getUser().getId() == sessionUserId ? true : false;
+            Optional<Subscribe> optional = subscribeJpaRepository.findByBoardIdAndUserId(boardId, sessionUserId);
+            hasSubscribed = optional.isPresent() ? true : false;
+        }
+        return new BoardResponse.DetailDTO(board, rating, isBoardOwner, hasSubscribed);
     }
 
     public List<BoardResponse.ListingsDTO> getAllBoard() { // board/listings
@@ -94,7 +94,7 @@ public class BoardService {
 
         List<Skill> skillList = new ArrayList<>();
 
-        for (String skillName: requestDTO.getSkill()){
+        for (String skillName : requestDTO.getSkill()) {
             Skill skill = Skill.builder()
                     .board(board)
                     .name(skillName)
@@ -106,7 +106,7 @@ public class BoardService {
             throw new Exception403("해당 공고를 수정할 권한이 없습니다.");
         }
         List<Skill> skillFound = skillJpaRepository.findByBoardId(boardId).orElse(null);
-        if (skillFound != null){
+        if (skillFound != null) {
             skillJpaRepository.deleteAll(skillFound);
         }
         // 스킬 수정

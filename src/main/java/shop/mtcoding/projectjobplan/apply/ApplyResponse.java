@@ -4,7 +4,7 @@ import lombok.Data;
 import shop.mtcoding.projectjobplan._core.utils.FormatUtil;
 import shop.mtcoding.projectjobplan.board.Board;
 import shop.mtcoding.projectjobplan.resume.Resume;
-import shop.mtcoding.projectjobplan.user.User;
+
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,10 +39,12 @@ public class ApplyResponse {
                 this.resumeTitle = resume.getTitle();
                 this.createdAt = resume.getCreatedAt();
             }
+
             public String getCreatedAt() {
                 return FormatUtil.timeFormatter(this.createdAt);
             }
         }
+
         private String getClosingDate() {
             return FormatUtil.timeFormatter(this.closingDate);
         }

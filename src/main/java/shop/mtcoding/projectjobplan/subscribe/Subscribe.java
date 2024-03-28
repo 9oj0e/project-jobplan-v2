@@ -1,10 +1,8 @@
 package shop.mtcoding.projectjobplan.subscribe;
 
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import shop.mtcoding.projectjobplan.board.Board;
 import shop.mtcoding.projectjobplan.resume.Resume;
@@ -21,11 +19,11 @@ public class Subscribe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    // boardId, boardUserId
+    // boardId
     @ManyToOne(fetch = FetchType.LAZY)
     private Board board;
 
-    // resumeId, resumeUserId
+    // resumeId
     @ManyToOne(fetch = FetchType.LAZY)
     private Resume resume;
 

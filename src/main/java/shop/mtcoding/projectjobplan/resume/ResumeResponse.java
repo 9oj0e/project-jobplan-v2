@@ -1,5 +1,6 @@
 package shop.mtcoding.projectjobplan.resume;
 
+import lombok.Builder;
 import lombok.Data;
 import shop.mtcoding.projectjobplan._core.utils.FormatUtil;
 
@@ -58,7 +59,7 @@ public class ResumeResponse {
 
     @Data
     public static class DetailDTO {
-        // 회원 정보
+        // user 정보
         private Integer userId;
         private String username;
         private String name;
@@ -66,8 +67,13 @@ public class ResumeResponse {
         private String address;
         private String phoneNumber;
         private String email;
-
-        // 이력 정보
+        private boolean isResumeOwner; // 이력서 주인 여부
+        private boolean hasSubscribed; // 구독 여부
+        // skill 정보 (보유 스킬)
+        private List<SkillDTO> skillList;
+        // 평점
+        private Double rating;
+        // resume 정보
         private Integer id;
         private String schoolName;
         private String major;
@@ -76,39 +82,25 @@ public class ResumeResponse {
         private String title;
         private String content; // cv, cover letter 자기소개서
 
-        // skill
-        private List<SkillDTO> skillList;
-
-        // 평점
-        private Double rating;
-
-        private Boolean resumeOwner; // 이력서 주인 여부 확인
-        private Boolean hasSubscribed;
-
-        public DetailDTO(Resume resume, Double rating, Boolean isResumeOwner, Boolean hasSubscribed) {
-            this.id = resume.getId();
+        public DetailDTO(Resume resume, Double rating, boolean isResumeOwner, boolean hasSubscribed) {
             this.userId = resume.getUser().getId();
             this.username = resume.getUser().getUsername();
             this.name = resume.getUser().getName();
             this.birthdate = resume.getUser().getBirthdate();
-            this.address = resume.getUser().getBirthdate();
-            this.email = resume.getUser().getEmail();
+            this.address = resume.getUser().getAddress();
             this.phoneNumber = resume.getUser().getPhoneNumber();
-
+            this.email = resume.getUser().getEmail();
+            this.isResumeOwner = isResumeOwner;
+            this.hasSubscribed = hasSubscribed;
+            this.skillList = resume.getUser().getSkills().stream().map(skill -> new SkillDTO(skill.getName())).toList();
+            this.rating = rating;
+            this.id = resume.getId();
             this.schoolName = resume.getSchoolName();
             this.major = resume.getMajor();
             this.educationLevel = resume.getEducationLevel();
             this.career = resume.getCareer();
-
             this.title = resume.getTitle();
             this.content = resume.getContent();
-
-            this.skillList = resume.getUser().getSkills().stream().map(skill -> new SkillDTO(skill.getName())).toList();
-
-            this.rating = rating;
-
-            this.resumeOwner = isResumeOwner;
-            this.hasSubscribed = hasSubscribed;
         }
 
         public class SkillDTO {

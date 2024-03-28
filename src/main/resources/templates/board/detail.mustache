@@ -4,7 +4,7 @@
     <div class="sidenav-container">
         <div class="sidenav">
             <!-- 수정 삭제 버튼 -->
-            {{#boardDetail.boardOwner}}
+            {{#boardDetail.isBoardOwner}}
                 <div class="mb-3"> <!-- 수정 하기 -->
                     <form action="/boards/{{boardDetail.id}}/update-form" method="get">
                         <button class="btn btn-warning">
@@ -19,9 +19,9 @@
                         </button>
                     </form>
                 </div>
-            {{/boardDetail.boardOwner}}
+            {{/boardDetail.isBoardOwner}}
             <!-- 구독하기 버튼 -->
-            {{^boardDetail.boardOwner}}
+            {{^boardDetail.isBoardOwner}}
                 {{#sessionUser}}
                     {{^isEmployer}}
                         {{^boardDetail.hasSubscribed}}
@@ -46,7 +46,7 @@
                     {{/isEmployer}}
 
                 {{/sessionUser}}
-            {{/boardDetail.boardOwner}}
+            {{/boardDetail.isBoardOwner}}
         </div>
     </div>
     <div class="card div-card">
@@ -171,7 +171,7 @@
                     {{/isEmployer}}
                 {{/sessionUser}}
                 {{^sessionUser}}
-                    <div>
+                    <div class="mt-3">
                         <form action="/login-form" method="get">
                             <button class="btn btn-primary form-control">지원</button>
                         </form>

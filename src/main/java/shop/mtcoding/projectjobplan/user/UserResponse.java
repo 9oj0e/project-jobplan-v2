@@ -3,10 +3,8 @@ package shop.mtcoding.projectjobplan.user;
 import lombok.Data;
 import shop.mtcoding.projectjobplan._core.utils.FormatUtil;
 import shop.mtcoding.projectjobplan.apply.Apply;
-import shop.mtcoding.projectjobplan.apply.ApplyResponse;
 import shop.mtcoding.projectjobplan.board.Board;
 import shop.mtcoding.projectjobplan.resume.Resume;
-import shop.mtcoding.projectjobplan.skill.Skill;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -83,6 +81,7 @@ public class UserResponse {
         // tech stack 기술
         private List<SkillDTO> skillList;
         private Boolean hasSkill;
+
         private Boolean hasSkill() {
             if (this.skillList.isEmpty()) {
                 return false;
@@ -90,6 +89,7 @@ public class UserResponse {
                 return true;
             }
         }
+
         public ProfileDTO(User user, List<Apply> applyList, Double rating) {
             this.id = user.getId();
             this.username = user.getUsername();
@@ -207,6 +207,7 @@ public class UserResponse {
                 }
             }
         }
+
         public class SkillDTO {
             private String skillName;
 

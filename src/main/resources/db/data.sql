@@ -1,4 +1,4 @@
--- -- user_tb
+-- user_tb
 INSERT INTO user_tb
 (username, password, name, birthdate, gender, phone_number, address, email,
  is_employer, employer_id_number, business_name, created_at)
@@ -55,7 +55,7 @@ INSERT INTO user_tb
 VALUES ('user6', '1234', '전두광', '1931-01-18', 'M', '01012345678', '대전', 'jdg456@domain.com',
         false, null, null, now());
 
---board_tb
+-- board_tb
 INSERT INTO board_tb
 (user_id, title, content, field, position, salary, opening_date, closing_date, created_at)
 VALUES (1, '솔루션 운영/개발자 (2년 이상)',
@@ -63,27 +63,27 @@ VALUES (1, '솔루션 운영/개발자 (2년 이상)',
         '풀스택', '신입', '최저시급', '2024-02-26', '2024-03-08', now());
 INSERT INTO board_tb
 (user_id, title, content, field, position, salary, opening_date, closing_date, created_at)
-VALUES (1, 'S/W Front-End',
+VALUES (2, 'S/W Front-End',
         '끊임없는 도전을 함께할 동료를 찾고 있습니다. 포지션 상세.. 주요 업무 : 데스크탑, 모바일 웹, 스마트폰 앱을 위한 웹뷰페이지 개발 자격 요건 :  5년 이상의 웹 프론트엔드 개발 경력 혹은 그에 준하는 실력을 갖추신 분 우대 사항 : React, Vue, Angular 등 모던 SPA 프레임워크 사용에 능숙하신 분 혜택 및 복지 : 4대 보험, 주 5일제',
         '프론트', '경력', '연봉협의', '2024-02-26', '2024-03-08', now());
 INSERT INTO board_tb
 (user_id, title, content, field, position, salary, opening_date, closing_date, created_at)
-VALUES (1, 'AI 비전 플랫폼 개발',
+VALUES (3, 'AI 비전 플랫폼 개발',
         '반려로봇 개발에 따른 LLM AI 개발자를 채용합니다. 포지션 상세.. 주요 업무 :  한국어, 영어 TTS(Text to Speech) 모델 알고리즘 개발 자격 요건 :  음성 데이터 처리 및 기계 학습 관련 1년 이상의 경력 우대 사항 : Python, Pytorch, Tensorflow, C++ 사용 가능 혜택 및 복지 : 4대 보험, 주 5일제',
         'AI', '경력', '최저시급', '2024-02-26', '2024-03-08', now());
 INSERT INTO board_tb
 (user_id, title, content, field, position, salary, opening_date, closing_date, created_at)
-VALUES (1, '클라우드 DevOps 엔지니어',
+VALUES (4, '클라우드 DevOps 엔지니어',
         '새롭고 신나는 로드맵에 동행해주실 도전의식과 창의성이 가득한 하클의 식구, 멤버를 기다립니다. 포지션 상세.. 주요 업무 : 실감형 AR Commerce 컨텐츠 , AR Advertisement 개발. 자격 요건 : 풀스택. 우대 사항 : 자료구조,운영체제,알고리즘,네트워크에 대한 이해가 있으신분. 혜택 및 복지 : 4대 보험, 주 5일제',
         '클라우드', '신입', '연봉협의', '2024-02-26', '2024-03-08', now());
 INSERT INTO board_tb
 (user_id, title, content, field, position, salary, opening_date, closing_date, created_at)
-VALUES (2, '솔루션 운영/개발자 (2년 이상)',
+VALUES (5, '솔루션 운영/개발자 (2년 이상)',
         '보안 솔루션 연구 개발 경력직 채용. 포지션 상세.. 주요 업무 : 신규 제품 프로토타입 개발. 자격 요건 : Java(필수) 외 1개 이상. 우대 사항 : 보안 솔루션 회사 근무 경험 또는 연구 실적. 혜택 및 복지 : 4대 보험, 주 5일제',
         '풀스택', '경력', '연봉협의', '2024-02-26', '2024-03-08', now());
 INSERT INTO board_tb
 (user_id, title, content, field, position, salary, opening_date, closing_date, created_at)
-VALUES (2, 'S/W Front-End',
+VALUES (1, 'S/W Front-End',
         '저희 회사와 함께 성장할 수 있는 역량 있고 창의적인 분들의 지원을 기대합니다. 포지션 상세.. 주요 업무 : SSEM 서비스 화면 개발 및 운영. 자격 요건 : HTML5, CSS3, javasript, jQuery. 우대 사항 : Javascipt 혹은 jQuery를 사용 해보신 분. 혜택 및 복지 : 4대 보험, 주 5일제',
         '프론트', '신입', '최저시급', '2024-02-26', '2024-03-08', now());
 INSERT INTO board_tb
@@ -93,32 +93,32 @@ VALUES (2, '백엔드 개발자(팀장/리더)',
         '개발팀 총괄', '경력', '연봉협의', '2024-02-26', '2024-03-08', now());
 INSERT INTO board_tb
 (user_id, title, content, field, position, salary, opening_date, closing_date, created_at)
-VALUES (2, 'DBMS 기술 엔지니어',
+VALUES (3, 'DBMS 기술 엔지니어',
         '데이터베이스에 관심이 있거나 데이터베이스 전문가를 꿈꾸는 많은 인재들의 지원을 기다리겠습니다. 포지션 상세.. 주요 업무 : CUBRID DBMS 고객 기술지원. 자격 요건 : Linux, Windows 시스템 사용 능력. 우대 사항 : Java, PHP, Python 등 프로그래밍 가능자. 혜택 및 복지 : 4대 보험, 주 5일제',
         'DBMS', '경력 무관', '연봉협의', '2024-02-26', '2024-03-08', now());
 INSERT INTO board_tb
 (user_id, title, content, field, position, salary, opening_date, closing_date, created_at)
-VALUES (3, 'Server Engineer',
+VALUES (4, 'Server Engineer',
         '3PRO 서비스 전반 백엔드 시스템 엔지니어링. 포지션 상세.. 주요 업무 : 내/외부의 다양한 클라이언트를 위한 REST API 개발, Server Engineer 2. 자격 요건 : Typescript에 대한 이해와 활용 경험이 있는 분. 우대 사항 :  100만 이상의 사용자를 가진 시스템을 설계/개발/운영한 경험이 있는 분. 혜택 및 복지 : 4대 보험, 주 5일제',
         '백엔드', '경력', '연봉협의', '2024-02-26', '2024-03-08', now());
 INSERT INTO board_tb
 (user_id, title, content, field, position, salary, opening_date, closing_date, created_at)
-VALUES (3, 'python 개발자(5년 이상)',
+VALUES (5, 'python 개발자(5년 이상)',
         '함께 성장할 파이썬 개발자를 모십니다. 포지션 상세.. 주요 업무 : python을 이용한 코어 모듈 고도화 작업. 자격 요건 : Python. 우대 사항 : 객체지향 프로그래밍 개발 실무 경험이 있는 분. 혜택 및 복지 : 4대 보험, 주 5일제',
         '백엔드', '경력', '연봉협의', '2024-02-26', '2024-03-08', now());
 INSERT INTO board_tb
 (user_id, title, content, field, position, salary, opening_date, closing_date, created_at)
-VALUES (3, '웹 서비스 개발자',
+VALUES (1, '웹 서비스 개발자',
         '엔터테인먼트 컨텐츠에 촉각을 전달할 수 있는 햅틱 기기와 소프트웨어를 글로벌 고객에게 제공합니다. 포지션 상세.. 주요 업무 : Web 기반 서비스 개발 및 운영(bHaptics Designer, Studio, Developer Portal 등). 자격 요건 : React 개발 3년 이상이신 분. 우대 사항 : Full-Stack 경험이 있으신 분. 혜택 및 복지 : 4대 보험, 주 5일제',
         '프론트', '경력', '연봉협의', '2024-02-26', '2024-03-08', now());
 INSERT INTO board_tb
 (user_id, title, content, field, position, salary, opening_date, closing_date, created_at)
-VALUES (3, 'AI 개발자(신입)',
+VALUES (2, 'AI 개발자(신입)',
         '"정도기술로 세상을 이롭게 한다"는 기업이념을 가지고 있습니다. 포지션 상세.. 주요 업무 : 메타버스 AI 모델 설계 및 학습. 자격 요건 : Linux 서버. 우대 사항 : 기계학습 및 인공지능 관련 이해 혹은 관련분야 전공자. 혜택 및 복지 : 4대 보험, 주 5일제',
         'AI', '신입', '최저시급', '2024-02-26', '2024-03-08', now());
 INSERT INTO board_tb
 (user_id, title, content, field, position, salary, opening_date, closing_date, created_at)
-VALUES (4, '게임 기획',
+VALUES (3, '게임 기획',
         '오늘에 멈추지 않고 더 나은 답을 향해 끊임없이 고민하고 함께 변화할 사람을 찾습니다. 포지션 상세.. 주요 업무 : 라이브 서비스 진행 중인 포코 시리즈 프로젝트 게임 기획. 자격 요건 : 퍼즐 장르에 대한 이해와 관심을 가지신 분. 우대 사항 : 추상적인 아이디어를 논리적으로 정돈할 수 있으신 분. 혜택 및 복지 : 4대 보험, 주 5일제',
         '기획', '신입', '최저시급', '2024-02-26', '2024-03-08', now());
 INSERT INTO board_tb
@@ -128,27 +128,27 @@ VALUES (4, '영상처리 개발자',
         '프로그래밍', '신입', '최저시급', '2024-02-26', '2024-03-08', now());
 INSERT INTO board_tb
 (user_id, title, content, field, position, salary, opening_date, closing_date, created_at)
-VALUES (4, 'Cloud Security Engineer',
+VALUES (5, 'Cloud Security Engineer',
         '클라우드 보안 비즈니스를 리드해 나갈 분을 찾습니다. 포지션 상세.. 주요 업무 : AWS, GCP, Azure와 같은 Public Cloud 및 On-premise 환경에 적합한 보안 컴플라이언스(Compliance as Code) 및 보안 정책(Policy as Code)을 연구. 자격 요건 : 셀프 모티베이션에 능숙하신 분. 우대 사항 : 정보보호학, 컴퓨터 관련 학과 학부(석사) 졸업(예정자). 혜택 및 복지 : 4대 보험, 주 5일제',
         '기획자', '신입', '최저시급', '2024-02-26', '2024-03-08', now());
 INSERT INTO board_tb
 (user_id, title, content, field, position, salary, opening_date, closing_date, created_at)
-VALUES (4, '정보보안 엔지니어',
+VALUES (1, '정보보안 엔지니어',
         '개인의 역량, 적성, 포부와 맞는 커리어 플랜을 만들어보세요. 포지션 상세.. 주요 업무 : 정보보안 정책에 따라 정보보호 시스템 및 솔루션 및 장비를 운영. 자격 요건 : 정보보호 기술과 시스템 운영 경험. 우대 사항 : 보안 인증(ISO27001, ISMS-P, CSAP 등) 취득 과정에서 수행 경험이 있으신 분. 혜택 및 복지 : 4대 보험, 주 5일제',
         '보안', '신입', '최저시급', '2024-02-26', '2024-03-08', now());
 INSERT INTO board_tb
 (user_id, title, content, field, position, salary, opening_date, closing_date, created_at)
-VALUES (5, 'Product Manager',
+VALUES (2, 'Product Manager',
         '함께 채용 시장을 혁신하고, 인재 검증 플랫폼을 만들어갈 개발자를 찾습니다. 포지션 상세.. 주요 업무 : 해당 포지션은 평판조회 플랫폼 지원자/작성자 영역을 집중적으로 기획합니다. 자격 요건 : 5년 이상의 서비스 기획 및 PM 경험 . 우대 사항 : 플랫폼의 Admin 기획을 진행한 경험 . 혜택 및 복지 : 4대 보험, 주 5일제',
         '기획', '경력', '연봉협의', '2024-02-26', '2024-03-08', now());
 INSERT INTO board_tb
 (user_id, title, content, field, position, salary, opening_date, closing_date, created_at)
-VALUES (5, 'JAVA기반 시스템 설계/개발 (모빌리티 시스템)',
+VALUES (3, 'JAVA기반 시스템 설계/개발 (모빌리티 시스템)',
         '디지털 혁신의 중심, 웅진에서 세상을 바꾸는 기회에 도전하세요. 포지션 상세.. 주요 업무 : 자사 모빌리티 솔루션(WDMS) 프로젝트 수행. 자격 요건 :  설계/개발 경력 10년 이상 . 우대 사항 : Vue.js, React.js, javascript(ES6) 개발 경험. 혜택 및 복지 : 4대 보험, 주 5일제',
         '프로그래밍', '경력', '연봉협의', '2024-02-26', '2024-03-08', now());
 INSERT INTO board_tb
 (user_id, title, content, field, position, salary, opening_date, closing_date, created_at)
-VALUES (5, '블록체인 전송 시스템 운영 담당자',
+VALUES (4, '블록체인 전송 시스템 운영 담당자',
         '무한한 상상력을 현실로 만드는 위메이드와 함께 하실 분은 지원해 주세요. 포지션 상세.. 주요 업무 : 게시판, 백 오피스 구축, 연동, api 연동. 자격 요건 : IT 관련 학과를 졸업하신 분 (전문학사 이상). 우대 사항 : 블록체인에 대해 관심이 있으신 분. 혜택 및 복지 : 4대 보험, 주 5일제',
         '시스템 운영', '신입', '최저시급', '2024-02-26', '2024-03-08', now());
 INSERT INTO board_tb
@@ -291,84 +291,93 @@ INSERT INTO rating_tb
     (rater_id, subject_id, rating, created_at)
 VALUES (1, 6, 3, now());
 
--- -- subscribe_tb (기업이 이력서를 구독)
+-- subscribe_tb (기업이 이력서를 구독)
 INSERT INTO subscribe_tb
-(user_id, board_id, resume_id, created_at)
+    (user_id, board_id, resume_id, created_at)
 VALUES (1, null, 1, now());
 INSERT INTO subscribe_tb
-(user_id, board_id, resume_id, created_at)
+    (user_id, board_id, resume_id, created_at)
 VALUES (1, null, 2, now());
 INSERT INTO subscribe_tb
-(user_id, board_id, resume_id, created_at)
+    (user_id, board_id, resume_id, created_at)
 VALUES (2, null, 3, now());
 INSERT INTO subscribe_tb
-(user_id, board_id, resume_id, created_at)
+    (user_id, board_id, resume_id, created_at)
 VALUES (2, null, 4, now());
 INSERT INTO subscribe_tb
-(user_id, board_id, resume_id, created_at)
+    (user_id, board_id, resume_id, created_at)
 VALUES (3, null, 5, now());
 INSERT INTO subscribe_tb
-(user_id, board_id, resume_id, created_at)
+    (user_id, board_id, resume_id, created_at)
 VALUES (3, null, 6, now());
 INSERT INTO subscribe_tb
-(user_id, board_id, resume_id, created_at)
+    (user_id, board_id, resume_id, created_at)
 VALUES (4, null, 7, now());
 INSERT INTO subscribe_tb
-(user_id, board_id, resume_id, created_at)
+    (user_id, board_id, resume_id, created_at)
 VALUES (4, null, 8, now());
 INSERT INTO subscribe_tb
-(user_id, board_id, resume_id, created_at)
+    (user_id, board_id, resume_id, created_at)
 VALUES (5, null, 9, now());
 INSERT INTO subscribe_tb
-(user_id, board_id, resume_id, created_at)
+    (user_id, board_id, resume_id, created_at)
 VALUES (5, null, 10, now());
--- -- subscribe_tb (개인이 기업을 )
+
+-- subscribe_tb (개인이 공고를 구독)
 INSERT INTO subscribe_tb
-(user_id, board_id, resume_id, created_at)
-VALUES (6, 1, null, now());
-INSERT INTO subscribe_tb
-(user_id, board_id, resume_id, created_at)
+    (user_id, board_id, resume_id, created_at)
 VALUES (6, 2, null, now());
 INSERT INTO subscribe_tb
-(user_id, board_id, resume_id, created_at)
+    (user_id, board_id, resume_id, created_at)
 VALUES (7, 3, null, now());
 INSERT INTO subscribe_tb
-(user_id, board_id, resume_id, created_at)
+    (user_id, board_id, resume_id, created_at)
 VALUES (7, 4, null, now());
 INSERT INTO subscribe_tb
-(user_id, board_id, resume_id, created_at)
+    (user_id, board_id, resume_id, created_at)
 VALUES (8, 5, null, now());
 INSERT INTO subscribe_tb
-(user_id, board_id, resume_id, created_at)
+    (user_id, board_id, resume_id, created_at)
 VALUES (8, 6, null, now());
 INSERT INTO subscribe_tb
-(user_id, board_id, resume_id, created_at)
+    (user_id, board_id, resume_id, created_at)
 VALUES (9, 7, null, now());
 INSERT INTO subscribe_tb
-(user_id, board_id, resume_id, created_at)
+    (user_id, board_id, resume_id, created_at)
 VALUES (9, 8, null, now());
 INSERT INTO subscribe_tb
-(user_id, board_id, resume_id, created_at)
+    (user_id, board_id, resume_id, created_at)
 VALUES (10, 9, null, now());
 INSERT INTO subscribe_tb
-(user_id, board_id, resume_id, created_at)
+    (user_id, board_id, resume_id, created_at)
 VALUES (10, 10, null, now());
 INSERT INTO subscribe_tb
-(user_id, board_id, resume_id, created_at)
+    (user_id, board_id, resume_id, created_at)
 VALUES (11, 11, null, now());
 INSERT INTO subscribe_tb
-(user_id, board_id, resume_id, created_at)
+    (user_id, board_id, resume_id, created_at)
 VALUES (11, 12, null, now());
 
--- -- skill_tb
--- insert into skill_tb(board_id,employer_id,user_id,skill_name) values (1,1,null,'java');
--- insert into skill_tb(board_id,employer_id,user_id,skill_name) values (1,1,null,'javaScript');
--- insert into skill_tb(board_id,employer_id,user_id,skill_name) values (2,1,null,'java');
--- insert into skill_tb(board_id,employer_id,user_id,skill_name) values (5,2,null,'HTML');
--- insert into skill_tb(board_id,employer_id,user_id,skill_name) values (6,2,null,'Spring');
--- insert into skill_tb(resume_id,employer_id,user_id,skill_name) values (1,null,6,'java');
--- insert into skill_tb(resume_id,employer_id,user_id,skill_name) values (1,null,6,'javaScript');
--- insert into skill_tb(resume_id,employer_id,user_id,skill_name) values (2,null,7,'java');
--- insert into skill_tb(resume_id,employer_id,user_id,skill_name) values (5,null,8,'HTML');
--- insert into skill_tb(resume_id,employer_id,user_id,skill_name) values (6,null,8,'Spring');
--- insert into skill_tb(resume_id,employer_id,user_id,skill_name) values (6,null,8,'MySQL');
+-- skill_tb
+INSERT INTO skill_tb(board_id, user_id, name)
+VALUES (1, null, 'java');
+INSERT INTO skill_tb(board_id, user_id, name)
+VALUES (1, null, 'javaScript');
+INSERT INTO skill_tb(board_id, user_id, name)
+VALUES (2, null, 'java');
+INSERT INTO skill_tb(board_id, user_id, name)
+VALUES (5, null, 'HTML');
+INSERT INTO skill_tb(board_id, user_id, name)
+VALUES (6, null, 'Spring');
+INSERT INTO skill_tb(board_id, user_id, name)
+VALUES (null, 6, 'java');
+INSERT INTO skill_tb(board_id, user_id, name)
+VALUES (null, 6, 'javaScript');
+INSERT INTO skill_tb(board_id, user_id, name)
+VALUES (null, 7, 'java');
+INSERT INTO skill_tb(board_id, user_id, name)
+VALUES (null, 8, 'HTML');
+INSERT INTO skill_tb(board_id, user_id, name)
+VALUES (null, 8, 'Spring');
+INSERT INTO skill_tb(board_id, user_id, name)
+VALUES (null, 8, 'MySQL');

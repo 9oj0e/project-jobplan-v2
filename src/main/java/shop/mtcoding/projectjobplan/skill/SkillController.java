@@ -11,7 +11,7 @@ public class SkillController {
     private final SkillService skillService;
 
     @PostMapping("/users/{userId}/skill/add")
-    public String add(@PathVariable int userId, SkillRequest.DTO requestDTO){
+    public String add(@PathVariable int userId, SkillRequest.DTO requestDTO) {
         skillService.createSkillList(requestDTO, userId);
 
         return "redirect:/users/" + userId;

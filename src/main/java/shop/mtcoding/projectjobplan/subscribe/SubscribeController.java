@@ -8,15 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import shop.mtcoding.projectjobplan.board.Board;
-import shop.mtcoding.projectjobplan.board.BoardJpaRepository;
-import shop.mtcoding.projectjobplan.board.BoardService;
-import shop.mtcoding.projectjobplan.resume.Resume;
-import shop.mtcoding.projectjobplan.resume.ResumeJpaRepository;
 import shop.mtcoding.projectjobplan.user.User;
-import shop.mtcoding.projectjobplan.user.UserJpaRepository;
-
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @Controller

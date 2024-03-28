@@ -42,5 +42,4 @@ public class MyExceptionHandler {
         request.setAttribute("status", 500);
         return "error";
     }
-
 }

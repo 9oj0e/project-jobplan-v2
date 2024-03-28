@@ -7,14 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import shop.mtcoding.projectjobplan.board.BoardResponse;
-import shop.mtcoding.projectjobplan.board.BoardService;
-import shop.mtcoding.projectjobplan.resume.Resume;
-import shop.mtcoding.projectjobplan.resume.ResumeService;
 import shop.mtcoding.projectjobplan.user.User;
-
-import java.util.List;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @Controller
@@ -25,7 +18,7 @@ public class ApplyController {
     @GetMapping("/boards/{boardId}/apply-form")
     public String applyForm(@PathVariable int boardId, HttpServletRequest request) {
         User user = (User) session.getAttribute("sessionUser");
-        ApplyResponse.ApplyFormDTO responseDTO = applyService.getApplyForm(boardId, user);
+        ApplyResponse.ApplyFormDTO responseDTO = applyService.getBoardAndResume(boardId, user);
         request.setAttribute("applyForm", responseDTO);
 
         return "/apply/apply-form";

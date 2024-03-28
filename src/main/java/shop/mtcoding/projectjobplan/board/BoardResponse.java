@@ -2,7 +2,6 @@ package shop.mtcoding.projectjobplan.board;
 
 import lombok.Data;
 import shop.mtcoding.projectjobplan._core.utils.FormatUtil;
-import shop.mtcoding.projectjobplan.user.User;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -27,7 +26,7 @@ public class BoardResponse {
             this.salary = board.getSalary();
             this.content = board.getContent();
             this.openingDate = FormatUtil.timeFormatter(board.getOpeningDate());
-            this.closingDate =  FormatUtil.timeFormatter(board.getClosingDate());
+            this.closingDate = FormatUtil.timeFormatter(board.getClosingDate());
         }
     }
 
@@ -38,9 +37,10 @@ public class BoardResponse {
         private String phoneNumber;
         private String email;
         private String businessName;
-        private Boolean hasSubscribed; // 구독 여부
-        private Boolean boardOwner; // 공고 주인 여부
-
+        private boolean isBoardOwner; // 공고 주인 여부
+        private boolean hasSubscribed; // 구독 여부
+        // 평점
+        private Double rating;
         // board 정보
         private Integer id;
         private String title; // 제목
@@ -48,45 +48,27 @@ public class BoardResponse {
         private String field; // 채용 분야
         private String position; // 포지션
         private String salary; // 연봉
+        // skill 정보 (우대 스킬)
         private List<SkillDTO> skillList;
-
-        private Double rating; // 평점
-
+        // 시간 정보
         private Timestamp openingDate; // 게시일
         private Timestamp closingDate; // 마감일 == null -> "상시채용"
 
-        public DetailDTO(Board board, Double rating, Boolean isBoardOwner, Boolean hasSubscribed) { // sessionUser
-            this.id = board.getId();
+        public DetailDTO(Board board, Double rating, boolean isBoardOwner, boolean hasSubscribed) {
             this.address = board.getUser().getAddress();
             this.phoneNumber = board.getUser().getPhoneNumber();
             this.email = board.getUser().getEmail();
             this.businessName = board.getUser().getBusinessName();
-            this.title = board.getTitle();
-            this.content = board.getContent();
-            this.field = board.getField();
-            this.position = board.getPosition();
-            this.salary = board.getSalary();
-            this.skillList = board.getSkillList().stream().map(skill -> new SkillDTO(skill.getName())).toList();
-            this.rating = rating;
-            this.openingDate = board.getOpeningDate();
-            this.closingDate = board.getClosingDate();
-            this.boardOwner = isBoardOwner;
+            this.isBoardOwner = isBoardOwner;
             this.hasSubscribed = hasSubscribed;
-        }
-
-        public DetailDTO(Board board, Double rating) { // sessionUser null
+            this.rating = rating;
             this.id = board.getId();
-            this.address = board.getUser().getAddress();
-            this.phoneNumber = board.getUser().getPhoneNumber();
-            this.email = board.getUser().getEmail();
-            this.businessName = board.getUser().getBusinessName();
             this.title = board.getTitle();
             this.content = board.getContent();
             this.field = board.getField();
             this.position = board.getPosition();
             this.salary = board.getSalary();
             this.skillList = board.getSkillList().stream().map(skill -> new SkillDTO(skill.getName())).toList();
-            this.rating = rating;
             this.openingDate = board.getOpeningDate();
             this.closingDate = board.getClosingDate();
         }
@@ -107,7 +89,7 @@ public class BoardResponse {
             return FormatUtil.timeFormatter(this.closingDate);
         }
 
-        public Double getRating(){
+        public Double getRating() {
             return FormatUtil.numberFormatter(this.rating);
         }
 
@@ -138,6 +120,7 @@ public class BoardResponse {
             return FormatUtil.timeFormatter(closingDate);
         }
     }
+
     @Data
     public static class IndexDTO {
         // 공고 정보

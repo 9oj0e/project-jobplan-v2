@@ -34,6 +34,7 @@ public class BoardRequest {
 
         // toEntity
     }
+
     @Data
     public static class UpdateDTO {
         private String title;
