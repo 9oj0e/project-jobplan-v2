@@ -291,50 +291,74 @@ INSERT INTO rating_tb
     (rater_id, subject_id, rating, created_at)
 VALUES (1, 6, 3, now());
 
--- -- subscribe_tb (기업이 이력서를 구독) todo : dummy 수정
--- INSERT INTO subscribe_tb
--- (resume_id, resume_user_id, board_id, board_user_id, created_at)
--- VALUES (1, null, null, 1, now());
--- INSERT INTO subscribe_tb
--- (resume_id, resume_user_id, board_id, board_user_id, created_at)
--- VALUES (2, null, null, 1, now());
--- INSERT INTO subscribe_tb
--- (resume_id, resume_user_id, board_id, board_user_id, created_at)
--- VALUES (1, null, null, 2, now());
--- INSERT INTO subscribe_tb
--- (resume_id, resume_user_id, board_id, board_user_id, created_at)
--- VALUES (2, null, null, 2, now());
--- INSERT INTO subscribe_tb
--- (resume_id, resume_user_id, board_id, board_user_id, created_at)
--- VALUES (1, null, null, 3, now());
--- INSERT INTO subscribe_tb
--- (resume_id, resume_user_id, board_id, board_user_id, created_at)
--- VALUES (2, null, null, 3, now());
--- INSERT INTO subscribe_tb
--- (resume_id, resume_user_id, board_id, board_user_id, created_at)
--- VALUES (1, null, null, 4, now());
--- INSERT INTO subscribe_tb
--- (resume_id, resume_user_id, board_id, board_user_id, created_at)
--- VALUES (1, null, null, 5, now());
+-- -- subscribe_tb (기업이 이력서를 구독)
+INSERT INTO subscribe_tb
+(user_id, board_id, resume_id, created_at)
+VALUES (1, null, 1, now());
+INSERT INTO subscribe_tb
+(user_id, board_id, resume_id, created_at)
+VALUES (1, null, 2, now());
+INSERT INTO subscribe_tb
+(user_id, board_id, resume_id, created_at)
+VALUES (2, null, 3, now());
+INSERT INTO subscribe_tb
+(user_id, board_id, resume_id, created_at)
+VALUES (2, null, 4, now());
+INSERT INTO subscribe_tb
+(user_id, board_id, resume_id, created_at)
+VALUES (3, null, 5, now());
+INSERT INTO subscribe_tb
+(user_id, board_id, resume_id, created_at)
+VALUES (3, null, 6, now());
+INSERT INTO subscribe_tb
+(user_id, board_id, resume_id, created_at)
+VALUES (4, null, 7, now());
+INSERT INTO subscribe_tb
+(user_id, board_id, resume_id, created_at)
+VALUES (4, null, 8, now());
+INSERT INTO subscribe_tb
+(user_id, board_id, resume_id, created_at)
+VALUES (5, null, 9, now());
+INSERT INTO subscribe_tb
+(user_id, board_id, resume_id, created_at)
+VALUES (5, null, 10, now());
 -- -- subscribe_tb (개인이 기업을 )
--- INSERT INTO subscribe_tb
--- (resume_id, resume_user_id, board_id, board_user_id, created_at)
--- VALUES (null, 6, 1, null, now());
--- INSERT INTO subscribe_tb
--- (resume_id, resume_user_id, board_id, board_user_id, created_at)
--- VALUES (null, 6, 2, null, now());
--- INSERT INTO subscribe_tb
--- (resume_id, resume_user_id, board_id, board_user_id, created_at)
--- VALUES (null, 6, 3, null, now());
--- INSERT INTO subscribe_tb
--- (resume_id, resume_user_id, board_id, board_user_id, created_at)
--- VALUES (null, 7, 1, null, now());
--- INSERT INTO subscribe_tb
--- (resume_id, resume_user_id, board_id, board_user_id, created_at)
--- VALUES (null, 7, 4, null, now());;
--- INSERT INTO subscribe_tb
--- (resume_id, resume_user_id, board_id, board_user_id, created_at)
--- VALUES (null, 8, 7, null, now());
+INSERT INTO subscribe_tb
+(user_id, board_id, resume_id, created_at)
+VALUES (6, 1, null, now());
+INSERT INTO subscribe_tb
+(user_id, board_id, resume_id, created_at)
+VALUES (6, 2, null, now());
+INSERT INTO subscribe_tb
+(user_id, board_id, resume_id, created_at)
+VALUES (7, 3, null, now());
+INSERT INTO subscribe_tb
+(user_id, board_id, resume_id, created_at)
+VALUES (7, 4, null, now());
+INSERT INTO subscribe_tb
+(user_id, board_id, resume_id, created_at)
+VALUES (8, 5, null, now());
+INSERT INTO subscribe_tb
+(user_id, board_id, resume_id, created_at)
+VALUES (8, 6, null, now());
+INSERT INTO subscribe_tb
+(user_id, board_id, resume_id, created_at)
+VALUES (9, 7, null, now());
+INSERT INTO subscribe_tb
+(user_id, board_id, resume_id, created_at)
+VALUES (9, 8, null, now());
+INSERT INTO subscribe_tb
+(user_id, board_id, resume_id, created_at)
+VALUES (10, 9, null, now());
+INSERT INTO subscribe_tb
+(user_id, board_id, resume_id, created_at)
+VALUES (10, 10, null, now());
+INSERT INTO subscribe_tb
+(user_id, board_id, resume_id, created_at)
+VALUES (11, 11, null, now());
+INSERT INTO subscribe_tb
+(user_id, board_id, resume_id, created_at)
+VALUES (11, 12, null, now());
 
 -- -- skill_tb
 -- insert into skill_tb(board_id,employer_id,user_id,skill_name) values (1,1,null,'java');
