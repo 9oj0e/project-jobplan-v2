@@ -54,7 +54,7 @@ public class ResumeController {
     public String listings(HttpServletRequest request,
                            @PageableDefault(size = 10) Pageable pageable) {
         ResumeResponse.ListingsDTO responseDTO = resumeService.getAllResume(pageable);
-        request.setAttribute("page", responseDTO);
+        request.setAttribute("resumeList", responseDTO);
 
         return "/resume/listings";
     }

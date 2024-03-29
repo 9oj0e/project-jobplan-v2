@@ -45,9 +45,7 @@
                 </div>
             </div>
         </section>
-
         <hr>
-
         <div class="div-job-sector">
             <div>
                 <div class="div-recommendation">지역별</div>
@@ -71,7 +69,6 @@
                 <a class="text-body" name="address" href="?address=제주">제주</a>
                 <a class="text-body" name="address" href="?address=세종">세종</a>
             </div>
-
             <div>
                 <div class="div-recommendation">기술별</div>
                 <a class="text-body" name="skill" href="?skill=java">Java</a>
@@ -94,41 +91,43 @@
             </div>
         </div>
         <hr>
-        <div class="container mt-3">
-            <br>
-            <div class="div-recommendation mb-20">채용 정보</div>
-            <table class="table">
-                <th>지역</th>
-                <th>회사명</th>
-                <th>공고 제목</th>
-                <th>급여 정보</th>
-                <th>마감일</th>
-                {{#page.content}}
-                    <tr>
-                        <td>{{address}}</td>
-                        <td><a href="/boards/{{id}}" class="text-body">{{businessName}}</a></td>
-                        <td><a href="/boards/{{id}}" class="text-body">{{title}}</a></td>
-                        <td>{{salary}}</td>
-                        <td>{{closingDate}}</td>
-                    </tr>
-                {{/page.content}}
-            </table>
-            <div class="d-flex justify-content-center">
-                <ul class="pagination">
-                    <li class="page-item {{^page.hasPrevious}}disabled{{/page.hasPrevious}}">
-                        <a class="page-link" href="?page={{page.pageable.previousOrFirst.pageNumber}}">Previous</a>
-                    </li>
-                    {{#pageList}}
-                        <li class="page-item">
-                            <a class="page-link" href="?page={{.}}">{{.}}</a>
+        {{#boardList}}
+            <div class="container mt-3">
+                <br>
+                <div class="div-recommendation mb-20">채용 정보</div>
+                <table class="table">
+                    <th>지역</th>
+                    <th>회사명</th>
+                    <th>공고 제목</th>
+                    <th>급여 정보</th>
+                    <th>마감일</th>
+                    {{#page.content}}
+                        <tr>
+                            <td>{{address}}</td>
+                            <td><a href="/boards/{{id}}" class="text-body">{{businessName}}</a></td>
+                            <td><a href="/boards/{{id}}" class="text-body">{{title}}</a></td>
+                            <td>{{salary}}</td>
+                            <td>{{closingDate}}</td>
+                        </tr>
+                    {{/page.content}}
+                </table>
+                <div class="d-flex justify-content-center">
+                    <ul class="pagination">
+                        <li class="page-item {{^page.hasPrevious}}disabled{{/page.hasPrevious}}">
+                            <a class="page-link" href="?page={{page.pageable.previousOrFirst.pageNumber}}">Previous</a>
                         </li>
-                    {{/pageList}}
-                    <li class="page-item {{^page.hasNext}}disabled{{/page.hasNext}}">
-                        <a class="page-link" href="?page={{page.pageable.next.pageNumber}}">Next</a>
-                    </li>
-                </ul>
+                        {{#pageList}}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{.}}">{{.}}</a>
+                            </li>
+                        {{/pageList}}
+                        <li class="page-item {{^page.hasNext}}disabled{{/page.hasNext}}">
+                            <a class="page-link" href="?page={{page.pageable.next.pageNumber}}">Next</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
+        {{/boardList}}
     </div>
 </main>
 <!-- 바디 end -->
