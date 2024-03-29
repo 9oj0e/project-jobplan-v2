@@ -1,6 +1,10 @@
 package shop.mtcoding.projectjobplan.user;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import shop.mtcoding.projectjobplan._core.errors.exception.Exception400;
@@ -42,6 +46,12 @@ public class UserService {
         return sessionUser;
     }
 
+    public Page<Apply> getApplyPage(Long userId, int pageNumber, int pageSize) {
+        // 지정된 사용자의 지원 내역을 가져오기
+        Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by(Sort.Direction.DESC, "id"));
+        return applyJpaRepository.findAll(pageable);
+    }
+
     public UserResponse.ProfileDTO getUser(User sessionUser, Integer boardId) {
         User user = userJpaRepository.findById(sessionUser.getId()).get();
         List<Apply> applyList;
@@ -50,6 +60,15 @@ public class UserService {
             if (boardId == null) {
                 // (기업) 모든 지원자 현황 보기
                 applyList = applyJpaRepository.findByBoardUserId(user.getId());
+                int applyListSize = applyList.size(); // 리스트 사이즈
+
+                // 페이지 수
+                int pageNumber = Math.max((int) Math.ceil(applyListSize / 3.0) - 1, 0);
+
+                Sort sort = Sort.by(Sort.Direction.DESC, "id");
+                Pageable pageable = PageRequest.of(pageNumber, 3, sort);
+
+                Page<Apply> applyPage = applyJpaRepository.findAll(pageable);
             } else {
                 // (기업) 공고별 지원자 보기
                 applyList = applyJpaRepository.findByBoardId(boardId);
