@@ -2,6 +2,7 @@ package shop.mtcoding.projectjobplan.subscribe;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import shop.mtcoding.projectjobplan.board.Board;
 import shop.mtcoding.projectjobplan.board.BoardJpaRepository;
@@ -37,11 +38,11 @@ public class SubscribeService {
         subscribeJpaRepository.save(subscribe);
     }
 
-    public SubscribeResponse.DTO getSubscription(int userId) { // 구독 리스트 불러오기
+    public SubscribeResponse.DTO getSubscription(int userId, Pageable pageable) { // 구독 리스트 불러오기
         User user = userJpaRepository.findById(userId).get();
         List<Subscribe> subscription = subscribeJpaRepository.findByUserId(userId).get();
 
-        return new SubscribeResponse.DTO(user, subscription);
+        return new SubscribeResponse.DTO(user, subscription, pageable);
     }
 
     @Transactional // 공고 구독 중지

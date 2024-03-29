@@ -1,26 +1,37 @@
 package shop.mtcoding.projectjobplan.subscribe;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import shop.mtcoding.projectjobplan._core.utils.FormatUtil;
+import shop.mtcoding.projectjobplan._core.utils.PagingUtil;
 import shop.mtcoding.projectjobplan.board.Board;
 import shop.mtcoding.projectjobplan.resume.Resume;
 import shop.mtcoding.projectjobplan.user.User;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SubscribeResponse {
     @Data
     public static class DTO {
-        private List<BoardDTO> boardList;
-        private List<ResumeDTO> resumeList;
+        private Page<?> page;
+        private List<Integer> pageList;
+        private Pageable pageable;
 
-        public DTO(User user, List<Subscribe> subscription) {
+        public DTO(User user, List<Subscribe> subscription, Pageable pageable) {
+            this.pageable = pageable;
             if (user.getIsEmployer()) {
-                this.resumeList = subscription.stream().map(subscribe -> new ResumeDTO(subscribe.getResume())).toList();
+                List<ResumeDTO> resumeList = subscription.stream().map(subscribe -> new ResumeDTO(subscribe.getResume())).toList();
+                this.page = PagingUtil.pageConverter(resumeList, pageable);
+                // todo : fix problem; pageList returns '#'
             } else {
-                this.boardList = subscription.stream().map(subscribe -> new BoardDTO(subscribe.getBoard())).toList();
+                List<BoardDTO> boardList = subscription.stream().map(subscribe -> new BoardDTO(subscribe.getBoard())).toList();
+                this.page = PagingUtil.pageConverter(boardList, pageable);
             }
+            this.pageList = PagingUtil.getPageList(this.page);
         }
 
         // (개인) 공고 구독 목록

@@ -116,7 +116,7 @@ public class ResumeResponse {
     }
 
     @Data
-    public static class MainDTO {
+    public static class ListingsDTO {
         // resume_tb
         private Integer id;
         private String career;
@@ -125,7 +125,7 @@ public class ResumeResponse {
         // user_tb
         private String name;
 
-        public MainDTO(Resume resume) {
+        public ListingsDTO(Resume resume) {
             this.id = resume.getId();
             this.career = resume.getCareer();
             this.title = resume.getTitle();
