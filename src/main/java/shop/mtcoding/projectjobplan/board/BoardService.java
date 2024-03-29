@@ -145,4 +145,11 @@ public class BoardService {
         return responseDTO;
 
     }
+
+    public List<BoardResponse.ListingsDTO> getAllBoardKeyword(String keyword) {
+        List<BoardResponse.ListingsDTO> responseDTO = new ArrayList<>();
+        List<Board> boardList = boardJpaRepository.findAllBoardJoinUserKeyword(keyword).get();
+        boardList.stream().forEach(board -> responseDTO.add(new BoardResponse.ListingsDTO(board)));
+        return responseDTO;
+    }
 }

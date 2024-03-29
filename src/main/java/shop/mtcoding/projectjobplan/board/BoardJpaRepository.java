@@ -22,4 +22,7 @@ public interface BoardJpaRepository extends JpaRepository<Board, Integer> {
 
     @Query("SELECT b FROM Board b JOIN FETCH b.user u where u.address like %:address% ORDER BY b.createdAt DESC")
     Optional<List<Board>> findAllBoardJoinUserAddress(String address);
+
+    @Query("select b from Board b where b.title like %:keyword% or b.content like %:keyword%")
+    Optional<List<Board>> findAllBoardJoinUserKeyword(String keyword);
 }
