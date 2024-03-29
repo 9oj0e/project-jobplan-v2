@@ -1,10 +1,13 @@
 package shop.mtcoding.projectjobplan.resume;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import shop.mtcoding.projectjobplan._core.errors.exception.Exception403;
 import shop.mtcoding.projectjobplan._core.errors.exception.Exception404;
+import shop.mtcoding.projectjobplan._core.utils.PagingUtil;
 import shop.mtcoding.projectjobplan.apply.ApplyResponse;
 import shop.mtcoding.projectjobplan.rating.RatingJpaRepository;
 import shop.mtcoding.projectjobplan.subscribe.Subscribe;
@@ -44,13 +47,12 @@ public class ResumeService {
         return new ResumeResponse.DetailDTO(resume, rating, isResumeOwner, hasSubscribed);
     }
 
-    public List<ResumeResponse.MainDTO> getAllResume() {
-        // todo : pagination
-        List<ResumeResponse.MainDTO> responseDTO = new ArrayList<>();
-        List<Resume> resumeList = resumeJpaRepository.findAllResume().get();
-        resumeList.stream().forEach(resume -> responseDTO.add(new ResumeResponse.MainDTO(resume)));
+    public Page<ResumeResponse.ListingsDTO> getAllResume(Pageable pageable) {
+        List<ResumeResponse.ListingsDTO> responseDTO = new ArrayList<>();
+        List<Resume> resumeList = resumeJpaRepository.findAllJoinUser().get();
+        resumeList.stream().forEach(resume -> responseDTO.add(new ResumeResponse.ListingsDTO(resume)));
 
-        return responseDTO;
+        return PagingUtil.pageConverter(responseDTO, pageable);
     }
 
     // 이력서수정폼

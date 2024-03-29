@@ -57,12 +57,24 @@ public class BoardService {
         return new BoardResponse.DetailDTO(board, rating, isBoardOwner, hasSubscribed);
     }
 
-    public Page<BoardResponse.ListingsDTO> getAllBoard(Pageable pageable) { // board/listings
+    // board/listings
+    public Page<BoardResponse.ListingsDTO> getAllBoard(Pageable pageable, String skill, String address, String keyword) {
         List<BoardResponse.ListingsDTO> responseDTO = new ArrayList<>();
-        List<Board> boardList = boardJpaRepository.findAllBoardJoinUser().get();
-        boardList.stream().forEach(board -> responseDTO.add(new BoardResponse.ListingsDTO(board)));
 
-        return PagingUtil.getPage(responseDTO, pageable);
+        if (skill != null) { // 기술별 검색시
+            List<Board> boardList = boardJpaRepository.findAllJoinUserWithSkill(skill).get();
+            boardList.stream().forEach(board -> responseDTO.add(new BoardResponse.ListingsDTO(board)));
+        } else if (address != null) { // 지역별 검색시
+            List<Board> boardList = boardJpaRepository.findAllJoinUserWithAddress(address).get();
+            boardList.stream().forEach(board -> responseDTO.add(new BoardResponse.ListingsDTO(board)));
+        } else if (keyword != null) { // 검색창 이용시
+            List<Board> boardList = boardJpaRepository.findAllJoinUserWithKeyword(keyword).get();
+            boardList.stream().forEach(board -> responseDTO.add(new BoardResponse.ListingsDTO(board)));
+        } else { // 모든 페이지
+            List<Board> boardList = boardJpaRepository.findAllJoinUser().get();
+            boardList.stream().forEach(board -> responseDTO.add(new BoardResponse.ListingsDTO(board)));
+        }
+        return PagingUtil.pageConverter(responseDTO, pageable);
     }
 
     public List<BoardResponse.IndexDTO> getAllBoardOnIndex() { // index

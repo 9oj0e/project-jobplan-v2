@@ -11,7 +11,7 @@ import java.util.stream.IntStream;
 
 public class PagingUtil {
 
-    public static <T> Page<T> getPage(List<T> content, Pageable pageable) {
+    public static <T> Page<T> pageConverter(List<T> content, Pageable pageable) {
         int start = (int) pageable.getOffset();
         int end = Math.min((start + pageable.getPageSize()), content.size());
 
@@ -19,12 +19,12 @@ public class PagingUtil {
         if (start <= end) {
             pageData = content.subList(start, end);
         }
-
         return new PageImpl<>(pageData, pageable, content.size());
     }
 
     public static List<Integer> getPageList(Page<?> page) {
         List<Integer> pageNumbers = new ArrayList<>();
+
         for (int i = 0; i < page.getTotalPages(); i++) {
             pageNumbers.add(i);
         }

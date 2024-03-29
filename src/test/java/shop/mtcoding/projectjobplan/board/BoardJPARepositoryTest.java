@@ -13,11 +13,13 @@ public class BoardJPARepositoryTest {
     @Autowired
     private BoardJpaRepository boardJpaRepository;
     @Test
-    public void findByUserId_test(){
+    public void findAllBoardJoinUserSkill_test(){
         // given
-        int userId = 1 ;
+        String skill = "java" ;
+
         // when
-       List<Board> boardList = boardJpaRepository.findAllByUserId(userId);
+       List<Board> boardList = boardJpaRepository.findAllBoardJoinUserSkill(skill).get();
+
         // then
         System.out.println(boardList);
     }

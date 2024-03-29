@@ -22,7 +22,7 @@ public class BoardController {
     private final HttpSession session;
     private final BoardService boardService;
 
-    @GetMapping({"/", "/boards"})
+    @GetMapping("/")
     public String index(HttpServletRequest request) {
 
         List<BoardResponse.IndexDTO> responseDTO = boardService.getAllBoardOnIndex();
@@ -60,14 +60,15 @@ public class BoardController {
         return "/board/detail";
     }
 
-    @GetMapping("/boards/listings")
+    @GetMapping("/boards")
     public String listings(HttpServletRequest request,
                            @PageableDefault(size = 10) Pageable pageable,
-                           @RequestParam(defaultValue = "0") int page) {
-        Page<BoardResponse.ListingsDTO> responseDTO = boardService.getAllBoard(pageable);
+                           @RequestParam(value = "skill", required = false) String skill,
+                           @RequestParam(value = "address", required = false) String address,
+                           @RequestParam(value = "keyword", required = false) String keyword) {
+        Page<BoardResponse.ListingsDTO> responseDTO = boardService.getAllBoard(pageable, skill, address, keyword);
         request.setAttribute("page", responseDTO);
         request.setAttribute("pageList", PagingUtil.getPageList(responseDTO));
-        request.setAttribute("currentPage", page == responseDTO.getPageable().getPageNumber() ? true : false);
 
         return "/board/listings";
     }
