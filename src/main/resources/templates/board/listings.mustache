@@ -68,7 +68,7 @@
                 <th>공고 제목</th>
                 <th>급여 정보</th>
                 <th>마감일</th>
-                {{#boardList}}
+                {{#boardList.content}}
                     <tr>
                         <td>{{address}}</td>
                         <td><a href="/boards/{{id}}" class="text-body">{{businessName}}</a></td>
@@ -76,8 +76,28 @@
                         <td>{{salary}}</td>
                         <td>{{closingDate}}</td>
                     </tr>
-                {{/boardList}}
+                {{/boardList.content}}
             </table>
+            <div class="d-flex justify-content-center">
+                {{#boardList}}
+                <ul class="pagination">
+                    {{#hasPrevious}}
+                        <li class="page-item disabled"><a class="page-link" href="/boards/listings?page={{number - 1}}">Previous</a></li>
+                    {{/boardList.hasPrevious}}
+                    {{#boardList.isFirst}}
+                        <li class="page-item"><a class="page-link" href="/boards/listings?page=0">First</a></li>
+                    {{/boardList.isFirst}}
+                    {{#boardList.isLast}}
+                        <li class="page-item"><a class="page-link" href="/boards/listings?page={{totalPages - 1}}
+                            ">Last</a></li>
+                    {{/boardList.isLast}}
+                    {{#boardList.hasNext}}
+                        <li class="page-item disabled"><a class="page-link" href="/boards/listings?page={{number + 1}}
+                            ">Next</a></li>
+                    {{/boardList.hasNext}}
+                </ul>
+                {{/boardList}}
+            </div>
         </div>
     </div>
 </main>

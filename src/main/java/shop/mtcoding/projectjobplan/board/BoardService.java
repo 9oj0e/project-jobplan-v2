@@ -1,10 +1,13 @@
 package shop.mtcoding.projectjobplan.board;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import shop.mtcoding.projectjobplan._core.errors.exception.Exception403;
 import shop.mtcoding.projectjobplan._core.errors.exception.Exception404;
+import shop.mtcoding.projectjobplan._core.utils.PagingUtil;
 import shop.mtcoding.projectjobplan.rating.RatingJpaRepository;
 import shop.mtcoding.projectjobplan.skill.Skill;
 import shop.mtcoding.projectjobplan.skill.SkillJpaRepository;
@@ -54,12 +57,13 @@ public class BoardService {
 
     }
 
-    public List<BoardResponse.ListingsDTO> getAllBoard() { // board/listings
+    public Page<BoardResponse.ListingsDTO> getAllBoard(Pageable pageable) { // board/listings
         List<BoardResponse.ListingsDTO> responseDTO = new ArrayList<>();
         List<Board> boardList = boardJpaRepository.findAllBoardJoinUser().get();
         boardList.stream().forEach(board -> responseDTO.add(new BoardResponse.ListingsDTO(board)));
 
-        return responseDTO;
+
+        return PagingUtil.getPage(responseDTO, pageable);
     }
 
     public List<BoardResponse.IndexDTO> getAllBoardOnIndex() { // index
