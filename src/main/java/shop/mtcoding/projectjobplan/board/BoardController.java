@@ -61,22 +61,8 @@ public class BoardController {
                            @RequestParam(value = "address", required = false) String address,
                            @RequestParam(value = "keyword", required = false) String keyword) {
 
-        if (skill != null) {
-            List<BoardResponse.ListingsDTO> responseDTO = boardService.getAllBoardSkill(skill);
-            request.setAttribute("boardList", responseDTO);
-
-        } else if (address != null) {
-            List<BoardResponse.ListingsDTO> responseDTO = boardService.getAllBoardAddress(address);
-            request.setAttribute("boardList", responseDTO);
-
-        } else if (keyword != null) {
-            List<BoardResponse.ListingsDTO> responseDTO = boardService.getAllBoardKeyword(keyword);
-            request.setAttribute("boardList", responseDTO);
-        } else {
-            List<BoardResponse.ListingsDTO> responseDTO = boardService.getAllBoard();
-            request.setAttribute("boardList", responseDTO);
-
-        }
+        List<BoardResponse.ListingsDTO> responseDTO = boardService.getAllBoard(skill,address,keyword);
+        request.setAttribute("boardList", responseDTO);
 
         return "/board/listings";
     }
