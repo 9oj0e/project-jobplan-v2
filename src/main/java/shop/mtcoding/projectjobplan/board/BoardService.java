@@ -58,25 +58,25 @@ public class BoardService {
         //기술별 검색시
         if (skill != null) {
             List<BoardResponse.ListingsDTO> responseDTO = new ArrayList<>();
-            List<Board> boardList = boardJpaRepository.findAllBoardJoinUserSkill(skill).get();
+            List<Board> boardList = boardJpaRepository.findAllBoardJoinUserSkill(skill).orElseThrow(() -> new Exception404("조회된 게시글이 없습니다."));
             boardList.stream().forEach(board -> responseDTO.add(new BoardResponse.ListingsDTO(board)));
             return responseDTO;
         //지역별 검색시
         } else if (address != null) {
             List<BoardResponse.ListingsDTO> responseDTO = new ArrayList<>();
-            List<Board> boardList = boardJpaRepository.findAllBoardJoinUserAddress(address).get();
+            List<Board> boardList = boardJpaRepository.findAllBoardJoinUserAddress(address).orElseThrow(() -> new Exception404("조회된 게시글이 없습니다."));
             boardList.stream().forEach(board -> responseDTO.add(new BoardResponse.ListingsDTO(board)));
             return responseDTO;
         //검색창 이용시
         } else if (keyword != null) {
             List<BoardResponse.ListingsDTO> responseDTO = new ArrayList<>();
-            List<Board> boardList = boardJpaRepository.findAllBoardJoinUserKeyword(keyword).get();
+            List<Board> boardList = boardJpaRepository.findAllBoardJoinUserKeyword(keyword).orElseThrow(() -> new Exception404("조회된 게시글이 없습니다."));
             boardList.stream().forEach(board -> responseDTO.add(new BoardResponse.ListingsDTO(board)));
             return responseDTO;
         //모든 페이지
         } else {
             List<BoardResponse.ListingsDTO> responseDTO = new ArrayList<>();
-            List<Board> boardList = boardJpaRepository.findAllBoardJoinUser().get();
+            List<Board> boardList = boardJpaRepository.findAllBoardJoinUser().orElseThrow(() -> new Exception404("조회된 게시글이 없습니다."));
             boardList.stream().forEach(board -> responseDTO.add(new BoardResponse.ListingsDTO(board)));
             return responseDTO;
 
