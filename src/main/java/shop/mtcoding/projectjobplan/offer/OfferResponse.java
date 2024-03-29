@@ -37,7 +37,7 @@ public class OfferResponse {
         }
 
         // 제안 폼 DTO
-        private OfferFormDTO(Resume resume, List<Board> boardList) {
+        OfferFormDTO(Resume resume, List<Board> boardList) {
             this.resumeId = resume.getId();
             this.title = resume.getTitle();
             this.username = resume.getUser().getName();
