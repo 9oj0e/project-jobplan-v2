@@ -3,11 +3,14 @@ package shop.mtcoding.projectjobplan.subscribe;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import shop.mtcoding.projectjobplan._core.utils.PagingUtil;
 import shop.mtcoding.projectjobplan.user.User;
 
 @RequiredArgsConstructor
@@ -33,15 +36,18 @@ public class SubscribeController {
     }
 
     @GetMapping("/users/{userId}/subscription") // 구독 리스트
-    public String subscription(@PathVariable int userId, HttpServletRequest request) {
+    public String subscription(@PathVariable int userId,
+                               HttpServletRequest request,
+                               @PageableDefault(size = 3) Pageable pageable) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        SubscribeResponse.DTO subscription = subscribeService.getSubscription(sessionUser.getId());
+        SubscribeResponse.DTO subscription = subscribeService.getSubscription(sessionUser.getId(), pageable);
         /* todo : null일 때 표시할 내용이 없다고 알리는 방법?
         if (subscription.getBoardList().isEmpty() && subscription.getResumeList().isEmpty()) {
             request.setAttribute("subscription", false);
         }
         */
         request.setAttribute("subscription", subscription);
+
         return "user/subscription";
     }
 

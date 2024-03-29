@@ -69,6 +69,7 @@ public class BoardController {
         Page<BoardResponse.ListingsDTO> responseDTO = boardService.getAllBoard(pageable, skill, address, keyword);
         request.setAttribute("page", responseDTO);
         request.setAttribute("pageList", PagingUtil.getPageList(responseDTO));
+        // todo : ?keyword=...&page=... 만드는 방법?
 
         return "/board/listings";
     }

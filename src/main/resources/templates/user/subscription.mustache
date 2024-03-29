@@ -34,7 +34,7 @@
                 <th></th>
             </tr>
             {{#subscription}}
-                {{#resumeList}}
+                {{#page.content}}
                     <tr>
                         <td>{{birthdate}}</td>
                         <td>{{resumeUserName}}</td>
@@ -49,31 +49,8 @@
                             </form>
                         </td>
                     </tr>
-                {{/resumeList}}
+                {{/page.content}}
             {{/subscription}}
-            {{^subscription}}
-                <tr>
-                    표시할 내용이 없습니다.
-                </tr>
-            {{/subscription}}
-            <!--
-            <tr>
-                <td>이가탄</td>
-                <td>
-                    <div class="div-recommendation-text-1">
-                        <span>Java</span>
-                        <span>HTML</span>
-                        <span>JavaScript</span>
-                    </div>
-                    <div class="div-recommendation-text-2">이력서 제목</div>
-                </td>
-                <td>
-                    <form action="">
-                        <button class="btn btn-danger">구독 취소</button>
-                    </form>
-                </td>
-            </tr>
-            -->
         </table>
         <div class="d-flex justify-content-center">
             <ul class="pagination">
@@ -97,7 +74,7 @@
                 <th></th>
             </tr>
             {{#subscription}}
-                {{#boardList}}
+                {{#page.content}}
                     <tr>
                         <td>{{address}}</td>
                         <td>{{businessName}}</td>
@@ -114,20 +91,23 @@
                             </form>
                         </td>
                     </tr>
-                {{/boardList}}
-            {{/subscription}}
-            {{^subscription}}
-                <tr>
-                    표시할 내용이 없습니다.
-                </tr>
+                {{/page.content}}
             {{/subscription}}
         </table>
         <div class="d-flex justify-content-center">
             <ul class="pagination">
-                <li class="page-item disabled"><a class="page-link" href="?page=#">Previous</a></li>
-                <li class="page-item"><a class="page-link" href="?page=#">1</a></li>
-                <li class="page-item"><a class="page-link" href="?page=#">2</a></li>
-                <li class="page-item disabled"><a class="page-link" href="?page=#">Next</a></li>
+                <li class="page-item {{^subscription.page.hasPrevious}}disabled{{/subscription.page.hasPrevious}}">
+                    <a class="page-link" href="?page={{subscription.page.pageable.previousOrFirst.pageNumber}}
+                    ">Previous</a>
+                </li>
+                {{#subscription.pageList}}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{.}}">{{.}}</a>
+                    </li>
+                {{/subscription.pageList}}
+                <li class="page-item {{^subscription.page.hasNext}}disabled{{/subscription.page.hasNext}}">
+                    <a class="page-link" href="?page={{subscription.page.pageable.next.pageNumber}}">Next</a>
+                </li>
             </ul>
         </div>
         </div>
