@@ -60,18 +60,17 @@ public class BoardService {
     // board/listings
     public Page<BoardResponse.ListingsDTO> getAllBoard(Pageable pageable, String skill, String address, String keyword) {
         List<BoardResponse.ListingsDTO> responseDTO = new ArrayList<>();
-
         if (skill != null) { // 기술별 검색시
-            List<Board> boardList = boardJpaRepository.findAllJoinUserWithSkill(skill).get();
+            List<Board> boardList = boardJpaRepository.findAllJoinUserWithSkill(skill).orElseThrow(() -> new Exception404("조회된 게시글이 없습니다."));
             boardList.stream().forEach(board -> responseDTO.add(new BoardResponse.ListingsDTO(board)));
         } else if (address != null) { // 지역별 검색시
-            List<Board> boardList = boardJpaRepository.findAllJoinUserWithAddress(address).get();
+            List<Board> boardList = boardJpaRepository.findAllJoinUserWithAddress(address).orElseThrow(() -> new Exception404("조회된 게시글이 없습니다."));
             boardList.stream().forEach(board -> responseDTO.add(new BoardResponse.ListingsDTO(board)));
         } else if (keyword != null) { // 검색창 이용시
-            List<Board> boardList = boardJpaRepository.findAllJoinUserWithKeyword(keyword).get();
+            List<Board> boardList = boardJpaRepository.findAllJoinUserWithKeyword(keyword).orElseThrow(() -> new Exception404("조회된 게시글이 없습니다."));
             boardList.stream().forEach(board -> responseDTO.add(new BoardResponse.ListingsDTO(board)));
         } else { // 모든 페이지
-            List<Board> boardList = boardJpaRepository.findAllJoinUser().get();
+            List<Board> boardList = boardJpaRepository.findAllJoinUser().orElseThrow(() -> new Exception404("조회된 게시글이 없습니다."));
             boardList.stream().forEach(board -> responseDTO.add(new BoardResponse.ListingsDTO(board)));
         }
         return PagingUtil.pageConverter(responseDTO, pageable);
