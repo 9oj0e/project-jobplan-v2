@@ -58,13 +58,17 @@ public class BoardController {
     @GetMapping("/boards/listings")
     public String listings(HttpServletRequest request,
                            @RequestParam(value = "skill", required = false) String skill,
-                           @RequestParam(value = "adress", required = false) String adress) {
+                           @RequestParam(value = "address", required = false) String address) {
 
-        if (skill!=null){
+        if (skill != null) {
             List<BoardResponse.ListingsDTO> responseDTO = boardService.getAllBoardSkill(skill);
             request.setAttribute("boardList", responseDTO);
 
-        }else {
+        } else if (address != null) {
+            List<BoardResponse.ListingsDTO> responseDTO = boardService.getAllBoardAddress(address);
+            request.setAttribute("boardList", responseDTO);
+
+        } else {
             List<BoardResponse.ListingsDTO> responseDTO = boardService.getAllBoard();
             request.setAttribute("boardList", responseDTO);
 

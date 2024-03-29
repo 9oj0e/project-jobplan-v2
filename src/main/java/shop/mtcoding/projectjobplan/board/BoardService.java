@@ -137,4 +137,12 @@ public class BoardService {
 
         return responseDTO;
     }
+
+    public List<BoardResponse.ListingsDTO> getAllBoardAddress(String address) {
+        List<BoardResponse.ListingsDTO> responseDTO = new ArrayList<>();
+        List<Board> boardList = boardJpaRepository.findAllBoardJoinUserAddress(address).get();
+        boardList.stream().forEach(board -> responseDTO.add(new BoardResponse.ListingsDTO(board)));
+        return responseDTO;
+
+    }
 }
