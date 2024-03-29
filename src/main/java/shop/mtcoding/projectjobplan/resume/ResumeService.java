@@ -47,12 +47,10 @@ public class ResumeService {
         return new ResumeResponse.DetailDTO(resume, rating, isResumeOwner, hasSubscribed);
     }
 
-    public Page<ResumeResponse.ListingsDTO> getAllResume(Pageable pageable) {
-        List<ResumeResponse.ListingsDTO> responseDTO = new ArrayList<>();
+    public ResumeResponse.ListingsDTO getAllResume(Pageable pageable) {
         List<Resume> resumeList = resumeJpaRepository.findAllJoinUser().get();
-        resumeList.stream().forEach(resume -> responseDTO.add(new ResumeResponse.ListingsDTO(resume)));
 
-        return PagingUtil.pageConverter(responseDTO, pageable);
+        return new ResumeResponse.ListingsDTO(resumeList, pageable);
     }
 
     // 이력서수정폼

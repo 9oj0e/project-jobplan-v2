@@ -3,6 +3,8 @@ package shop.mtcoding.projectjobplan.user;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -73,14 +75,15 @@ public class UserController {
         return "redirect:/users/" + userId;
     }
 
-    @GetMapping({"/users/{userId}", "/users/{userId}/boards/{boardId}"})
+    @GetMapping({"/users/{userId}", "/users/{userId}/boards", "/users/{userId}/boards/{boardId}"})
     public String profile(
             @PathVariable Integer userId,
             @PathVariable(required = false) Integer boardId,
+            @PageableDefault(size = 3) Pageable pageable,
             HttpServletRequest request) {
         // todo: NullPointException
         User sessionUser = (User) session.getAttribute("sessionUser");
-        UserResponse.ProfileDTO profileDTO = userService.getUser(sessionUser, boardId);
+        UserResponse.ProfileDTO profileDTO = userService.getUser(sessionUser, boardId, pageable);
         request.setAttribute("profileDTO", profileDTO);
 
         return "/user/profile";

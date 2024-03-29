@@ -24,8 +24,8 @@ public class BoardController {
 
     @GetMapping("/")
     public String index(HttpServletRequest request) {
-
-        List<BoardResponse.IndexDTO> responseDTO = boardService.getAllBoardOnIndex();
+        final int limit = 8;
+        List<BoardResponse.IndexDTO> responseDTO = boardService.getAllBoardOnIndex(limit);
         request.setAttribute("boardList", responseDTO);
 
         return "/index";
@@ -66,9 +66,8 @@ public class BoardController {
                            @RequestParam(value = "skill", required = false) String skill,
                            @RequestParam(value = "address", required = false) String address,
                            @RequestParam(value = "keyword", required = false) String keyword) {
-        Page<BoardResponse.ListingsDTO> responseDTO = boardService.getAllBoard(pageable, skill, address, keyword);
+        BoardResponse.ListingsDTO responseDTO = boardService.getAllBoard(pageable, skill, address, keyword);
         request.setAttribute("page", responseDTO);
-        request.setAttribute("pageList", PagingUtil.getPageList(responseDTO));
         // todo : ?keyword=...&page=... 만드는 방법?
 
         return "/board/listings";

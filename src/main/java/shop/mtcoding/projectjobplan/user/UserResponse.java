@@ -1,7 +1,10 @@
 package shop.mtcoding.projectjobplan.user;
 
 import lombok.Data;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import shop.mtcoding.projectjobplan._core.utils.FormatUtil;
+import shop.mtcoding.projectjobplan._core.utils.PagingUtil;
 import shop.mtcoding.projectjobplan.apply.Apply;
 import shop.mtcoding.projectjobplan.board.Board;
 import shop.mtcoding.projectjobplan.resume.Resume;
@@ -64,7 +67,7 @@ public class UserResponse {
         private String phoneNumber;
         private String address;
         private String email;
-        private List<ResumeDTO> resumeList = new ArrayList<>();
+        private Page<ResumeDTO> resumeList;
 
         // 평점
         private Double rating;
@@ -73,10 +76,10 @@ public class UserResponse {
         private Boolean isEmployer;
         private String employerIdNumber;
         private String businessName;
-        private List<BoardDTO> boardList = new ArrayList<>();
+        private Page<BoardDTO> boardList;
 
         // 지원자 현황 및 지원 현황
-        private List<ApplyDTO> applyList;
+        private Page<ApplyDTO> applyList;
 
         // tech stack 기술
         private List<SkillDTO> skillList;
@@ -90,7 +93,7 @@ public class UserResponse {
             }
         }
 
-        public ProfileDTO(User user, List<Apply> applyList, Double rating) {
+        public ProfileDTO(User user, List<Apply> applyList, Double rating, Pageable pageable) {
             this.id = user.getId();
             this.username = user.getUsername();
             this.password = user.getPassword();
@@ -105,12 +108,15 @@ public class UserResponse {
                 this.isEmployer = user.getIsEmployer();
                 this.employerIdNumber = user.getEmployerIdNumber();
                 this.businessName = user.getBusinessName();
-                this.boardList = user.getBoards().stream().map(board -> new BoardDTO(board)).toList();
+                List<BoardDTO> boardList = user.getBoards().stream().map(board -> new BoardDTO(board)).toList();
+                this.boardList = PagingUtil.pageConverter(boardList, pageable);
             } else {
-                this.resumeList = user.getResumes().stream().map(resume -> new ResumeDTO(resume)).toList();
+                List<ResumeDTO> resumeList = user.getResumes().stream().map(resume -> new ResumeDTO(resume)).toList();
+                this.resumeList = PagingUtil.pageConverter(resumeList, pageable);
                 this.skillList = user.getSkills().stream().map(skill -> new SkillDTO(skill.getName())).toList();
             }
-            this.applyList = applyList.stream().map(apply -> new ApplyDTO(apply)).toList();
+            List<ApplyDTO> applies = applyList.stream().map(apply -> new ApplyDTO(apply)).toList();
+            this.applyList = PagingUtil.pageConverter(applies, pageable); // todo : pagination?
         }
 
         public Double getRating() {

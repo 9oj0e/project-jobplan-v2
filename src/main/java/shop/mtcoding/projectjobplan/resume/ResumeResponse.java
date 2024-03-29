@@ -2,7 +2,10 @@ package shop.mtcoding.projectjobplan.resume;
 
 import lombok.Builder;
 import lombok.Data;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import shop.mtcoding.projectjobplan._core.utils.FormatUtil;
+import shop.mtcoding.projectjobplan._core.utils.PagingUtil;
 
 import java.util.List;
 
@@ -110,6 +113,7 @@ public class ResumeResponse {
                 this.skillName = skillName;
             }
         }
+
         public Double getRating() {
             return FormatUtil.numberFormatter(this.rating);
         }
@@ -117,19 +121,30 @@ public class ResumeResponse {
 
     @Data
     public static class ListingsDTO {
-        // resume_tb
-        private Integer id;
-        private String career;
-        private String title;
+        Page<ResumeDTO> resumeList;
+        List<Integer> pageList;
 
-        // user_tb
-        private String name;
+        public ListingsDTO(List<Resume> resumes, Pageable pageable) {
+            List<ResumeDTO> resumeList = resumes.stream().map(resume -> new ResumeDTO(resume)).toList();
+            this.resumeList = PagingUtil.pageConverter(resumeList, pageable);
+            this.pageList = PagingUtil.getPageList(this.resumeList);
+        }
 
-        public ListingsDTO(Resume resume) {
-            this.id = resume.getId();
-            this.career = resume.getCareer();
-            this.title = resume.getTitle();
-            this.name = resume.getUser().getName();
+        public class ResumeDTO {
+            // resume_tb
+            private Integer id;
+            private String career;
+            private String title;
+
+            // user_tb
+            private String name;
+
+            public ResumeDTO(Resume resume) {
+                this.id = resume.getId();
+                this.career = resume.getCareer();
+                this.title = resume.getTitle();
+                this.name = resume.getUser().getName();
+            }
         }
     }
 }

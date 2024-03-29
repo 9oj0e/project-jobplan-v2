@@ -60,52 +60,58 @@
             </div>
         </section>
         <hr>
-        <table class="table">
-            <div class="div-recommendation mb-20">구직자 정보</div>
-            <div class="dropdown">
+        <div class="div-recommendation mb-20">구직자 정보</div>
+        <div class="dropdown">
             <button type="button" class="btn btn-outline-dark" data-bs-toggle="dropdown">
                 기술을 선택하세요
             </button>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" name ="keyword" href="?keyword=java">java</a></li>
-                <li><a class="dropdown-item" name ="keyword" href="?keyword=javaScript">javaScript</a></li>
-                <li><a class="dropdown-item" name ="keyword" href="?keyword=Spring">Spring</a></li>
-                <li><a class="dropdown-item" name ="keyword" href="?keyword=HTML">HTML</a></li>
-                <li><a class="dropdown-item" name ="keyword" href="?keyword=jQuery">jQuery</a></li>
-                <li><a class="dropdown-item" name ="keyword" href="?keyword=MySQL">MySQL</a></li>
-            </ul>
-            </div>
-            <th>이름</th>
-            <th>구직자 정보</th>
-            <th>이력서</th>
-            {{#page.content}}
-                <tr>
-                    <td class="div-recommendation-text-2">{{name}}</td>
-                    <td>
-                        <div class="div-recommendation-text-1">{{career}}</div>
-                        <div class="div-recommendation-text-2">{{title}}</div>
-                    </td>
-                    <td>
-                        <button class="btn btn-outline-body" onclick="location.href='/resumes/{{id}}'">이력서보기</button>
-                    </td>
-                </tr>
-            {{/page.content}}
-        </table>
-        <div class="d-flex justify-content-center">
-            <ul class="pagination">
-                <li class="page-item {{^page.hasPrevious}}disabled{{/page.hasPrevious}}">
-                    <a class="page-link" href="?page={{page.pageable.previousOrFirst.pageNumber}}">Previous</a>
-                </li>
-                {{#pageList}}
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{.}}">{{.}}</a>
-                    </li>
-                {{/pageList}}
-                <li class="page-item {{^page.hasNext}}disabled{{/page.hasNext}}">
-                    <a class="page-link" href="?page={{page.pageable.next.pageNumber}}">Next</a>
-                </li>
+                <li><a class="dropdown-item" name="keyword" href="?keyword=java">java</a></li>
+                <li><a class="dropdown-item" name="keyword" href="?keyword=javaScript">javaScript</a></li>
+                <li><a class="dropdown-item" name="keyword" href="?keyword=Spring">Spring</a></li>
+                <li><a class="dropdown-item" name="keyword" href="?keyword=HTML">HTML</a></li>
+                <li><a class="dropdown-item" name="keyword" href="?keyword=jQuery">jQuery</a></li>
+                <li><a class="dropdown-item" name="keyword" href="?keyword=MySQL">MySQL</a></li>
             </ul>
         </div>
+        {{#page}}
+        <div class="container mt-3">
+            <br>
+            <table class="table">
+                <th>이름</th>
+                <th>구직자 정보</th>
+                <th>이력서</th>
+                {{#resumeList}}
+                    <tr>
+                        <td class="div-recommendation-text-2">{{name}}</td>
+                        <td>
+                            <div class="div-recommendation-text-1">{{career}}</div>
+                            <div class="div-recommendation-text-2">{{title}}</div>
+                        </td>
+                        <td>
+                            <button class="btn btn-outline-body" onclick="location.href='/resumes/{{id}}'">이력서보기
+                            </button>
+                        </td>
+                    </tr>
+                {{/resumeList}}
+            </table>
+            <div class="d-flex justify-content-center">
+                <ul class="pagination">
+                    <li class="page-item {{^resumeList.hasPrevious}}disabled{{/resumeList.hasPrevious}}">
+                        <a class="page-link" href="?page={{resumeList.pageable.previousOrFirst.pageNumber}}">Previous</a>
+                    </li>
+                    {{#pageList}}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{.}}">{{.}}</a>
+                        </li>
+                    {{/pageList}}
+                    <li class="page-item {{^resumeList.hasNext}}disabled{{/resumeList.hasNext}}">
+                        <a class="page-link" href="?page={{resumeList.pageable.next.pageNumber}}">Next</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        {{/page}}
     </div>
 </main>
 <!-- 바디 end -->
