@@ -4,7 +4,7 @@
     <div class="sidenav-container">
         <div class="sidenav">
             <!-- 수정 삭제 버튼 -->
-            {{#resumeDetail.resumeOwner}}
+            {{#resumeDetail.isResumeOwner}}
                 <div class="mb-3"> <!-- 수정 하기 -->
                     <form action="/resumes/{{resumeDetail.id}}/update-form" method="get">
                         <button class="btn btn-warning">
@@ -13,15 +13,14 @@
                     </form>
                 </div>
                 <div class="mb-3"> <!-- 삭제 하기 -->
-                    <form action="/resumes/{{resumeDetail.id}}/delete" method="post"
-                          onsubmit="return false">
+                    <form action="/resumes/{{resumeDetail.id}}/delete" method="post">
                         <button class="btn btn-danger">
                             <i class="fa-regular fa-trash-can icon-size"></i>
                         </button>
                     </form>
                 </div>
-            {{/resumeDetail.resumeOwner}}
-            {{^resumeDetail.resumeOwner}}
+            {{/resumeDetail.isResumeOwner}}
+            {{^resumeDetail.isResumeOwner}}
                 <!-- 구독하기 버튼 -->
                 {{#sessionUser}}
                     {{#isEmployer}}
@@ -46,7 +45,7 @@
                     {{/resumeDetail.hasSubscribed}}
                     {{/isEmployer}}
                 {{/sessionUser}}
-            {{/resumeDetail.resumeOwner}}
+            {{/resumeDetail.isResumeOwner}}
         </div>
     </div>
     <div class="card div-card">

@@ -2,7 +2,6 @@ package shop.mtcoding.projectjobplan.board;
 
 import lombok.Data;
 import shop.mtcoding.projectjobplan._core.utils.FormatUtil;
-import shop.mtcoding.projectjobplan.user.User;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -16,8 +15,8 @@ public class BoardResponse {
         private String position;
         private String salary;
         private String content;
-        private Timestamp openingDate;
-        private Timestamp closingDate;
+        private String openingDate;
+        private String closingDate;
 
         public UpdateFormDTO(Board board) {
             this.id = board.getId();
@@ -26,64 +25,60 @@ public class BoardResponse {
             this.position = board.getPosition();
             this.salary = board.getSalary();
             this.content = board.getContent();
-            this.openingDate = board.getOpeningDate();
-            this.closingDate = board.getClosingDate();
+            this.openingDate = FormatUtil.timeFormatter(board.getOpeningDate());
+            this.closingDate = FormatUtil.timeFormatter(board.getClosingDate());
         }
     }
 
+    @Data
     public static class DetailDTO {
-        private Integer id;
+        // user 정보
         private String address;
         private String phoneNumber;
         private String email;
         private String businessName;
-
+        private boolean isBoardOwner; // 공고 주인 여부
+        private boolean hasSubscribed; // 구독 여부
+        // 평점
+        private Double rating;
+        // board 정보
+        private Integer id;
         private String title; // 제목
         private String content; // 내용
         private String field; // 채용 분야
         private String position; // 포지션
         private String salary; // 연봉
-        private Boolean boardOwner; // 공고 주인 여부
-        private Double rating; // 평점
-        private Boolean hasSubscribed;
-
+        // skill 정보 (우대 스킬)
+        private List<SkillDTO> skillList;
+        // 시간 정보
         private Timestamp openingDate; // 게시일
         private Timestamp closingDate; // 마감일 == null -> "상시채용"
 
-        public DetailDTO(Board board, Double rating, Boolean isBoardOwner, Boolean hasSubscribed) {
-            this.id = board.getId();
+        public DetailDTO(Board board, Double rating, boolean isBoardOwner, boolean hasSubscribed) {
             this.address = board.getUser().getAddress();
             this.phoneNumber = board.getUser().getPhoneNumber();
             this.email = board.getUser().getEmail();
             this.businessName = board.getUser().getBusinessName();
+            this.isBoardOwner = isBoardOwner;
+            this.hasSubscribed = hasSubscribed;
+            this.rating = rating;
+            this.id = board.getId();
             this.title = board.getTitle();
             this.content = board.getContent();
             this.field = board.getField();
             this.position = board.getPosition();
             this.salary = board.getSalary();
-            this.rating = rating;
+            this.skillList = board.getSkillList().stream().map(skill -> new SkillDTO(skill.getName())).toList();
             this.openingDate = board.getOpeningDate();
             this.closingDate = board.getClosingDate();
-            this.boardOwner = isBoardOwner;
-            this.hasSubscribed = hasSubscribed;
         }
 
+        public class SkillDTO {
+            private String skillName;
 
-        public DetailDTO(Board board, Double rating) {
-            this.id = board.getId();
-            this.address = board.getUser().getAddress();
-            this.phoneNumber = board.getUser().getPhoneNumber();
-            this.email = board.getUser().getEmail();
-            this.businessName = board.getUser().getBusinessName();
-            this.title = board.getTitle();
-            this.content = board.getContent();
-            this.field = board.getField();
-            this.position = board.getPosition();
-            this.salary = board.getSalary();
-            this.rating = rating;
-            this.openingDate = board.getOpeningDate();
-            this.closingDate = board.getClosingDate();
-
+            public SkillDTO(String skillName) {
+                this.skillName = skillName;
+            }
         }
 
         public String getOpeningDate() {
@@ -94,7 +89,7 @@ public class BoardResponse {
             return FormatUtil.timeFormatter(this.closingDate);
         }
 
-        public Double getRating(){
+        public Double getRating() {
             return FormatUtil.numberFormatter(this.rating);
         }
 
@@ -125,6 +120,7 @@ public class BoardResponse {
             return FormatUtil.timeFormatter(closingDate);
         }
     }
+
     @Data
     public static class IndexDTO {
         // 공고 정보

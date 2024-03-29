@@ -53,7 +53,8 @@ public class BoardController {
     @GetMapping("/boards/{boardId}")
     public String detail(@PathVariable int boardId, HttpServletRequest request) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        BoardResponse.DetailDTO boardDetail = boardService.getBoardInDetail(boardId, sessionUser);
+        Integer sessionUserId = sessionUser == null ? null : sessionUser.getId();
+        BoardResponse.DetailDTO boardDetail = boardService.getBoardInDetail(boardId, sessionUserId);
         request.setAttribute("boardDetail", boardDetail);
 
         return "/board/detail";
@@ -95,6 +96,6 @@ public class BoardController {
         User sessionUser = (User) session.getAttribute("sessionUser");
         boardService.removeBoard(boardId, sessionUser);
 
-        return "redirect:/board/listings";
+        return "redirect:/users/" + sessionUser.getId();
     }
 }

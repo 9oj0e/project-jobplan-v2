@@ -7,6 +7,8 @@ import shop.mtcoding.projectjobplan._core.errors.exception.Exception403;
 import shop.mtcoding.projectjobplan._core.errors.exception.Exception404;
 import shop.mtcoding.projectjobplan.apply.ApplyResponse;
 import shop.mtcoding.projectjobplan.rating.RatingJpaRepository;
+import shop.mtcoding.projectjobplan.subscribe.Subscribe;
+import shop.mtcoding.projectjobplan.subscribe.SubscribeJpaRepository;
 import shop.mtcoding.projectjobplan.subscribe.SubscribeService;
 import shop.mtcoding.projectjobplan.user.User;
 import shop.mtcoding.projectjobplan.user.UserJpaRepository;
@@ -20,7 +22,7 @@ import java.util.Optional;
 public class ResumeService {
     private final ResumeJpaRepository resumeJpaRepository;
     private final RatingJpaRepository ratingJpaRepository;
-    private final SubscribeService subscribeService ;
+    private final SubscribeJpaRepository subscribeJpaRepository;
 
     @Transactional
     public Resume createResume(ResumeRequest.SaveDTO requestDTO, User sessionUser) {
@@ -28,15 +30,18 @@ public class ResumeService {
         return resumeJpaRepository.save(requestDTO.toEntity(sessionUser));
     }
 
-    public ResumeResponse.DetailDTO findResumeById(int resumeId, int sessionUserId) {
+    public ResumeResponse.DetailDTO getResumeInDetail(int resumeId, Integer sessionUserId) {
         Resume resume = resumeJpaRepository.findById(resumeId).get();
-        Boolean resumeOwner = false;
-        if (resume.getUser().getId() == sessionUserId) resumeOwner = true;
-        Double rate = ratingJpaRepository.findRatingAvgByUserId(resume.getUser().getId()).orElse(0.0);
-        Boolean hasSubscribed = subscribeService.checkResumeSubscription(resumeId,sessionUserId);
-        ResumeResponse.DetailDTO responseDTO = new ResumeResponse.DetailDTO(resume, rate, resumeOwner,hasSubscribed);
+        Double rating = ratingJpaRepository.findRatingAvgByUserId(resume.getUser().getId()).orElse(0.0);
 
-        return responseDTO;
+        boolean isResumeOwner = false;
+        boolean hasSubscribed = false;
+        if (sessionUserId != null) {
+            isResumeOwner = resume.getUser().getId() == sessionUserId ? true : false;
+            Optional<Subscribe> optional = subscribeJpaRepository.findByResumeIdAndUserId(resumeId, sessionUserId);
+            hasSubscribed = optional.isPresent() ? true : false;
+        }
+        return new ResumeResponse.DetailDTO(resume, rating, isResumeOwner, hasSubscribed);
     }
 
     public List<ResumeResponse.MainDTO> getAllResume() {
@@ -49,7 +54,7 @@ public class ResumeService {
     }
 
     // 이력서수정폼
-    public ResumeResponse.UpdateDTO getResume(int id, User sessionUser) {
+    public ResumeResponse.UpdateFormDTO getResume(int id, User sessionUser) {
         // 조회 및 예외처리
         Resume resume = resumeJpaRepository.findById(id)
                 .orElseThrow(() -> new Exception404("해당 이력서를 찾을 수 없습니다."));
@@ -59,7 +64,7 @@ public class ResumeService {
             throw new Exception403("해당 이력서의 수정페이지로 이동할 권한이 없습니다.");
         }
 
-        return new ResumeResponse.UpdateDTO(resumeJpaRepository.findById(id).get());
+        return new ResumeResponse.UpdateFormDTO(resumeJpaRepository.findById(id).get());
     }
 
     @Transactional // 이력서수정

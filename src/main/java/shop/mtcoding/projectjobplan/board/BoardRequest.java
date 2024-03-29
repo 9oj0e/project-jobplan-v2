@@ -3,6 +3,7 @@ package shop.mtcoding.projectjobplan.board;
 import lombok.Data;
 import shop.mtcoding.projectjobplan.user.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BoardRequest {
@@ -17,7 +18,7 @@ public class BoardRequest {
         private String openingDate;
         private String closingDate;
 
-        private List<String> skill;
+        private List<String> skill = new ArrayList<>();
 
         public Board toEntity(User user) {
             return Board.builder()
@@ -31,9 +32,8 @@ public class BoardRequest {
                     .closingDate(closingDate)
                     .build();
         }
-
-        // toEntity
     }
+
     @Data
     public static class UpdateDTO {
         private String title;
@@ -44,7 +44,6 @@ public class BoardRequest {
         private String openingDate;
         private String closingDate;
 
-        private List<String> skill;
-        // toEntity
+        private List<String> skill = new ArrayList<>();
     }
 }

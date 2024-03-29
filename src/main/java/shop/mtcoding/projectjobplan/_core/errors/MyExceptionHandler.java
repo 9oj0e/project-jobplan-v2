@@ -12,6 +12,7 @@ public class MyExceptionHandler {
     public String ex400(Exception400 e, HttpServletRequest request) {
         request.setAttribute("msg", e.getMessage());
         request.setAttribute("status", 400);
+
         return "error";
     }
 
@@ -19,6 +20,7 @@ public class MyExceptionHandler {
     public String ex401(Exception401 e, HttpServletRequest request) {
         request.setAttribute("msg", e.getMessage());
         request.setAttribute("status", 401);
+
         return "error";
     }
 
@@ -26,6 +28,7 @@ public class MyExceptionHandler {
     public String ex403(RuntimeException e, HttpServletRequest request) {
         request.setAttribute("msg", e.getMessage());
         request.setAttribute("status", 403);
+
         return "error";
     }
 
@@ -33,6 +36,7 @@ public class MyExceptionHandler {
     public String ex404(RuntimeException e, HttpServletRequest request) {
         request.setAttribute("msg", e.getMessage());
         request.setAttribute("status", 404);
+
         return "error";
     }
 
@@ -40,7 +44,7 @@ public class MyExceptionHandler {
     public String ex500(RuntimeException e, HttpServletRequest request) {
         request.setAttribute("msg", e.getMessage());
         request.setAttribute("status", 500);
+
         return "error";
     }
-
 }

@@ -22,7 +22,7 @@ public class FormatUtil {
         return output;
     }
 
-    public static Double numberFormatter(Double num){
+    public static Double numberFormatter(Double num) {
         // 소수점 한 자리 rounded down to the nearest tenth
         return (double) Math.round(num * 10) / 10;
     }

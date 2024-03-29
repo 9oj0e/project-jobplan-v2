@@ -1,7 +1,6 @@
 package shop.mtcoding.projectjobplan.apply;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import shop.mtcoding.projectjobplan.board.Board;
@@ -10,7 +9,6 @@ import shop.mtcoding.projectjobplan.resume.Resume;
 import shop.mtcoding.projectjobplan.resume.ResumeJpaRepository;
 import shop.mtcoding.projectjobplan.user.User;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -29,7 +27,7 @@ public class ApplyService {
         applyJpaRepository.save(apply);
     }
 
-    public ApplyResponse.ApplyFormDTO getApplyForm(int boardId, User sessionUser) {
+    public ApplyResponse.ApplyFormDTO getBoardAndResume(int boardId, User sessionUser) {
         Board board = boardJpaRepository.findById(boardId).get();
         List<Resume> resumeList = resumeJpaRepository.findByUserId(sessionUser.getId()).get();
 

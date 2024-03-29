@@ -9,6 +9,4 @@ import java.util.Optional;
 public interface RatingJpaRepository extends JpaRepository<Rating, Integer> {
     @Query("SELECT AVG(r.rating) FROM Rating r WHERE r.subject.id = :id")
     Optional<Double> findRatingAvgByUserId(@Param("id") Integer id);
-
-
 }

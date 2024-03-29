@@ -33,7 +33,7 @@ public class SubscribeResponse {
             private String salary;
             private Timestamp closingDate;
 
-            public String getClosingDate(){
+            public String getClosingDate() {
                 return FormatUtil.timeFormatter(this.closingDate);
             }
 

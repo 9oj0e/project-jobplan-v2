@@ -253,7 +253,7 @@
                             </div>
                             <div>
                                 {{#skillList}}
-                                    <span class="btn btn-outline-success">{{skillName}}</span>
+                                    <span class="btn btn-light">{{skillName}}</span>
                                 {{/skillList}}
                                 {{^hasSkill}}
                                     <button class="btn btn-outline-primary form-control" data-bs-toggle="modal"
@@ -295,7 +295,7 @@
                                         <form action="/users/{{sessionUser.id}}/boards/{{id}}" method="get">
                                             <button class="btn btn-outline-primary">지원자</button>
                                         </form>
-                                        <form action="/boards/{{id}}/update" method="post">
+                                        <form action="/boards/{{id}}/delete" method="post">
                                             <button class="btn btn-primary">삭제</button>
                                         </form>
                                     </div>

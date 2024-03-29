@@ -8,9 +8,6 @@ import shop.mtcoding.projectjobplan._core.errors.exception.Exception401;
 import shop.mtcoding.projectjobplan._core.errors.exception.Exception404;
 import shop.mtcoding.projectjobplan.apply.Apply;
 import shop.mtcoding.projectjobplan.apply.ApplyJpaRepository;
-import shop.mtcoding.projectjobplan.apply.ApplyResponse;
-import shop.mtcoding.projectjobplan.apply.ApplyService;
-import shop.mtcoding.projectjobplan.board.BoardJpaRepository;
 import shop.mtcoding.projectjobplan.rating.RatingJpaRepository;
 import shop.mtcoding.projectjobplan.skill.Skill;
 import shop.mtcoding.projectjobplan.skill.SkillJpaRepository;
@@ -24,7 +21,6 @@ import java.util.Optional;
 public class UserService {
     private final UserJpaRepository userJpaRepository;
     private final ApplyJpaRepository applyJpaRepository;
-    private final SkillJpaRepository skillJpaRepository;
     private final RatingJpaRepository ratingJpaRepository;
 
     @Transactional

@@ -9,7 +9,7 @@ public class ApplyRequest {
         private Integer boardId;
         // toEntity 가능?
     }
-    
+
     @Data
     public static class UpdateDTO {
         private Integer id;

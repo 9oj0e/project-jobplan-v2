@@ -23,7 +23,7 @@ public class ResumeController {
     }
 
     @GetMapping("/resumes/post-form") // 이력서 작성 폼
-    public String postForm(HttpServletRequest request) {
+    public String postForm() {
 
         return "/resume/post-form";
     }
@@ -39,7 +39,8 @@ public class ResumeController {
     @GetMapping("/resumes/{resumeId}")
     public String detail(@PathVariable int resumeId, HttpServletRequest request) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        ResumeResponse.DetailDTO resumeDetail = resumeService.findResumeById(resumeId, sessionUser.getId());
+        Integer sessionUserId = sessionUser == null ? null : sessionUser.getId();
+        ResumeResponse.DetailDTO resumeDetail = resumeService.getResumeInDetail(resumeId, sessionUserId);
         request.setAttribute("resumeDetail", resumeDetail);
 
         return "/resume/detail";
@@ -57,7 +58,7 @@ public class ResumeController {
     @GetMapping("/resumes/{resumeId}/update-form")
     public String updateForm(@PathVariable int resumeId, HttpServletRequest request) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        ResumeResponse.UpdateDTO responseDTO = resumeService.getResume(resumeId, sessionUser);
+        ResumeResponse.UpdateFormDTO responseDTO = resumeService.getResume(resumeId, sessionUser);
         request.setAttribute("resume", responseDTO);
 
         return "/resume/update-form";
@@ -77,6 +78,6 @@ public class ResumeController {
         User sessionUser = (User) session.getAttribute("sessionUser");
         resumeService.removeResume(resumeId, sessionUser);
 
-        return "redirect:/resume/listings";
+        return "redirect:/users/" + sessionUser.getId();
     }
 }

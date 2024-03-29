@@ -6,9 +6,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import shop.mtcoding.projectjobplan._core.utils.ConvertUtil;
+import shop.mtcoding.projectjobplan.apply.Apply;
+import shop.mtcoding.projectjobplan.skill.Skill;
+import shop.mtcoding.projectjobplan.subscribe.Subscribe;
 import shop.mtcoding.projectjobplan.user.User;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @Entity
@@ -29,12 +34,21 @@ public class Board {
     private String position; // 포지션
     private String salary; // 연봉
 
+    @OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE)
+    private List<Skill> skillList;
+
     // 날짜
     private Timestamp openingDate; // 게시일
     private Timestamp closingDate; // 마감일 == null -> "상시채용"
 
     @CreationTimestamp
     private Timestamp createdAt; // 생성일
+
+    @OneToMany(mappedBy = "board", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE) // Entity 객체의 변수명 == FK의 주인
+    private List<Apply> applies = new ArrayList<>();
+
+    @OneToMany(mappedBy = "board", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE) // Entity 객체의 변수명 == FK의 주인
+    private List<Subscribe> subscribes = new ArrayList<>();
 
     public void update(BoardRequest.UpdateDTO requestDTO) {
         this.title = requestDTO.getTitle();

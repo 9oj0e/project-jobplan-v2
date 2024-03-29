@@ -10,7 +10,6 @@ import shop.mtcoding.projectjobplan.resume.ResumeJpaRepository;
 import shop.mtcoding.projectjobplan.user.User;
 import shop.mtcoding.projectjobplan.user.UserJpaRepository;
 
-import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,32 +37,11 @@ public class SubscribeService {
         subscribeJpaRepository.save(subscribe);
     }
 
-    // 구독 리스트 불러오기
-    public SubscribeResponse.DTO getSubscription(int userId) {
+    public SubscribeResponse.DTO getSubscription(int userId) { // 구독 리스트 불러오기
         User user = userJpaRepository.findById(userId).get();
         List<Subscribe> subscription = subscribeJpaRepository.findByUserId(userId).get();
 
         return new SubscribeResponse.DTO(user, subscription);
-    }
-
-    // 공고 구독 여부 확인 todo : BoardService 로 이동, BoardResponse.DetailDTO 에 값 전달
-    public boolean checkBoardSubscription(int boardId, int userId) {
-        Optional<Subscribe> optionalSubscribe = subscribeJpaRepository.findByBoardIdAndUserId(boardId, userId);
-        if (optionalSubscribe.isPresent()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    // 이력서 구독 여부 확인 todo : ResumeService 로 이동, ResumeResponse.DetailDTO 에 값 전달
-    public boolean checkResumeSubscription(int resumeId, int userId) {
-        Optional<Subscribe> optionalSubscribe = subscribeJpaRepository.findByResumeIdAndUserId(resumeId, userId);
-        if (optionalSubscribe.isPresent()) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
     @Transactional // 공고 구독 중지
