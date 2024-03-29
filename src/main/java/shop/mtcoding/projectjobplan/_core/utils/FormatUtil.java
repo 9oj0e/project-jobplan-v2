@@ -24,6 +24,8 @@ public class FormatUtil {
 
     public static Double numberFormatter(Double num) {
         // 소수점 한 자리 rounded down to the nearest tenth
-        return (double) Math.round(num * 10) / 10;
+        final int DECIMAL_PLACE = 10;
+
+        return (double) Math.round(num * DECIMAL_PLACE) / DECIMAL_PLACE;
     }
 }

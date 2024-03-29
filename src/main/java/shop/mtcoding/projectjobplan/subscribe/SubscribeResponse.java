@@ -19,10 +19,8 @@ public class SubscribeResponse {
     public static class DTO {
         private Page<?> page;
         private List<Integer> pageList;
-        private Pageable pageable;
 
         public DTO(User user, List<Subscribe> subscription, Pageable pageable) {
-            this.pageable = pageable;
             if (user.getIsEmployer()) {
                 List<ResumeDTO> resumeList = subscription.stream().map(subscribe -> new ResumeDTO(subscribe.getResume())).toList();
                 this.page = PagingUtil.pageConverter(resumeList, pageable);

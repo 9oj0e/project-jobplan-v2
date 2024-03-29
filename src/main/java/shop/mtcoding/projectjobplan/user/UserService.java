@@ -52,7 +52,7 @@ public class UserService {
         return applyJpaRepository.findAll(pageable);
     }
 
-    public UserResponse.ProfileDTO getUser(User sessionUser, Integer boardId) {
+    public UserResponse.ProfileDTO getUser(User sessionUser, Integer boardId, Pageable pageable) {
         User user = userJpaRepository.findById(sessionUser.getId()).get();
         List<Apply> applyList;
         if (sessionUser.getIsEmployer()) {
@@ -69,7 +69,7 @@ public class UserService {
         }
         Double rating = ratingJpaRepository.findRatingAvgByUserId(sessionUser.getId()).orElse(0.0);
 
-        return new UserResponse.ProfileDTO(user, applyList, rating);
+        return new UserResponse.ProfileDTO(user, applyList, rating, pageable);
     }
 
     // 회원수정폼

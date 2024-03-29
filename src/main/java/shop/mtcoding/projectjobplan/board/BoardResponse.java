@@ -1,7 +1,10 @@
 package shop.mtcoding.projectjobplan.board;
 
 import lombok.Data;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import shop.mtcoding.projectjobplan._core.utils.FormatUtil;
+import shop.mtcoding.projectjobplan._core.utils.PagingUtil;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -97,27 +100,38 @@ public class BoardResponse {
 
     @Data
     public static class ListingsDTO {
-        // board_tb
-        private Integer id;
-        private String title;
-        private String salary;
-        private Timestamp closingDate;
+        Page<BoardDTO> page;
+        List<Integer> pageList;
 
-        // user_tb
-        private String address;
-        private String businessName;
-
-        public ListingsDTO(Board board) {
-            this.id = board.getId();
-            this.title = board.getTitle();
-            this.salary = board.getSalary();
-            this.closingDate = board.getClosingDate();
-            this.address = board.getUser().getAddress();
-            this.businessName = board.getUser().getBusinessName();
+        public ListingsDTO(List<Board> boards, Pageable pageable) {
+            List<BoardDTO> boardList = boards.stream().map(board -> new BoardDTO(board)).toList();
+            this.page = PagingUtil.pageConverter(boardList, pageable);
+            this.pageList = PagingUtil.getPageList(this.page);
         }
 
-        public String getClosingDate() {
-            return FormatUtil.timeFormatter(closingDate);
+        public class BoardDTO {
+            // board_tb
+            private Integer id;
+            private String title;
+            private String salary;
+            private Timestamp closingDate;
+
+            // user_tb
+            private String address;
+            private String businessName;
+
+            public BoardDTO(Board board) {
+                this.id = board.getId();
+                this.title = board.getTitle();
+                this.salary = board.getSalary();
+                this.closingDate = board.getClosingDate();
+                this.address = board.getUser().getAddress();
+                this.businessName = board.getUser().getBusinessName();
+            }
+
+            public String getClosingDate() {
+                return FormatUtil.timeFormatter(closingDate);
+            }
         }
     }
 

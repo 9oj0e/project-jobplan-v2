@@ -12,16 +12,19 @@ public interface BoardJpaRepository extends JpaRepository<Board, Integer> {
     @Query("SELECT b FROM Board b JOIN FETCH User u WHERE b.user.id = u.id ORDER BY b.id DESC")
     Optional<List<Board>> findAllByUserId(int userId);
 
+    @Query("SELECT b FROM Board b JOIN FETCH b.user u ORDER BY b.id DESC LIMIT :limit")
+    Optional<List<Board>> findAllJoinUser(int limit);
+
     @Query("SELECT b FROM Board b JOIN FETCH b.user u ORDER BY b.id DESC")
     Optional<List<Board>> findAllJoinUser();
 
-    @Query("select s.board from Skill s join fetch s.board.user where s.name =:skill ORDER BY s.board.createdAt DESC")
+    @Query("SELECT s.board FROM Skill s JOIN FETCH s.board.user WHERE s.name =:skill ORDER BY s.board.createdAt DESC")
     Optional<List<Board>> findAllJoinUserWithSkill(String skill);
 
-    @Query("SELECT b FROM Board b JOIN FETCH b.user u where u.address like %:address% ORDER BY b.createdAt DESC")
+    @Query("SELECT b FROM Board b JOIN FETCH b.user u WHERE u.address LIKE %:address% ORDER BY b.createdAt DESC")
     Optional<List<Board>> findAllJoinUserWithAddress(String address);
 
-    @Query("select b from Board b join fetch b.user u where b.title like %:keyword% or b.content like %:keyword% or u.businessName like %:keyword% ORDER BY b.createdAt DESC")
+    @Query("SELECT b FROM Board b JOIN FETCH b.user u WHERE b.title LIKE %:keyword% OR b.content LIKE %:keyword% OR u.businessName LIKE %:keyword% ORDER BY b.createdAt DESC")
     Optional<List<Board>> findAllJoinUserWithKeyword(String keyword);
   
     @Query("SELECT r FROM Resume r WHERE r.user.id = :id ORDER BY r.id DESC")
