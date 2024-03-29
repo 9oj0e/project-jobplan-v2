@@ -26,7 +26,6 @@ public class SubscribeResponse {
             if (user.getIsEmployer()) {
                 List<ResumeDTO> resumeList = subscription.stream().map(subscribe -> new ResumeDTO(subscribe.getResume())).toList();
                 this.page = PagingUtil.pageConverter(resumeList, pageable);
-                // todo : fix problem; pageList returns '#'
             } else {
                 List<BoardDTO> boardList = subscription.stream().map(subscribe -> new BoardDTO(subscribe.getBoard())).toList();
                 this.page = PagingUtil.pageConverter(boardList, pageable);

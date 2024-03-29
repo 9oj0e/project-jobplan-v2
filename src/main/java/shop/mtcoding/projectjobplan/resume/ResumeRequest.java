@@ -7,24 +7,22 @@ public class ResumeRequest {
 
     @Data // 이력서 작성하기
     public static class SaveDTO {
-        private String title;
-        private String schoolName;
         private String educationLevel; // 졸업 형태
+        private String schoolName;
         private String major; // 전공
-
-        // todo 스킬 넣기
         private String career; // 경력 정보
+        private String title;
         private String content; // 자기소개서
 
         // toEntity
         public Resume toEntity(User user) {
             return Resume.builder()
                     .user(user)
-                    .title(title)
-                    .schoolName(schoolName)
                     .educationLevel(educationLevel)
+                    .schoolName(schoolName)
                     .major(major)
                     .career(career)
+                    .title(title)
                     .content(content)
                     .build();
         }

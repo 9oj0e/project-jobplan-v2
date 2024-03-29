@@ -52,13 +52,6 @@
                 {{/page.content}}
             {{/subscription}}
         </table>
-        <div class="d-flex justify-content-center">
-            <ul class="pagination">
-                <li class="page-item disabled"><a class="page-link" href="?page=#">Previous</a></li>
-                <li class="page-item"><a class="page-link" href="?page=#">1</a></li>
-                <li class="page-item disabled"><a class="page-link" href="?page=#">Next</a></li>
-            </ul>
-        </div>
     </div>
     {{/sessionUser.isEmployer}}
     {{^sessionUser.isEmployer}}
@@ -94,25 +87,24 @@
                 {{/page.content}}
             {{/subscription}}
         </table>
-        <div class="d-flex justify-content-center">
-            <ul class="pagination">
-                <li class="page-item {{^subscription.page.hasPrevious}}disabled{{/subscription.page.hasPrevious}}">
-                    <a class="page-link" href="?page={{subscription.page.pageable.previousOrFirst.pageNumber}}
-                    ">Previous</a>
-                </li>
-                {{#subscription.pageList}}
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{.}}">{{.}}</a>
-                    </li>
-                {{/subscription.pageList}}
-                <li class="page-item {{^subscription.page.hasNext}}disabled{{/subscription.page.hasNext}}">
-                    <a class="page-link" href="?page={{subscription.page.pageable.next.pageNumber}}">Next</a>
-                </li>
-            </ul>
-        </div>
         </div>
     {{/sessionUser.isEmployer}}
+    <div class="d-flex justify-content-center">
+        <ul class="pagination">
+            <li class="page-item {{^subscription.page.hasPrevious}}disabled{{/subscription.page.hasPrevious}}">
+                <a class="page-link" href="?page={{subscription.page.pageable.previousOrFirst.pageNumber}}
+                ">Previous</a>
+            </li>
+            {{#subscription.pageList}}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{.}}">{{.}}</a>
+                </li>
+            {{/subscription.pageList}}
+            <li class="page-item {{^subscription.page.hasNext}}disabled{{/subscription.page.hasNext}}">
+                <a class="page-link" href="?page={{subscription.page.pageable.next.pageNumber}}">Next</a>
+            </li>
+        </ul>
+    </div>
     <!-- 바디 end -->
 </main>
-
 {{>layout/footer}}

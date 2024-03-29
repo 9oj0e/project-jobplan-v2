@@ -55,20 +55,10 @@ public class UserService {
     public UserResponse.ProfileDTO getUser(User sessionUser, Integer boardId) {
         User user = userJpaRepository.findById(sessionUser.getId()).get();
         List<Apply> applyList;
-        List<Skill> skillList = new ArrayList<>();
         if (sessionUser.getIsEmployer()) {
             if (boardId == null) {
                 // (기업) 모든 지원자 현황 보기
                 applyList = applyJpaRepository.findByBoardUserId(user.getId());
-                int applyListSize = applyList.size(); // 리스트 사이즈
-
-                // 페이지 수
-                int pageNumber = Math.max((int) Math.ceil(applyListSize / 3.0) - 1, 0);
-
-                Sort sort = Sort.by(Sort.Direction.DESC, "id");
-                Pageable pageable = PageRequest.of(pageNumber, 3, sort);
-
-                Page<Apply> applyPage = applyJpaRepository.findAll(pageable);
             } else {
                 // (기업) 공고별 지원자 보기
                 applyList = applyJpaRepository.findByBoardId(boardId);
