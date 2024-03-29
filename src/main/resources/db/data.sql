@@ -279,6 +279,12 @@ VALUES (4, 8, now());
 INSERT INTO apply_tb
     (resume_id, board_id, created_at)
 VALUES (5, 5, now());
+INSERT INTO apply_tb
+(resume_id, board_id, created_at)
+VALUES (2, 5, now());
+INSERT INTO apply_tb
+(resume_id, board_id, created_at)
+VALUES (4, 5, now());
 
 -- 평점
 INSERT INTO rating_tb
