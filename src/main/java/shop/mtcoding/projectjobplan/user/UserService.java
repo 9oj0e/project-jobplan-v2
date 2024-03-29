@@ -53,6 +53,7 @@ public class UserService {
     }
 
     public UserResponse.ProfileDTO getUser(User sessionUser, Integer boardId, Pageable pageable) {
+        // todo : pagination?
         User user = userJpaRepository.findById(sessionUser.getId()).get();
         List<Apply> applyList;
         if (sessionUser.getIsEmployer()) {
@@ -69,7 +70,7 @@ public class UserService {
         }
         Double rating = ratingJpaRepository.findRatingAvgByUserId(sessionUser.getId()).orElse(0.0);
 
-        return new UserResponse.ProfileDTO(user, applyList, rating, pageable);
+        return new UserResponse.ProfileDTO(user, applyList, rating, pageable); // todo : pagination?
     }
 
     // 회원수정폼

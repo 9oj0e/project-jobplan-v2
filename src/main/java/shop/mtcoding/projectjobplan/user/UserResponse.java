@@ -116,7 +116,7 @@ public class UserResponse {
                 this.skillList = user.getSkills().stream().map(skill -> new SkillDTO(skill.getName())).toList();
             }
             List<ApplyDTO> applies = applyList.stream().map(apply -> new ApplyDTO(apply)).toList();
-            this.applyList = PagingUtil.pageConverter(applies, pageable);
+            this.applyList = PagingUtil.pageConverter(applies, pageable); // todo : pagination?
         }
 
         public Double getRating() {

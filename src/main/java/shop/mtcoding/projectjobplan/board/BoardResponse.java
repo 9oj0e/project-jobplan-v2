@@ -100,13 +100,13 @@ public class BoardResponse {
 
     @Data
     public static class ListingsDTO {
-        Page<BoardDTO> page;
+        Page<BoardDTO> boardList;
         List<Integer> pageList;
 
         public ListingsDTO(List<Board> boards, Pageable pageable) {
             List<BoardDTO> boardList = boards.stream().map(board -> new BoardDTO(board)).toList();
-            this.page = PagingUtil.pageConverter(boardList, pageable);
-            this.pageList = PagingUtil.getPageList(this.page);
+            this.boardList = PagingUtil.pageConverter(boardList, pageable);
+            this.pageList = PagingUtil.getPageList(this.boardList);
         }
 
         public class BoardDTO {

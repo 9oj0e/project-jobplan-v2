@@ -74,14 +74,14 @@
                 <li><a class="dropdown-item" name="keyword" href="?keyword=MySQL">MySQL</a></li>
             </ul>
         </div>
-        {{#resumeList}}
+        {{#page}}
         <div class="container mt-3">
             <br>
             <table class="table">
                 <th>이름</th>
                 <th>구직자 정보</th>
                 <th>이력서</th>
-                {{#page.content}}
+                {{#resumeList}}
                     <tr>
                         <td class="div-recommendation-text-2">{{name}}</td>
                         <td>
@@ -93,25 +93,25 @@
                             </button>
                         </td>
                     </tr>
-                {{/page.content}}
+                {{/resumeList}}
             </table>
             <div class="d-flex justify-content-center">
                 <ul class="pagination">
-                    <li class="page-item {{^page.hasPrevious}}disabled{{/page.hasPrevious}}">
-                        <a class="page-link" href="?page={{page.pageable.previousOrFirst.pageNumber}}">Previous</a>
+                    <li class="page-item {{^resumeList.hasPrevious}}disabled{{/resumeList.hasPrevious}}">
+                        <a class="page-link" href="?page={{resumeList.pageable.previousOrFirst.pageNumber}}">Previous</a>
                     </li>
                     {{#pageList}}
                         <li class="page-item">
                             <a class="page-link" href="?page={{.}}">{{.}}</a>
                         </li>
                     {{/pageList}}
-                    <li class="page-item {{^page.hasNext}}disabled{{/page.hasNext}}">
-                        <a class="page-link" href="?page={{page.pageable.next.pageNumber}}">Next</a>
+                    <li class="page-item {{^resumeList.hasNext}}disabled{{/resumeList.hasNext}}">
+                        <a class="page-link" href="?page={{resumeList.pageable.next.pageNumber}}">Next</a>
                     </li>
                 </ul>
             </div>
         </div>
-        {{/resumeList}}
+        {{/page}}
     </div>
 </main>
 <!-- 바디 end -->

@@ -121,13 +121,13 @@ public class ResumeResponse {
 
     @Data
     public static class ListingsDTO {
-        Page<ResumeDTO> page;
+        Page<ResumeDTO> resumeList;
         List<Integer> pageList;
 
         public ListingsDTO(List<Resume> resumes, Pageable pageable) {
             List<ResumeDTO> resumeList = resumes.stream().map(resume -> new ResumeDTO(resume)).toList();
-            this.page = PagingUtil.pageConverter(resumeList, pageable);
-            this.pageList = PagingUtil.getPageList(this.page);
+            this.resumeList = PagingUtil.pageConverter(resumeList, pageable);
+            this.pageList = PagingUtil.getPageList(this.resumeList);
         }
 
         public class ResumeDTO {

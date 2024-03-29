@@ -91,7 +91,7 @@
             </div>
         </div>
         <hr>
-        {{#boardList}}
+        {{#page}}
             <div class="container mt-3">
                 <br>
                 <div class="div-recommendation mb-20">채용 정보</div>
@@ -101,7 +101,7 @@
                     <th>공고 제목</th>
                     <th>급여 정보</th>
                     <th>마감일</th>
-                    {{#page.content}}
+                    {{#boardList}}
                         <tr>
                             <td>{{address}}</td>
                             <td><a href="/boards/{{id}}" class="text-body">{{businessName}}</a></td>
@@ -109,25 +109,25 @@
                             <td>{{salary}}</td>
                             <td>{{closingDate}}</td>
                         </tr>
-                    {{/page.content}}
+                    {{/boardList}}
                 </table>
                 <div class="d-flex justify-content-center">
                     <ul class="pagination">
-                        <li class="page-item {{^page.hasPrevious}}disabled{{/page.hasPrevious}}">
-                            <a class="page-link" href="?page={{page.pageable.previousOrFirst.pageNumber}}">Previous</a>
+                        <li class="page-item {{^boardList.hasPrevious}}disabled{{/boardList.hasPrevious}}">
+                            <a class="page-link" href="?page={{boardList.pageable.previousOrFirst.pageNumber}}">Previous</a>
                         </li>
                         {{#pageList}}
                             <li class="page-item">
                                 <a class="page-link" href="?page={{.}}">{{.}}</a>
                             </li>
                         {{/pageList}}
-                        <li class="page-item {{^page.hasNext}}disabled{{/page.hasNext}}">
-                            <a class="page-link" href="?page={{page.pageable.next.pageNumber}}">Next</a>
+                        <li class="page-item {{^boardList.hasNext}}disabled{{/boardList.hasNext}}">
+                            <a class="page-link" href="?page={{boardList.pageable.next.pageNumber}}">Next</a>
                         </li>
                     </ul>
                 </div>
             </div>
-        {{/boardList}}
+        {{/page}}
     </div>
 </main>
 <!-- 바디 end -->
