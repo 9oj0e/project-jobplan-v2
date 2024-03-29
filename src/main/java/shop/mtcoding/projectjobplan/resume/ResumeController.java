@@ -3,10 +3,14 @@ package shop.mtcoding.projectjobplan.resume;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import shop.mtcoding.projectjobplan._core.utils.PagingUtil;
 import shop.mtcoding.projectjobplan.user.User;
 
 import java.util.List;
@@ -46,10 +50,12 @@ public class ResumeController {
         return "/resume/detail";
     }
 
-    @GetMapping("/resumes/listings")
-    public String listings(HttpServletRequest request) {
-        List<ResumeResponse.MainDTO> responseDTO = resumeService.getAllResume();
-        request.setAttribute("resumeList", responseDTO);
+    @GetMapping("/resumes")
+    public String listings(HttpServletRequest request,
+                           @PageableDefault(size = 10) Pageable pageable) {
+        Page<ResumeResponse.ListingsDTO> responseDTO = resumeService.getAllResume(pageable);
+        request.setAttribute("page", responseDTO);
+        request.setAttribute("pageList", PagingUtil.getPageList(responseDTO));
 
         return "/resume/listings";
     }

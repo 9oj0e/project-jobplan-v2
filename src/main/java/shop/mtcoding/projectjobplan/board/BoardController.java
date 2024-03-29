@@ -3,11 +3,15 @@ package shop.mtcoding.projectjobplan.board;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import shop.mtcoding.projectjobplan._core.utils.PagingUtil;
 import shop.mtcoding.projectjobplan.user.User;
 
 import java.util.List;
@@ -18,8 +22,9 @@ public class BoardController {
     private final HttpSession session;
     private final BoardService boardService;
 
-    @GetMapping({"/", "/boards"})
+    @GetMapping("/")
     public String index(HttpServletRequest request) {
+
         List<BoardResponse.IndexDTO> responseDTO = boardService.getAllBoardOnIndex();
         request.setAttribute("boardList", responseDTO);
 
@@ -55,14 +60,16 @@ public class BoardController {
         return "/board/detail";
     }
 
-    @GetMapping("/boards/listings")
+    @GetMapping("/boards")
     public String listings(HttpServletRequest request,
+                           @PageableDefault(size = 10) Pageable pageable,
                            @RequestParam(value = "skill", required = false) String skill,
                            @RequestParam(value = "address", required = false) String address,
                            @RequestParam(value = "keyword", required = false) String keyword) {
-
-        List<BoardResponse.ListingsDTO> responseDTO = boardService.getAllBoard(skill,address,keyword);
-        request.setAttribute("boardList", responseDTO);
+        Page<BoardResponse.ListingsDTO> responseDTO = boardService.getAllBoard(pageable, skill, address, keyword);
+        request.setAttribute("page", responseDTO);
+        request.setAttribute("pageList", PagingUtil.getPageList(responseDTO));
+        // todo : ?keyword=...&page=... 만드는 방법?
 
         return "/board/listings";
     }
