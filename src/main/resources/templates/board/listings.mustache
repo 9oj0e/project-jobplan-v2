@@ -3,7 +3,7 @@
 <main class="main-size">
     <div class="row justify-content-end mb-3">
         <div class="col-md-4">
-            <form action="/" method="get" class="form-inline">
+            <form action="/boards/listings" method="get" class="form-inline">
                 <div class="input-group rounded">
                     <input class="form-control me-2 rounded-end" type="text" placeholder="기업,채용정보를 입력하세요"
                            name="keyword" required/>
@@ -45,21 +45,50 @@
                 </div>
             </div>
         </section>
+
+        <hr>
+
+        <div class="div-job-sector">
+            <div>
+                <div class="div-recommendation">지역별</div>
+                <a class="text-body" name="address" href="?address=서울">서울</a>
+                <a class="text-body" name="address" href="?address=경기">경기</a>
+                <a class="text-body" name="address" href="?address=인천">인천</a>
+                <a class="text-body" name="address" href="?address=부산">부산</a>
+                <a class="text-body" name="address" href="?address=대구">대구</a>
+                <a class="text-body" name="address" href="?address=대전">대전</a>
+                <br>
+                <a class="text-body" name="address" href="?address=경남">경남</a>
+                <a class="text-body" name="address" href="?address=전남">전남</a>
+                <a class="text-body" name="address" href="?address=충남">충남</a>
+                <a class="text-body" name="address" href="?address=광주">광주</a>
+                <a class="text-body" name="address" href="?address=울산">울산</a>
+                <a class="text-body" name="address" href="?address=경북">경북</a>
+                <br>
+                <a class="text-body" name="address" href="?address=전북">전북</a>
+                <a class="text-body" name="address" href="?address=충북">충북</a>
+                <a class="text-body" name="address" href="?address=강원">강원</a>
+                <a class="text-body" name="address" href="?address=제주">제주</a>
+                <a class="text-body" name="address" href="?address=세종">세종</a>
+            </div>
+
+            <div>
+                <div class="div-recommendation">기술별</div>
+                <a class="text-body" name="skill" href="?skill=java">Java</a>
+                <a class="text-body" name="skill" href="?skill=javaScript">JavasSript</a>
+                <a class="text-body" name="skill" href="?skill=Spring">Spring</a>
+                <a class="text-body" name="skill" href="?skill=HTML">HTML</a>
+                <a class="text-body" name="skill" href="?skill=jQuery">JQuery</a>
+
+
+                <br>
+                <a class="text-body" name="skill" href="?skill=MySQL">MySQL</a>
+                <br>
+
+            </div>
+        </div>
         <hr>
         <div class="container mt-3">
-            <div class="dropdown">
-                <button type="button" class="btn btn-outline-dark" data-bs-toggle="dropdown">
-                    기술을 선택하세요
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" name="keyword" href="?keyword=java">java</a></li>
-                    <li><a class="dropdown-item" name="keyword" href="?keyword=javaScript">javasSript</a></li>
-                    <li><a class="dropdown-item" name="keyword" href="?keyword=Spring">Spring</a></li>
-                    <li><a class="dropdown-item" name="keyword" href="?keyword=HTML">HTML</a></li>
-                    <li><a class="dropdown-item" name="keyword" href="?keyword=jQuery">jQuery</a></li>
-                    <li><a class="dropdown-item" name="keyword" href="?keyword=MySQL">MySQL</a></li>
-                </ul>
-            </div>
             <br>
             <div class="div-recommendation mb-20">채용 정보</div>
             <table class="table">

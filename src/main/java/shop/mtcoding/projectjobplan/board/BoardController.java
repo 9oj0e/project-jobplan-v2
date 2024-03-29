@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import shop.mtcoding.projectjobplan.user.User;
 
 import java.util.List;
@@ -55,8 +56,12 @@ public class BoardController {
     }
 
     @GetMapping("/boards/listings")
-    public String listings(HttpServletRequest request) {
-        List<BoardResponse.ListingsDTO> responseDTO = boardService.getAllBoard();
+    public String listings(HttpServletRequest request,
+                           @RequestParam(value = "skill", required = false) String skill,
+                           @RequestParam(value = "address", required = false) String address,
+                           @RequestParam(value = "keyword", required = false) String keyword) {
+
+        List<BoardResponse.ListingsDTO> responseDTO = boardService.getAllBoard(skill,address,keyword);
         request.setAttribute("boardList", responseDTO);
 
         return "/board/listings";

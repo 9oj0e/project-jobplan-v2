@@ -54,12 +54,34 @@ public class BoardService {
         return new BoardResponse.DetailDTO(board, rating, isBoardOwner, hasSubscribed);
     }
 
-    public List<BoardResponse.ListingsDTO> getAllBoard() { // board/listings
-        List<BoardResponse.ListingsDTO> responseDTO = new ArrayList<>();
-        List<Board> boardList = boardJpaRepository.findAllBoardJoinUser().get();
-        boardList.stream().forEach(board -> responseDTO.add(new BoardResponse.ListingsDTO(board)));
+    public List<BoardResponse.ListingsDTO> getAllBoard(String skill, String address, String keyword) { // board/listings
+        //기술별 검색시
+        if (skill != null) {
+            List<BoardResponse.ListingsDTO> responseDTO = new ArrayList<>();
+            List<Board> boardList = boardJpaRepository.findAllBoardJoinUserSkill(skill).get();
+            boardList.stream().forEach(board -> responseDTO.add(new BoardResponse.ListingsDTO(board)));
+            return responseDTO;
+        //지역별 검색시
+        } else if (address != null) {
+            List<BoardResponse.ListingsDTO> responseDTO = new ArrayList<>();
+            List<Board> boardList = boardJpaRepository.findAllBoardJoinUserAddress(address).get();
+            boardList.stream().forEach(board -> responseDTO.add(new BoardResponse.ListingsDTO(board)));
+            return responseDTO;
+        //검색창 이용시
+        } else if (keyword != null) {
+            List<BoardResponse.ListingsDTO> responseDTO = new ArrayList<>();
+            List<Board> boardList = boardJpaRepository.findAllBoardJoinUserKeyword(keyword).get();
+            boardList.stream().forEach(board -> responseDTO.add(new BoardResponse.ListingsDTO(board)));
+            return responseDTO;
+        //모든 페이지
+        } else {
+            List<BoardResponse.ListingsDTO> responseDTO = new ArrayList<>();
+            List<Board> boardList = boardJpaRepository.findAllBoardJoinUser().get();
+            boardList.stream().forEach(board -> responseDTO.add(new BoardResponse.ListingsDTO(board)));
+            return responseDTO;
 
-        return responseDTO;
+        }
+
     }
 
     public List<BoardResponse.IndexDTO> getAllBoardOnIndex() { // index
@@ -128,5 +150,28 @@ public class BoardService {
         }
 
         boardJpaRepository.delete(board);
+    }
+
+    public List<BoardResponse.ListingsDTO> getAllBoardSkill(String skill) {
+        List<BoardResponse.ListingsDTO> responseDTO = new ArrayList<>();
+        List<Board> boardList = boardJpaRepository.findAllBoardJoinUserSkill(skill).get();
+        boardList.stream().forEach(board -> responseDTO.add(new BoardResponse.ListingsDTO(board)));
+
+        return responseDTO;
+    }
+
+    public List<BoardResponse.ListingsDTO> getAllBoardAddress(String address) {
+        List<BoardResponse.ListingsDTO> responseDTO = new ArrayList<>();
+        List<Board> boardList = boardJpaRepository.findAllBoardJoinUserAddress(address).get();
+        boardList.stream().forEach(board -> responseDTO.add(new BoardResponse.ListingsDTO(board)));
+        return responseDTO;
+
+    }
+
+    public List<BoardResponse.ListingsDTO> getAllBoardKeyword(String keyword) {
+        List<BoardResponse.ListingsDTO> responseDTO = new ArrayList<>();
+        List<Board> boardList = boardJpaRepository.findAllBoardJoinUserKeyword(keyword).get();
+        boardList.stream().forEach(board -> responseDTO.add(new BoardResponse.ListingsDTO(board)));
+        return responseDTO;
     }
 }
