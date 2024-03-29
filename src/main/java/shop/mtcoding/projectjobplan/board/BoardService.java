@@ -129,4 +129,12 @@ public class BoardService {
 
         boardJpaRepository.delete(board);
     }
+
+    public List<BoardResponse.ListingsDTO> getAllBoardSkill(String skill) {
+        List<BoardResponse.ListingsDTO> responseDTO = new ArrayList<>();
+        List<Board> boardList = boardJpaRepository.findAllBoardJoinUserSkill(skill).get();
+        boardList.stream().forEach(board -> responseDTO.add(new BoardResponse.ListingsDTO(board)));
+
+        return responseDTO;
+    }
 }
