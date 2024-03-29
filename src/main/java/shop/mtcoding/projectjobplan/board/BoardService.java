@@ -54,14 +54,12 @@ public class BoardService {
             return new BoardResponse.DetailDTO(board, rating, boardOwner, hasSubscribed);
         }
         return new BoardResponse.DetailDTO(board, rating);
-
     }
 
     public Page<BoardResponse.ListingsDTO> getAllBoard(Pageable pageable) { // board/listings
         List<BoardResponse.ListingsDTO> responseDTO = new ArrayList<>();
         List<Board> boardList = boardJpaRepository.findAllBoardJoinUser().get();
         boardList.stream().forEach(board -> responseDTO.add(new BoardResponse.ListingsDTO(board)));
-
 
         return PagingUtil.getPage(responseDTO, pageable);
     }

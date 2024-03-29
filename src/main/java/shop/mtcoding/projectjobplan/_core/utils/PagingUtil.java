@@ -6,18 +6,28 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class PagingUtil {
 
-    public static <T> Page<T> getPage(List<T> dataList, Pageable pageable) {
+    public static <T> Page<T> getPage(List<T> content, Pageable pageable) {
         int start = (int) pageable.getOffset();
-        int end = Math.min((start + pageable.getPageSize()), dataList.size());
+        int end = Math.min((start + pageable.getPageSize()), content.size());
 
         List<T> pageData = new ArrayList<>();
         if (start <= end) {
-            pageData = dataList.subList(start, end);
+            pageData = content.subList(start, end);
         }
 
-        return new PageImpl<>(pageData, pageable, dataList.size());
+        return new PageImpl<>(pageData, pageable, content.size());
+    }
+
+    public static List<Integer> getPageList(Page<?> page) {
+        List<Integer> pageNumbers = new ArrayList<>();
+        for (int i = 0; i < page.getTotalPages(); i++) {
+            pageNumbers.add(i);
+        }
+        return pageNumbers;
     }
 }

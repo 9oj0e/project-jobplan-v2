@@ -68,7 +68,7 @@
                 <th>공고 제목</th>
                 <th>급여 정보</th>
                 <th>마감일</th>
-                {{#boardList.content}}
+                {{#page.content}}
                     <tr>
                         <td>{{address}}</td>
                         <td><a href="/boards/{{id}}" class="text-body">{{businessName}}</a></td>
@@ -76,27 +76,24 @@
                         <td>{{salary}}</td>
                         <td>{{closingDate}}</td>
                     </tr>
-                {{/boardList.content}}
+                {{/page.content}}
             </table>
             <div class="d-flex justify-content-center">
-                {{#boardList}}
-                <ul class="pagination">
-                    {{#hasPrevious}}
-                        <li class="page-item disabled"><a class="page-link" href="/boards/listings?page={{number - 1}}">Previous</a></li>
-                    {{/boardList.hasPrevious}}
-                    {{#boardList.isFirst}}
-                        <li class="page-item"><a class="page-link" href="/boards/listings?page=0">First</a></li>
-                    {{/boardList.isFirst}}
-                    {{#boardList.isLast}}
-                        <li class="page-item"><a class="page-link" href="/boards/listings?page={{totalPages - 1}}
-                            ">Last</a></li>
-                    {{/boardList.isLast}}
-                    {{#boardList.hasNext}}
-                        <li class="page-item disabled"><a class="page-link" href="/boards/listings?page={{number + 1}}
-                            ">Next</a></li>
-                    {{/boardList.hasNext}}
-                </ul>
-                {{/boardList}}
+                <div class="d-flex justify-content-center">
+                    <ul class="pagination">
+                        <li class="page-item {{^page.hasPrevious}}disabled{{/page.hasPrevious}}">
+                            <a class="page-link" href="?page={{page.pageable.previousOrFirst.pageNumber}}">Previous</a>
+                        </li>
+                        {{#pageList}}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{.}}">{{.}}</a>
+                            </li>
+                        {{/pageList}}
+                        <li class="page-item {{^page.hasNext}}disabled{{/page.hasNext}}">
+                            <a class="page-link" href="?page={{page.pageable.next.pageNumber}}">Next</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>

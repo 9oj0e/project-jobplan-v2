@@ -4,13 +4,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import shop.mtcoding.projectjobplan._core.utils.PagingUtil;
 import shop.mtcoding.projectjobplan.user.User;
 
 import java.util.List;
@@ -60,12 +61,12 @@ public class BoardController {
 
     @GetMapping("/boards/listings")
     public String listings(HttpServletRequest request,
-                           @RequestParam(name = "page", defaultValue = "0") int page) {
-        final int SIZE = 10;
-        Pageable pageable = PageRequest.of(page, SIZE);
+                           @PageableDefault(size = 10) Pageable pageable,
+                           @RequestParam(defaultValue = "0") int page) {
         Page<BoardResponse.ListingsDTO> responseDTO = boardService.getAllBoard(pageable);
-        System.out.println(responseDTO);
-        request.setAttribute("boardList", responseDTO);
+        request.setAttribute("page", responseDTO);
+        request.setAttribute("pageList", PagingUtil.getPageList(responseDTO));
+        request.setAttribute("currentPage", page == responseDTO.getPageable().getPageNumber() ? true : false);
 
         return "/board/listings";
     }
