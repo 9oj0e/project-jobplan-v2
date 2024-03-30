@@ -42,9 +42,17 @@ public class ResumeService {
         return new ResumeResponse.DetailDTO(resume, rating, isResumeOwner, hasSubscribed);
     }
 
-    public ResumeResponse.ListingsDTO getAllResume(Pageable pageable) {
-        List<Resume> resumeList = resumeJpaRepository.findAllJoinUser().get();
-
+    public ResumeResponse.ListingsDTO getAllResume(Pageable pageable, String skill, String address, String keyword) {
+        List<Resume> resumeList;
+        if (skill != null) {
+            resumeList = resumeJpaRepository.findAllJoinUserWithSkill(skill).orElseThrow(() -> new Exception404("조회된 이력서가 없습니다."));
+        } else if (address != null) {
+            resumeList = resumeJpaRepository.findAllJoinUserWithAddress(address).orElseThrow(() -> new Exception404("조회된 이력서가 없습니다."));
+        } else if (keyword != null) {
+            resumeList = resumeJpaRepository.findAllJoinUserWithKeyword(keyword).orElseThrow(() -> new Exception404("조회된 이력서가 없습니다."));
+        } else {
+            resumeList = resumeJpaRepository.findAllJoinUser().orElseThrow(() -> new Exception404("조회된 이력서가 없습니다."));
+        }
         return new ResumeResponse.ListingsDTO(resumeList, pageable);
     }
 

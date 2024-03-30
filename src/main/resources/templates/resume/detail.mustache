@@ -72,10 +72,10 @@
                         <td>{{schoolName}}</td>
                     </tr>
                     {{#major}}
-                    <tr>
-                        <td>전공</td>
-                        <td>{{major}}</td>
-                    </tr>
+                        <tr>
+                            <td>전공</td>
+                            <td>{{major}}</td>
+                        </tr>
                     {{/major}}
                     <tr>
                         <td>졸업형태</td>
@@ -126,12 +126,12 @@
                         {{^userPic}}
                             <img class="card-img" src="../images/avatar.png" alt="Card image" style="width:100%">
                         {{/userPic}}
-                        <h4 class="card-title text-center">{{resumeDetail.name}}</h4>
+                        <h4 class="card-title text-center">{{name}}</h4>
                     </div>
                     <div class="card-footer" style="text-align: center;">
                         {{#sessionUser.isEmployer}}
                             {{^hasRated}}
-                                <form action="/resumes/{{resumeDetail.id}}/rate" method="post">
+                                <form action="/resumes/{{id}}/rate" method="post">
                                     <div>
                                         <select name="rating" style="text-align: center; width: 100%">
                                             <option value="1">1점</option>
@@ -151,8 +151,8 @@
                             {{/hasRated}}
                             <!-- 제안하기 버튼 -->
                             <div class="mt-3">
-                                <form action="#" method="post">
-                                    <button class="btn btn-primary">제안</button>
+                                <form action="/resumes/{{id}}/offer-form" method="get">
+                                    <button class="btn btn-primary form-control">제안</button>
                                 </form>
                             </div>
                         {{/sessionUser.isEmployer}}
