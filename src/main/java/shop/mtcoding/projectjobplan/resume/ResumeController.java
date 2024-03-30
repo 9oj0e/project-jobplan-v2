@@ -20,13 +20,13 @@ public class ResumeController {
 
     @GetMapping("/resumes/main")
     public String main() {
-        return "/resume/main";
+        return "resume/main";
     }
 
     @GetMapping("/resumes/post-form") // 이력서 작성 폼
     public String postForm() {
 
-        return "/resume/post-form";
+        return "resume/post-form";
     }
 
     @PostMapping("/resumes/post") // 이력서 작성 action
@@ -44,7 +44,7 @@ public class ResumeController {
         ResumeResponse.DetailDTO resumeDetail = resumeService.getResumeInDetail(resumeId, sessionUserId);
         request.setAttribute("resumeDetail", resumeDetail);
 
-        return "/resume/detail";
+        return "resume/detail";
     }
 
     @GetMapping("/resumes")
@@ -56,21 +56,20 @@ public class ResumeController {
         ResumeResponse.ListingsDTO responseDTO = resumeService.getAllResume(pageable, skill, address, keyword);
         request.setAttribute("page", responseDTO);
 
-        return "/resume/listings";
+        return "resume/listings";
     }
 
-    // 이력서수정폼
-    @GetMapping("/resumes/{resumeId}/update-form")
+    /* modal로 대체
+    @GetMapping("/resumes/{resumeId}/update-form") // 이력서수정폼
     public String updateForm(@PathVariable int resumeId, HttpServletRequest request) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         ResumeResponse.UpdateFormDTO responseDTO = resumeService.getResume(resumeId, sessionUser);
         request.setAttribute("resume", responseDTO);
 
-        return "/resume/update-form";
+        return "resume/update-form";
     }
-
-    // 이력서수정
-    @PostMapping("/resumes/{resumeId}/update")
+    */
+    @PostMapping("/resumes/{resumeId}/update") // 이력서수정
     public String update(@PathVariable int resumeId, ResumeRequest.UpdateDTO requestDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         resumeService.setResume(resumeId, requestDTO, sessionUser);

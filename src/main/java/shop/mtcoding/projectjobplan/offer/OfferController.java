@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import shop.mtcoding.projectjobplan.user.User;
 
-import java.util.List;
-
 @Controller
 @RequiredArgsConstructor
 public class OfferController {
@@ -19,17 +17,25 @@ public class OfferController {
 
     @GetMapping("/resumes/{resumeId}/offer-form")
     public String offerForm(@PathVariable int resumeId, HttpServletRequest request) {
-        User user = (User) session.getAttribute("sessionUser");
-        OfferResponse.OfferFormDTO respDTO = offerService.getBoardAndResume(resumeId, user);
-        request.setAttribute("offerForm", respDTO);
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        OfferResponse.OfferFormDTO responseDTO = offerService.getResumeAndBoard(resumeId, sessionUser);
+        request.setAttribute("offerForm", responseDTO);
 
         return "offer/offer-form";
     }
 
     @PostMapping("/resumes/{resumeId}/offer")
-    public String offer(@PathVariable Integer resumeId, OfferRequest.OfferDTO reqDTO) {
-        offerService.createOffer(reqDTO);
+    public String offer(@PathVariable Integer resumeId, OfferRequest.OfferDTO requestDTO) {
+        offerService.createOffer(requestDTO);
 
         return "redirect:/resumes/" + resumeId;
+    }
+
+    @PostMapping("/offer/update")
+    public String update(OfferRequest.UpdateDTO requestDTO) { // 지원자 합격/불합격 처리
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        offerService.updateOffer(requestDTO);
+
+        return "redirect:/users/" + sessionUser.getId();
     }
 }

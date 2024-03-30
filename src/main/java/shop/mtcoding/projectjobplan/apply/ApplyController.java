@@ -17,11 +17,11 @@ public class ApplyController {
 
     @GetMapping("/boards/{boardId}/apply-form")
     public String applyForm(@PathVariable int boardId, HttpServletRequest request) {
-        User user = (User) session.getAttribute("sessionUser");
-        ApplyResponse.ApplyFormDTO responseDTO = applyService.getBoardAndResume(boardId, user);
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        ApplyResponse.ApplyFormDTO responseDTO = applyService.getBoardAndResume(boardId, sessionUser);
         request.setAttribute("applyForm", responseDTO);
 
-        return "/apply/apply-form";
+        return "apply/apply-form";
     }
 
     @PostMapping("/boards/{boardId}/apply")

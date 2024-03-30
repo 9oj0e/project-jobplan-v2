@@ -76,8 +76,9 @@ public class ResumeResponse {
         private Double rating; // 평점
         private boolean isResumeOwner; // 이력서 주인 여부
         private boolean hasSubscribed; // 구독 여부
+        private boolean hasRated; // 평가 여부
 
-        public DetailDTO(Resume resume, Double rating, boolean isResumeOwner, boolean hasSubscribed) {
+        public DetailDTO(Resume resume, Double rating, boolean isResumeOwner, boolean hasSubscribed, boolean hasRated) {
             this.id = resume.getId();
             this.career = resume.getCareer();
             this.title = resume.getTitle();
@@ -96,16 +97,15 @@ public class ResumeResponse {
             this.rating = rating;
             this.isResumeOwner = isResumeOwner;
             this.hasSubscribed = hasSubscribed;
+            this.hasRated = hasRated;
         }
 
         public class SkillDTO {
             private String skillName;
-
             public SkillDTO(String skillName) {
                 this.skillName = skillName;
             }
         }
-
         public Double getRating() {
             return FormatUtil.numberFormatter(this.rating);
         }

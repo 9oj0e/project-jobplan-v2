@@ -41,11 +41,9 @@ public class SubscribeController {
                                @PageableDefault(size = 3) Pageable pageable) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         SubscribeResponse.DTO subscription = subscribeService.getSubscription(sessionUser.getId(), pageable);
-        /* todo : null일 때 표시할 내용이 없다고 알리는 방법?
-        if (subscription.getBoardList().isEmpty() && subscription.getResumeList().isEmpty()) {
+        if (subscription.getPage().isEmpty()) {
             request.setAttribute("subscription", false);
         }
-        */
         request.setAttribute("subscription", subscription);
 
         return "user/subscription";

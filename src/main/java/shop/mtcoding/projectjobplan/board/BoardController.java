@@ -3,7 +3,6 @@ package shop.mtcoding.projectjobplan.board;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import shop.mtcoding.projectjobplan._core.utils.PagingUtil;
 import shop.mtcoding.projectjobplan.user.User;
 
 import java.util.List;
@@ -28,18 +26,18 @@ public class BoardController {
         List<BoardResponse.IndexDTO> responseDTO = boardService.getAllBoardOnIndex(limit);
         request.setAttribute("boardList", responseDTO);
 
-        return "/index";
+        return "index";
     }
 
     @GetMapping("/boards/main")
     public String main() {
-        return "/board/main";
+        return "board/main";
     }
 
     @GetMapping("/boards/post-form")
     public String postForm() {
 
-        return "/board/post-form";
+        return "board/post-form";
     }
 
     @PostMapping("/boards/post")
@@ -57,7 +55,7 @@ public class BoardController {
         BoardResponse.DetailDTO boardDetail = boardService.getBoardInDetail(boardId, sessionUserId);
         request.setAttribute("boardDetail", boardDetail);
 
-        return "/board/detail";
+        return "board/detail";
     }
 
     @GetMapping("/boards")
@@ -70,21 +68,20 @@ public class BoardController {
         request.setAttribute("page", responseDTO);
         // todo : ?keyword=...&page=... 만드는 방법?
 
-        return "/board/listings";
+        return "board/listings";
     }
 
-    // 공고수정폼
-    @GetMapping("/boards/{boardId}/update-form")
+    /* modal로 대체
+    @GetMapping("/boards/{boardId}/update-form") // 공고수정폼
     public String updateForm(@PathVariable int boardId, HttpServletRequest request) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         BoardResponse.UpdateFormDTO responseDTO = boardService.getBoard(boardId, sessionUser);
         request.setAttribute("board", responseDTO);
 
-        return "/board/update-form";
+        return "board/update-form";
     }
-
-    // 공고수정
-    @PostMapping("/boards/{boardId}/update")
+    */
+    @PostMapping("/boards/{boardId}/update") // 공고수정
     public String update(@PathVariable int boardId, BoardRequest.UpdateDTO requestDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         boardService.setBoard(boardId, requestDTO, sessionUser);

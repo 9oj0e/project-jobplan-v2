@@ -35,35 +35,35 @@ public class BoardResponse {
 
     @Data
     public static class DetailDTO {
-        // user 정보
-        private String address;
-        private String phoneNumber;
-        private String email;
-        private String businessName;
-        private boolean isBoardOwner; // 공고 주인 여부
-        private boolean hasSubscribed; // 구독 여부
-        // 평점
-        private Double rating;
-        // board 정보
+        // 공고 정보
         private Integer id;
         private String title; // 제목
         private String content; // 내용
         private String field; // 채용 분야
         private String position; // 포지션
         private String salary; // 연봉
-        // skill 정보 (우대 스킬)
-        private List<SkillDTO> skillList;
-        // 시간 정보
         private Timestamp openingDate; // 게시일
         private Timestamp closingDate; // 마감일 == null -> "상시채용"
+        private List<SkillDTO> skillList; // 우대 스킬
+        // 회원 정보
+        private String address;
+        private String phoneNumber;
+        private String email;
+        private String businessName;
+        // 기타 정보
+        private Double rating; // 평점
+        private boolean isBoardOwner; // 공고 주인 여부
+        private boolean hasSubscribed; // 구독 여부
+        private boolean hasRated; // 평가 여부
 
-        public DetailDTO(Board board, Double rating, boolean isBoardOwner, boolean hasSubscribed) {
+        public DetailDTO(Board board, Double rating, boolean isBoardOwner, boolean hasSubscribed, boolean hasRated) {
             this.address = board.getUser().getAddress();
             this.phoneNumber = board.getUser().getPhoneNumber();
             this.email = board.getUser().getEmail();
             this.businessName = board.getUser().getBusinessName();
             this.isBoardOwner = isBoardOwner;
             this.hasSubscribed = hasSubscribed;
+            this.hasRated = hasRated;
             this.rating = rating;
             this.id = board.getId();
             this.title = board.getTitle();

@@ -1,7 +1,5 @@
 package shop.mtcoding.projectjobplan.offer;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,30 +18,32 @@ public class OfferService {
     private final OfferJpaRepository offerJpaRepository;
     private final ResumeJpaRepository resumeJpaRepository;
     private final BoardJpaRepository boardJpaRepository;
-    private final HttpSession session;
 
-    public OfferResponse.OfferFormDTO getBoardAndResume(int resumeId, User sessionUser) {
-        System.out.println("1. Resume resume = resumeJpaRepository.findById(resumeId) : ");
+    public OfferResponse.OfferFormDTO getResumeAndBoard(int resumeId, User sessionUser) {
         Resume resume = resumeJpaRepository.findById(resumeId)
-                .orElseThrow(() -> new Exception404("회원 정보를 찾을 수 없습니다."));
-
-        // todo: boardList를 못 찾음
-        System.out.println("3. List<Board> boardList = boardJpaRepository.findByUserId(sessionUser.getId()) : ");
+                .orElseThrow(() -> new Exception404("이력서 정보를 찾을 수 없습니다."));
         List<Board> boardList = boardJpaRepository.findByUserId(sessionUser.getId())
-                .orElseThrow(() -> new Exception404("회원 정보를 찾을 수 없습니다."));
+                .orElseThrow(() -> new Exception404("게시글 정보를 찾을 수 없습니다."));
 
         return new OfferResponse.OfferFormDTO(resume, boardList);
     }
 
     @Transactional
-    public void createOffer(OfferRequest.OfferDTO reqDTO) {
-        Resume resume = resumeJpaRepository.findById(reqDTO.getResumeId())
-                .orElseThrow(() -> new Exception404("회원 정보를 찾을 수 없습니다."));
-
-        Board board = boardJpaRepository.findById(reqDTO.getBoardId())
-                .orElseThrow(() -> new Exception404("회원 정보를 찾을 수 없습니다."));
-
+    public void createOffer(OfferRequest.OfferDTO requestDTO) {
+        Board board = boardJpaRepository.findById(requestDTO.getBoardId())
+                .orElseThrow(() -> new Exception404("게시글 정보를 찾을 수 없습니다."));
+        Resume resume = resumeJpaRepository.findById(requestDTO.getResumeId())
+                .orElseThrow(() -> new Exception404("이력서 정보를 찾을 수 없습니다."));
         Offer offer = new Offer(resume, board);
+
         offerJpaRepository.save(offer);
+    }
+
+    @Transactional
+    public void updateOffer(OfferRequest.UpdateDTO requestDTO) {
+        Offer offer = offerJpaRepository.findById(requestDTO.getId())
+                .orElseThrow(() -> new Exception404("제안 이력이 없습니다."));
+
+        offer.update(requestDTO);
     }
 }

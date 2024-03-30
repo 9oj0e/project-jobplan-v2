@@ -20,10 +20,8 @@ public class Offer {
     private Integer id;
     @ManyToOne(fetch = FetchType.LAZY)
     private Resume resume;
-    // resume_id, resume_user_id
     @ManyToOne(fetch = FetchType.LAZY)
     private Board board;
-    // board_id, board_user_id
     private Boolean status;
     @CreationTimestamp
     private Timestamp createdAt;
@@ -31,13 +29,11 @@ public class Offer {
     public Offer(Resume resume, Board board) {
         this.resume = resume;
         this.board = board;
-        // this.status = null;
-        // this.createdAt = new Timestamp(System.currentTimeMillis()); // createdAt이 없어서 null. 애러 해결. (김성재)
     }
 
-//    public void update(OfferRequest.UpdateDTO requestDTO) {
-//        this.status = requestDTO.getStatus();
-//    }
+    public void update(OfferRequest.UpdateDTO requestDTO) {
+        this.status = requestDTO.getStatus();
+    }
 
     public String getCreatedAt() {
         return FormatUtil.timeFormatter(createdAt);
