@@ -83,20 +83,16 @@
                     <input type="email" name="email" id="email" placeholder="Enter email.." value="ssar@nate.com"
                            class="form-control" required>
                 </div>
-
-
                 {{#isEmployer}}
                     <div style="text-align: end"><h4>기업 정보</h4></div>
                     <input type="hidden" name="isEmployer" value="true"> <!--기업 회원 여부 true-->
                     <div class="mb-3">
                         <p class="p-text">사업자 등록 번호</p>
-                        <input type="text" pattern="[0-9]{10}" title="번호만 입력하세요" name="employerIdNumber"
-                               id="employerIdNumber" value="0000000000" class="form-control" required>
+                        <input type="text" pattern="[0-9]{10}" title="번호만 입력하세요" name="employerIdNumber" value="0000000000" class="form-control" required>
                     </div>
                     <div class="mb-3">
                         <p class="p-text">기업 이름</p>
-                        <input type="text" name="businessName" id="businessName" value="그린컴퓨터아카데미" class="form-control"
-                               required>
+                        <input type="text" name="businessName" value="그린컴퓨터아카데미" class="form-control" required>
                     </div>
                     <!-- 업종 삭제 (JUHO CHOI)
                     <p class="p-text">업종</p>
@@ -108,6 +104,22 @@
                         <option value="IT 개발">IT 개발</option>
                     </select>
                      -->
+                {{/isEmployer}}
+                {{^isEmployer}}
+                    <div style="text-align: end"><h4>학력 정보</h4></div>
+                    <input type="hidden" name="isEmployer" value="false"> <!--기업 회원 여부 false-->
+                    <div class="mb-3">
+                        <p class="p-text">학력</p>
+                        <input type="text" name="educationLevel" value="초대졸" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <p class="p-text">학교명</p>
+                        <input type="text" name="schoolName" value="부경대학교" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <p class="p-text">전공</p>
+                        <input type="text" name="major" value="경영학과" class="form-control" required>
+                    </div>
                 {{/isEmployer}}
                 <button type="submit" class="btn btn-primary form-control mt-3">회원가입</button>
             </form>

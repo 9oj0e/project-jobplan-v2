@@ -1,15 +1,5 @@
 {{>layout/header}}
 <style>
-    * {
-        margin: 0px;
-        box-sizing: border-box;
-    }
-
-    .h2-text {
-        margin: 10px 0 20px;
-        text-align: center;
-    }
-
     .join-select {
         text-align: center;
         display: grid;
@@ -18,27 +8,7 @@
     }
 </style>
 <div style="display: flex; justify-content: center">
-    <div class="card" style="width: 600px; margin-top: 5%; margin-bottom: 10%">
-        <div class="card-header">
-            <h2 class="h2-text">회원 유형을 선택하세요</h2>
-        </div>
-        <div class="card-body">
-            <div class="join-select mt-5 mb-5">
-                <form action="/users/join-form" method="get">
-                    <input type="hidden" name="isEmployer" value="false">
-                    <button class="btn btn-outline-primary form-control">
-                        개인 회원
-                    </button>
-                </form>
-                <form action="/users/join-form" method="get">
-                    <input type="hidden" name="isEmployer" value="true">
-                    <button class="btn btn-primary form-control">
-                        기업 회원
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
+
 </div>
 <!-- 바디 end -->
 {{>layout/footer}}
