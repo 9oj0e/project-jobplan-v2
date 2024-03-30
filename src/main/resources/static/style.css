@@ -64,19 +64,19 @@ a {
     outline: grey;
     outline-style: groove;
     outline-width: thin;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     /* padding-right: 10px; */
     height: 60px;
     /*background-size: 100% 100%;*/
     /*width: 1000px;*/
-    min-width: 600px;
+    min-width: 750px;
     z-index: 1;
 }
 
 .nav-header {
     padding: 20px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .div-menu-left {
@@ -111,21 +111,33 @@ a {
 /* 헤더 end */
 
 
-/* 광고 start */
+/* 검색 & 광고 배너 start */
 .div-container {
     margin: 30px 10px;
     height: 100%;
 }
 
+.search-box-banner {
+    background-image: url(../images/intro_img_web.png);
+    height: 150px;
+    border-radius: 20px;
+    background-size: 100% 100%;
+    align-content: center;
+}
+
+.search-box {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
 .div-ad-img1 {
-    background-image: url(images/ad1.png);
+    background-image: url(../images/ad1.png);
     height: 150px;
     border-radius: 20px;
     background-size: 100% 100%;
 }
-
-
-/* 광고창 end */
+/* 검색 & 광고 배너 end */
 
 
 /* 바디 start */
@@ -136,7 +148,7 @@ a {
 
 .sidenav {
     position: sticky;
-    top: 60px;
+    top: 70px;
     padding-left: 10px;
     padding-right: 10px;
 }

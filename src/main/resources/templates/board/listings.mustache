@@ -1,23 +1,28 @@
 {{>layout/header}}
 <!-- 바디 start -->
 <main class="main-size">
-    <div class="row justify-content-end mb-3">
-        <div class="col-md-4">
-            <form action="/boards" method="get" class="form-inline">
-                <div class="input-group rounded">
-                    <input class="form-control me-2 rounded-end" type="text" placeholder="기업,채용정보를 입력하세요"
-                           name="keyword" required/>
-                    <a href="#" class="text-body"><i class="fa-solid fa-magnifying-glass icon-search"></i></a>
-                </div>
-            </form>
-        </div>
-    </div>
-    <!-- 광고 창 start -->
+    <!-- 검색 배너 start -->
     <div class="div-container">
-        <section class="section-body">
-            <div class="div-ad-img1"></div>
-        </section>
-        <!-- 광고 창 end -->
+        {{^sessionUser.isEmployer}}
+            <section class="section-body">
+                <div class="search-box-banner">
+                    <div class="search-box">
+                        <div class="col-md-4">
+                            <form action="/boards" method="get" class="form-inline">
+                                <div class="input-group rounded">
+                                    <input type="text" name="keyword" placeholder="기업,채용정보를 입력하세요"
+                                           class="form-control rounded-end" required/>
+                                    <button type="submit">
+                                        <i class="fa-solid fa-magnifying-glass icon-search"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        {{/sessionUser.isEmployer}}
+        <!-- 검색 배너 end -->
         <!-- 바디 start -->
         <section class="section-body">
             <div class="div-recommendation mb-20">추천 채용 정보</div>
@@ -46,88 +51,104 @@
             </div>
         </section>
         <hr>
-        <div class="div-job-sector">
-            <div>
-                <div class="div-recommendation">지역별</div>
-                <a class="text-body" name="address" href="?address=서울">서울</a>
-                <a class="text-body" name="address" href="?address=경기">경기</a>
-                <a class="text-body" name="address" href="?address=인천">인천</a>
-                <a class="text-body" name="address" href="?address=부산">부산</a>
-                <a class="text-body" name="address" href="?address=대구">대구</a>
-                <a class="text-body" name="address" href="?address=대전">대전</a>
-                <br>
-                <a class="text-body" name="address" href="?address=경남">경남</a>
-                <a class="text-body" name="address" href="?address=전남">전남</a>
-                <a class="text-body" name="address" href="?address=충남">충남</a>
-                <a class="text-body" name="address" href="?address=광주">광주</a>
-                <a class="text-body" name="address" href="?address=울산">울산</a>
-                <a class="text-body" name="address" href="?address=경북">경북</a>
-                <br>
-                <a class="text-body" name="address" href="?address=전북">전북</a>
-                <a class="text-body" name="address" href="?address=충북">충북</a>
-                <a class="text-body" name="address" href="?address=강원">강원</a>
-                <a class="text-body" name="address" href="?address=제주">제주</a>
-                <a class="text-body" name="address" href="?address=세종">세종</a>
-            </div>
-            <div>
-                <div class="div-recommendation">기술별</div>
-                <a class="text-body" name="skill" href="?skill=java">Java</a>
-                <a class="text-body" name="skill" href="?skill=javaScript">JavasSript</a>
-                <a class="text-body" name="skill" href="?skill=Spring">Spring</a>
-                <a class="text-body" name="skill" href="?skill=HTML">HTML</a>
-                <a class="text-body" name="skill" href="?skill=jQuery">JQuery</a>
-                <br>
-                <a class="text-body" name="skill" href="?skill=MySQL">MySQL</a>
-                <a class="text-body" name="skill" href="?skill=Flutter">Flutter</a>
-                <a class="text-body" name="skill" href="?skill=React">React</a>
-                <a class="text-body" name="skill" href="?skill=AWS">AWS</a>
-                <a class="text-body" name="skill" href="?skill=C">C</a>
-                <a class="text-body" name="skill" href="?skill=Basic">Basic</a>
-                <br>
-                <a class="text-body" name="skill" href="?skill=Flutter">Flutter</a>
-                <a class="text-body" name="skill" href="?skill=Python">Python</a>
-                <a class="text-body" name="skill" href="?skill=Linux">Linux</a>
-                <br>
-            </div>
-        </div>
+        <!-- 광고 창 start -->
+        <section class="section-body">
+            <div class="div-ad-img1"></div>
+        </section>
+        <!-- 광고 창 end -->
         <hr>
-        {{#page}}
-            <div class="container mt-3">
-                <br>
-                <div class="div-recommendation mb-20">채용 정보</div>
-                <table class="table">
-                    <th>지역</th>
-                    <th>회사명</th>
-                    <th>공고 제목</th>
-                    <th>급여 정보</th>
-                    <th>마감일</th>
-                    {{#boardList}}
-                        <tr>
-                            <td>{{address}}</td>
-                            <td><a href="/boards/{{id}}" class="text-body">{{businessName}}</a></td>
-                            <td><a href="/boards/{{id}}" class="text-body">{{title}}</a></td>
-                            <td>{{salary}}</td>
-                            <td>{{closingDate}}</td>
-                        </tr>
-                    {{/boardList}}
-                </table>
-                <div class="d-flex justify-content-center">
-                    <ul class="pagination">
-                        <li class="page-item {{^boardList.hasPrevious}}disabled{{/boardList.hasPrevious}}">
-                            <a class="page-link" href="?page={{boardList.pageable.previousOrFirst.pageNumber}}">Previous</a>
-                        </li>
-                        {{#pageList}}
-                            <li class="page-item">
-                                <a class="page-link" href="?page={{.}}">{{.}}</a>
-                            </li>
-                        {{/pageList}}
-                        <li class="page-item {{^boardList.hasNext}}disabled{{/boardList.hasNext}}">
-                            <a class="page-link" href="?page={{boardList.pageable.next.pageNumber}}">Next</a>
-                        </li>
-                    </ul>
+        <!-- 카테고리 검색 start -->
+        <section class="section-body">
+            <div class="div-job-sector">
+                <div>
+                    <div class="div-recommendation">지역별</div>
+                    <a class="text-body" name="address" href="?address=서울">서울</a>
+                    <a class="text-body" name="address" href="?address=경기">경기</a>
+                    <a class="text-body" name="address" href="?address=인천">인천</a>
+                    <a class="text-body" name="address" href="?address=부산">부산</a>
+                    <a class="text-body" name="address" href="?address=대구">대구</a>
+                    <a class="text-body" name="address" href="?address=대전">대전</a>
+                    <br>
+                    <a class="text-body" name="address" href="?address=경남">경남</a>
+                    <a class="text-body" name="address" href="?address=전남">전남</a>
+                    <a class="text-body" name="address" href="?address=충남">충남</a>
+                    <a class="text-body" name="address" href="?address=광주">광주</a>
+                    <a class="text-body" name="address" href="?address=울산">울산</a>
+                    <a class="text-body" name="address" href="?address=경북">경북</a>
+                    <br>
+                    <a class="text-body" name="address" href="?address=전북">전북</a>
+                    <a class="text-body" name="address" href="?address=충북">충북</a>
+                    <a class="text-body" name="address" href="?address=강원">강원</a>
+                    <a class="text-body" name="address" href="?address=제주">제주</a>
+                    <a class="text-body" name="address" href="?address=세종">세종</a>
+                </div>
+                <div>
+                    <div class="div-recommendation">기술별</div>
+                    <a class="text-body" name="skill" href="?skill=java">Java</a>
+                    <a class="text-body" name="skill" href="?skill=javaScript">JavasSript</a>
+                    <a class="text-body" name="skill" href="?skill=Spring">Spring</a>
+                    <a class="text-body" name="skill" href="?skill=HTML">HTML</a>
+                    <a class="text-body" name="skill" href="?skill=jQuery">JQuery</a>
+                    <br>
+                    <a class="text-body" name="skill" href="?skill=MySQL">MySQL</a>
+                    <a class="text-body" name="skill" href="?skill=Flutter">Flutter</a>
+                    <a class="text-body" name="skill" href="?skill=React">React</a>
+                    <a class="text-body" name="skill" href="?skill=AWS">AWS</a>
+                    <a class="text-body" name="skill" href="?skill=C">C</a>
+                    <a class="text-body" name="skill" href="?skill=Basic">Basic</a>
+                    <br>
+                    <a class="text-body" name="skill" href="?skill=Flutter">Flutter</a>
+                    <a class="text-body" name="skill" href="?skill=Python">Python</a>
+                    <a class="text-body" name="skill" href="?skill=Linux">Linux</a>
+                    <br>
                 </div>
             </div>
-        {{/page}}
+
+        </section>
+        <!-- 카테고리 검색 end -->
+        <hr>
+        <!-- 채용 공고 리스트 start -->
+        <section class="section-body">
+            {{#page}}
+                <div class="container">
+                    <br>
+                    <div class="div-recommendation mb-20">채용 정보</div>
+                    <table class="table">
+                        <th>지역</th>
+                        <th>회사명</th>
+                        <th>공고 제목</th>
+                        <th>급여 정보</th>
+                        <th>마감일</th>
+                        {{#boardList}}
+                            <tr>
+                                <td>{{address}}</td>
+                                <td><a href="/boards/{{id}}" class="text-body">{{businessName}}</a></td>
+                                <td><a href="/boards/{{id}}" class="text-body">{{title}}</a></td>
+                                <td>{{salary}}</td>
+                                <td>{{closingDate}}</td>
+                            </tr>
+                        {{/boardList}}
+                    </table>
+                    <div class="d-flex justify-content-center">
+                        <ul class="pagination">
+                            <li class="page-item {{^boardList.hasPrevious}}disabled{{/boardList.hasPrevious}}">
+                                <a class="page-link" href="?page={{boardList.pageable.previousOrFirst.pageNumber}}
+                                ">Previous</a>
+                            </li>
+                            {{#pageList}}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{.}}">{{.}}</a>
+                                </li>
+                            {{/pageList}}
+                            <li class="page-item {{^boardList.hasNext}}disabled{{/boardList.hasNext}}">
+                                <a class="page-link" href="?page={{boardList.pageable.next.pageNumber}}">Next</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            {{/page}}
+        </section>
+        <!-- 채용 공고 리스트 end -->
     </div>
 </main>
 <!-- 바디 end -->
