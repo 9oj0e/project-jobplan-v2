@@ -9,20 +9,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RequiredArgsConstructor
 @Controller
 public class UserController {
     private final HttpSession session;
     private final UserService userService;
-
+    /* modal로 대체
     @GetMapping("/users/join-type")
     public String joinType() {
 
         return "/user/join-type";
     }
-
-    @GetMapping("/users/join-form")
+    */
+    @PostMapping("/users/join-form")
     public String joinForm(boolean isEmployer, HttpServletRequest request) {
         request.setAttribute("isEmployer", isEmployer);
 
@@ -33,15 +34,15 @@ public class UserController {
     public String join(UserRequest.JoinDTO requestDTO) {
         userService.createUser(requestDTO);
 
-        return "redirect:/login-form";
+        return "redirect:/";
     }
-
+    /* modal로 대체
     @GetMapping("/login-form")
     public String loginForm() {
 
         return "/user/login-form";
     }
-
+    */
     @PostMapping("/login")
     public String login(UserRequest.LoginDTO requestDTO) {
         User sessionUser = userService.getUser(requestDTO);
@@ -56,7 +57,7 @@ public class UserController {
 
         return "redirect:/";
     }
-
+    /* modal 로 대체
     @GetMapping("/users/{userId}/update-form")
     public String updateForm(@PathVariable Integer userId, HttpServletRequest request) {
         User sessionUser = (User) session.getAttribute("sessionUser");
@@ -65,7 +66,7 @@ public class UserController {
 
         return "/user/update-form";
     }
-
+    */
     @PostMapping("/users/{userId}/update")
     public String update(@PathVariable Integer userId, UserRequest.UpdateDTO requestDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");

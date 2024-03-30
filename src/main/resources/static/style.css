@@ -57,11 +57,20 @@ a {
 }
 
 .header-main {
-    margin: 0px auto;
+    position: sticky;
+    top: 0px;
+    background: white;
+    opacity: 0.9;
+    outline: grey;
+    outline-style: groove;
+    outline-width: thin;
+    margin-bottom: 20px;
     /* padding-right: 10px; */
-    height: 50px;
-    background-size: 100% 100%;
-    width: 1000px;
+    height: 60px;
+    /*background-size: 100% 100%;*/
+    /*width: 1000px;*/
+    min-width: 600px;
+    z-index: 1;
 }
 
 .nav-header {
@@ -127,11 +136,10 @@ a {
 
 .sidenav {
     position: sticky;
-    top: 10px;
+    top: 60px;
     padding-left: 10px;
     padding-right: 10px;
 }
-
 
 .div-recommendation {
     font-size: 25px;
