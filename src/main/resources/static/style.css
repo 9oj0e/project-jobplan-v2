@@ -257,8 +257,8 @@ a {
 
 
 
-.employer-people-image1 {
-    background-image: url(images/people.jpg);
+.user-image1 {
+    background-image: url(images/user1.jpg);
     width: 150px;
     height: 180px;
     background-size: 100% 100%;
@@ -266,25 +266,16 @@ a {
 
 }
 
-.employer-people-image2 {
-    background-image: url(images/people1.jpg);
+.user-image2 {
+    background-image: url(images/user2.jpg);
     width: 150px;
     height: 180px;
     background-size: 100% 100%;
     border-radius: 20px;
 
 }
-.employer-people-image3 {
-    background-image: url(images/people2.jpg);
-    width: 150px;
-    height: 180px;
-    background-size: 100% 100%;
-    border-radius: 20px;
-
-}
-
-.employer-people-image4 {
-    background-image: url(images/people3.jpg);
+.user-image3 {
+    background-image: url(images/user3.jpg);
     width: 150px;
     height: 180px;
     background-size: 100% 100%;
@@ -292,8 +283,17 @@ a {
 
 }
 
-.employer-people-image5 {
-    background-image: url(images/people4.jpg);
+.user-image4 {
+    background-image: url(images/user4.jpg);
+    width: 150px;
+    height: 180px;
+    background-size: 100% 100%;
+    border-radius: 20px;
+
+}
+
+.user-image5 {
+    background-image: url(images/user5.png);
     width: 150px;
     height: 180px;
     background-size: 100% 100%;

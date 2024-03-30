@@ -2,54 +2,54 @@
 INSERT INTO user_tb
 (username, password, name, birthdate, gender, phone_number, address, email,
  is_employer, employer_id_number, business_name, created_at)
-VALUES ('emp1', '1234', '정현조', '1996-04-01', 'M', '01012345678', '부산', 'jjh123@naver.com',
+VALUES ('emp1', '1234', '이해진', '1967-06-22', 'M', '01012345678', '전북', 'lhj@naver.com',
         true, '0128275512', '네이버', now());
 INSERT INTO user_tb
 (username, password, name, birthdate, gender, phone_number, address, email,
  is_employer, employer_id_number, business_name, created_at)
-VALUES ('emp2', '1234', '류재성', '1991-10-01', 'M', '01012345678', '부산', 'rjs123@kakao.com',
+VALUES ('emp2', '1234', '김범수', '1966-03-27', 'M', '01012345678', '전남', 'briankim@kakao.com',
         true, '0128275512', '카카오', now());
 INSERT INTO user_tb
 (username, password, name, birthdate, gender, phone_number, address, email,
  is_employer, employer_id_number, business_name, created_at)
-VALUES ('emp3', '1234', '김정수', '1996-08-01', 'M', '01012345678', '부산', 'kjs123@line.com',
+VALUES ('emp3', '1234', '켄타로', '1900-01-01', 'M', '01012345678', '서울', 'ly@yahoo.com',
         true, '0128275512', '라인', now());
 INSERT INTO user_tb
 (username, password, name, birthdate, gender, phone_number, address, email,
  is_employer, employer_id_number, business_name, created_at)
-VALUES ('emp4', '1234', '김성재', '1998-05-01', 'M', '01012345678', '부산', 'ksj123@coupang.com',
+VALUES ('emp4', '1234', '김범', '1978-10-07', 'M', '01012345678', '서울', 'beomkim@coupang.com',
         true, '0128275512', '쿠팡', now());
 INSERT INTO user_tb
 (username, password, name, birthdate, gender, phone_number, address, email,
  is_employer, employer_id_number, business_name, created_at)
-VALUES ('emp5', '1234', '최윤정', '2000-04-01', 'F', '01012345678', '부산', 'cyj123@baemin.com',
+VALUES ('emp5', '1234', '김봉진', '1976-10-10', 'M', '01012345678', '전남', 'bongjhin@baemin.com',
         true, '0128275512', '배달의민족', now());
 
 -- user_tb (개인 유저)
 INSERT INTO user_tb
 (username, password, name, birthdate, gender, phone_number, address, email, education_level, school_name, major,
  is_employer, created_at)
-VALUES ('user1', '1234', '홍길동', '2000-01-01', 'M', '01012345678', '서울', 'hgd456@domain.com', '대졸', '서울대학교', '컴퓨터공학',
+VALUES ('user1', '1234', '류재성', '2000-01-01', 'M', '01012345678', '서울', 'hgd456@domain.com', '대졸', '서울대학교', '컴퓨터공학',
         false, now());
 INSERT INTO user_tb
 (username, password, name, birthdate, gender, phone_number, address, email, education_level, school_name, major,
  is_employer, created_at)
-VALUES ('user2', '1234', '이가탄', '2000-01-01', 'M', '01012345678', '울산', 'lgt456@domain.com', '대졸', '영남대학교', '컴퓨터공학',
+VALUES ('user2', '1234', '장현정', '2000-01-01', 'M', '01012345678', '울산', 'lgt456@domain.com', '대졸', '영남대학교', '컴퓨터공학',
         false, now());
 INSERT INTO user_tb
 (username, password, name, birthdate, gender, phone_number, address, email, education_level, school_name, major,
  is_employer, created_at)
-VALUES ('user3', '1234', '홍금보', '2000-01-01', 'M', '01012345678', '인천', 'hgb456@domain.com', '초대졸', '구미대학교', '소프트웨어공학',
+VALUES ('user3', '1234', '김성재', '2000-01-01', 'M', '01012345678', '인천', 'hgb456@domain.com', '초대졸', '구미대학교', '소프트웨어공학',
         false, now());
 INSERT INTO user_tb
 (username, password, name, birthdate, gender, phone_number, address, email, education_level, school_name, major,
  is_employer, created_at)
-VALUES ('user4', '1234', '김덕배', '2000-01-01', 'M', '01012345678', '제주', 'kdb456@domain.com', '초대졸', '부천대학교', '소프트웨어공학',
+VALUES ('user4', '1234', '이서현', '2000-01-01', 'M', '01012345678', '제주', 'kdb456@domain.com', '초대졸', '부천대학교', '소프트웨어공학',
         false, now());
 INSERT INTO user_tb
-(username, password, name, birthdate, gender, phone_number, address, email, education_level, school_name,
+(username, password, name, birthdate, gender, phone_number, address, email, education_level, school_name, major,
  is_employer, created_at)
-VALUES ('user5', '1234', '한만춘', '2000-01-01', 'M', '01012345678', '광주', 'hmc456@domain.com', '고졸', '대구과학고등학교',
+VALUES ('user5', '1234', '조정현', '1996-04-01', 'M', '01012345678', '진주', 'hmc456@domain.com', '대졸', '경상국립대학교', '무역통상',
         false, now());
 INSERT INTO user_tb
 (username, password, name, birthdate, gender, phone_number, address, email, education_level, school_name,
