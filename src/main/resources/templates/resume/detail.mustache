@@ -1,55 +1,53 @@
 {{>layout/header}}
 <!-- 바디 start -->
 <div class="div-card-container">
-    <div class="sidenav-container">
-        <div class="sidenav">
-            <!-- 수정 삭제 버튼 -->
-            {{#resumeDetail.isResumeOwner}}
-                <div class="mb-3"> <!-- 수정 하기 -->
-                    <form action="/resumes/{{resumeDetail.id}}/update-form" method="get">
-                        <button class="btn btn-warning">
-                            <i class="fa-regular fa-file-word icon-size"></i>
-                        </button>
-                    </form>
-                </div>
-                <div class="mb-3"> <!-- 삭제 하기 -->
-                    <form action="/resumes/{{resumeDetail.id}}/delete" method="post">
-                        <button class="btn btn-danger">
-                            <i class="fa-regular fa-trash-can icon-size"></i>
-                        </button>
-                    </form>
-                </div>
-            {{/resumeDetail.isResumeOwner}}
-            {{^resumeDetail.isResumeOwner}}
-                <!-- 구독하기 버튼 -->
-                {{#sessionUser}}
-                    {{#isEmployer}}
-                    {{^resumeDetail.hasSubscribed}}
-                        <div class="mb-3"> <!-- 구독하기 -->
-                            <form action="/resumes/{{resumeDetail.id}}/subscribe" method="post">
-                                <button class="btn btn-outline-dark">
-                                    <i class="fa-regular fa-bookmark icon-size"></i>
-                                </button>
-                            </form>
-                        </div>
-                    {{/resumeDetail.hasSubscribed}}
-                    {{#resumeDetail.hasSubscribed}}
-                        <div class="mb-3"> <!-- 구독 취소 -->
-                            <form action="/resumes/{{resumeDetail.id}}/unsubscribe" method="post">
-                                <input type="hidden" name="fromSubscription" value="false">
-                                <button class="btn btn-outline-dark">
-                                    <i class="fa-solid fa-bookmark icon-size"></i>
-                                </button>
-                            </form>
-                        </div>
-                    {{/resumeDetail.hasSubscribed}}
-                    {{/isEmployer}}
-                {{/sessionUser}}
-            {{/resumeDetail.isResumeOwner}}
+    {{#resumeDetail}}
+        <div class="sidenav-container">
+            <div class="sidenav">
+                <!-- 수정 삭제 버튼 -->
+                {{#isResumeOwner}}
+                    <div class="mb-3"> <!-- 수정 하기 -->
+                        <form action="/resumes/{{id}}/update-form" method="get">
+                            <button class="btn btn-warning">
+                                <i class="fa-regular fa-file-word icon-size"></i>
+                            </button>
+                        </form>
+                    </div>
+                    <div class="mb-3"> <!-- 삭제 하기 -->
+                        <form action="/resumes/{{id}}/delete" method="post">
+                            <button class="btn btn-danger">
+                                <i class="fa-regular fa-trash-can icon-size"></i>
+                            </button>
+                        </form>
+                    </div>
+                {{/isResumeOwner}}
+                {{^isResumeOwner}}
+                    <!-- 구독하기 버튼 -->
+                    {{#sessionUser.isEmployer}}
+                        {{^hasSubscribed}}
+                            <div class="mb-3"> <!-- 구독하기 -->
+                                <form action="/resumes/{{id}}/subscribe" method="post">
+                                    <button class="btn btn-outline-dark">
+                                        <i class="fa-regular fa-bookmark icon-size"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        {{/hasSubscribed}}
+                        {{#hasSubscribed}}
+                            <div class="mb-3"> <!-- 구독 취소 -->
+                                <form action="/resumes/{{id}}/unsubscribe" method="post">
+                                    <input type="hidden" name="fromSubscription" value="false">
+                                    <button class="btn btn-outline-dark">
+                                        <i class="fa-solid fa-bookmark icon-size"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        {{/hasSubscribed}}
+                    {{/sessionUser.isEmployer}}
+                {{/isResumeOwner}}
+            </div>
         </div>
-    </div>
-    <div class="card div-card">
-        {{#resumeDetail}}
+        <div class="card div-card">
             <div class="card-header card-title">
                 <h3>{{title}}</h3>
             </div>
@@ -73,10 +71,12 @@
                         <td>학교명</td>
                         <td>{{schoolName}}</td>
                     </tr>
-                    <tr>
-                        <td>전공</td>
-                        <td>{{major}}</td>
-                    </tr>
+                    {{#major}}
+                        <tr>
+                            <td>전공</td>
+                            <td>{{major}}</td>
+                        </tr>
+                    {{/major}}
                     <tr>
                         <td>졸업형태</td>
                         <td>{{educationLevel}}</td>
@@ -105,35 +105,33 @@
                     </tr>
                 </table>
             </div>
-        {{/resumeDetail}}
-    </div>
-    <div class="sidenav-container">
-        <div class="sidenav">
-            <div class="card" style="width:200px">
-                <div class="card-body" style="padding-left: 0; padding-right: 0">
-                    <div class="card-title">
-                        {{#resumeDetail.rating}}
-                            <table class="table">
-                                <tr>
-                                    <td style="text-align: end; padding-bottom: 0; padding-top: 0">평점 ⭐</td>
-                                    <td style="text-align: start; padding-bottom: 0; padding-top: 0">{{resumeDetail.rating}}</td>
-                                </tr>
-                            </table>
-                        {{/resumeDetail.rating}}
+        </div>
+        <div class="sidenav-container">
+            <div class="sidenav">
+                <div class="card" style="width:200px">
+                    <div class="card-body" style="padding-left: 0; padding-right: 0">
+                        <div class="card-title">
+                            {{#rating}}
+                                <table class="table">
+                                    <tr>
+                                        <td style="text-align: end; padding-bottom: 0; padding-top: 0">평점 ⭐</td>
+                                        <td style="text-align: start; padding-bottom: 0; padding-top: 0">{{rating}}</td>
+                                    </tr>
+                                </table>
+                            {{/rating}}
+                        </div>
+                        {{#userPic}}
+                            <img class="card-img" src="/upload/{{userPic.imgFilename}}" style="width:100%">
+                        {{/userPic}}
+                        {{^userPic}}
+                            <img class="card-img" src="../images/avatar.png" alt="Card image" style="width:100%">
+                        {{/userPic}}
+                        <h4 class="card-title text-center">{{name}}</h4>
                     </div>
-                    {{#userPic}}
-                        <img class="card-img" src="/upload/{{userPic.imgFilename}}" style="width:100%">
-                    {{/userPic}}
-                    {{^userPic}}
-                        <img class="card-img" src="../images/avatar.png" alt="Card image" style="width:100%">
-                    {{/userPic}}
-                    <h4 class="card-title text-center">{{resumeDetail.name}}</h4>
-                </div>
-                <div class="card-footer" style="text-align: center;">
-                    {{#sessionUser}}
-                        {{#isEmployer}}
+                    <div class="card-footer" style="text-align: center;">
+                        {{#sessionUser.isEmployer}}
                             {{^hasRated}}
-                                <form action="/resumes/{{resumeDetail.id}}/rate" method="post">
+                                <form action="/resumes/{{id}}/rate" method="post">
                                     <div>
                                         <select name="rating" style="text-align: center; width: 100%">
                                             <option value="1">1점</option>
@@ -151,22 +149,18 @@
                                     </div>
                                 </form>
                             {{/hasRated}}
-                        {{/isEmployer}}
-                    {{/sessionUser}}
+                            <!-- 제안하기 버튼 -->
+                            <div class="mt-3">
+                                <form action="/resumes/{{id}}/offer-form" method="get">
+                                    <button class="btn btn-primary form-control">제안</button>
+                                </form>
+                            </div>
+                        {{/sessionUser.isEmployer}}
+                    </div>
                 </div>
             </div>
-            <!-- 제안하기 버튼 -->
-            <!--
-            {{#sessionUser.isEmployer}}
-            <div class="mt-3">
-                <form action="#" method="post">
-                    <button class="btn btn-primary">제안</button>
-                </form>
-            </div>
-            {{/sessionUser.isEmployer}}
-            -->
         </div>
-    </div>
+    {{/resumeDetail}}
 </div>
 <!-- 바디 end -->
 {{>layout/footer}}
