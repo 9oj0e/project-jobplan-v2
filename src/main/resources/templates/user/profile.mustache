@@ -129,7 +129,7 @@
 {{#profileDTO}}
     <main class="main-size">
     <div class="div-body">
-        <div class="div-layout" style="height: 600px">
+        <div class="div-layout">
             <div class="d-flex justify-content-between">
                 <h5>안녕하세요, {{sessionUser.name}}님</h5>
                 <div style="display: flex; justify-content: space-evenly; width: 150px">
@@ -278,23 +278,24 @@
                                 <td>{{businessName}}</td>
                             </tr>
                         {{/isEmployer}}
+                        {{^isEmployer}}
+                            <tr>
+                                <th>학력</th>
+                                <td>{{educationLevel}}</td>
+                            </tr>
+                            <tr>
+                                <th>학교명</th>
+                                <td>{{schoolName}}</td>
+                            </tr>
+                            {{#major}}
+                                <tr>
+                                    <th>전공</th>
+                                    <td>{{major}}</td>
+                                </tr>
+                            {{/major}}
+                        {{/isEmployer}}
                         </tbody>
                     </table>
-                    <!-- 기업
-                        <div class="form-control">
-                            <div class="mb-3"><b>희망 기술 스택</b></div>
-                            <div>
-                                {{#skillList}}
-                                    <span>{{skillName}}</span>
-                                {{/skillList}}
-                        {{^skillList}}
-                                    <form action="/users/{{sessionUser.id}}/update-form">
-                                        <button class="btn btn-outline-primary form-control">추가하기</button>
-                                    </form>
-                                {{/skillList}}
-                            </div>
-                        </div>
-                        -->
                     {{^isEmployer}}
                         <div class="form-control">
                             <div class="mb-3" style="display: flex; justify-content: space-between">

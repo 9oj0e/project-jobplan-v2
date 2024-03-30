@@ -59,7 +59,6 @@ public class UserResponse {
         private Integer id;
         private String username;
         private String password;
-
         // 개인 정보
         private String name;
         private String birthdate;
@@ -67,23 +66,24 @@ public class UserResponse {
         private String phoneNumber;
         private String address;
         private String email;
-        private Page<ResumeDTO> resumeList;
-
         // 평점
         private Double rating;
-
+        // 학력 정보
+        private String educationLevel;
+        private String schoolName;
+        private String major;
         // 기업 정보
         private Boolean isEmployer;
         private String employerIdNumber;
         private String businessName;
-        private Page<BoardDTO> boardList;
-
-        // 지원자 현황 및 지원 현황
-        private Page<ApplyDTO> applyList;
-
         // tech stack 기술
         private List<SkillDTO> skillList;
         private Boolean hasSkill;
+        // 게시물 정보
+        private Page<ResumeDTO> resumeList;
+        private Page<BoardDTO> boardList;
+        // 지원자 현황 및 지원 현황
+        private Page<ApplyDTO> applyList;
 
         private Boolean hasSkill() {
             if (this.skillList.isEmpty()) {
@@ -103,6 +103,9 @@ public class UserResponse {
             this.phoneNumber = user.getPhoneNumber();
             this.address = user.getAddress();
             this.email = user.getEmail();
+            this.educationLevel = user.getEducationLevel();
+            this.schoolName = user.getSchoolName();
+            this.major = user.getMajor();
             this.rating = rating;
             if (user.getIsEmployer()) {
                 this.isEmployer = user.getIsEmployer();

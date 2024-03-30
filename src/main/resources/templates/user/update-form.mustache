@@ -14,7 +14,7 @@
             <div class="card-body">
                 <form action="/users/{{id}}/update" method="post" enctype="application/x-www-form-urlencoded"
                       onsubmit="return true">
-                    <div style="text-align: end"><h4>기본 정보 수정</h4></div>
+                    <div style="text-align: end"><h4>기본 정보</h4></div>
                     <div>아이디</div>
                     <div class="mb-3">
                         <input type="text" class="form-control" name="username" value="{{username}}"
@@ -25,7 +25,7 @@
                         <input type="password" class="form-control" name="password" placeholder="{{password}}"
                                value="{{password}}">
                     </div>
-                    <div style="text-align: end"><h4>개인 정보 수정</h4></div>
+                    <div style="text-align: end"><h4>개인 정보</h4></div>
                     <div>이름</div>
                     <div class="mb-3">
                         <input type="text" class="form-control" name="name" value="{{name}}"
@@ -60,7 +60,7 @@
                         <input type="email" class="form-control" name="email" value="{{email}}">
                     </div>
                     {{#isEmployer}}
-                        <div style="text-align: end"><h4>기업 정보 수정</h4></div>
+                        <div style="text-align: end"><h4>기업 정보</h4></div>
                         <div>사업자번호</div>
                         <div class="mb-3">
                             <input type="text" class="form-control" name="employerIdNumber" value="{{employerIdNumber}}"
@@ -70,6 +70,22 @@
                         <div class="mb-3">
                             <input type="text" class="form-control" name="businessName" value="{{businessName}}"
                                    required>
+                        </div>
+                    {{/isEmployer}}
+                    {{^isEmployer}}
+                        <div style="text-align: end"><h4>학력 정보</h4></div>
+                        <input type="hidden" name="isEmployer" value="false"> <!--기업 회원 여부 false-->
+                        <div class="mb-3">
+                            <p class="p-text">학력</p>
+                            <input type="text" name="educationLevel" value="{{educationLevel}}" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <p class="p-text">학교명</p>
+                            <input type="text" name="schoolName" value="{{schoolName}}" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <p class="p-text">전공</p>
+                            <input type="text" name="major" {{#major}}value="{{major}}"{{/major}} class="form-control" required>
                         </div>
                     {{/isEmployer}}
                     </table>
