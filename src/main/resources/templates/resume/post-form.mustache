@@ -14,63 +14,57 @@
                         <tr>
                             <td>이름</td>
                             <td>
-                                <input name="name" type="text" value="{{name}}" readonly class="form-control">
+                                {{name}}
                             </td>
                         </tr>
                         <tr>
                             <td>생년월일</td>
                             <td>
-                                <input name="birthdate" type="date" value="{{birthdate}}" readonly class="form-control">
+                                {{birthdate}}
                             </td>
                         </tr>
                         <tr>
                             <td>휴대전화</td>
                             <td>
-                                <input name="phoneNumber" type="text" value="{{phoneNumber}}" readonly
-                                       class="form-control">
+                                {{phoneNumber}}
                             </td>
                         </tr>
                         <tr>
                             <td>이메일</td>
                             <td>
-                                <input name="email" type="email" value="{{email}}" readonly class="form-control">
+                                {{email}}
                             </td>
                         </tr>
                         <tr>
                             <td>주소</td>
                             <td>
-                                <input name="address" type="text" value="{{address}}" readonly class="form-control">
+                                {{address}}
+                            </td>
+                        </tr>
+                    </table>
+                    <h4>학력 정보</h4>
+                    <hr>
+                    <table class="table mb-5">
+                        <tr>
+                            <td>학력</td>
+                            <td>
+                                {{educationLevel}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>학교명</td>
+                            <td>
+                                {{schoolName}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>전공</td>
+                            <td>
+                                {{major}}
                             </td>
                         </tr>
                     </table>
                 {{/sessionUser}}
-                <h4>학력 정보</h4>
-                <hr>
-                <table class="table mb-5">
-                    <tr>
-                        <td>학교명</td>
-                        <td>
-                            <input name="schoolName" type="text"
-                                   class="form-control">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>졸업형태</td>
-                        <td>
-                            <select name="educationLevel" class="form-control">
-                                <option value="고졸">고졸</option>
-                                <option value="초대졸">초대졸</option>
-                                <option value="대졸">대졸</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>전공</td>
-                        <td>
-                            <input name="major" type="text" class="form-control">
-                        </td>
-                    </tr>
-                </table>
                 <h4>이력서 작성</h4>
                 <hr>
                 <table class="table mb-5">
