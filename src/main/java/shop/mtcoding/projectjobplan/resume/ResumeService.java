@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import shop.mtcoding.projectjobplan._core.errors.exception.Exception403;
 import shop.mtcoding.projectjobplan._core.errors.exception.Exception404;
+import shop.mtcoding.projectjobplan.rating.Rating;
 import shop.mtcoding.projectjobplan.rating.RatingJpaRepository;
 import shop.mtcoding.projectjobplan.subscribe.Subscribe;
 import shop.mtcoding.projectjobplan.subscribe.SubscribeJpaRepository;
@@ -34,12 +35,15 @@ public class ResumeService {
 
         boolean isResumeOwner = false;
         boolean hasSubscribed = false;
+        boolean hasRated = false;
         if (sessionUserId != null) {
             isResumeOwner = resume.getUser().getId() == sessionUserId ? true : false;
-            Optional<Subscribe> optional = subscribeJpaRepository.findByResumeIdAndUserId(resumeId, sessionUserId);
-            hasSubscribed = optional.isPresent() ? true : false;
+            Optional<Subscribe> optionalSubscribe = subscribeJpaRepository.findByResumeIdAndUserId(resumeId, sessionUserId);
+            hasSubscribed = optionalSubscribe.isPresent() ? true : false;
+            Optional<Rating> optionalRating = ratingJpaRepository.findByRaterIdAndSubjectId(sessionUserId, resume.getUser().getId());
+            hasRated = optionalRating.isPresent() ? true : false;
         }
-        return new ResumeResponse.DetailDTO(resume, rating, isResumeOwner, hasSubscribed);
+        return new ResumeResponse.DetailDTO(resume, rating, isResumeOwner, hasSubscribed, hasRated);
     }
 
     public ResumeResponse.ListingsDTO getAllResume(Pageable pageable, String skill, String address, String keyword) {

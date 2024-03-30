@@ -6,6 +6,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import shop.mtcoding.projectjobplan._core.errors.exception.Exception403;
 import shop.mtcoding.projectjobplan._core.errors.exception.Exception404;
+import shop.mtcoding.projectjobplan.apply.Apply;
+import shop.mtcoding.projectjobplan.apply.ApplyJpaRepository;
+import shop.mtcoding.projectjobplan.rating.Rating;
 import shop.mtcoding.projectjobplan.rating.RatingJpaRepository;
 import shop.mtcoding.projectjobplan.skill.Skill;
 import shop.mtcoding.projectjobplan.skill.SkillJpaRepository;
@@ -13,6 +16,7 @@ import shop.mtcoding.projectjobplan.subscribe.Subscribe;
 import shop.mtcoding.projectjobplan.subscribe.SubscribeJpaRepository;
 import shop.mtcoding.projectjobplan.user.User;
 
+import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -21,6 +25,7 @@ import java.util.Optional;
 @Service
 public class BoardService {
     private final BoardJpaRepository boardJpaRepository;
+    private final ApplyJpaRepository applyJpaRepository;
     private final RatingJpaRepository ratingJpaRepository;
     private final SubscribeJpaRepository subscribeJpaRepository;
     private final SkillJpaRepository skillJpaRepository;
@@ -42,17 +47,21 @@ public class BoardService {
     }
 
     public BoardResponse.DetailDTO getBoardInDetail(int boardId, Integer sessionUserId) {
-        Board board = boardJpaRepository.findById(boardId).get();
+        Board board = boardJpaRepository.findById(boardId).orElseThrow(() -> new Exception404("조회된 게시글이 없습니다."));
         Double rating = ratingJpaRepository.findRatingAvgByUserId(board.getUser().getId()).orElse(0.0);
 
         boolean isBoardOwner = false;
+        boolean hasRated = false;
         boolean hasSubscribed = false;
+        boolean hasApplied = false;
         if (sessionUserId != null) {
             isBoardOwner = board.getUser().getId() == sessionUserId ? true : false;
-            Optional<Subscribe> optional = subscribeJpaRepository.findByBoardIdAndUserId(boardId, sessionUserId);
-            hasSubscribed = optional.isPresent() ? true : false;
+            Optional<Subscribe> optionalSubscribe = subscribeJpaRepository.findByBoardIdAndUserId(board.getId(), sessionUserId);
+            hasSubscribed = optionalSubscribe.isPresent() ? true : false;
+            Optional<Rating> optionalRating = ratingJpaRepository.findByRaterIdAndSubjectId(sessionUserId, board.getUser().getId());
+            hasRated = optionalRating.isPresent() ? true : false;
         }
-        return new BoardResponse.DetailDTO(board, rating, isBoardOwner, hasSubscribed);
+        return new BoardResponse.DetailDTO(board, rating, isBoardOwner, hasSubscribed, hasRated);
     }
 
     // board/listings
