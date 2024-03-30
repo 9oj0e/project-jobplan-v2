@@ -30,7 +30,7 @@ public class ResumeService {
     }
 
     public ResumeResponse.DetailDTO getResumeInDetail(int resumeId, Integer sessionUserId) {
-        Resume resume = resumeJpaRepository.findById(resumeId).get();
+        Resume resume = resumeJpaRepository.findById(resumeId).orElseThrow(() -> new Exception404("조회된 이력서가 없습니다."));
         Double rating = ratingJpaRepository.findRatingAvgByUserId(resume.getUser().getId()).orElse(0.0);
 
         boolean isResumeOwner = false;
@@ -38,7 +38,7 @@ public class ResumeService {
         boolean hasRated = false;
         if (sessionUserId != null) {
             isResumeOwner = resume.getUser().getId() == sessionUserId ? true : false;
-            Optional<Subscribe> optionalSubscribe = subscribeJpaRepository.findByResumeIdAndUserId(resumeId, sessionUserId);
+            Optional<Subscribe> optionalSubscribe = subscribeJpaRepository.findByResumeIdAndUserId(resume.getId(), sessionUserId);
             hasSubscribed = optionalSubscribe.isPresent() ? true : false;
             Optional<Rating> optionalRating = ratingJpaRepository.findByRaterIdAndSubjectId(sessionUserId, resume.getUser().getId());
             hasRated = optionalRating.isPresent() ? true : false;

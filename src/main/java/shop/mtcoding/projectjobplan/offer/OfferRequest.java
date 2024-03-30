@@ -7,7 +7,6 @@ public class OfferRequest {
     public static class OfferDTO {
         private Integer resumeId;
         private Integer boardId;
-        // toEntity 가능?
     }
 
     @Data

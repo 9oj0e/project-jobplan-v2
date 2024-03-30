@@ -20,13 +20,13 @@ public class ResumeController {
 
     @GetMapping("/resumes/main")
     public String main() {
-        return "/resume/main";
+        return "resume/main";
     }
 
     @GetMapping("/resumes/post-form") // 이력서 작성 폼
     public String postForm() {
 
-        return "/resume/post-form";
+        return "resume/post-form";
     }
 
     @PostMapping("/resumes/post") // 이력서 작성 action
@@ -44,7 +44,7 @@ public class ResumeController {
         ResumeResponse.DetailDTO resumeDetail = resumeService.getResumeInDetail(resumeId, sessionUserId);
         request.setAttribute("resumeDetail", resumeDetail);
 
-        return "/resume/detail";
+        return "resume/detail";
     }
 
     @GetMapping("/resumes")
@@ -56,7 +56,7 @@ public class ResumeController {
         ResumeResponse.ListingsDTO responseDTO = resumeService.getAllResume(pageable, skill, address, keyword);
         request.setAttribute("page", responseDTO);
 
-        return "/resume/listings";
+        return "resume/listings";
     }
 
     // 이력서수정폼
@@ -66,7 +66,7 @@ public class ResumeController {
         ResumeResponse.UpdateFormDTO responseDTO = resumeService.getResume(resumeId, sessionUser);
         request.setAttribute("resume", responseDTO);
 
-        return "/resume/update-form";
+        return "resume/update-form";
     }
 
     // 이력서수정

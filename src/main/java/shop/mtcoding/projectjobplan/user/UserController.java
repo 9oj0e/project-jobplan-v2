@@ -20,14 +20,14 @@ public class UserController {
     @GetMapping("/users/join-type")
     public String joinType() {
 
-        return "/user/join-type";
+        return "user/join-type";
     }
     */
     @PostMapping("/users/join-form")
     public String joinForm(boolean isEmployer, HttpServletRequest request) {
         request.setAttribute("isEmployer", isEmployer);
 
-        return "/user/join-form";
+        return "user/join-form";
     }
 
     @PostMapping("/join")
@@ -64,7 +64,7 @@ public class UserController {
         UserResponse.UpdateFormDTO user = userService.getUser(sessionUser.getId());
         request.setAttribute("user", user);
 
-        return "/user/update-form";
+        return "user/update-form";
     }
     */
     @PostMapping("/users/{userId}/update")
@@ -87,6 +87,6 @@ public class UserController {
         UserResponse.ProfileDTO profileDTO = userService.getUser(sessionUser, boardId, pageable);
         request.setAttribute("profileDTO", profileDTO);
 
-        return "/user/profile";
+        return "user/profile";
     }
 }

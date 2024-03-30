@@ -19,14 +19,11 @@ public class Subscribe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    // boardId
+    // 참조 Entity, user -> Board / user -> Resume
     @ManyToOne(fetch = FetchType.LAZY)
     private Board board;
-
-    // resumeId
     @ManyToOne(fetch = FetchType.LAZY)
     private Resume resume;
-
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
