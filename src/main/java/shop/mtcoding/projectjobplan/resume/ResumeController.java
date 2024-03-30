@@ -3,7 +3,6 @@ package shop.mtcoding.projectjobplan.resume;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
@@ -11,10 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import shop.mtcoding.projectjobplan._core.utils.PagingUtil;
 import shop.mtcoding.projectjobplan.user.User;
-
-import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
@@ -34,7 +30,7 @@ public class ResumeController {
     }
 
     @PostMapping("/resumes/post") // 이력서 작성 action
-    public String post(ResumeRequest.SaveDTO requestDTO) {
+    public String post(ResumeRequest.PostDTO requestDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         Resume resume = resumeService.createResume(requestDTO, sessionUser);
 

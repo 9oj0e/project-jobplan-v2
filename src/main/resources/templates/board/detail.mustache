@@ -1,56 +1,53 @@
 {{>layout/header}}
 <!-- 바디 start -->
 <div class="div-card-container">
-    <div class="sidenav-container">
-        <div class="sidenav">
-            <!-- 수정 삭제 버튼 -->
-            {{#boardDetail.isBoardOwner}}
-                <div class="mb-3"> <!-- 수정 하기 -->
-                    <form action="/boards/{{boardDetail.id}}/update-form" method="get">
-                        <button class="btn btn-warning">
-                            <i class="fa-regular fa-file-word icon-size"></i>
-                        </button>
-                    </form>
-                </div>
-                <div class="mb-3"> <!-- 삭제 하기 -->
-                    <form action="/boards/{{boardDetail.id}}/delete" method="post">
-                        <button class="btn btn-danger">
-                            <i class="fa-regular fa-trash-can icon-size"></i>
-                        </button>
-                    </form>
-                </div>
-            {{/boardDetail.isBoardOwner}}
-            <!-- 구독하기 버튼 -->
-            {{^boardDetail.isBoardOwner}}
-                {{#sessionUser}}
-                    {{^isEmployer}}
-                        {{^boardDetail.hasSubscribed}}
+    {{#boardDetail}}
+        <div class="sidenav-container">
+            <div class="sidenav">
+                <!-- 수정 삭제 버튼 -->
+                {{#isBoardOwner}}
+                    <div class="mb-3"> <!-- 수정 하기 -->
+                        <form action="/boards/{{id}}/update-form" method="get">
+                            <button class="btn btn-warning">
+                                <i class="fa-regular fa-file-word icon-size"></i>
+                            </button>
+                        </form>
+                    </div>
+                    <div class="mb-3"> <!-- 삭제 하기 -->
+                        <form action="/boards/{{id}}/delete" method="post">
+                            <button class="btn btn-danger">
+                                <i class="fa-regular fa-trash-can icon-size"></i>
+                            </button>
+                        </form>
+                    </div>
+                {{/isBoardOwner}}
+                <!-- 구독하기 버튼 -->
+                {{^isBoardOwner}}
+                    {{^sessionUser.isEmployer}}
+                        {{^hasSubscribed}}
                             <div class="mb-3"> <!-- 구독 -->
-                                <form action="/boards/{{boardDetail.id}}/subscribe" method="post">
+                                <form action="/boards/{{id}}/subscribe" method="post">
                                     <button class="btn btn-outline-dark">
                                         <i class="fa-regular fa-bookmark icon-size"></i>
                                     </button>
                                 </form>
                             </div>
-                        {{/boardDetail.hasSubscribed}}
-                        {{#boardDetail.hasSubscribed}}
+                        {{/hasSubscribed}}
+                        {{#hasSubscribed}}
                             <div class="mb-3"> <!-- 구독 취소 -->
-                                <form action="/boards/{{boardDetail.id}}/unsubscribe" method="post">
+                                <form action="/boards/{{id}}/unsubscribe" method="post">
                                     <input type="hidden" name="fromSubscription" value="false">
                                     <button class="btn btn-outline-dark">
                                         <i class="fa-solid fa-bookmark icon-size"></i>
                                     </button>
                                 </form>
                             </div>
-                        {{/boardDetail.hasSubscribed}}
-                    {{/isEmployer}}
-
-                {{/sessionUser}}
-            {{/boardDetail.isBoardOwner}}
+                        {{/hasSubscribed}}
+                    {{/sessionUser.isEmployer}}
+                {{/isBoardOwner}}
+            </div>
         </div>
-    </div>
-    <div class="card div-card">
-        {{#boardDetail}}
+        <div class="card div-card">
             <div class="card-header card-title">
                 <h3>{{title}}</h3>
             </div>
@@ -107,37 +104,35 @@
                     </tr>
                 </table>
             </div>
-        {{/boardDetail}}
-    </div>
-    <div class="sidenav-container">
-        <div class="sidenav">
-            <div class="card" style="width:200px">
-                <div class="card-body" style="padding-left: 0; padding-right: 0">
-                    <div class="card-title">
-                        {{#boardDetail.rating}}
-                            <table class="table">
-                                <tr>
-                                    <td style="text-align: end; padding-bottom: 0; padding-top: 0">평점 ⭐</td>
-                                    <td style="text-align: start; padding-bottom: 0; padding-top: 0">{{boardDetail.rating}}</td>
-                                </tr>
-                            </table>
-                        {{/boardDetail.rating}}
+        </div>
+        <div class="sidenav-container">
+            <div class="sidenav">
+                <div class="card" style="width:200px">
+                    <div class="card-body" style="padding-left: 0; padding-right: 0">
+                        <div class="card-title">
+                            {{#rating}}
+                                <table class="table">
+                                    <tr>
+                                        <td style="text-align: end; padding-bottom: 0; padding-top: 0">평점 ⭐</td>
+                                        <td style="text-align: start; padding-bottom: 0; padding-top: 0">{{rating}}</td>
+                                    </tr>
+                                </table>
+                            {{/rating}}
+                        </div>
+                        {{#pic}}
+                            <img class="card-img-top" src="/upload/{{imgFilename}}" style="width:100%">
+                        {{/pic}}
+                        {{^pic}}
+                            <img class="card-img-top" src="../images/{{businessName}}.jpg"
+                                 onerror="this.onerror=null; this.src='../images/chaeyong.jpg';" style="width:100%">
+                        {{/pic}}
+                        <h4 class="card-title text-center">{{businessName}}</h4>
                     </div>
-                    {{#pic}}
-                        <img class="card-img-top" src="/upload/{{imgFilename}}" style="width:100%">
-                    {{/pic}}
-                    {{^pic}}
-                        <img class="card-img-top" src="../images/{{boardDetail.businessName}}.jpg"
-                             onerror="this.onerror=null; this.src='../images/chaeyong.jpg';" style="width:100%">
-                    {{/pic}}
-                    <h4 class="card-title text-center">{{boardDetail.businessName}}</h4>
-                </div>
-                <div class="card-footer" style="text-align: center;">
-                    <!-- 평가 버튼 -->
-                    {{#sessionUser}}
-                        {{^isEmployer}}
+                    <div class="card-footer" style="text-align: center;">
+                        <!-- 평가 버튼 -->
+                        {{^sessionUser.isEmployer}}
                             {{^hasRated}}
-                                <form action="/boards/{{boardDetail.id}}/rate" method="post">
+                                <form action="/boards/{{id}}/rate" method="post">
                                     <div>
                                         <select name="rating" style="text-align: center; width: 100%">
                                             <option value="1">1점</option>
@@ -147,39 +142,27 @@
                                             <option value="5">5점</option>
                                         </select>
                                         <div align="right">
-                                            <button class="btn btn-outline-dark btn-sm" style="width: 100%; margin-top: 5px">
+                                            <button class="btn btn-outline-dark btn-sm"
+                                                    style="width: 100%; margin-top: 5px">
                                                 평가하기
                                             </button>
                                         </div>
                                     </div>
                                 </form>
                             {{/hasRated}}
-                        {{/isEmployer}}
-                    {{/sessionUser}}
+                            <!-- 지원하기 버튼 -->
+                            <div class="mt-3">
+                                <form action="/boards/{{id}}/apply-form" method="get">
+                                    <!--todo 지원시 사라지게-->
+                                    <button class="btn btn-primary form-control">지원</button>
+                                </form>
+                            </div>
+                        {{/sessionUser.isEmployer}}
+                    </div>
                 </div>
             </div>
-            <div>
-                {{#sessionUser}}
-                    {{^isEmployer}}
-                        <!-- 지원하기 버튼 -->
-                        <div class="mt-3">
-                            <form action="/boards/{{boardDetail.id}}/apply-form" method="get">
-                                <!--todo 지원시 사라지게-->
-                                <button class="btn btn-primary form-control">지원</button>
-                            </form>
-                        </div>
-                    {{/isEmployer}}
-                {{/sessionUser}}
-                {{^sessionUser}}
-                    <div class="mt-3">
-                        <form action="/login-form" method="get">
-                            <button class="btn btn-primary form-control">지원</button>
-                        </form>
-                    </div>
-                {{/sessionUser}}
-            </div>
         </div>
-    </div>
+    {{/boardDetail}}
 </div>
 <!-- 바디 end -->
 {{>layout/footer}}

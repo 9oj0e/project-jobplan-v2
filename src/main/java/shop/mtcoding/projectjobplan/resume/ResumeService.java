@@ -1,22 +1,16 @@
 package shop.mtcoding.projectjobplan.resume;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import shop.mtcoding.projectjobplan._core.errors.exception.Exception403;
 import shop.mtcoding.projectjobplan._core.errors.exception.Exception404;
-import shop.mtcoding.projectjobplan._core.utils.PagingUtil;
-import shop.mtcoding.projectjobplan.apply.ApplyResponse;
 import shop.mtcoding.projectjobplan.rating.RatingJpaRepository;
 import shop.mtcoding.projectjobplan.subscribe.Subscribe;
 import shop.mtcoding.projectjobplan.subscribe.SubscribeJpaRepository;
-import shop.mtcoding.projectjobplan.subscribe.SubscribeService;
 import shop.mtcoding.projectjobplan.user.User;
-import shop.mtcoding.projectjobplan.user.UserJpaRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,9 +22,10 @@ public class ResumeService {
     private final SubscribeJpaRepository subscribeJpaRepository;
 
     @Transactional
-    public Resume createResume(ResumeRequest.SaveDTO requestDTO, User sessionUser) {
+    public Resume createResume(ResumeRequest.PostDTO requestDTO, User sessionUser) {
+        Resume resume = new Resume(requestDTO, sessionUser);
 
-        return resumeJpaRepository.save(requestDTO.toEntity(sessionUser));
+        return resumeJpaRepository.save(resume);
     }
 
     public ResumeResponse.DetailDTO getResumeInDetail(int resumeId, Integer sessionUserId) {
