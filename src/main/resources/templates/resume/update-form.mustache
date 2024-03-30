@@ -7,6 +7,40 @@
                 <h2>이력서 수정</h2>
             </div>
             <div class="card-body">
+                {{#resume}}
+                    <h4>이력서 내용</h4>
+                    <hr>
+                    <table class="table mb-5">
+                        <tr>
+                            <td>제목</td>
+                            <td>
+                                <input name="title" type="text" value="{{title}}" readonly class="form-control">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>자기소개서</td>
+                            <td style="width: 415px">
+                                <textarea name="content" class="form-control"
+                                          style="height: 300px">{{content}}</textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>경력 정보</td>
+                            <td style="width: 415px">
+                                <textarea name="career" class="form-control" style="height: 100px">{{career}}</textarea>
+                            </td>
+                        </tr>
+                    </table>
+                    <h4>보유 스킬</h4>
+                    <div class="form-control mb-5">
+                        {{#skillList}}
+                            <btn class="btn btn-light">{{skillName}}</btn>
+                        {{/skillList}}
+                        {{^skillList}}
+                            <btn class="btn btn-outline-light form-control">없음</btn>
+                        {{/skillList}}
+                    </div>
+                {{/resume}}
                 {{#sessionUser}}
                     <h4>개인 정보</h4>
                     <hr>
@@ -65,40 +99,6 @@
                         </tr>
                     </table>
                 {{/sessionUser}}
-                {{#resume}}
-                    <h4>이력서 내용</h4>
-                    <hr>
-                    <table class="table mb-5">
-                        <tr>
-                            <td>제목</td>
-                            <td>
-                                <input name="title" type="text" value="{{title}}" readonly class="form-control">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>자기소개서</td>
-                            <td style="width: 415px">
-                                <textarea name="content" class="form-control"
-                                          style="height: 300px">{{content}}</textarea>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>경력 정보</td>
-                            <td style="width: 415px">
-                                <textarea name="career" class="form-control" style="height: 100px">{{career}}</textarea>
-                            </td>
-                        </tr>
-                    </table>
-                    <h4>보유 스킬</h4>
-                    <div class="form-control mb-5">
-                        {{#skillList}}
-                            <btn class="btn btn-light">{{skillName}}</btn>
-                        {{/skillList}}
-                        {{^skillList}}
-                            <btn class="btn btn-outline-light form-control">없음</btn>
-                        {{/skillList}}
-                    </div>
-                {{/resume}}
             </div>
             <div class="card-footer">
                 <div class="button-post-cancel">

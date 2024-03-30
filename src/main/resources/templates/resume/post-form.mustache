@@ -7,6 +7,28 @@
                 <h2>이력서 작성</h2>
             </div>
             <div class="card-body">
+                <h4>이력서 내용</h4>
+                <hr>
+                <table class="table mb-5">
+                    <tr>
+                        <td>제목</td>
+                        <td>
+                            <input name="title" type="text" class="form-control">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>자기소개서</td>
+                        <td style="width: 415px">
+                            <textarea name="content" class="form-control" style="height: 300px;"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>경력 정보</td>
+                        <td style="width: 415px">
+                            <textarea name="career" class="form-control" style="height: 100px"></textarea>
+                        </td>
+                    </tr>
+                </table>
                 {{#sessionUser}}
                     <h4>개인 정보</h4>
                     <hr>
@@ -65,28 +87,6 @@
                         </tr>
                     </table>
                 {{/sessionUser}}
-                <h4>이력서 작성</h4>
-                <hr>
-                <table class="table mb-5">
-                    <tr>
-                        <td>제목</td>
-                        <td>
-                            <input name="title" type="text" class="form-control">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>자기소개서</td>
-                        <td style="width: 415px">
-                            <textarea name="content" class="form-control" style="height: 300px;"></textarea>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>경력 정보</td>
-                        <td style="width: 415px">
-                            <textarea name="career" class="form-control" style="height: 100px"></textarea>
-                        </td>
-                    </tr>
-                </table>
             </div>
             <div class="card-footer">
                 <div class="button-post-cancel">

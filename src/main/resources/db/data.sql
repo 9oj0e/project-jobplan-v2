@@ -1,4 +1,3 @@
-
 -- user_tb (기업 유저)
 INSERT INTO user_tb
 (username, password, name, birthdate, gender, phone_number, address, email,
@@ -29,34 +28,34 @@ VALUES ('emp5', '1234', '최윤정', '2000-04-01', 'F', '01012345678', '부산',
 -- user_tb (개인 유저)
 INSERT INTO user_tb
 (username, password, name, birthdate, gender, phone_number, address, email, education_level, school_name, major,
- is_employer, employer_id_number, business_name, created_at)
+ is_employer, created_at)
 VALUES ('user1', '1234', '홍길동', '2000-01-01', 'M', '01012345678', '서울', 'hgd456@domain.com', '대졸', '서울대학교', '컴퓨터공학',
-        false, null, null, now());
+        false, now());
 INSERT INTO user_tb
 (username, password, name, birthdate, gender, phone_number, address, email, education_level, school_name, major,
- is_employer, employer_id_number, business_name, created_at)
+ is_employer, created_at)
 VALUES ('user2', '1234', '이가탄', '2000-01-01', 'M', '01012345678', '울산', 'lgt456@domain.com', '대졸', '영남대학교', '컴퓨터공학',
-        false, null, null, now());
+        false, now());
 INSERT INTO user_tb
 (username, password, name, birthdate, gender, phone_number, address, email, education_level, school_name, major,
- is_employer, employer_id_number, business_name, created_at)
+ is_employer, created_at)
 VALUES ('user3', '1234', '홍금보', '2000-01-01', 'M', '01012345678', '인천', 'hgb456@domain.com', '초대졸', '구미대학교', '소프트웨어공학',
-        false, null, null, now());
+        false, now());
 INSERT INTO user_tb
 (username, password, name, birthdate, gender, phone_number, address, email, education_level, school_name, major,
- is_employer, employer_id_number, business_name, created_at)
+ is_employer, created_at)
 VALUES ('user4', '1234', '김덕배', '2000-01-01', 'M', '01012345678', '제주', 'kdb456@domain.com', '초대졸', '부천대학교', '소프트웨어공학',
-        false, null, null, now());
+        false, now());
 INSERT INTO user_tb
-(username, password, name, birthdate, gender, phone_number, address, email, education_level, school_name, major,
- is_employer, employer_id_number, business_name, created_at)
-VALUES ('user5', '1234', '한만춘', '2000-01-01', 'M', '01012345678', '광주', 'hmc456@domain.com', '고졸', '대구과학고등학교', null,
-        false, null, null, now());
+(username, password, name, birthdate, gender, phone_number, address, email, education_level, school_name,
+ is_employer, created_at)
+VALUES ('user5', '1234', '한만춘', '2000-01-01', 'M', '01012345678', '광주', 'hmc456@domain.com', '고졸', '대구과학고등학교',
+        false, now());
 INSERT INTO user_tb
-(username, password, name, birthdate, gender, phone_number, address, email, education_level, school_name, major,
- is_employer, employer_id_number, business_name, created_at)
-VALUES ('user6', '1234', '전두광', '1931-01-18', 'M', '01012345678', '대전', 'jdg456@domain.com', '고졸', '하나고등학교', null,
-        false, null, null, now());
+(username, password, name, birthdate, gender, phone_number, address, email, education_level, school_name,
+ is_employer, created_at)
+VALUES ('user6', '1234', '전두광', '1931-01-18', 'M', '01012345678', '대전', 'jdg456@domain.com', '고졸', '하나고등학교',
+        false, now());
 
 -- board_tb
 INSERT INTO board_tb
@@ -162,30 +161,30 @@ VALUES (5, '광고 솔루션 백앤드 개발자',
 
 -- resume_tb
 INSERT INTO resume_tb
-(user_id, title, content, career, created_at)
+    (user_id, title, content, career, created_at)
 VALUES (6, '새싹을 틔울 수 있는 씨앗이 되겠습니다.',
         '저는 컴퓨터 공학을 전공한 전문적인 IT 개발자로서, 프로그래밍에 대한 열정과 경험이 풍부합니다. 사용자 중심의 솔루션을 개발하여 비즈니스 문제를 해결하는 것을 즐기며, 끊임없이 새로운 기술을 익히고 발전시키는 것에 흥미를 느낍니다.',
         '백앤드 1년', now());
 INSERT INTO resume_tb
-(user_id, title, content, career, created_at)
+    (user_id, title, content, career, created_at)
 VALUES (7, '돌쇠 같이 일하는 미친아이 입사지원서.',
         '다양한 프로그래밍 언어 및 기술 스택에 대한 깊은 이해와 경험을 보유하고 있습니다. 주로 Java와 Python을 사용하여 웹 및 애플리케이션을 개발하였으며, Spring Framework 및 Django와 같은 프레임워크를 활용하여 프로젝트를 구축했습니다.',
         '프론트 1년', now());
 INSERT INTO resume_tb
-(user_id, title, content, career, created_at)
+    (user_id, title, content, career, created_at)
 VALUES (8, '대한민국 최고의 개발자를 꿈꿉니다.',
         '최근에는 은행 업계에서 작업했으며, 온라인 뱅킹 플랫폼의 보안 강화 및 성능 향상을 위한 프로젝트에 참여했습니다. 이를 통해 대용량 데이터 처리 및 보안 강화에 대한 전문 지식을 쌓았습니다.',
         '풀스택 1년', now());
 INSERT INTO resume_tb
-(user_id, title, content, career, created_at)
+    (user_id, title, content, career, created_at)
 VALUES (9, '매일 30분으로 내가 이뤄낸 것.',
         '팀에서의 원활한 소통과 협업을 중요하게 생각합니다. Agile 방법론을 따르며, 주기적인 스크럼 회의를 통해 팀원들과의 소통을 촉진하고 프로젝트 일정을 관리합니다.',
         '신입', now());
 INSERT INTO resume_tb
-(user_id, title, content, career, created_at)
+    (user_id, title, content, career, created_at)
 VALUES (10, '학점 2.3에서 편입 후 4.2로.', '새로운 기술 및 도구에 대한 학습에 적극적으로 참여하며, 온라인 코스를 통해 지속적인 전문적인 발전을 추구합니다.', '신입', now());
 INSERT INTO resume_tb
-(user_id, title, content, career, created_at)
+    (user_id, title, content, career, created_at)
 VALUES (11, '목표를 달성하기 위해 실행한 3단계 실행 계획.',
         '지속적인 성장과 함께 사용자 중심의 혁신적인 솔루션을 개발하여 비즈니스 가치를 극대화하는데 기여하고 싶습니다. 함께 일하는 팀원들과의 긍정적인 협력을 통해 동료들과 함께 성장하는 기회를 소중히 여기며, IT 업계의 발전에 기여하고자 합니다.',
         '신입', now());
@@ -225,10 +224,10 @@ INSERT INTO apply_tb
     (resume_id, board_id, created_at)
 VALUES (5, 5, now());
 INSERT INTO apply_tb
-(resume_id, board_id, created_at)
+    (resume_id, board_id, created_at)
 VALUES (2, 5, now());
 INSERT INTO apply_tb
-(resume_id, board_id, created_at)
+    (resume_id, board_id, created_at)
 VALUES (4, 5, now());
 
 -- 평점
@@ -243,71 +242,71 @@ INSERT INTO rating_tb
 VALUES (1, 6, 3, now());
 
 -- subscribe_tb (기업이 이력서를 구독)
-INSERT INTO subscribe_tb
-    (user_id, board_id, resume_id, created_at)
-VALUES (1, null, 1, now());
-INSERT INTO subscribe_tb
-    (user_id, board_id, resume_id, created_at)
-VALUES (1, null, 2, now());
-INSERT INTO subscribe_tb
-    (user_id, board_id, resume_id, created_at)
-VALUES (2, null, 3, now());
-INSERT INTO subscribe_tb
-    (user_id, board_id, resume_id, created_at)
-VALUES (2, null, 4, now());
-INSERT INTO subscribe_tb
-    (user_id, board_id, resume_id, created_at)
-VALUES (3, null, 5, now());
-INSERT INTO subscribe_tb
-    (user_id, board_id, resume_id, created_at)
-VALUES (3, null, 6, now());
-INSERT INTO subscribe_tb
-    (user_id, board_id, resume_id, created_at)
-VALUES (4, null, 7, now());
-INSERT INTO subscribe_tb
-    (user_id, board_id, resume_id, created_at)
-VALUES (4, null, 8, now());
-INSERT INTO subscribe_tb
-    (user_id, board_id, resume_id, created_at)
-VALUES (5, null, 9, now());
-INSERT INTO subscribe_tb
-    (user_id, board_id, resume_id, created_at)
-VALUES (5, null, 10, now());
+-- INSERT INTO subscribe_tb
+--     (user_id, resume_id, created_at)
+-- VALUES (1, 1, now());
+-- INSERT INTO subscribe_tb
+--     (user_id, resume_id, created_at)
+-- VALUES (1, 2, now());
+-- INSERT INTO subscribe_tb
+--     (user_id, resume_id, created_at)
+-- VALUES (2, 3, now());
+-- INSERT INTO subscribe_tb
+--     (user_id, resume_id, created_at)
+-- VALUES (2, 4, now());
+-- INSERT INTO subscribe_tb
+--     (user_id, resume_id, created_at)
+-- VALUES (3, 5, now());
+-- INSERT INTO subscribe_tb
+--     (user_id, resume_id, created_at)
+-- VALUES (3, 6, now());
+-- INSERT INTO subscribe_tb
+--     (user_id, resume_id, created_at)
+-- VALUES (4, 7, now());
+-- INSERT INTO subscribe_tb
+--     (user_id, resume_id, created_at)
+-- VALUES (4, 8, now());
+-- INSERT INTO subscribe_tb
+--     (user_id, resume_id, created_at)
+-- VALUES (5, 9, now());
+-- INSERT INTO subscribe_tb
+--     (user_id, resume_id, created_at)
+-- VALUES (5, 10, now());
 
 -- subscribe_tb (개인이 공고를 구독)
 INSERT INTO subscribe_tb
-    (user_id, board_id, resume_id, created_at)
-VALUES (6, 2, null, now());
+    (user_id, board_id, created_at)
+VALUES (6, 2, now());
 INSERT INTO subscribe_tb
-    (user_id, board_id, resume_id, created_at)
-VALUES (7, 3, null, now());
+    (user_id, board_id, created_at)
+VALUES (7, 3, now());
 INSERT INTO subscribe_tb
-    (user_id, board_id, resume_id, created_at)
-VALUES (7, 4, null, now());
+    (user_id, board_id, created_at)
+VALUES (7, 4, now());
 INSERT INTO subscribe_tb
-    (user_id, board_id, resume_id, created_at)
-VALUES (8, 5, null, now());
+    (user_id, board_id, created_at)
+VALUES (8, 5, now());
 INSERT INTO subscribe_tb
-    (user_id, board_id, resume_id, created_at)
-VALUES (8, 6, null, now());
+    (user_id, board_id, created_at)
+VALUES (8, 6, now());
 INSERT INTO subscribe_tb
-    (user_id, board_id, resume_id, created_at)
-VALUES (9, 7, null, now());
+    (user_id, board_id, created_at)
+VALUES (9, 7, now());
 INSERT INTO subscribe_tb
-    (user_id, board_id, resume_id, created_at)
-VALUES (9, 8, null, now());
+    (user_id, board_id, created_at)
+VALUES (9, 8, now());
 INSERT INTO subscribe_tb
-    (user_id, board_id, resume_id, created_at)
-VALUES (10, 9, null, now());
+    (user_id, board_id, created_at)
+VALUES (10, 9, now());
 INSERT INTO subscribe_tb
-    (user_id, board_id, resume_id, created_at)
-VALUES (10, 10, null, now());
+    (user_id, board_id, created_at)
+VALUES (10, 10, now());
 INSERT INTO subscribe_tb
-    (user_id, board_id, resume_id, created_at)
-VALUES (11, 11, null, now());
+    (user_id, board_id, created_at)
+VALUES (11, 11, now());
 INSERT INTO subscribe_tb
-    (user_id, board_id, resume_id, created_at)
-VALUES (11, 12, null, now());
+    (user_id, board_id, created_at)
+VALUES (11, 12, now());
 
 -- skill_tb (공고 우대 스킬)
 INSERT INTO skill_tb(board_id, user_id, name)
