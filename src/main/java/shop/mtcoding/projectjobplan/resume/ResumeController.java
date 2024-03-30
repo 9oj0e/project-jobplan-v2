@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import shop.mtcoding.projectjobplan._core.utils.PagingUtil;
 import shop.mtcoding.projectjobplan.user.User;
 
@@ -37,7 +38,7 @@ public class ResumeController {
         User sessionUser = (User) session.getAttribute("sessionUser");
         Resume resume = resumeService.createResume(requestDTO, sessionUser);
 
-        return "redirect:/resume/" + resume.getId();
+        return "redirect:/resumes/" + resume.getId();
     }
 
     @GetMapping("/resumes/{resumeId}")
@@ -52,8 +53,11 @@ public class ResumeController {
 
     @GetMapping("/resumes")
     public String listings(HttpServletRequest request,
-                           @PageableDefault(size = 10) Pageable pageable) {
-        ResumeResponse.ListingsDTO responseDTO = resumeService.getAllResume(pageable);
+                           @PageableDefault(size = 10) Pageable pageable,
+                           @RequestParam(value = "skill", required = false) String skill,
+                           @RequestParam(value = "address", required = false) String address,
+                           @RequestParam(value = "keyword", required = false) String keyword) {
+        ResumeResponse.ListingsDTO responseDTO = resumeService.getAllResume(pageable, skill, address, keyword);
         request.setAttribute("page", responseDTO);
 
         return "/resume/listings";
