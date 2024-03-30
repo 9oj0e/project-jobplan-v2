@@ -59,8 +59,8 @@ public class ResumeController {
         return "resume/listings";
     }
 
-    // 이력서수정폼
-    @GetMapping("/resumes/{resumeId}/update-form")
+    /* modal로 대체
+    @GetMapping("/resumes/{resumeId}/update-form") // 이력서수정폼
     public String updateForm(@PathVariable int resumeId, HttpServletRequest request) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         ResumeResponse.UpdateFormDTO responseDTO = resumeService.getResume(resumeId, sessionUser);
@@ -68,9 +68,8 @@ public class ResumeController {
 
         return "resume/update-form";
     }
-
-    // 이력서수정
-    @PostMapping("/resumes/{resumeId}/update")
+    */
+    @PostMapping("/resumes/{resumeId}/update") // 이력서수정
     public String update(@PathVariable int resumeId, ResumeRequest.UpdateDTO requestDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         resumeService.setResume(resumeId, requestDTO, sessionUser);

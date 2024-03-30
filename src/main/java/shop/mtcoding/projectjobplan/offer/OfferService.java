@@ -1,7 +1,5 @@
 package shop.mtcoding.projectjobplan.offer;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,10 +38,11 @@ public class OfferService {
 
         offerJpaRepository.save(offer);
     }
+
     @Transactional
     public void updateOffer(OfferRequest.UpdateDTO requestDTO) {
         Offer offer = offerJpaRepository.findById(requestDTO.getId())
-                        .orElseThrow(() -> new Exception404("제안 이력이 없습니다."));
+                .orElseThrow(() -> new Exception404("제안 이력이 없습니다."));
 
         offer.update(requestDTO);
     }
