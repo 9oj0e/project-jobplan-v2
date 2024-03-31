@@ -32,7 +32,7 @@ public class OfferController {
     }
 
     @PostMapping("/offer/update")
-    public String update(OfferRequest.UpdateDTO requestDTO) { // 지원자 합격/불합격 처리
+    public String update(OfferRequest.UpdateDTO requestDTO) { // 제안 받기
         User sessionUser = (User) session.getAttribute("sessionUser");
         offerService.updateOffer(requestDTO);
 

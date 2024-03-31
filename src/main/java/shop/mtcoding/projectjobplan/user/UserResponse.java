@@ -3,10 +3,13 @@ package shop.mtcoding.projectjobplan.user;
 import lombok.Data;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.support.PageableUtils;
 import shop.mtcoding.projectjobplan._core.utils.FormatUtil;
 import shop.mtcoding.projectjobplan._core.utils.PagingUtil;
 import shop.mtcoding.projectjobplan.apply.Apply;
 import shop.mtcoding.projectjobplan.board.Board;
+import shop.mtcoding.projectjobplan.offer.Offer;
+import shop.mtcoding.projectjobplan.offer.OfferRequest;
 import shop.mtcoding.projectjobplan.resume.Resume;
 
 import java.sql.Timestamp;
@@ -84,6 +87,8 @@ public class UserResponse {
         private Page<BoardDTO> boardList;
         // 지원자 현황 및 지원 현황
         private Page<ApplyDTO> applyList;
+        // 제안
+        private Page<OfferDTO> offerList;
 
         private Boolean hasSkill() {
             if (this.skillList.isEmpty()) {
@@ -93,7 +98,7 @@ public class UserResponse {
             }
         }
 
-        public ProfileDTO(User user, List<Apply> applyList, Double rating, Pageable pageable) {
+        public ProfileDTO(User user, List<Apply> applyList, List<Offer> offerList, Double rating, Pageable pageable) {
             this.id = user.getId();
             this.username = user.getUsername();
             this.password = user.getPassword();
@@ -120,6 +125,9 @@ public class UserResponse {
             }
             List<ApplyDTO> applies = applyList.stream().map(apply -> new ApplyDTO(apply)).toList();
             this.applyList = PagingUtil.pageConverter(applies, pageable); // todo : pagination?
+
+            List<OfferDTO> offers = offerList.stream().map(offer -> new OfferDTO(offer)).toList();
+            this.offerList = PagingUtil.pageConverter(offers, pageable);
         }
 
         public Double getRating() {
@@ -174,17 +182,17 @@ public class UserResponse {
         }
 
         public class ApplyDTO {
-            // 이력서 정보
+            // 공고 정보
             private Integer resumeId;
             private String resumeTitle;
             private String applicantName;
 
-            // 공고 정보
+            // 이력서 정보
             private Integer boardId;
             private String boardTitle;
             private String businessName;
 
-            // 지원 정보
+            // 제안 정보
             private Integer id;
             private Boolean status;
             private String createdAt;
@@ -213,6 +221,57 @@ public class UserResponse {
                 try {
                     if (this.status) return "합격";
                     else if (!this.status) return "불합격";
+                    else return null;
+                } catch (Exception e) {
+                    return null;
+                }
+            }
+        }
+
+        public class OfferDTO {
+            // 이력서 정보
+            private Integer resumeId;
+            private String title;
+            private String username;
+            private String career;
+
+            // 공고 정보
+            private Integer boardId;
+            private String boardTitle;
+            private String position;
+            private String field;
+
+            // 지원 정보
+            private Integer id;
+            private Boolean status;
+            private String createdAt;
+
+            public OfferDTO(Offer offer) {
+                this.resumeId = offer.getResume().getId();
+                this.title = offer.getResume().getTitle();
+                this.username = offer.getResume().getUser().getName();
+                this.career = offer.getResume().getCareer();
+                this.boardId = offer.getBoard().getId();
+                this.boardTitle = offer.getBoard().getTitle();
+                this.position = offer.getBoard().getPosition();
+                this.field = offer.getBoard().getField();
+                this.id = offer.getId();
+                this.status = offer.getStatus();
+                this.createdAt = offer.getCreatedAt();
+            }
+
+            public String getTitle() {
+                return FormatUtil.stringFormatter(this.title);
+            }
+
+            public String getBoardTitle() {
+                return FormatUtil.stringFormatter(this.boardTitle);
+            }
+
+            public String getStatus() {
+                try {
+                    if (this.status) return "제안 받기";
+                    else if (!this.status) return "삭제";
                     else return null;
                 } catch (Exception e) {
                     return null;
