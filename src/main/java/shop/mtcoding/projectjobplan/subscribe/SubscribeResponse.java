@@ -23,10 +23,10 @@ public class SubscribeResponse {
         public DTO(User user, List<Subscribe> subscription, Pageable pageable) {
             if (user.getIsEmployer()) {
                 List<ResumeDTO> resumeList = subscription.stream().map(subscribe -> new ResumeDTO(subscribe.getResume())).toList();
-                this.page = PagingUtil.pageConverter(resumeList, pageable);
+                this.page = PagingUtil.pageConverter(pageable, resumeList);
             } else {
                 List<BoardDTO> boardList = subscription.stream().map(subscribe -> new BoardDTO(subscribe.getBoard())).toList();
-                this.page = PagingUtil.pageConverter(boardList, pageable);
+                this.page = PagingUtil.pageConverter(pageable, boardList);
             }
             this.pageList = PagingUtil.getPageList(this.page);
         }

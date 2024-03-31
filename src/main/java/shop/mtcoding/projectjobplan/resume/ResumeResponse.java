@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import shop.mtcoding.projectjobplan._core.utils.FormatUtil;
 import shop.mtcoding.projectjobplan._core.utils.PagingUtil;
+import shop.mtcoding.projectjobplan.user.User;
 
 import java.util.List;
 
@@ -115,11 +116,13 @@ public class ResumeResponse {
     public static class ListingsDTO {
         Page<ResumeDTO> resumeList;
         List<Integer> pageList;
+        List<User> userList;
 
-        public ListingsDTO(List<Resume> resumes, Pageable pageable) {
+        public ListingsDTO(Pageable pageable, List<Resume> resumes, List<User> userList) {
             List<ResumeDTO> resumeList = resumes.stream().map(resume -> new ResumeDTO(resume)).toList();
-            this.resumeList = PagingUtil.pageConverter(resumeList, pageable);
+            this.resumeList = PagingUtil.pageConverter(pageable, resumeList);
             this.pageList = PagingUtil.getPageList(this.resumeList);
+            this.userList = userList;
         }
 
         public class ResumeDTO {

@@ -92,7 +92,7 @@ public class UserController {
             HttpServletRequest request) {
         // todo: NullPointException
         User sessionUser = (User) session.getAttribute("sessionUser");
-        UserResponse.ProfileDTO profileDTO = userService.getUser(sessionUser, boardId, resumeId, pageable);
+        UserResponse.ProfileDTO profileDTO = userService.getUser(sessionUser.getId(), boardId, resumeId, pageable);
         request.setAttribute("profileDTO", profileDTO);
 
         return "user/profile";

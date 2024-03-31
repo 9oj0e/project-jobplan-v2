@@ -76,7 +76,7 @@ public class BoardService {
         } else { // 모든 페이지
             boardList = boardJpaRepository.findAllJoinUser().orElseThrow(() -> new Exception404("조회된 게시글이 없습니다."));
         }
-        return new BoardResponse.ListingsDTO(boardList, pageable);
+        return new BoardResponse.ListingsDTO(pageable, boardList);
     }
 
     public List<BoardResponse.IndexDTO> getAllBoardOnIndex(int limit) { // index

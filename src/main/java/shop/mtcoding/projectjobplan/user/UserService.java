@@ -9,6 +9,8 @@ import shop.mtcoding.projectjobplan._core.errors.exception.Exception401;
 import shop.mtcoding.projectjobplan._core.errors.exception.Exception404;
 import shop.mtcoding.projectjobplan.apply.Apply;
 import shop.mtcoding.projectjobplan.apply.ApplyJpaRepository;
+import shop.mtcoding.projectjobplan.offer.Offer;
+import shop.mtcoding.projectjobplan.offer.OfferJpaRepository;
 import shop.mtcoding.projectjobplan.rating.RatingJpaRepository;
 
 import java.util.List;
@@ -20,6 +22,7 @@ public class UserService {
     private final UserJpaRepository userJpaRepository;
     private final ApplyJpaRepository applyJpaRepository;
     private final RatingJpaRepository ratingJpaRepository;
+    private final OfferJpaRepository offerJpaRepository;
 
     @Transactional
     public User createUser(UserRequest.JoinDTO requestDTO) { // join
@@ -38,25 +41,31 @@ public class UserService {
                 .orElseThrow(() -> new Exception401("아이디 또는 비밀번호가 틀렸습니다."));
     }
 
-    public UserResponse.ProfileDTO getUser(User sessionUser, Integer boardId, Integer resumeId, Pageable pageable) {
-        User user = userJpaRepository.findById(sessionUser.getId()).get();
+    public UserResponse.ProfileDTO getUser(Integer sessionUserId, Integer boardId, Integer resumeId, Pageable pageable) {
+        User user = userJpaRepository.findById(sessionUserId)
+                .orElseThrow(() -> new Exception404("찾을 수 없는 유저입니다."));
         List<Apply> applyList;
-        if (sessionUser.getIsEmployer()) { // 기업 마이페이지
-            if (boardId == null) { // 모든 지원자 현황 보기
+        List<Offer> offerList;
+        if (user.getIsEmployer()) { // 기업 마이페이지
+            if (boardId == null) { // 모든 지원자 현황 보기 & 모든 제안 현황 보기
                 applyList = applyJpaRepository.findByBoardUserId(user.getId());
-            } else { // 공고별 지원자 보기
+                offerList = offerJpaRepository.findByBoardUserId(user.getId());
+            } else { // 공고별 지원자 보기 & 공고별 제안 현황 보기
                 applyList = applyJpaRepository.findByBoardId(boardId);
+                offerList = offerJpaRepository.findByBoardId(boardId);
             }
         } else { // 개인 마이페이지
-            if (resumeId == null) { // 모든 지원 현황 보기
+            if (resumeId == null) { // 모든 지원 현황 보기 & 모든 제안 현황 보기
                 applyList = applyJpaRepository.findByResumeUserId(user.getId());
-            } else { // 공고별 지원 현황 보기
+                offerList = offerJpaRepository.findByResumeUserId(user.getId());
+            } else { // 이력서별 지원 현황 보기 & 이력서별 제안 현황 보기
                 applyList = applyJpaRepository.findByResumeId(resumeId);
+                offerList = offerJpaRepository.findByResumeId(resumeId);
             }
         }
-        Double rating = ratingJpaRepository.findRatingAvgByUserId(sessionUser.getId()).orElse(0.0);
+        Double rating = ratingJpaRepository.findRatingAvgByUserId(user.getId()).orElse(0.0);
 
-        return new UserResponse.ProfileDTO(user, applyList, rating, pageable);
+        return new UserResponse.ProfileDTO(user, applyList, offerList, rating, pageable);
     }
 
     public UserResponse.UpdateFormDTO getUser(int userId) { // 회원수정폼

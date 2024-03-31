@@ -6,11 +6,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import shop.mtcoding.projectjobplan._core.errors.exception.Exception403;
 import shop.mtcoding.projectjobplan._core.errors.exception.Exception404;
+import shop.mtcoding.projectjobplan._core.errors.exception.Exception500;
 import shop.mtcoding.projectjobplan.rating.Rating;
 import shop.mtcoding.projectjobplan.rating.RatingJpaRepository;
 import shop.mtcoding.projectjobplan.subscribe.Subscribe;
 import shop.mtcoding.projectjobplan.subscribe.SubscribeJpaRepository;
 import shop.mtcoding.projectjobplan.user.User;
+import shop.mtcoding.projectjobplan.user.UserJpaRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +20,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Service
 public class ResumeService {
+    private final UserJpaRepository userJpaRepository;
     private final ResumeJpaRepository resumeJpaRepository;
     private final RatingJpaRepository ratingJpaRepository;
     private final SubscribeJpaRepository subscribeJpaRepository;
@@ -46,9 +49,15 @@ public class ResumeService {
         return new ResumeResponse.DetailDTO(resume, rating, isResumeOwner, hasSubscribed, hasRated);
     }
 
-    public ResumeResponse.ListingsDTO getAllResume(Pageable pageable, String skill, String address, String keyword) {
+    public ResumeResponse.ListingsDTO getAllResume(Pageable pageable, Integer userId, String skill, String address, String keyword) {
         List<Resume> resumeList;
-        if (skill != null) {
+        List<User> userList; // 추천 인재 (기술을 많이 가진 인재 내림차순 정렬)
+        userList = userJpaRepository.findUsersWithMostSkills()
+                .orElseThrow(() -> new Exception500("DB 조회 불가"));
+        System.out.println("userList check : " + userList.size());
+        if (userId != null) {
+            resumeList = resumeJpaRepository.findByUserId(userId).orElseThrow(() -> new Exception404("조회된 이력서가 없습니다."));
+        } else if (skill != null) {
             resumeList = resumeJpaRepository.findAllJoinUserWithSkill(skill).orElseThrow(() -> new Exception404("조회된 이력서가 없습니다."));
         } else if (address != null) {
             resumeList = resumeJpaRepository.findAllJoinUserWithAddress(address).orElseThrow(() -> new Exception404("조회된 이력서가 없습니다."));
@@ -57,7 +66,7 @@ public class ResumeService {
         } else {
             resumeList = resumeJpaRepository.findAllJoinUser().orElseThrow(() -> new Exception404("조회된 이력서가 없습니다."));
         }
-        return new ResumeResponse.ListingsDTO(resumeList, pageable);
+        return new ResumeResponse.ListingsDTO(pageable, resumeList, userList);
     }
 
     // 이력서수정폼
