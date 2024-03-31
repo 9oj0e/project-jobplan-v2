@@ -1,11 +1,5 @@
 {{>layout/header}}
 <!-- 바디 start -->
-<style>
-    #search-input::placeholder {
-        color: white;
-        opacity: 1; /* Firefox */
-    }
-</style>
 <main class="main-size">
     <!-- 검색 배너 start -->
     {{#sessionUser}}
@@ -16,7 +10,7 @@
                         <div style="width: 50%">
                             <form action="/resumes" method="get" class="form-inline">
                                 <div class="input-group rounded">
-                                    <input id="search-input" type="text" name="keyword"
+                                    <input id="searchInput" type="text" name="keyword"
                                            placeholder="이력서 정보를 입력하세요.."
                                            class="form-control rounded-end"
                                            style="background: transparent; color: white" required/>

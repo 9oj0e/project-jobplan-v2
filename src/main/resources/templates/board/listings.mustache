@@ -1,11 +1,5 @@
 {{>layout/header}}
 <!-- 바디 start -->
-<style>
-    #search-input::placeholder {
-        color: white;
-        opacity: 1; /* Firefox */
-    }
-</style>
 <main class="main-size">
     <!-- 검색 배너 start -->
     <section class="section-body">
@@ -14,7 +8,7 @@
                 <div style="width: 50%">
                     <form action="/boards" method="get" class="form-inline">
                         <div class="input-group rounded">
-                            <input id="search-input" type="text" name="keyword" placeholder="채용 정보를 입력하세요.."
+                            <input id="searchInput" type="text" name="keyword" placeholder="채용 정보를 입력하세요.."
                                    class="form-control rounded-end" style="background: transparent; color: white"
                                    required/>
                             <button type="submit" style="text-align: end">

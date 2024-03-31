@@ -8,16 +8,15 @@
                 <h5>안녕하세요, {{sessionUser.name}}님</h5>
                 <div style="display: flex; justify-content: space-evenly; width: 150px">
                     <!-- 회원 정보 수정 -->
-                    <button class="btn btn-outline-warning" data-bs-toggle="modal"
+                    <button class="btn btn-outline-secondary" data-bs-toggle="modal"
                             data-bs-target="#updateForm">
                         <i class="fa-solid fa-user-pen icon-size"></i>
                     </button>
                     <!-- 탈퇴 하기 -->
-                    <form action="/users/{{sessionUser.id}}/delete">
-                        <button class="btn btn-outline-danger">
-                            <i class="fa-solid fa-user-xmark icon-size"></i>
-                        </button>
-                    </form>
+                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                            data-bs-target="#deleteForm">
+                        <i class="fa-solid fa-user-xmark icon-size"></i>
+                    </button>
                 </div>
             </div>
             <div class="div-information">
@@ -303,16 +302,16 @@
                                         <div>{{status}}</div>
                                     {{/status}}
                                     {{^status}}
-                                        <form action="/apply/update" method="post">
-                                            <input name="status" type="hidden" value="0">
-                                            <input name="id" type="hidden" value="{{id}}">
-                                            <button class="btn btn-outline-danger">불합격</button>
-                                        </form>
-                                        <form action="/apply/update" method="post">
-                                            <input name="status" type="hidden" value="1">
-                                            <input name="id" type="hidden" value="{{id}}">
-                                            <button class="btn btn-outline-primary">합격</button>
-                                        </form>
+                                        <input type="hidden" id="applyId" value="{{id}}">
+                                        <button class="btn btn-outline-danger" onclick="getApplyId()"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#applyRejectForm">
+                                            불합격
+                                        </button>
+                                        <button class="btn btn-primary" onclick="getApplyId()" data-bs-toggle="modal"
+                                                data-bs-target="#applyAcceptForm">
+                                            합격
+                                        </button>
                                     {{/status}}
                                 </div>
                             </td>
@@ -472,6 +471,27 @@
     </div>
 {{/profileDTO}}
 <!-- modal :: updateForm end -->
+<!-- modal :: deleteForm start -->
+<div class="modal fade" id="deleteForm" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">회원 탈퇴</h5>
+            </div>
+            <div class="modal-body">
+                <div>탈퇴를 희망하십니까?</div>
+                <div>모든 이력은 동시에 삭제됩니다.</div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">취소</button>
+                <form action="/users/{{profileDTO.id}}/delete" method="post">
+                    <button class="btn btn-danger">삭제</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- modal :: deleteForm end -->
 <!-- modal :: skillForm start -->
 <div class="modal fade" id="skillForm" tabindex="-1">
     <div class="modal-dialog">
@@ -600,4 +620,62 @@
     </div>
 </div>
 <!-- modal :: skillForm end -->
+<!-- modal :: applyRejectForm start -->
+<div class="modal fade" id="applyRejectForm" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">불합격 처리</h5>
+            </div>
+            <div class="modal-body">
+                해당 지원자를 '불합격' 처리 하시겠습니까?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">취소</button>
+                <form action="/apply/update" method="post">
+                    <input name="status" type="hidden" value="0">
+                    <input name="id" id="statusInput" type="hidden">
+                    <button class="btn btn-outline-danger">불합격</button>
+                </form>
+            </div>
+            <script>
+                function getApplyId() {
+                    let inputValue = document.getElementById("applyId").value;
+                    let statusInput = document.getElementById("statusInput");
+                    statusInput.value = inputValue;
+                }
+            </script>
+        </div>
+    </div>
+</div>
+<!-- modal :: applyRejectForm end -->
+<!-- modal :: applyAcceptForm start -->
+<div class="modal fade" id="applyAcceptForm" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">합격 처리</h5>
+            </div>
+            <div class="modal-body">
+                해당 지원자를 '합격' 처리 하시겠습니까?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">취소</button>
+                <form action="/apply/update" method="post">
+                    <input name="status" type="hidden" value="1">
+                    <input name="id" id="statusInput" type="hidden">
+                    <button class="btn btn-outline-primary">합격</button>
+                </form>
+                <script>
+                    function getApplyId() {
+                        let inputValue = document.getElementById("applyId").value;
+                        let statusInput = document.getElementById("statusInput");
+                        statusInput.value = inputValue;
+                    }
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- modal :: applyAcceptForm end -->
 <!-- modal end -->
