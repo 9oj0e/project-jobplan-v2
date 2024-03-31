@@ -1,122 +1,118 @@
 {{>layout/header}}
 <!-- 바디 start -->
-<style>
-    #search-input::placeholder {
-        color: white;
-        opacity: 1; /* Firefox */
-    }
-</style>
 <main class="main-size">
     <!-- 검색 배너 start -->
-    <div class="div-container">
-        {{^sessionUser.isEmployer}}
+    {{^sessionUser.isEmployer}}
+        <section class="section-body">
+            <div class="search-box-banner">
+                <div class="search-box">
+                    <div style="width: 50%">
+                        <form action="/boards" method="get" class="form-inline">
+                            <div class="input-group rounded">
+                                <input id="searchInput" type="text" name="keyword" placeholder="채용 정보를 입력하세요.."
+                                       class="form-control rounded-end" style="background: transparent; color: white"
+                                       required/>
+                                <button type="submit" style="text-align: end">
+                                    <i class="fa-solid fa-magnifying-glass icon-search"
+                                       style="right: 30px; color: white"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    {{/sessionUser.isEmployer}}
+    {{#sessionUser}}
+        {{#isEmployer}}
             <section class="section-body">
                 <div class="search-box-banner">
                     <div class="search-box">
-                        <div style="width: 50%">
-                            <form action="/boards" method="get" class="form-inline">
-                                <div class="input-group rounded">
-                                    <input id="search-input" type="text" name="keyword" placeholder="채용 정보를 입력하세요.."
-                                           class="form-control rounded-end" style="background: transparent; color: white" required/>
-                                    <button type="submit" style="text-align: end">
-                                        <i class="fa-solid fa-magnifying-glass icon-search" style="right: 30px; color: white"></i>
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        {{/sessionUser.isEmployer}}
-        {{#sessionUser}}
-            {{#isEmployer}}
-                <section class="section-body">
-                    <div class="search-box-banner">
                         <div class="search-box">
-                            <div class="search-box">
-                                <div style="width: 50%">
+                            <div style="width: 50%">
                                 <form action="/resumes" method="get" class="form-inline">
                                     <div class="input-group rounded">
-                                        <input id="search-input" type="text" name="keyword" placeholder="이력서 정보를 입력하세요"
-                                               class="form-control rounded-end" style="background: transparent; color: white" required/>
+                                        <input id="searchInput" type="text" name="keyword" placeholder="이력서 정보를 입력하세요"
+                                               class="form-control rounded-end"
+                                               style="background: transparent; color: white" required/>
                                         <button type="submit" style="text-align: end">
-                                            <i class="fa-solid fa-magnifying-glass icon-search" style="right: 30px; color: white"></i>
+                                            <i class="fa-solid fa-magnifying-glass icon-search"
+                                               style="right: 30px; color: white"></i>
                                         </button>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
-                </section>
-            {{/isEmployer}}
-        {{/sessionUser}}
-        <!-- 검색 배너 end -->
-        <!-- 추천 채용 정보 start -->
-        <section class="section-body">
-            <div class="div-recommendation mb-20">추천 채용 정보</div>
-            <div class="div-recommendation-img">
-                <div>
-                    <div class="div-recommendation-img-1"></div>
-                    <div class="div-recommendation-text-1">IT,컨텐츠
-                        <span><a href="" class="text-body"><i class="fa-regular fa-star"></i></a></span>
-                    </div>
-                    <div class="div-recommendation-text-2">아이헤이트플라잉버그스</div>
+            </section>
+        {{/isEmployer}}
+    {{/sessionUser}}
+    <!-- 검색 배너 end -->
+    <!-- 추천 채용 정보 start -->
+    <section class="section-body">
+        <div class="div-recommendation mb-20">추천 채용 정보</div>
+        <div class="div-recommendation-img">
+            <div>
+                <div class="div-recommendation-img-1"></div>
+                <div class="div-recommendation-text-1">IT,컨텐츠
+                    <span><a href="" class="text-body"><i class="fa-regular fa-star"></i></a></span>
                 </div>
-                <div>
-                    <div class="div-recommendation-img-2"></div>
-                    <div class="div-recommendation-text-1">제조
-                        <span><a href="" class="text-body"><i class="fa-regular fa-star"></i></a></span>
-                    </div>
-                    <div class="div-recommendation-text-2">한솔테크닉스</div>
-                </div>
-                <div>
-                    <div class="div-recommendation-img-3"></div>
-                    <div class="div-recommendation-text-1">IT,컨텐츠
-                        <span><a href="" class="text-body"><i class="fa-regular fa-star"></i></a></span>
-                    </div>
-                    <div class="div-recommendation-text-2">대보정보통신</div>
-                </div>
+                <div class="div-recommendation-text-2">아이헤이트플라잉버그스</div>
             </div>
-        </section>
-        <!-- 추천 채용 정보 end -->
-        <hr>
-        <!-- 광고 창 start -->
-        <section>
-            <div class="div-ad-img1"></div>
-        </section>
-        <!-- 광고 창 end -->
-        <hr>
-        <!-- 채용 공고 리스트 start -->
-        <section class="section-body">
-            <div class="div-jop-more">
-                <div class="div-recommendation mb-20">채용 정보</div>
-                <a href="/boards" class="text-body">
-                    <h6>더보기</h6>
-                </a>
+            <div>
+                <div class="div-recommendation-img-2"></div>
+                <div class="div-recommendation-text-1">제조
+                    <span><a href="" class="text-body"><i class="fa-regular fa-star"></i></a></span>
+                </div>
+                <div class="div-recommendation-text-2">한솔테크닉스</div>
             </div>
-            <div class="div-recommendation-box">
-                {{#boardList}}
+            <div>
+                <div class="div-recommendation-img-3"></div>
+                <div class="div-recommendation-text-1">IT,컨텐츠
+                    <span><a href="" class="text-body"><i class="fa-regular fa-star"></i></a></span>
+                </div>
+                <div class="div-recommendation-text-2">대보정보통신</div>
+            </div>
+        </div>
+    </section>
+    <!-- 추천 채용 정보 end -->
+    <hr>
+    <!-- 광고 창 start -->
+    <section class="section-body">
+        <div class="div-ad-img1"></div>
+    </section>
+    <!-- 광고 창 end -->
+    <hr>
+    <!-- 채용 공고 리스트 start -->
+    <section class="section-body">
+        <div class="div-jop-more">
+            <div class="div-recommendation mb-20">채용 정보</div>
+            <a href="/boards" class="text-body">
+                <h6>더보기</h6>
+            </a>
+        </div>
+        <div class="div-recommendation-box">
+            {{#boardList}}
+                <div>
                     <div>
-                        <div>
-                            <img class="div-company-img" src="../images/{{businessName}}.jpg"
-                                 onerror="this.onerror=null; this.src='../images/chaeyong.jpg';" style="width:100%">
+                        <img class="div-company-img" src="../images/{{businessName}}.jpg"
+                             alt="/images/business.jpg" style="width:100%">
+                    </div>
+                    <div class="btn-like">
+                        <div class="div-recommendation-text-1">{{field}}
+                            <span><a href="" class="text-body"><i class="fa-regular fa-star"></i></a></span>
                         </div>
-                        <div class="btn-like">
-                            <div class="div-recommendation-text-1">{{field}}
-                                <span><a href="" class="text-body"><i class="fa-regular fa-star"></i></a></span>
-                            </div>
 
-                            <div class="div-recommendation-text-2">
-                                <a href="/boards/{{id}}" class="text-body">
-                                    {{businessName}}
-                                </a>
-                            </div>
+                        <div class="div-recommendation-text-2">
+                            <a href="/boards/{{id}}" class="text-body">
+                                {{businessName}}
+                            </a>
                         </div>
                     </div>
-                {{/boardList}}
-            </div>
-        </section>
-    </div>
+                </div>
+            {{/boardList}}
+        </div>
+    </section>
     <!-- 채용 공고 리스트 end -->
 </main>
 <!-- 바디 end -->

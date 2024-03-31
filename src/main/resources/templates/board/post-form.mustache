@@ -1,6 +1,6 @@
 {{>layout/header}}
 <!-- 바디 start -->
-<div class="div-card-container">
+<main class="main-card-container">
     <div class="card div-card">
         <form action="/boards/post" method="post">
             <div class="card-header card-title">
@@ -10,18 +10,18 @@
                 <table class="table">
                     <tr>
                         <td>공고 제목</td>
-                        <td><input name="title" type="text" class="form-control"></td>
+                        <td><input name="title" type="text" class="form-control" value="열정만으로 일하는 인재를 원합니다."></td>
                     </tr>
                     <tr>
                         <td>채용 분야</td>
                         <td>
-                            <input name="field" type="text" class="form-control">
+                            <input name="field" type="text" class="form-control" value="개발">
                         </td>
                     </tr>
                     <tr>
                         <td>포지션</td>
                         <td>
-                            <input name="position" type="text" class="form-control">
+                            <input name="position" type="text" class="form-control" value="백엔드">
                         </td>
                     </tr>
                     <tr>
@@ -33,7 +33,7 @@
                     <tr>
                         <td>연봉</td>
                         <td>
-                            <input name="salary" type="text" class="form-control">
+                            <input name="salary" type="text" class="form-control" value="연봉협의">
                         </td>
                     </tr>
                     <tr>
@@ -55,14 +55,14 @@
                 <div class=form-control style="display: flex; justify-content: space-evenly">
                     <table class="table">
                         <tr>
-                            <td><input type="checkbox" name="skill" value="java"><span>Java</span></td>
+                            <td><input type="checkbox" name="skill" value="java" checked><span>Java</span></td>
                             <td><input type="checkbox" name="skill" value="javaScript"><span>JavaScript</span></td>
                             <td><input type="checkbox" name="skill" value="Spring"><span>Spring</span></td>
                             <td><input type="checkbox" name="skill" value="HTML"><span>HTML</span></td>
                             <td><input type="checkbox" name="skill" value="jQuery"><span>JQuery</span></td>
                         </tr>
                         <tr>
-                            <td><input type="checkbox" name="skill" value="MySQL"><span>MySQL</span></td>
+                            <td><input type="checkbox" name="skill" value="MySQL" checked><span>MySQL</span></td>
                             <td><input type="checkbox" name="skill" value="Flutter"><span>Flutter</span></td>
                             <td><input type="checkbox" name="skill" value="React"><span>React</span></td>
                             <td><input type="checkbox" name="skill" value="AWS"><span>AWS</span></td>
@@ -87,6 +87,6 @@
             </div>
         </form>
     </div>
-</div>
+</main>
 <!-- 바디 end -->
 {{>layout/footer}}

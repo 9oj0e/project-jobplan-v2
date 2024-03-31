@@ -38,20 +38,21 @@ public class UserService {
                 .orElseThrow(() -> new Exception401("아이디 또는 비밀번호가 틀렸습니다."));
     }
 
-    public UserResponse.ProfileDTO getUser(User sessionUser, Integer boardId, Pageable pageable) {
+    public UserResponse.ProfileDTO getUser(User sessionUser, Integer boardId, Integer resumeId, Pageable pageable) {
         User user = userJpaRepository.findById(sessionUser.getId()).get();
         List<Apply> applyList;
-        if (sessionUser.getIsEmployer()) {
-            if (boardId == null) {
-                // (기업) 모든 지원자 현황 보기
+        if (sessionUser.getIsEmployer()) { // 기업 마이페이지
+            if (boardId == null) { // 모든 지원자 현황 보기
                 applyList = applyJpaRepository.findByBoardUserId(user.getId());
-            } else {
-                // (기업) 공고별 지원자 보기
+            } else { // 공고별 지원자 보기
                 applyList = applyJpaRepository.findByBoardId(boardId);
             }
-        } else {
-            // (개인) 지원 현황 보기
-            applyList = applyJpaRepository.findByResumeUserId(user.getId());
+        } else { // 개인 마이페이지
+            if (resumeId == null) { // 모든 지원 현황 보기
+                applyList = applyJpaRepository.findByResumeUserId(user.getId());
+            } else { // 공고별 지원 현황 보기
+                applyList = applyJpaRepository.findByResumeId(resumeId);
+            }
         }
         Double rating = ratingJpaRepository.findRatingAvgByUserId(sessionUser.getId()).orElse(0.0);
 

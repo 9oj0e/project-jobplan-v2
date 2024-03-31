@@ -164,6 +164,9 @@ public class UserResponse {
             public String getTitle() {
                 return FormatUtil.stringFormatter(this.title);
             }
+            public String getOgTitle() {
+                return this.title;
+            }
 
             public String getCreatedAt() {
                 return FormatUtil.timeFormatter(this.createdAt);

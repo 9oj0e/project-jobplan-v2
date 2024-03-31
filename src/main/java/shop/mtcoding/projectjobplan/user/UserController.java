@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class UserController {
     private final HttpSession session;
     private final UserService userService;
+
     /* modal로 대체
     @GetMapping("/users/join-type")
     public String joinType() {
@@ -36,6 +37,7 @@ public class UserController {
 
         return "redirect:/";
     }
+
     /* modal로 대체
     @GetMapping("/login-form")
     public String loginForm() {
@@ -57,6 +59,7 @@ public class UserController {
 
         return "redirect:/";
     }
+
     /* modal 로 대체
     @GetMapping("/users/{userId}/update-form")
     public String updateForm(@PathVariable Integer userId, HttpServletRequest request) {
@@ -76,15 +79,20 @@ public class UserController {
         return "redirect:/users/" + userId;
     }
 
-    @GetMapping({"/users/{userId}", "/users/{userId}/boards", "/users/{userId}/boards/{boardId}"})
+    @GetMapping({"/users/{userId}",
+            "/users/{userId}/boards",
+            "/users/{userId}/boards/{boardId}",
+            "/users/{userId}/resumes",
+            "/users/{userId}/resumes/{resumeId}"})
     public String profile(
             @PathVariable Integer userId,
             @PathVariable(required = false) Integer boardId,
+            @PathVariable(required = false) Integer resumeId,
             @PageableDefault(size = 3) Pageable pageable,
             HttpServletRequest request) {
         // todo: NullPointException
         User sessionUser = (User) session.getAttribute("sessionUser");
-        UserResponse.ProfileDTO profileDTO = userService.getUser(sessionUser, boardId, pageable);
+        UserResponse.ProfileDTO profileDTO = userService.getUser(sessionUser, boardId, resumeId, pageable);
         request.setAttribute("profileDTO", profileDTO);
 
         return "user/profile";

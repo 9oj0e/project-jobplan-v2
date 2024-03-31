@@ -21,7 +21,7 @@ a {
     /* 클릭 영역 확대 */
     margin-right: 5px;
     /* 오른쪽 여백 설정 */
-    
+
 }
 
 .mb-20 {
@@ -116,6 +116,10 @@ a {
     margin: 30px 10px;
     height: 100%;
 }
+ #searchInput::placeholder {
+     color: white;
+     opacity: 1; /* Firefox */
+ }
 
 .search-box-banner {
     background-image: url(../images/intro_img_web.png);
@@ -138,7 +142,6 @@ a {
     background-size: 100% 100%;
 }
 /* 검색 & 광고 배너 end */
-
 
 /* 바디 start */
 .sidenav-container {
@@ -209,8 +212,6 @@ a {
     justify-content: space-between;
 }
 
-
-
 .div-recommendation-box {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -229,24 +230,28 @@ a {
     background-size: 100% 100%;
     border-radius: 20px;
 }
+
 .div-company-img-카카오 {
     background-image: url(images/카카오.jpg);
     height: 180px;
     background-size: 100% 100%;
     border-radius: 20px;
 }
+
 .div-company-img-라인 {
     background-image: url(images/라인.jpg);
     height: 180px;
     background-size: 100% 100%;
     border-radius: 20px;
 }
+
 .div-company-img-쿠팡 {
     background-image: url(images/쿠팡.jpg);
     height: 180px;
     background-size: 100% 100%;
     border-radius: 20px;
 }
+
 .div-company-img-배달의민족 {
     background-image: url(images/배달의민족.jpg);
     height: 180px;
@@ -254,16 +259,12 @@ a {
     border-radius: 20px;
 }
 
-
-
-
 .user-image1 {
     background-image: url(images/user1.jpg);
     width: 150px;
     height: 180px;
     background-size: 100% 100%;
     border-radius: 20px;
-
 }
 
 .user-image2 {
@@ -272,15 +273,14 @@ a {
     height: 180px;
     background-size: 100% 100%;
     border-radius: 20px;
-
 }
+
 .user-image3 {
     background-image: url(images/user3.jpg);
     width: 150px;
     height: 180px;
     background-size: 100% 100%;
     border-radius: 20px;
-
 }
 
 .user-image4 {
@@ -289,26 +289,21 @@ a {
     height: 180px;
     background-size: 100% 100%;
     border-radius: 20px;
-
 }
 
 .user-image5 {
-    background-image: url(images/user5.png);
+    background-image: url(images/user5.jpg);
     width: 150px;
     height: 180px;
     background-size: 100% 100%;
     border-radius: 20px;
-
 }
-
 
 .div-recommendation-people {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-column-gap: 10px;
-
 }
-
 
 .div-job-sector {
     display: grid;
@@ -316,11 +311,9 @@ a {
     height: 120px;
 }
 
-
 .page-link {
     color: black !important;
 }
-
 
 /* KSJ body start */
 
@@ -329,7 +322,7 @@ a {
     grid-template-columns: 1fr 1fr 1fr 1fr 2fr 1fr 1fr;
 }
 
-.div-apply-col{
+.div-apply-col {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }
@@ -344,7 +337,6 @@ a {
     padding: 10px;
     text-align: left;
 }
-
 
 .div-body {
     width: 80%;
@@ -482,11 +474,12 @@ a {
 th {
     vertical-align: middle;
 }
+
 td {
     vertical-align: middle;
 }
 
-.div-card-container {
+.main-card-container {
     display: flex;
     justify-content: center;
 }

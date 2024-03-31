@@ -12,7 +12,7 @@
     }
 </style>
 <!-- 바디 start -->
-<div class="div-card-container">
+<main class="main-card-container">
     <div class="card div-card">
         <div class="card-header card-title">
             {{#isEmployer}}
@@ -55,7 +55,7 @@
                 <div class="mb-3" style="display: grid; grid-template-columns: 1fr 1fr">
                     <div style="display: flex; justify-content: center">
                         <span>남자</span>
-                        <input type="radio" name="gender" id="gender" value='M' required>
+                        <input type="radio" name="gender" id="gender" value='M' required checked>
                     </div>
                     <div style="display: flex; justify-content: center">
                         <span>여자</span>
@@ -88,7 +88,8 @@
                     <input type="hidden" name="isEmployer" value="true"> <!--기업 회원 여부 true-->
                     <div class="mb-3">
                         <p class="p-text">사업자 등록 번호</p>
-                        <input type="text" pattern="[0-9]{10}" title="번호만 입력하세요" name="employerIdNumber" value="0000000000" class="form-control" required>
+                        <input type="text" pattern="[0-9]{10}" title="번호만 입력하세요" name="employerIdNumber"
+                               value="0000000000" class="form-control" required>
                     </div>
                     <div class="mb-3">
                         <p class="p-text">기업 이름</p>
@@ -125,7 +126,7 @@
             </form>
         </div>
     </div>
-</div>
+</main>
 
 <script>
     let isSameCheck = false;
