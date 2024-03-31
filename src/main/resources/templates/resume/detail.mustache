@@ -14,11 +14,10 @@
                         </button>
                     </div>
                     <div class="mb-3"> <!-- 삭제 하기 -->
-                        <form action="/resumes/{{id}}/delete" method="post">
-                            <button class="btn btn-outline-secondary">
-                                <i class="fa-regular fa-trash-can icon-size"></i>
-                            </button>
-                        </form>
+                        <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal"
+                                data-bs-target="#deleteForm">
+                            <i class="fa-regular fa-trash-can icon-size"></i>
+                        </button>
                     </div>
                 {{/isResumeOwner}}
                 <!-- 수정 삭제 버튼 end -->
@@ -291,4 +290,24 @@
     </div>
 {{/resumeDetail}}
 <!-- modal :: updateForm end -->
+<!-- modal :: deleteForm start -->
+<div class="modal fade" id="deleteForm" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">이력서 삭제</h5>
+            </div>
+            <div class="modal-body">
+                해당 이력서를 삭제하시겠습니까?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">취소</button>
+                <form action="/resumes/{{resumeDetail.id}}/delete" method="post">
+                    <button class="btn btn-secondary">삭제</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- modal :: deleteForm end -->
 <!-- modal end -->
