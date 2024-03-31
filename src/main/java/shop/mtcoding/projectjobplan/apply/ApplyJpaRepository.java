@@ -20,4 +20,8 @@ public interface ApplyJpaRepository extends JpaRepository<Apply, Integer> {
     // (개인) 지원 현황
     @Query("SELECT a FROM Apply a WHERE a.resume.user.id = :userId")
     List<Apply> findByResumeUserId(@Param("userId") int userId);
+
+    // (개인) 공고별 지원 현황
+    @Query("SELECT a FROM Apply a WHERE a.resume.id = :resumeId")
+    List<Apply> findByResumeId(@Param("resumeId") int resumeId);
 }

@@ -37,7 +37,7 @@
                                 {{/pic}}
                                 {{^pic}}
                                     <img class="card-img" src="/../images/{{businessName}}.jpg"
-                                         onerror="this.src='../../images/chaeyong.jpg'" style="width:100%;">
+                                         alt="/images/business.jpg" style="width:100%;">
                                 {{/pic}}
                             </div>
                             <div class="card-body">
@@ -62,38 +62,32 @@
                             </div>
                         {{/isEmployer}}
                         {{^isEmployer}}
-                            {{#userPic}}
-                                <img class="card-img" src="/upload/{{userPic.imgFilename}}" style="width:100%">
-                            {{/userPic}}
-                            {{^userPic}}
-                                {{#userPic2}}
-                                    <img class="card-img" src="/upload/{{userPic2}}"
-                                         onerror="this.src='../images/avatar.png'" style="width:100%">
-                                {{/userPic2}}
-                                {{^userPic2}}
-                                    <img class="card-img" src="../images/avatar.png" style="width:100%">
-                                {{/userPic2}}
-                            {{/userPic}}
+                            {{#pic}}
+                                <img class="card-img" src="/upload/{{imgFilename}}" style="width:100%">
+                            {{/pic}}
+                            {{^pic}}
+                                <img class="card-img" src="/../images/avatar.png" style="width:100%">
+                            {{/pic}}
                             <div class="card-body">
                                 <h4>{{name}}</h4>
                             </div>
                             <div class="card-footer">
                                 <div style="display: grid; grid-template-columns: 1fr 1fr; grid-column-gap: 10px">
-                                    {{^userPic}}
+                                    {{^pic}}
                                         <form action="/upload-form/{{id}}" method="get"> <!-- 사진 등록 -->
                                             <button class="btn btn-primary">
                                                 <i class="fa-solid fa-plus icon-size"></i>
                                             </button>
                                         </form>
-                                    {{/userPic}}
-                                    {{#userPic}}
+                                    {{/pic}}
+                                    {{#pic}}
                                         <form action="/deleteImg" method="post"> <!-- 사진 삭제 -->
                                             <input type="hidden" name="userId" value="{{userPic.userId}}">
                                             <button class="btn btn-outline-primary">
                                                 <i class="fa-solid fa-minus icon-size"></i>
                                             </button>
                                         </form>
-                                    {{/userPic}}
+                                    {{/pic}}
                                 </div>
                             </div>
                         {{/isEmployer}}
@@ -216,18 +210,15 @@
                             <th></th>
                         </tr>
                         {{#boardList}}
-                            <tr>
+                            <tr onclick="location.href='/boards/{{id}}'">
                                 <td>{{position}}</td>
                                 <td>{{field}}</td>
-                                <td><a href="/boards/{{id}}">{{title}}</a></td>
+                                <td>{{title}}</td>
                                 <td>{{openingDate}}</td>
                                 <td>
-                                    <div style="display: flex; justify-content: space-evenly">
+                                    <div style="display: flex; justify-content: center">
                                         <form action="/users/{{sessionUser.id}}/boards/{{id}}" method="get">
-                                            <button class="btn btn-outline-primary">지원자</button>
-                                        </form>
-                                        <form action="/boards/{{id}}/delete" method="post">
-                                            <button class="btn btn-primary">삭제</button>
+                                            <button class="btn btn-primary">지원자</button>
                                         </form>
                                     </div>
                                 </td>
@@ -254,18 +245,14 @@
                             <td></td>
                         </tr>
                         {{#resumeList}}
-                            <tr>
-                                <td><a href="/resumes/{{id}}">{{title}}</a></td>
+                            <tr onclick="location.href='/resumes/{{id}}'">
+                                <td>{{ogTitle}}</td>
                                 <td>{{createdAt}}</td>
                                 <td>
-                                    <div style="display: flex; justify-content: end">
-                                        <form action="/resumes/{{id}}/update-form">
-                                            <button class="btn btn-outline-primary">수정</button>&nbsp;
+                                    <div style="display: flex; justify-content: center">
+                                        <form action="/users/{{sessionUser.id}}/resumes/{{id}}" method="get">
+                                            <button class="btn btn-primary">지원 현황</button>
                                         </form>
-                                        <form action="/resumes/{{id}}/delete" method="post">
-                                            <button class="btn btn-primary">삭제</button>
-                                        </form>
-                                        <!--공고별 지원 현황 보기?-->
                                     </div>
                                 </td>
                             </tr>
@@ -278,7 +265,7 @@
             <div class="div-layout">
                 <div class="div-header d-flex justify-content-between">
                     <h3><b>지원자 리스트</b></h3>
-                    <form action="/users/{{sessionUser.id}}" method="get" class="justify-content-end">
+                    <form action="/users/{{sessionUser.id}}/boards" method="get" class="justify-content-end">
                         <button class="btn btn-primary">전체</button>
                     </form>
                 </div>
@@ -324,7 +311,9 @@
             <div class="div-layout">
                 <div class="div-header d-flex justify-content-between" style="text-align: end">
                     <h2><b>나의 지원현황</b></h2>
-                    <!--전체 보기 버튼?-->
+                    <form action="/users/{{sessionUser.id}}/resumes" method="get" class="justify-content-end">
+                        <button class="btn btn-primary">전체</button>
+                    </form>
                 </div>
                 <div class="div-resume">
                     <table class="table table-hover" style="text-align: center">
