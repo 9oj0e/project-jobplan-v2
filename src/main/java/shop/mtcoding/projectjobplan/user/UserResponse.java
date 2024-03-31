@@ -88,8 +88,8 @@ public class UserResponse {
         // 지원자 현황 및 지원 현황 & 제안 현황
         private Page<ApplyDTO> applyList;
         private Page<OfferDTO> offerList;
-        Integer applyCount = applyList.getSize(); // 지원자 및 지원 갯수
-        Integer offerCount = offerList.getSize(); // 제안 갯수
+        // Integer applyCount = applyList.getSize(); // 지원자 및 지원 갯수
+        // Integer offerCount = offerList.getSize(); // 제안 갯수
 
         private Boolean hasSkill() {
             if (this.skillList.isEmpty()) {

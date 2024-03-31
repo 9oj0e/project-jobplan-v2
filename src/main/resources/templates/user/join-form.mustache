@@ -127,32 +127,6 @@
         </div>
     </div>
 </main>
-
-<script>
-    let isSameCheck = false;
-
-    function check() {
-        let username = $("#username").val();
-
-        $.ajax({
-            type: "get",
-            url: "/api/username-same-check",
-            data: {username: username}
-        }).done((res) => {
-            if (res.body == false) {
-                isSameCheck = true;
-                alert("사용가능한 아이디입니다.")
-            } else {
-                isSameCheck = false;
-                alert("아이디가 중복되었습니다.")
-            }
-        }).fail((res) => {
-            alert(res.responseJSON.msg);
-        });
-
-    }
-
-</script>
-
+{{>user/join-form-script}}
 <!-- 바디 end -->
 {{>layout/footer}}
