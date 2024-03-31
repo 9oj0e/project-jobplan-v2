@@ -103,9 +103,9 @@ public class BoardResponse {
         Page<BoardDTO> boardList;
         List<Integer> pageList;
 
-        public ListingsDTO(List<Board> boards, Pageable pageable) {
+        public ListingsDTO(Pageable pageable, List<Board> boards) {
             List<BoardDTO> boardList = boards.stream().map(board -> new BoardDTO(board)).toList();
-            this.boardList = PagingUtil.pageConverter(boardList, pageable);
+            this.boardList = PagingUtil.pageConverter(pageable, boardList);
             this.pageList = PagingUtil.getPageList(this.boardList);
         }
 

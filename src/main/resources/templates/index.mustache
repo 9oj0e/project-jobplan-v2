@@ -8,16 +8,8 @@
         {{>resume/listings-search-banner}}
     {{/sessionUser.isEmployer}}
     <hr>
-    {{^sessionUser.isEmployer}}
-        {{>board/listings-recommendation}}
-    {{/sessionUser.isEmployer}}
-    {{#sessionUser.isEmployer}}
-        {{>resume/listings-reference}}
-    {{/sessionUser.isEmployer}}
-    <hr>
     {{>advertisement}}
     <hr>
-    {{^sessionUser.isEmployer}}
     <!-- 채용 공고 리스트 start -->
     <section class="section-body">
         <div class="div-jop-more">
@@ -49,7 +41,6 @@
         </div>
     </section>
     <!-- 채용 공고 리스트 end -->
-    {{/sessionUser.isEmployer}}
 </main>
 <!-- 바디 end -->
 {{>layout/footer}}

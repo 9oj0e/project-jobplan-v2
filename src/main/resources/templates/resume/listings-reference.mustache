@@ -1,5 +1,20 @@
 <section class="section-body">
     <div class="div-recommendation mb-20">추천 인재</div>
+<div class="div-reference">
+    {{#page.userList}}
+        <div onclick="location.href='?userid={{id}}'">
+        <img class="card-img" src="/../images/avatar.png" style="width:75%; height: 75%">
+        <div class="div-recommendation-text-1">{{schoolName}}</div>
+        <!--<span><a href="" class="text-body"><i class="fa-regular fa-star"></i></a></span>-->
+        <div class="div-recommendation-text-2">{{name}}</div>
+    </div>
+    {{/page.userList}}
+    </div>
+    </div>
+</section>
+<!-- dummy data
+<section class="section-body">
+    <div class="div-recommendation mb-20">추천 인재</div>
     <div class="div-recommendation-people">
         <div onclick="location.href='/resume/1'">
             <div class="user-image1"></div>
@@ -38,3 +53,4 @@
         </div>
     </div>
 </section>
+-->

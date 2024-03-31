@@ -50,10 +50,11 @@ public class ResumeController {
     @GetMapping("/resumes")
     public String listings(HttpServletRequest request,
                            @PageableDefault(size = 10) Pageable pageable,
+                           @RequestParam(value = "userid", required = false) Integer userid,
                            @RequestParam(value = "skill", required = false) String skill,
                            @RequestParam(value = "address", required = false) String address,
                            @RequestParam(value = "keyword", required = false) String keyword) {
-        ResumeResponse.ListingsDTO responseDTO = resumeService.getAllResume(pageable, skill, address, keyword);
+        ResumeResponse.ListingsDTO responseDTO = resumeService.getAllResume(pageable, userid, skill, address, keyword);
         request.setAttribute("page", responseDTO);
 
         return "resume/listings";

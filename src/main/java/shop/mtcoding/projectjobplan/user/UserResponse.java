@@ -118,16 +118,16 @@ public class UserResponse {
                 this.employerIdNumber = user.getEmployerIdNumber();
                 this.businessName = user.getBusinessName();
                 List<BoardDTO> boardList = user.getBoards().stream().map(board -> new BoardDTO(board)).toList();
-                this.boardList = PagingUtil.pageConverter(boardList, pageable);
+                this.boardList = PagingUtil.pageConverter(pageable, boardList);
             } else {
                 List<ResumeDTO> resumeList = user.getResumes().stream().map(resume -> new ResumeDTO(resume)).toList();
-                this.resumeList = PagingUtil.pageConverter(resumeList, pageable);
+                this.resumeList = PagingUtil.pageConverter(pageable, resumeList);
                 this.skillList = user.getSkills().stream().map(skill -> new SkillDTO(skill.getName())).toList();
             }
             List<ApplyDTO> applies = applyList.stream().map(apply -> new ApplyDTO(apply)).toList();
-            this.applyList = PagingUtil.pageConverter(applies, pageable); // todo : pagination?
+            this.applyList = PagingUtil.pageConverter(pageable, applies); // todo : pagination?
             List<OfferDTO> offers = offerList.stream().map(offer -> new OfferDTO(offer)).toList();
-            this.offerList = PagingUtil.pageConverter(offers, pageable);
+            this.offerList = PagingUtil.pageConverter(pageable, offers);
         }
 
         public Double getRating() {

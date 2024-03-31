@@ -11,7 +11,7 @@ import java.util.stream.IntStream;
 
 public class PagingUtil {
 
-    public static <T> Page<T> pageConverter(List<T> content, Pageable pageable) {
+    public static <T> Page<T> pageConverter(Pageable pageable, List<T> content) {
         // Page = 0 페이지 부터 시작.
         int start = (int) pageable.getOffset();
         int end = Math.min((start + pageable.getPageSize()), content.size());
