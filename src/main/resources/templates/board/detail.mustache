@@ -1,4 +1,183 @@
 {{>layout/header}}
+<!-- 바디 start -->
+<main class="main-card-container">
+    {{#boardDetail}}
+        <!-- sidenav LEFT start -->
+        <div class="sidenav-container">
+            <div class="sidenav">
+                <!-- 수정 삭제 버튼 start -->
+                {{#isBoardOwner}}
+                    <div class="mb-3"> <!-- 수정 하기 -->
+                        <button class="btn btn-secondary" data-bs-toggle="modal"
+                                data-bs-target="#updateForm">
+                            <i class="fa-regular fa-file-word icon-size"></i>
+                        </button>
+                    </div>
+                    <div class="mb-3"> <!-- 삭제 하기 -->
+                        <form action="/boards/{{id}}/delete" method="post">
+                            <button class="btn btn-outline-secondary">
+                                <i class="fa-regular fa-trash-can icon-size"></i>
+                            </button>
+                        </form>
+                    </div>
+                {{/isBoardOwner}}
+                <!-- 수정 삭제 버튼 end -->
+                <!-- 구독하기 버튼 start -->
+                {{^isBoardOwner}}
+                    {{^sessionUser.isEmployer}}
+                        {{^hasSubscribed}}
+                            <div class="mb-3"> <!-- 구독 -->
+                                <form action="/boards/{{id}}/subscribe" method="post">
+                                    <button class="btn btn-outline-dark">
+                                        <i class="fa-regular fa-bookmark icon-size"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        {{/hasSubscribed}}
+                        {{#hasSubscribed}}
+                            <div class="mb-3"> <!-- 구독 취소 -->
+                                <form action="/boards/{{id}}/unsubscribe" method="post">
+                                    <input type="hidden" name="fromSubscription" value="false">
+                                    <button class="btn btn-outline-dark">
+                                        <i class="fa-solid fa-bookmark icon-size"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        {{/hasSubscribed}}
+                    {{/sessionUser.isEmployer}}
+                {{/isBoardOwner}}
+                <!-- 구독하기 버튼 end -->
+            </div>
+        </div>
+        <!-- sidenav LEFT end -->
+        <!-- card start -->
+        <div class="card div-card">
+            <div class="card-header card-title">
+                <h3>{{title}}</h3>
+            </div>
+            <div class="card-body" style=" margin-left: 5%; margin-right: 5%">
+                <h4 class="card-title">조건</h4>
+                <table class="table">
+                    <tr>
+                        <td>근무 지역</td>
+                        <td>{{address}}</td>
+                    </tr>
+                    <tr>
+                        <td>채용 분야</td>
+                        <td>{{field}}</td>
+                    </tr>
+                    <tr>
+                        <td>포지션</td>
+                        <td>{{position}}</td>
+                    </tr>
+                    <tr>
+                        <td>연봉</td>
+                        <td>{{salary}}</td>
+                    </tr>
+                </table>
+                <h4 class="card-title">우대 스킬</h4>
+                <div class="form-control mb-3">
+                    {{#skillList}}
+                        <btn class="btn btn-light">{{skillName}}</btn>
+                    {{/skillList}}
+                    {{^skillList}}
+                        <btn class="btn btn-outline-light form-control">없음</btn>
+                    {{/skillList}}
+                </div>
+                <h4 class="card-title">상세 내용</h4>
+                <div class="form-control mb-3" style="height: 300px">{{content}}</div>
+                <h4 class="card-title">연락처</h4>
+                <table class="table">
+                    <tr>
+                        <td>전화</td>
+                        <td>{{phoneNumber}}</td>
+                    </tr>
+                    <tr>
+                        <td>이메일</td>
+                        <td>{{email}}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="card-footer">
+                <table class="table table-borderless">
+                    <tr>
+                        <td style="background-color: transparent; text-align: end">게시일</td>
+                        <td style="background-color: transparent">{{openingDate}}</td>
+                        <td style="background-color: transparent; text-align: end">마감일</td>
+                        <td style="background-color: transparent">{{closingDate}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <!-- card end -->
+        <!-- sidenav RIGHT start -->
+        <div class="sidenav-container">
+            <div class="sidenav">
+                <div class="card" style="width:200px">
+                    <div class="card-body" style="padding-left: 0; padding-right: 0">
+                        <div class="card-title">
+                            <!-- 평점 start -->
+                            {{#rating}}
+                                <table class="table">
+                                    <tr>
+                                        <td style="text-align: end; padding-bottom: 0; padding-top: 0">평점 ⭐</td>
+                                        <td style="text-align: start; padding-bottom: 0; padding-top: 0">{{rating}}</td>
+                                    </tr>
+                                </table>
+                            {{/rating}}
+                            <!-- 평점 end -->
+                        </div>
+                        <!-- 사진 start -->
+                        {{#pic}}
+                            <img class="card-img-top" src="/upload/{{imgFilename}}" style="width:100%">
+                        {{/pic}}
+                        {{^pic}}
+                            <img class="card-img-top" src="../images/{{businessName}}.jpg"
+                                 onerror="this.onerror=null; this.src='../images/chaeyong.jpg';" style="width:100%">
+                        {{/pic}}
+                        <!-- 사진 end -->
+                        <h4 class="card-title text-center">{{businessName}}</h4>
+                    </div>
+                    <div class="card-footer" style="text-align: center;">
+                        {{^sessionUser.isEmployer}}
+                        <!-- 평가 버튼 start -->
+                            {{^hasRated}}
+                                <form action="/boards/{{id}}/rate" method="post">
+                                    <div>
+                                        <select name="rating" style="text-align: center; width: 100%">
+                                            <option value="1">1점</option>
+                                            <option value="2">2점</option>
+                                            <option value="3">3점</option>
+                                            <option value="4">4점</option>
+                                            <option value="5">5점</option>
+                                        </select>
+                                        <div align="right">
+                                            <button class="btn btn-outline-dark btn-sm"
+                                                    style="width: 100%; margin-top: 5px">
+                                                평가하기
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            {{/hasRated}}
+                            <!-- 평가 버튼 end -->
+                            <div class="mt-3"> <!-- 지원하기 버튼 -->
+                                <form action="/boards/{{id}}/apply-form" method="get">
+                                    <button class="btn btn-primary form-control">지원</button>
+                                </form>
+                            </div>
+                        {{/sessionUser.isEmployer}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- sidenav RIGHT end -->
+    {{/boardDetail}}
+</main>
+<!-- 바디 end -->
+{{>layout/footer}}
+<!-- modal start -->
+<!-- modal :: updateForm start -->
 {{#boardDetail}}
     <div class="modal fade" id="updateForm" tabindex="-1">
         <div class="modal-dialog">
@@ -93,169 +272,5 @@
         </div>
     </div>
 {{/boardDetail}}
-<!-- 바디 start -->
-<div class="div-card-container">
-    {{#boardDetail}}
-        <div class="sidenav-container">
-            <div class="sidenav">
-                <!-- 수정 삭제 버튼 -->
-                {{#isBoardOwner}}
-                    <div class="mb-3"> <!-- 수정 하기 -->
-                        <button class="btn btn-warning" data-bs-toggle="modal"
-                                data-bs-target="#updateForm">
-                            <i class="fa-regular fa-file-word icon-size"></i>
-                        </button>
-                    </div>
-                    <div class="mb-3"> <!-- 삭제 하기 -->
-                        <form action="/boards/{{id}}/delete" method="post">
-                            <button class="btn btn-danger">
-                                <i class="fa-regular fa-trash-can icon-size"></i>
-                            </button>
-                        </form>
-                    </div>
-                {{/isBoardOwner}}
-                <!-- 구독하기 버튼 -->
-                {{^isBoardOwner}}
-                    {{^sessionUser.isEmployer}}
-                        {{^hasSubscribed}}
-                            <div class="mb-3"> <!-- 구독 -->
-                                <form action="/boards/{{id}}/subscribe" method="post">
-                                    <button class="btn btn-outline-dark">
-                                        <i class="fa-regular fa-bookmark icon-size"></i>
-                                    </button>
-                                </form>
-                            </div>
-                        {{/hasSubscribed}}
-                        {{#hasSubscribed}}
-                            <div class="mb-3"> <!-- 구독 취소 -->
-                                <form action="/boards/{{id}}/unsubscribe" method="post">
-                                    <input type="hidden" name="fromSubscription" value="false">
-                                    <button class="btn btn-outline-dark">
-                                        <i class="fa-solid fa-bookmark icon-size"></i>
-                                    </button>
-                                </form>
-                            </div>
-                        {{/hasSubscribed}}
-                    {{/sessionUser.isEmployer}}
-                {{/isBoardOwner}}
-            </div>
-        </div>
-        <div class="card div-card">
-            <div class="card-header card-title">
-                <h3>{{title}}</h3>
-            </div>
-            <div class="card-body" style=" margin-left: 5%; margin-right: 5%">
-                <h4 class="card-title">조건</h4>
-                <table class="table">
-                    <tr>
-                        <td>근무 지역</td>
-                        <td>{{address}}</td>
-                    </tr>
-                    <tr>
-                        <td>채용 분야</td>
-                        <td>{{field}}</td>
-                    </tr>
-                    <tr>
-                        <td>포지션</td>
-                        <td>{{position}}</td>
-                    </tr>
-                    <tr>
-                        <td>연봉</td>
-                        <td>{{salary}}</td>
-                    </tr>
-                </table>
-                <h4 class="card-title">우대 스킬</h4>
-                <div class="form-control mb-3">
-                    {{#skillList}}
-                        <btn class="btn btn-light">{{skillName}}</btn>
-                    {{/skillList}}
-                    {{^skillList}}
-                        <btn class="btn btn-outline-light form-control">없음</btn>
-                    {{/skillList}}
-                </div>
-                <h4 class="card-title">상세 내용</h4>
-                <div class="form-control mb-3" style="height: 300px">{{content}}</div>
-                <h4 class="card-title">연락처</h4>
-                <table class="table">
-                    <tr>
-                        <td>전화</td>
-                        <td>{{phoneNumber}}</td>
-                    </tr>
-                    <tr>
-                        <td>이메일</td>
-                        <td>{{email}}</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="card-footer">
-                <table class="table table-borderless">
-                    <tr>
-                        <td style="background-color: transparent; text-align: end">게시일</td>
-                        <td style="background-color: transparent">{{openingDate}}</td>
-                        <td style="background-color: transparent; text-align: end">마감일</td>
-                        <td style="background-color: transparent">{{closingDate}}</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        <div class="sidenav-container">
-            <div class="sidenav">
-                <div class="card" style="width:200px">
-                    <div class="card-body" style="padding-left: 0; padding-right: 0">
-                        <div class="card-title">
-                            {{#rating}}
-                                <table class="table">
-                                    <tr>
-                                        <td style="text-align: end; padding-bottom: 0; padding-top: 0">평점 ⭐</td>
-                                        <td style="text-align: start; padding-bottom: 0; padding-top: 0">{{rating}}</td>
-                                    </tr>
-                                </table>
-                            {{/rating}}
-                        </div>
-                        {{#pic}}
-                            <img class="card-img-top" src="/upload/{{imgFilename}}" style="width:100%">
-                        {{/pic}}
-                        {{^pic}}
-                            <img class="card-img-top" src="../images/{{businessName}}.jpg"
-                                 onerror="this.onerror=null; this.src='../images/chaeyong.jpg';" style="width:100%">
-                        {{/pic}}
-                        <h4 class="card-title text-center">{{businessName}}</h4>
-                    </div>
-                    <div class="card-footer" style="text-align: center;">
-                        <!-- 평가 버튼 -->
-                        {{^sessionUser.isEmployer}}
-                            {{^hasRated}}
-                                <form action="/boards/{{id}}/rate" method="post">
-                                    <div>
-                                        <select name="rating" style="text-align: center; width: 100%">
-                                            <option value="1">1점</option>
-                                            <option value="2">2점</option>
-                                            <option value="3">3점</option>
-                                            <option value="4">4점</option>
-                                            <option value="5">5점</option>
-                                        </select>
-                                        <div align="right">
-                                            <button class="btn btn-outline-dark btn-sm"
-                                                    style="width: 100%; margin-top: 5px">
-                                                평가하기
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            {{/hasRated}}
-                            <!-- 지원하기 버튼 -->
-                            <div class="mt-3">
-                                <form action="/boards/{{id}}/apply-form" method="get">
-                                    <!--todo 지원시 사라지게-->
-                                    <button class="btn btn-primary form-control">지원</button>
-                                </form>
-                            </div>
-                        {{/sessionUser.isEmployer}}
-                    </div>
-                </div>
-            </div>
-        </div>
-    {{/boardDetail}}
-</div>
-<!-- 바디 end -->
-{{>layout/footer}}
+<!-- modal :: updateForm end -->
+<!-- modal end -->

@@ -293,7 +293,7 @@ a {
 }
 
 .user-image5 {
-    background-image: url(images/user5.png);
+    background-image: url(images/user5.jpg);
     width: 150px;
     height: 180px;
     background-size: 100% 100%;
@@ -486,7 +486,7 @@ td {
     vertical-align: middle;
 }
 
-.div-card-container {
+.main-card-container {
     display: flex;
     justify-content: center;
 }

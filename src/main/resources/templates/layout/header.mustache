@@ -63,7 +63,9 @@
     </nav>
 </header>
 <!-- 헤더 end -->
+<!-- modal start -->
 {{^sessionUser}}
+    <!-- modal :: joinType start -->
     <div class="modal fade" id="joinType" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -91,6 +93,8 @@
             </div>
         </div>
     </div>
+    <!-- modal :: joinType end -->
+    <!-- modal :: loginForm start -->
     <div style="display: flex; justify-content: center">
         <div class="modal fade" id="loginForm">
             <div class="modal-dialog modal-dialog-centered">
@@ -128,4 +132,6 @@
             </div>
         </div>
     </div>
+    <!-- modal :: loginForm end -->
 {{/sessionUser}}
+<!-- modal end -->
