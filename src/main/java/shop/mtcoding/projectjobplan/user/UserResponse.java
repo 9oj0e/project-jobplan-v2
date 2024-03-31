@@ -85,10 +85,11 @@ public class UserResponse {
         // 게시물 정보
         private Page<ResumeDTO> resumeList;
         private Page<BoardDTO> boardList;
-        // 지원자 현황 및 지원 현황
+        // 지원자 현황 및 지원 현황 & 제안 현황
         private Page<ApplyDTO> applyList;
-        // 제안
         private Page<OfferDTO> offerList;
+        Integer applyCount = applyList.getSize(); // 지원자 및 지원 갯수
+        Integer offerCount = offerList.getSize(); // 제안 갯수
 
         private Boolean hasSkill() {
             if (this.skillList.isEmpty()) {
@@ -125,7 +126,6 @@ public class UserResponse {
             }
             List<ApplyDTO> applies = applyList.stream().map(apply -> new ApplyDTO(apply)).toList();
             this.applyList = PagingUtil.pageConverter(applies, pageable); // todo : pagination?
-
             List<OfferDTO> offers = offerList.stream().map(offer -> new OfferDTO(offer)).toList();
             this.offerList = PagingUtil.pageConverter(offers, pageable);
         }
