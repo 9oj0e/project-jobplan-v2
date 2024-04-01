@@ -31,7 +31,7 @@ public class OfferController {
         return "redirect:/resumes/" + resumeId;
     }
 
-    @PostMapping("/offer/update")
+    @PostMapping("/offers/update")
     public String update(OfferRequest.UpdateDTO requestDTO) { // 제안 받기
         User sessionUser = (User) session.getAttribute("sessionUser");
         offerService.updateOffer(requestDTO);
