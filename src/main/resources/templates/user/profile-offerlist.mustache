@@ -1,7 +1,7 @@
 {{^isEmployer}}
     <div class="div-layout">
         <div class="div-header d-flex justify-content-between" style="text-align: end">
-            <h2><b>제안</b></h2>
+            <h2><b>받은 제안</b></h2>
             <form action="/users/{{sessionUser.id}}/resumes" method="get" class="justify-content-end">
                 <button class="btn btn-primary">전체</button>
             </form>
@@ -14,7 +14,7 @@
                     <th>공고 제목</th>
                     <th></th>
                 </tr>
-                {{#applyList}}
+                {{#offerList}}
                     <tr>
                         <td><a href="/resumes/{{resumeId}}">{{resumeTitle}}</a></td>
                         <td>{{businessName}}</td>
@@ -36,8 +36,54 @@
                             </div>
                         </td>
                     </tr>
-                {{/applyList}}
+                {{/offerList}}
             </table>
         </div>
+    </div>
+{{/isEmployer}}
+{{#isEmployer}}
+    <div class="div-layout">
+        <div class="div-header d-flex justify-content-between">
+            <h3><b>나의 제안 현황</b></h3>
+            <form action="/users/{{sessionUser.id}}/boards" method="get" class="justify-content-end">
+                <button class="btn btn-primary">전체</button>
+            </form>
+        </div>
+        <table class="table table-hover" style="text-align: center">
+            <tr>
+                <th>공고 제목</th>
+                <th>지원자 명</th>
+                <th>이력서 제목</th>
+                <th>지원 날짜</th>
+                <th></th>
+            </tr>
+            {{#offerList}}
+                <tr>
+                    <td><a href="/boards/{{boardId}}">{{boardTitle}}</a></td>
+                    <td>{{applicantName}}</td>
+                    <td><a href="/resumes/{{resumeId}}">{{resumeTitle}}</a></td>
+                    <td>{{createdAt}}</td>
+                    <td>
+                        <div style="display: flex; justify-content: space-evenly">
+                            {{#status}}
+                                <div>{{status}}</div>
+                            {{/status}}
+                            {{^status}}
+                                <input type="hidden" id="applyId" value="{{id}}">
+                                <button class="btn btn-outline-danger" onclick="getApplyId()"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#applyRejectForm">
+                                    불합격
+                                </button>
+                                <button class="btn btn-primary" onclick="getApplyId()" data-bs-toggle="modal"
+                                        data-bs-target="#applyAcceptForm">
+                                    합격
+                                </button>
+                            {{/status}}
+                        </div>
+                    </td>
+                </tr>
+            {{/offerList}}
+        </table>
     </div>
 {{/isEmployer}}

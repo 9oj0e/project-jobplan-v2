@@ -1,7 +1,7 @@
 {{#isEmployer}}
     <div class="div-layout">
         <div class="div-header d-flex justify-content-between">
-            <h3><b>지원자 리스트</b></h3>
+            <h3><b>지원자 목록</b></h3>
             <form action="/users/{{sessionUser.id}}/boards" method="get" class="justify-content-end">
                 <button class="btn btn-primary">전체</button>
             </form>
@@ -47,7 +47,7 @@
 {{^isEmployer}}
     <div class="div-layout">
         <div class="div-header d-flex justify-content-between" style="text-align: end">
-            <h2><b>나의 지원현황</b></h2>
+            <h2><b>나의 지원 현황</b></h2>
             <form action="/users/{{sessionUser.id}}/resumes" method="get" class="justify-content-end">
                 <button class="btn btn-primary">전체</button>
             </form>
