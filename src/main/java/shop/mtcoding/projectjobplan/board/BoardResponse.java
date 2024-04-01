@@ -102,11 +102,13 @@ public class BoardResponse {
     public static class ListingsDTO {
         Page<BoardDTO> boardList;
         List<Integer> pageList;
+        List<RecommendationDTO> recommendationList;
 
-        public ListingsDTO(Pageable pageable, List<Board> boards) {
+        public ListingsDTO(Pageable pageable, List<Board> boards, List<Board> recommendations) {
             List<BoardDTO> boardList = boards.stream().map(board -> new BoardDTO(board)).toList();
             this.boardList = PagingUtil.pageConverter(pageable, boardList);
             this.pageList = PagingUtil.getPageList(this.boardList);
+            this.recommendationList = recommendations.stream().map(recommendation -> new RecommendationDTO(recommendation)).toList();
         }
 
         public class BoardDTO {
@@ -131,6 +133,18 @@ public class BoardResponse {
 
             public String getClosingDate() {
                 return FormatUtil.timeFormatter(closingDate);
+            }
+        }
+
+        public class RecommendationDTO{
+            private Integer boardId;
+            private String field;
+            private String businessName;
+
+            public RecommendationDTO(Board board) {
+                this.boardId = board.getId();
+                this.field = board.getField();
+                this.businessName = board.getUser().getBusinessName();
             }
         }
     }

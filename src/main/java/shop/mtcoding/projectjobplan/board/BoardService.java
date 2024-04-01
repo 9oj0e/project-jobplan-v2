@@ -66,6 +66,7 @@ public class BoardService {
     }
 
     // board/listings
+    @Transactional(readOnly = true)
     public BoardResponse.ListingsDTO getAllBoard(Pageable pageable, String skill, String address, String keyword) {
         List<Board> boardList;
         if (skill != null) { // 기술별 검색시
@@ -77,7 +78,10 @@ public class BoardService {
         } else { // 모든 페이지
             boardList = boardJpaRepository.findAllJoinUser().orElseThrow(() -> new Exception404("조회된 게시글이 없습니다."));
         }
-        return new BoardResponse.ListingsDTO(pageable, boardList);
+        List<Board> recommendations = boardJpaRepository.findAllOrderByCreatedAtDesc(3).get();
+
+
+        return new BoardResponse.ListingsDTO(pageable, boardList, recommendations);
     }
 
     public List<BoardResponse.IndexDTO> getAllBoardOnIndex(int limit) { // index
