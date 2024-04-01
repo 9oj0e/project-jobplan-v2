@@ -76,7 +76,7 @@ a {
 .nav-header {
     padding: 20px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
 }
 
 .div-menu-left {

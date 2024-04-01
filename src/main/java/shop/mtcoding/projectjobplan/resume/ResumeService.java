@@ -50,6 +50,7 @@ public class ResumeService {
         return new ResumeResponse.DetailDTO(resume, rating, isResumeOwner, hasSubscribed, hasRated);
     }
 
+    @Transactional(readOnly = true)
     public ResumeResponse.ListingsDTO getAllResume(Pageable pageable, Integer userId, String skill, String address, String keyword) {
         List<Resume> resumeList;
         List<User> userList; // 추천 인재 (기술을 많이 가진 인재 내림차순 정렬)
@@ -67,7 +68,7 @@ public class ResumeService {
         } else {
             resumeList = resumeJpaRepository.findAllJoinUser().orElseThrow(() -> new Exception404("조회된 이력서가 없습니다."));
         }
-        return new ResumeResponse.ListingsDTO(pageable, resumeList, userList);
+        return new ResumeResponse.ListingsDTO(pageable, resumeList, userList, skill, address, keyword);
     }
 
     // 이력서수정폼

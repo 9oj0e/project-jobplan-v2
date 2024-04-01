@@ -34,16 +34,22 @@
                 <div class="d-flex justify-content-center">
                     <ul class="pagination">
                         <li class="page-item {{^boardList.hasPrevious}}disabled{{/boardList.hasPrevious}}">
-                            <a class="page-link" href="?page={{boardList.pageable.previousOrFirst.pageNumber}}
-                            ">Previous</a>
+                            <a class="page-link" href="?page={{boardList.pageable.next.pageNumber}}{{#keyword}}
+                            &keyword={{keyword}}{{/keyword}}{{#address}}
+                            &address={{address}}{{/address}}{{#skill}}&skill={{skill}}{{/skill}}">Previous</a>
                         </li>
                         {{#pageList}}
                             <li class="page-item">
-                                <a class="page-link" href="?page={{.}}">{{.}}</a>
+                                <a class="page-link" href="?page={{.}}{{#page.keyword}}
+                                &keyword={{page.keyword}}{{/page.keyword}}{{#page.address}}
+                                &address={{page.address}}{{/page.address}}{{#page.skill}}
+                                &skill={{page.skill}}{{/page.skill}}">{{.}}</a>
                             </li>
                         {{/pageList}}
                         <li class="page-item {{^boardList.hasNext}}disabled{{/boardList.hasNext}}">
-                            <a class="page-link" href="?page={{boardList.pageable.next.pageNumber}}">Next</a>
+                            <a class="page-link" href="?page={{boardList.pageable.next.pageNumber}}{{#keyword}}
+                            &keyword={{keyword}}{{/keyword}}{{#address}}
+                            &address={{address}}{{/address}}{{#skill}}&skill={{skill}}{{/skill}}">Next</a>
                         </li>
                     </ul>
                 </div>

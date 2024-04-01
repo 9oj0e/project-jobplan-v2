@@ -105,11 +105,17 @@ public class BoardResponse {
         Page<BoardDTO> boardList;
         List<Integer> pageList;
         List<RecommendationDTO> recommendationList = new ArrayList<>();
+        String skill;
+        String address;
+        String keyword;
 
-        public ListingsDTO(Pageable pageable, List<Board> boards, List<Object[]> recommendations) {
+        public ListingsDTO(Pageable pageable, List<Board> boards, List<Object[]> recommendations, String skill, String address, String keyword) {
             List<BoardDTO> boardList = boards.stream().map(board -> new BoardDTO(board)).toList();
             this.boardList = PagingUtil.pageConverter(pageable, boardList);
             this.pageList = PagingUtil.getPageList(this.boardList);
+            this.skill = skill;
+            this.address = address;
+            this.keyword = keyword;
             for (Object[] result : recommendations) {
                 RecommendationDTO dto
                         = new RecommendationDTO(

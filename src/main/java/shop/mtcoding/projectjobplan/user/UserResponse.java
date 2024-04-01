@@ -3,17 +3,14 @@ package shop.mtcoding.projectjobplan.user;
 import lombok.Data;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.support.PageableUtils;
 import shop.mtcoding.projectjobplan._core.utils.FormatUtil;
 import shop.mtcoding.projectjobplan._core.utils.PagingUtil;
 import shop.mtcoding.projectjobplan.apply.Apply;
 import shop.mtcoding.projectjobplan.board.Board;
 import shop.mtcoding.projectjobplan.offer.Offer;
-import shop.mtcoding.projectjobplan.offer.OfferRequest;
 import shop.mtcoding.projectjobplan.resume.Resume;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 
 public class UserResponse {
@@ -240,8 +237,9 @@ public class UserResponse {
             private String boardTitle;
             private String position;
             private String field;
+            private String businessName;
 
-            // 지원 정보
+            // 제안 정보
             private Integer id;
             private Boolean status;
             private String createdAt;
@@ -255,6 +253,7 @@ public class UserResponse {
                 this.boardTitle = offer.getBoard().getTitle();
                 this.position = offer.getBoard().getPosition();
                 this.field = offer.getBoard().getField();
+                this.businessName = offer.getBoard().getUser().getBusinessName();
                 this.id = offer.getId();
                 this.status = offer.getStatus();
                 this.createdAt = offer.getCreatedAt();
@@ -270,8 +269,8 @@ public class UserResponse {
 
             public String getStatus() {
                 try {
-                    if (this.status) return "제안 받기";
-                    else if (!this.status) return "삭제";
+                    if (this.status) return "수락";
+                    else if (!this.status) return "거절";
                     else return null;
                 } catch (Exception e) {
                     return null;

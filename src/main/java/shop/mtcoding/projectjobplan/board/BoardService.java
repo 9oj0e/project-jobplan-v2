@@ -62,7 +62,6 @@ public class BoardService {
         return new BoardResponse.DetailDTO(board, rating, isBoardOwner, hasSubscribed, hasRated);
     }
 
-    // board/listings
     @Transactional(readOnly = true)
     public BoardResponse.ListingsDTO getAllBoard(Pageable pageable, Integer sessionUserId, String skill, String address, String keyword) {
         List<Board> boards;
@@ -81,7 +80,7 @@ public class BoardService {
                     .orElseThrow(() -> new Exception404("가진 스킬이 없습니다."));
             recommendations = boardQueryRepository.findWithSkill(skills);
         }
-        return new BoardResponse.ListingsDTO(pageable, boards, recommendations);
+        return new BoardResponse.ListingsDTO(pageable, boards, recommendations, skill, address, keyword);
     }
 
     public List<BoardResponse.IndexDTO> getAllBoardOnIndex(int limit) { // index

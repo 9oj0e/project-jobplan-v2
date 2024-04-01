@@ -31,16 +31,22 @@
         <div class="d-flex justify-content-center">
             <ul class="pagination">
                 <li class="page-item {{^resumeList.hasPrevious}}disabled{{/resumeList.hasPrevious}}">
-                    <a class="page-link" href="?page={{resumeList.pageable.previousOrFirst.pageNumber}}
-                    ">Previous</a>
+                    <a class="page-link" href="?page={{resumeList.pageable.next.pageNumber}}{{#keyword}}
+                    &keyword={{keyword}}{{/keyword}}{{#address}}
+                    &address={{address}}{{/address}}{{#skill}}&skill={{skill}}{{/skill}}">Previous</a>
                 </li>
                 {{#pageList}}
                     <li class="page-item">
-                        <a class="page-link" href="?page={{.}}">{{.}}</a>
+                        <a class="page-link" href="?page={{.}}{{#page.keyword}}
+                        &keyword={{page.keyword}}{{/page.keyword}}{{#page.address}}
+                        &address={{page.address}}{{/page.address}}{{#page.skill}}
+                        &skill={{page.skill}}{{/page.skill}}">{{.}}</a>
                     </li>
                 {{/pageList}}
                 <li class="page-item {{^resumeList.hasNext}}disabled{{/resumeList.hasNext}}">
-                    <a class="page-link" href="?page={{resumeList.pageable.next.pageNumber}}">Next</a>
+                    <a class="page-link" href="?page={{resumeList.pageable.next.pageNumber}}{{#keyword}}
+                    &keyword={{keyword}}{{/keyword}}{{#address}}
+                    &address={{address}}{{/address}}{{#skill}}&skill={{skill}}{{/skill}}">Next</a>
                 </li>
             </ul>
         </div>

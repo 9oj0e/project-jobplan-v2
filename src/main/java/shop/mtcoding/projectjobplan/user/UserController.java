@@ -8,7 +8,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @RequiredArgsConstructor
 @Controller
@@ -32,8 +34,8 @@ public class UserController {
 
     @PostMapping("/join")
     public String join(@Valid UserRequest.JoinDTO requestDTO, Errors errors) {
-        userService.createUser(requestDTO);
-
+        User sessionUser = userService.createUser(requestDTO);
+        session.setAttribute("sessionUser", sessionUser);
         return "redirect:/";
     }
 
@@ -70,7 +72,7 @@ public class UserController {
     }
     */
     @PostMapping("/users/{userId}/update")
-    public String update(@PathVariable Integer userId,@Valid UserRequest.UpdateDTO requestDTO,Errors errors) {
+    public String update(@PathVariable Integer userId, @Valid UserRequest.UpdateDTO requestDTO, Errors errors) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         User newSessionUser = userService.setUser(sessionUser.getId(), requestDTO);
         session.setAttribute("sessionUser", newSessionUser);

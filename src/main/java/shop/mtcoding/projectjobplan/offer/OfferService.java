@@ -19,6 +19,7 @@ public class OfferService {
     private final ResumeJpaRepository resumeJpaRepository;
     private final BoardJpaRepository boardJpaRepository;
 
+    @Transactional(readOnly = true)
     public OfferResponse.OfferFormDTO getResumeAndBoard(int resumeId, User sessionUser) {
         Resume resume = resumeJpaRepository.findById(resumeId)
                 .orElseThrow(() -> new Exception404("이력서 정보를 찾을 수 없습니다."));
@@ -43,7 +44,14 @@ public class OfferService {
     public void updateOffer(OfferRequest.UpdateDTO requestDTO) {
         Offer offer = offerJpaRepository.findById(requestDTO.getId())
                 .orElseThrow(() -> new Exception404("제안 이력이 없습니다."));
-
         offer.update(requestDTO);
+    }
+
+
+    @Transactional
+    public void removeOffer(int id) {
+        Offer offer = offerJpaRepository.findById(id)
+                .orElseThrow(() -> new Exception404("취소할 제안이 없습니다."));
+        offerJpaRepository.delete(offer);
     }
 }
