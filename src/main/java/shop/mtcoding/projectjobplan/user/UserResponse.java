@@ -241,7 +241,7 @@ public class UserResponse {
             private String position;
             private String field;
 
-            // 지원 정보
+            // 제안 정보
             private Integer id;
             private Boolean status;
             private String createdAt;
@@ -270,8 +270,8 @@ public class UserResponse {
 
             public String getStatus() {
                 try {
-                    if (this.status) return "제안 받기";
-                    else if (!this.status) return "삭제";
+                    if (this.status) return "수락";
+                    else if (!this.status) return "거절";
                     else return null;
                 } catch (Exception e) {
                     return null;

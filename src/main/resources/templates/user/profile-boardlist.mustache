@@ -22,11 +22,21 @@
                     <td>{{title}}</td>
                     <td>{{openingDate}}</td>
                     <td>
-                        <div style="display: flex; justify-content: center">
-                            <form action="/users/{{sessionUser.id}}/boards/{{id}}" method="get">
-                                <button class="btn btn-primary">지원자</button>
-                            </form>
+                        <div style="display: flex; justify-content: space-evenly">
+                            <div style="display: flex; justify-content: center">
+                                <form action="/users/{{sessionUser.id}}/boards/{{id}}" method="get">
+                                    <button class="btn btn-primary">지원자</button>
+                                </form>
+                            </div>
+                            <!--제안-->
+                            <div style="display: flex; justify-content: center">
+                                <form action="/users/{{sessionUser.id}}/boards/{{id}}" method="get">
+                                    <button class="btn btn-primary">제안</button>
+                                </form>
+                            </div>
                         </div>
+                        <!--지원자-->
+
                     </td>
                 </tr>
             {{/boardList}}
