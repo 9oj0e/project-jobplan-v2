@@ -9,6 +9,9 @@ import java.util.Optional;
 
 public interface BoardJpaRepository extends JpaRepository<Board, Integer> {
 
+    @Query("SELECT b FROM Board b ORDER BY b.createdAt DESC limit :limit")
+    Optional<List<Board>> findAllOrderByCreatedAtDesc(@Param("limit") int limit);
+
     @Query("SELECT b FROM Board b JOIN FETCH User u WHERE b.user.id = u.id ORDER BY b.id DESC")
     Optional<List<Board>> findAllByUserId(int userId);
 
@@ -26,7 +29,7 @@ public interface BoardJpaRepository extends JpaRepository<Board, Integer> {
 
     @Query("SELECT b FROM Board b JOIN FETCH b.user u WHERE b.title LIKE %:keyword% OR b.content LIKE %:keyword% OR u.businessName LIKE %:keyword% ORDER BY b.createdAt DESC")
     Optional<List<Board>> findAllJoinUserWithKeyword(String keyword);
-  
+
     @Query("SELECT b FROM Board b WHERE b.user.id = :id ORDER BY b.id DESC")
     Optional<List<Board>> findByUserId(@Param("id") int id);
 }

@@ -8,7 +8,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -67,9 +66,13 @@ public class BoardController {
                            @RequestParam(value = "skill", required = false) String skill,
                            @RequestParam(value = "address", required = false) String address,
                            @RequestParam(value = "keyword", required = false) String keyword) {
-        BoardResponse.ListingsDTO responseDTO = boardService.getAllBoard(pageable, skill, address, keyword);
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        Integer sessionUserId = null;
+        if (sessionUser != null) {
+            sessionUserId = sessionUser.getId();
+        }
+        BoardResponse.ListingsDTO responseDTO = boardService.getAllBoard(pageable, sessionUserId, skill, address, keyword);
         request.setAttribute("page", responseDTO);
-        // todo : ?keyword=...&page=... 만드는 방법?
 
         return "board/listings";
     }
@@ -85,7 +88,7 @@ public class BoardController {
     }
     */
     @PostMapping("/boards/{boardId}/update") // 공고수정
-    public String update(@PathVariable int boardId,@Valid BoardRequest.UpdateDTO requestDTO,Errors errors) {
+    public String update(@PathVariable int boardId, @Valid BoardRequest.UpdateDTO requestDTO, Errors errors) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         boardService.setBoard(boardId, requestDTO, sessionUser);
 

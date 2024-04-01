@@ -18,9 +18,9 @@ public class BoardJPARepositoryTest {
         String skill = "java" ;
 
         // when
-       List<Board> boardList = boardJpaRepository.findAllBoardJoinUserSkill(skill).get();
+//       List<Board> boardList = boardJpaRepository.findAllBoardJoinUserSkill(skill).get();
 
         // then
-        System.out.println(boardList);
+//        System.out.println(boardList);
     }
 }

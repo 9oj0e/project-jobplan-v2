@@ -224,6 +224,12 @@ a {
     border-radius: 20px;
 }
 
+.div-recommendation-img-0 {
+    height: 250px;
+    background-size: 100% 100%;
+    border-radius: 20px;
+}
+
 .div-company-img-네이버 {
     background-image: url(images/네이버.jpg);
     height: 180px;

@@ -51,7 +51,7 @@ public class OfferService {
     @Transactional
     public void removeOffer(int id) {
         Offer offer = offerJpaRepository.findById(id)
-                        .orElseThrow(() -> new Exception404("취소할 제안이 없습니다."));
+                .orElseThrow(() -> new Exception404("취소할 제안이 없습니다."));
         offerJpaRepository.delete(offer);
     }
 }

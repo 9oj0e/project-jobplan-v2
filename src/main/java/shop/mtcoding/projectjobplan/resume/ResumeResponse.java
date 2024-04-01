@@ -103,10 +103,12 @@ public class ResumeResponse {
 
         public class SkillDTO {
             private String skillName;
+
             public SkillDTO(String skillName) {
                 this.skillName = skillName;
             }
         }
+
         public Double getRating() {
             return FormatUtil.numberFormatter(this.rating);
         }
@@ -135,6 +137,7 @@ public class ResumeResponse {
             private int id;
             private String name;
             private String schoolName;
+
             public UserDTO(User user) {
                 this.id = user.getId();
                 this.name = user.getName();

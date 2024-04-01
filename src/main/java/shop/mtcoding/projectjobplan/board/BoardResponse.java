@@ -1,12 +1,14 @@
 package shop.mtcoding.projectjobplan.board;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import shop.mtcoding.projectjobplan._core.utils.FormatUtil;
 import shop.mtcoding.projectjobplan._core.utils.PagingUtil;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 public class BoardResponse {
@@ -102,24 +104,43 @@ public class BoardResponse {
     public static class ListingsDTO {
         Page<BoardDTO> boardList;
         List<Integer> pageList;
+        List<RecommendationDTO> recommendationList = new ArrayList<>();
         String skill;
         String address;
         String keyword;
 
-        public ListingsDTO(Pageable pageable, List<Board> boards, String skill, String address, String keyword) {
+        public ListingsDTO(Pageable pageable, List<Board> boards, List<Object[]> recommendations, String skill, String address, String keyword) {
             List<BoardDTO> boardList = boards.stream().map(board -> new BoardDTO(board)).toList();
             this.boardList = PagingUtil.pageConverter(pageable, boardList);
             this.pageList = PagingUtil.getPageList(this.boardList);
             this.skill = skill;
             this.address = address;
             this.keyword = keyword;
-            System.out.println("2. DTO : " + address);
+            for (Object[] result : recommendations) {
+                RecommendationDTO dto
+                        = new RecommendationDTO(
+                        (Integer) result[0], (String) result[1], (String) result[2], (String) result[3]
+                );
+                this.recommendationList.add(dto);
+            }
+        }
+
+        public List<RecommendationDTO> getRecommendationList() {
+            if (!recommendationList.isEmpty()) {
+                return this.recommendationList;
+            } else { // sessionUser가 없으면, 최근 공고 3개 띄우기
+                return boardList.stream()
+                        .map(boardDTO -> new RecommendationDTO(boardDTO.id, boardDTO.title, boardDTO.field, boardDTO.businessName))
+                        .limit(3)
+                        .toList();
+            }
         }
 
         public class BoardDTO {
             // board_tb
             private Integer id;
             private String title;
+            private String field;
             private String salary;
             private Timestamp closingDate;
 
@@ -130,6 +151,7 @@ public class BoardResponse {
             public BoardDTO(Board board) {
                 this.id = board.getId();
                 this.title = board.getTitle();
+                this.field = board.getField();
                 this.salary = board.getSalary();
                 this.closingDate = board.getClosingDate();
                 this.address = board.getUser().getAddress();
@@ -138,6 +160,23 @@ public class BoardResponse {
 
             public String getClosingDate() {
                 return FormatUtil.timeFormatter(closingDate);
+            }
+        }
+
+
+        @NoArgsConstructor
+        @Data
+        public static class RecommendationDTO {
+            private Integer boardId;
+            private String title;
+            private String field;
+            private String businessName;
+
+            public RecommendationDTO(Integer boardId, String title, String field, String businessName) {
+                this.boardId = boardId;
+                this.title = title;
+                this.field = field;
+                this.businessName = businessName;
             }
         }
     }
