@@ -43,8 +43,8 @@ public class BoardQueryRepository {
                 AND
                 b.user_id = u.id
                 """;
-        String limit = "LIMIT 3";
-        String query = queryStart + whereClause + queryEnd;
+        String limit = " LIMIT 3";
+        String query = queryStart + whereClause + queryEnd + limit;
 
         return entityManager.createNativeQuery(query).getResultList();
     }

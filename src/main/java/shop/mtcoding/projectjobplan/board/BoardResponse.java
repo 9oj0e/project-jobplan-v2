@@ -10,7 +10,6 @@ import shop.mtcoding.projectjobplan._core.utils.PagingUtil;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class BoardResponse {
     @Data
@@ -119,19 +118,23 @@ public class BoardResponse {
                 this.recommendationList.add(dto);
             }
         }
-        /* todo : sessionUser가 null일 때.
+
         public List<RecommendationDTO> getRecommendationList() {
             if (!recommendationList.isEmpty()) {
                 return this.recommendationList;
-            } else {
-
+            } else { // sessionUser가 없으면, 최근 공고 3개 띄우기
+                return boardList.stream()
+                        .map(boardDTO -> new RecommendationDTO(boardDTO.id, boardDTO.title, boardDTO.field, boardDTO.businessName))
+                        .limit(3)
+                        .toList();
             }
         }
-        */
+
         public class BoardDTO {
             // board_tb
             private Integer id;
             private String title;
+            private String field;
             private String salary;
             private Timestamp closingDate;
 
@@ -142,6 +145,7 @@ public class BoardResponse {
             public BoardDTO(Board board) {
                 this.id = board.getId();
                 this.title = board.getTitle();
+                this.field = board.getField();
                 this.salary = board.getSalary();
                 this.closingDate = board.getClosingDate();
                 this.address = board.getUser().getAddress();
@@ -156,7 +160,7 @@ public class BoardResponse {
 
         @NoArgsConstructor
         @Data
-        public static class RecommendationDTO{
+        public static class RecommendationDTO {
             private Integer boardId;
             private String title;
             private String field;
