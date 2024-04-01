@@ -2,10 +2,13 @@ package shop.mtcoding.projectjobplan.board;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,7 +44,7 @@ public class BoardController {
     }
 
     @PostMapping("/boards/post")
-    public String post(BoardRequest.SaveDTO requestDTO) {
+    public String post(@Valid BoardRequest.SaveDTO requestDTO, Errors errors) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         Board board = boardService.createBoard(requestDTO, sessionUser);
 
@@ -82,7 +85,7 @@ public class BoardController {
     }
     */
     @PostMapping("/boards/{boardId}/update") // 공고수정
-    public String update(@PathVariable int boardId, BoardRequest.UpdateDTO requestDTO) {
+    public String update(@Valid @PathVariable int boardId, BoardRequest.UpdateDTO requestDTO,Errors errors) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         boardService.setBoard(boardId, requestDTO, sessionUser);
 
