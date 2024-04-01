@@ -41,7 +41,7 @@ public class UserService {
                 .orElseThrow(() -> new Exception401("아이디 또는 비밀번호가 틀렸습니다."));
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public UserResponse.ProfileDTO getUser(Integer sessionUserId, Integer boardId, Integer resumeId, Pageable pageable) {
         User user = userJpaRepository.findById(sessionUserId)
                 .orElseThrow(() -> new Exception404("찾을 수 없는 유저입니다."));

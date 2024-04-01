@@ -32,6 +32,7 @@ public class ResumeService {
         return resumeJpaRepository.save(resume);
     }
 
+    @Transactional(readOnly = true)
     public ResumeResponse.DetailDTO getResumeInDetail(int resumeId, Integer sessionUserId) {
         Resume resume = resumeJpaRepository.findById(resumeId).orElseThrow(() -> new Exception404("조회된 이력서가 없습니다."));
         Double rating = ratingJpaRepository.findRatingAvgByUserId(resume.getUser().getId()).orElse(0.0);
