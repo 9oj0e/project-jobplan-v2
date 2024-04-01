@@ -290,32 +290,32 @@ VALUES (4, 5, now());
 -- 제안
 -- offer_tb
 INSERT INTO offer_tb
-(resume_id, board_id, created_at)
-VALUES (18, 16, now());
+(resume_id, board_id, created_at, status)
+VALUES (18, 16, now(), true);
 INSERT INTO offer_tb
-(resume_id, board_id, created_at)
-VALUES (16, 17, now());
+(resume_id, board_id, created_at, status)
+VALUES (16, 17, now(), null);
 INSERT INTO offer_tb
-(resume_id, board_id, created_at)
-VALUES (11, 7, now());
+(resume_id, board_id, created_at, status)
+VALUES (11, 7, now(), null);
 INSERT INTO offer_tb
-(resume_id, board_id, created_at)
-VALUES (18, 12, now());
+(resume_id, board_id, created_at, status)
+VALUES (18, 12, now(), null);
 INSERT INTO offer_tb
-(resume_id, board_id, created_at)
-VALUES (2, 13, now());
+(resume_id, board_id, created_at, status)
+VALUES (2, 13, now(), null);
 INSERT INTO offer_tb
-(resume_id, board_id, created_at)
-VALUES (8, 8, now());
+(resume_id, board_id, created_at, status)
+VALUES (8, 8, now(), null);
 INSERT INTO offer_tb
-(resume_id, board_id, created_at)
-VALUES (17, 3, now());
+(resume_id, board_id, created_at, status)
+VALUES (17, 3, now(), null);
 INSERT INTO offer_tb
-(resume_id, board_id, created_at)
-VALUES (10, 13, now());
+(resume_id, board_id, created_at, status)
+VALUES (10, 13, now(), null);
 INSERT INTO offer_tb
-(resume_id, board_id, created_at)
-VALUES (13, 13, now());
+(resume_id, board_id, created_at, status)
+VALUES (13, 13, now(), null);
 
 -- 평점
 INSERT INTO rating_tb

@@ -65,11 +65,18 @@
                     <td>{{field}}</td>
                     <td><a href="/resumes/{{resumeId}}">{{title}}</a></td>
                     <td><a href="/boards/{{boardId}}">{{boardTitle}}</a></td>
-                    <td>
-                        <form action="/offers/{{id}}/delete" method="post">
-                            <button class="btn btn-outline-danger">제안 취소</button>
-                        </form>
-                    </td>
+                    {{#status}}
+                        <td>
+                            <div>{{status}}</div>
+                        </td>
+                    {{/status}}
+                    {{^status}}
+                        <td>
+                            <form action="/offers/{{id}}/delete" method="post">
+                                <button class="btn btn-outline-danger">제안 취소</button>
+                            </form>
+                        </td>
+                    {{/status}}
                 </tr>
             {{/offerList}}
         </table>

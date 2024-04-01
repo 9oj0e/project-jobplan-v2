@@ -42,7 +42,7 @@ public class OfferController {
     @PostMapping("/offers/{offerId}/delete")
     public String delete(@PathVariable int offerId) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        offerService.removeOffer(offerId, sessionUser);
+        offerService.removeOffer(offerId);
         return "redirect:/users/" + sessionUser.getId();
     }
 }

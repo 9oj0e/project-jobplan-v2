@@ -270,8 +270,8 @@ public class UserResponse {
 
             public String getStatus() {
                 try {
-                    if (this.status) return "제안 받기";
-                    else if (!this.status) return "삭제";
+                    if (this.status) return "수락";
+                    else if (!this.status) return "거절";
                     else return null;
                 } catch (Exception e) {
                     return null;
