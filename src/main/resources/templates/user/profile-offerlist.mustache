@@ -25,12 +25,12 @@
                                     <div>{{status}}</div>
                                 {{/status}}
                                 {{^status}}
-                                        <form action="/offers/update" method="post">
+                                        <form action="/offer/update" method="post">
                                             <input type="hidden" name="id" value="{{id}}">
                                             <input type="hidden" name="status" value="0">
                                             <button type="submit" class="btn btn-outline-danger">거절</button>
                                         </form>
-                                        <form action="/offers/update" method="post">
+                                        <form action="/offer/update" method="post">
                                             <input type="hidden" name="id" value="{{id}}">
                                             <input type="hidden" name="status" value="1">
                                             <button type="submit" class="btn btn-primary">수락</button>
@@ -75,7 +75,7 @@
                     {{/status}}
                     {{^status}}
                         <td>
-                            <form action="/offers/{{id}}/delete" method="post">
+                            <form action="/offer/{{id}}/delete" method="post">
                                 <button class="btn btn-outline-danger">제안 취소</button>
                             </form>
                         </td>
