@@ -1,6 +1,7 @@
 package shop.mtcoding.projectjobplan.board;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import shop.mtcoding.projectjobplan._core.utils.FormatUtil;
@@ -8,6 +9,7 @@ import shop.mtcoding.projectjobplan._core.utils.PagingUtil;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Objects;
 
 public class BoardResponse {
     @Data
@@ -104,11 +106,11 @@ public class BoardResponse {
         List<Integer> pageList;
         List<RecommendationDTO> recommendationList;
 
-        public ListingsDTO(Pageable pageable, List<Board> boards, List<Board> recommendations) {
+        public ListingsDTO(Pageable pageable, List<Board> boards, List<RecommendationDTO> recommendations) {
             List<BoardDTO> boardList = boards.stream().map(board -> new BoardDTO(board)).toList();
             this.boardList = PagingUtil.pageConverter(pageable, boardList);
             this.pageList = PagingUtil.getPageList(this.boardList);
-            this.recommendationList = recommendations.stream().map(recommendation -> new RecommendationDTO(recommendation)).toList();
+            this.recommendationList = recommendations;
         }
 
         public class BoardDTO {
@@ -136,16 +138,14 @@ public class BoardResponse {
             }
         }
 
-        public class RecommendationDTO{
+
+        @NoArgsConstructor
+        @Data
+        public static class RecommendationDTO{
             private Integer boardId;
+            private String title;
             private String field;
             private String businessName;
-
-            public RecommendationDTO(Board board) {
-                this.boardId = board.getId();
-                this.field = board.getField();
-                this.businessName = board.getUser().getBusinessName();
-            }
         }
     }
 

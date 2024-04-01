@@ -67,9 +67,9 @@ public class BoardController {
                            @RequestParam(value = "skill", required = false) String skill,
                            @RequestParam(value = "address", required = false) String address,
                            @RequestParam(value = "keyword", required = false) String keyword) {
-        BoardResponse.ListingsDTO responseDTO = boardService.getAllBoard(pageable, skill, address, keyword);
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        BoardResponse.ListingsDTO responseDTO = boardService.getAllBoard(pageable, sessionUser.getId(), skill, address, keyword);
         request.setAttribute("page", responseDTO);
-        // todo : ?keyword=...&page=... 만드는 방법?
 
         return "board/listings";
     }
