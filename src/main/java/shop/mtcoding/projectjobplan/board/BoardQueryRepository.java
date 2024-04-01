@@ -26,13 +26,14 @@ public class BoardQueryRepository {
     public List<Object[]> findWithSkill(List<Skill> skills) {
         List<String> skillNameList = new ArrayList<>();
         skills.forEach(skill -> skillNameList.add(skill.getName()));
-        String whereClause = buildWhereClause(skillNameList);
+        System.out.println("skill input test : " + skillNameList);
         String queryStart = """
                 SELECT b.id, b.title, b.field, u.business_name FROM
                 (SELECT s.board_id, COUNT(s.name) AS name_count
                 FROM skill_tb AS s
                 WHERE s.board_id IS NOT NULL
                 AND (""";
+        String whereClause = buildWhereClause(skillNameList);
         String queryEnd = """
                 )
                 GROUP BY s.board_id
@@ -42,21 +43,9 @@ public class BoardQueryRepository {
                 AND
                 b.user_id = u.id
                 """;
+        String limit = "LIMIT 3";
         String query = queryStart + whereClause + queryEnd;
-        /*
-        List<Object[]> results = entityManager.createQuery(query).getResultList();
-        System.out.println(results);
-        List<BoardResponse.ListingsDTO.RecommendationDTO> responseDTO = new ArrayList<>();
-        for (Object[] result : results) {
-            BoardResponse.ListingsDTO.RecommendationDTO dto = new BoardResponse.ListingsDTO.RecommendationDTO();
-            dto.setBoardId((Integer) result[0]);
-            dto.setTitle((String) result[1]);
-            dto.setField((String) result[2]);
-            dto.setBusinessName((String) result[3]);
 
-            responseDTO.add(dto);
-        }
-        */
-        return entityManager.createQuery(query).getResultList();
+        return entityManager.createNativeQuery(query).getResultList();
     }
 }

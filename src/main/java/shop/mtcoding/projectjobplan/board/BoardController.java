@@ -68,7 +68,11 @@ public class BoardController {
                            @RequestParam(value = "address", required = false) String address,
                            @RequestParam(value = "keyword", required = false) String keyword) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        BoardResponse.ListingsDTO responseDTO = boardService.getAllBoard(pageable, sessionUser.getId(), skill, address, keyword);
+        Integer sessionUserId = null;
+        if (sessionUser != null) {
+            sessionUserId = sessionUser.getId();
+        }
+        BoardResponse.ListingsDTO responseDTO = boardService.getAllBoard(pageable, sessionUserId, skill, address, keyword);
         request.setAttribute("page", responseDTO);
 
         return "board/listings";

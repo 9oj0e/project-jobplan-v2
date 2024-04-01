@@ -8,6 +8,7 @@ import shop.mtcoding.projectjobplan._core.utils.FormatUtil;
 import shop.mtcoding.projectjobplan._core.utils.PagingUtil;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -104,15 +105,29 @@ public class BoardResponse {
     public static class ListingsDTO {
         Page<BoardDTO> boardList;
         List<Integer> pageList;
-        List<RecommendationDTO> recommendationList;
+        List<RecommendationDTO> recommendationList = new ArrayList<>();
 
-        public ListingsDTO(Pageable pageable, List<Board> boards, List<RecommendationDTO> recommendations) {
+        public ListingsDTO(Pageable pageable, List<Board> boards, List<Object[]> recommendations) {
             List<BoardDTO> boardList = boards.stream().map(board -> new BoardDTO(board)).toList();
             this.boardList = PagingUtil.pageConverter(pageable, boardList);
             this.pageList = PagingUtil.getPageList(this.boardList);
-            this.recommendationList = recommendations;
+            for (Object[] result : recommendations) {
+                RecommendationDTO dto
+                        = new RecommendationDTO(
+                        (Integer) result[0], (String) result[1], (String) result[2], (String) result[3]
+                );
+                this.recommendationList.add(dto);
+            }
         }
+        /* todo : sessionUser가 null일 때.
+        public List<RecommendationDTO> getRecommendationList() {
+            if (!recommendationList.isEmpty()) {
+                return this.recommendationList;
+            } else {
 
+            }
+        }
+        */
         public class BoardDTO {
             // board_tb
             private Integer id;
@@ -146,6 +161,13 @@ public class BoardResponse {
             private String title;
             private String field;
             private String businessName;
+
+            public RecommendationDTO(Integer boardId, String title, String field, String businessName) {
+                this.boardId = boardId;
+                this.title = title;
+                this.field = field;
+                this.businessName = businessName;
+            }
         }
     }
 

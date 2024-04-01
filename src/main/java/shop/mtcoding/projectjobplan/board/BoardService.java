@@ -75,12 +75,19 @@ public class BoardService {
         } else { // 모든 페이지
             boards = boardJpaRepository.findAllJoinUser().orElseThrow(() -> new Exception404("조회된 게시글이 없습니다."));
         }
-        List<Skill> skills = skillJpaRepository.findByUserId(sessionUserId)
-                .orElseThrow(() -> new Exception404("가진 스킬이 없습니다."));
-//        List<BoardResponse.ListingsDTO.RecommendationDTO> recommendations = boardQueryRepository.findWithSkill(skills);
-
-//        return new BoardResponse.ListingsDTO(pageable, boards, recommendations);
-        return null;
+        List<Object[]> recommendations = new ArrayList<>();
+        if (sessionUserId != null) {
+            List<Skill> skills = skillJpaRepository.findByUserId(sessionUserId)
+                    .orElseThrow(() -> new Exception404("가진 스킬이 없습니다."));
+            //.orElse(new ArrayList<>());
+            recommendations = boardQueryRepository.findWithSkill(skills);
+        } /*else {
+            final int limit = 3;
+            List<Board> recommendationList = boardJpaRepository.findAllOrderByCreatedAtDesc(limit)
+                    .orElseThrow(() -> new Exception404("조회된 게시물이 하나도 없습니다."));
+            return new BoardResponse.ListingsDTO(pageable, boards, recommendationList);
+        }*/
+        return new BoardResponse.ListingsDTO(pageable, boards, recommendations);
     }
 
     public List<BoardResponse.IndexDTO> getAllBoardOnIndex(int limit) { // index
