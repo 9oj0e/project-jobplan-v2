@@ -2,14 +2,13 @@ package shop.mtcoding.projectjobplan.user;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @Controller
@@ -32,7 +31,7 @@ public class UserController {
     }
 
     @PostMapping("/join")
-    public String join(UserRequest.JoinDTO requestDTO) {
+    public String join(@Valid UserRequest.JoinDTO requestDTO, Errors errors) {
         userService.createUser(requestDTO);
 
         return "redirect:/";
@@ -71,7 +70,7 @@ public class UserController {
     }
     */
     @PostMapping("/users/{userId}/update")
-    public String update(@PathVariable Integer userId, UserRequest.UpdateDTO requestDTO) {
+    public String update(@PathVariable Integer userId,@Valid UserRequest.UpdateDTO requestDTO,Errors errors) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         User newSessionUser = userService.setUser(sessionUser.getId(), requestDTO);
         session.setAttribute("sessionUser", newSessionUser);

@@ -85,7 +85,7 @@ public class BoardController {
     }
     */
     @PostMapping("/boards/{boardId}/update") // 공고수정
-    public String update(@Valid @PathVariable int boardId, BoardRequest.UpdateDTO requestDTO,Errors errors) {
+    public String update(@PathVariable int boardId,@Valid BoardRequest.UpdateDTO requestDTO,Errors errors) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         boardService.setBoard(boardId, requestDTO, sessionUser);
 

@@ -2,10 +2,12 @@ package shop.mtcoding.projectjobplan.resume;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,7 +32,7 @@ public class ResumeController {
     }
 
     @PostMapping("/resumes/post") // 이력서 작성 action
-    public String post(ResumeRequest.PostDTO requestDTO) {
+    public String post(@Valid ResumeRequest.PostDTO requestDTO, Errors errors) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         Resume resume = resumeService.createResume(requestDTO, sessionUser);
 
@@ -71,7 +73,7 @@ public class ResumeController {
     }
     */
     @PostMapping("/resumes/{resumeId}/update") // 이력서수정
-    public String update(@PathVariable int resumeId, ResumeRequest.UpdateDTO requestDTO) {
+    public String update(@PathVariable int resumeId,@Valid ResumeRequest.UpdateDTO requestDTO, Errors errors) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         resumeService.setResume(resumeId, requestDTO, sessionUser);
 
