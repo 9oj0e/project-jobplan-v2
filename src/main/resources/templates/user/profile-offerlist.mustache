@@ -52,6 +52,8 @@
         <table class="table table-hover" style="text-align: center">
             <tr>
                 <th>이름</th>
+                <th>경력</th>
+                <th>채용 분야</th>
                 <th>이력서 제목</th>
                 <th>제안한 공고</th>
                 <th></th>
@@ -59,6 +61,8 @@
             {{#offerList}}
                 <tr>
                     <td>{{username}}</td>
+                    <td>{{career}}</td>
+                    <td>{{field}}</td>
                     <td><a href="/resumes/{{resumeId}}">{{title}}</a></td>
                     <td><a href="/boards/{{boardId}}">{{boardTitle}}</a></td>
                     <td>
