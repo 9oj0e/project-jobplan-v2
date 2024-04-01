@@ -19,7 +19,7 @@ public class BoardRequest {
         private String field;
         @NotEmpty
         private String position;
-        @NotEmpty(message = "내용을 입력하세요.")
+        @NotEmpty
         private String content;
         @NotEmpty
         private String salary;
