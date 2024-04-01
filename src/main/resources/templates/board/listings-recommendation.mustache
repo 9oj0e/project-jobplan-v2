@@ -2,14 +2,14 @@
     <div class="div-recommendation mb-20">추천 채용 정보</div>
     <div class="div-recommendation-img">
         {{#page.recommendationList}}
-            <div>
+            <div onclick="location.href='/boards/{{boardId}}'">
                 <img class="div-recommendation-img-0" src="../images/{{businessName}}.jpg" alt="/images/business.png" style="width:100%">
                 <div class="div-recommendation-text-1">{{field}}
-                    <span><a href="/board/{{boardId}}" class="text-body"><i class="fa-regular fa-star"></i></a></span>
+                    <span><i class="fa-regular fa-star"></i></span>
                 </div>
                 <div class="div-recommendation-text-2">{{businessName}}</div>
             </div>
-        {{/page.recommendationList}}
+        {{/page.recommendationList}}dsf
 <!--        <div>-->
 <!--            <div class="div-recommendation-img-1"></div>-->
 <!--            <div class="div-recommendation-text-1">IT,컨텐츠-->
