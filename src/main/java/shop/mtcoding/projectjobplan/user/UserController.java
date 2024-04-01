@@ -32,8 +32,8 @@ public class UserController {
 
     @PostMapping("/join")
     public String join(@Valid UserRequest.JoinDTO requestDTO, Errors errors) {
-        userService.createUser(requestDTO);
-
+      User sessionUser = userService.createUser(requestDTO);
+        session.setAttribute("sessionUser", sessionUser);
         return "redirect:/";
     }
 
