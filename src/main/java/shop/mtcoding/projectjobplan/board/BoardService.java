@@ -46,6 +46,7 @@ public class BoardService {
         return board;
     }
 
+    @Transactional(readOnly = true)
     public BoardResponse.DetailDTO getBoardInDetail(int boardId, Integer sessionUserId) {
         Board board = boardJpaRepository.findById(boardId).orElseThrow(() -> new Exception404("조회된 게시글이 없습니다."));
         Double rating = ratingJpaRepository.findRatingAvgByUserId(board.getUser().getId()).orElse(0.0);
