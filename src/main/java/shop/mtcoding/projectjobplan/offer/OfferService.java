@@ -3,7 +3,6 @@ package shop.mtcoding.projectjobplan.offer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import shop.mtcoding.projectjobplan._core.errors.exception.Exception403;
 import shop.mtcoding.projectjobplan._core.errors.exception.Exception404;
 import shop.mtcoding.projectjobplan.board.Board;
 import shop.mtcoding.projectjobplan.board.BoardJpaRepository;
@@ -20,6 +19,7 @@ public class OfferService {
     private final ResumeJpaRepository resumeJpaRepository;
     private final BoardJpaRepository boardJpaRepository;
 
+    @Transactional(readOnly = true)
     public OfferResponse.OfferFormDTO getResumeAndBoard(int resumeId, User sessionUser) {
         Resume resume = resumeJpaRepository.findById(resumeId)
                 .orElseThrow(() -> new Exception404("이력서 정보를 찾을 수 없습니다."));
