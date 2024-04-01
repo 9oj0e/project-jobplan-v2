@@ -16,7 +16,7 @@
                 </tr>
                 {{#offerList}}
                     <tr>
-                        <td><a href="/resumes/{{resumeId}}">{{resumeTitle}}</a></td>
+                        <td><a href="/resumes/{{resumeId}}">{{title}}</a></td>
                         <td>{{businessName}}</td>
                         <td><a href="/boards/{{boardId}}">{{boardTitle}}</a></td>
                         <td>
@@ -26,12 +26,35 @@
                                 {{/status}}
                                 {{^status}}
                                     <input type="hidden" id="offerId" value="{{id}}">
-                                    <button class="btn btn-outline-danger">
-                                        삭제
-                                    </button>
-                                    <button class="btn btn-primary">
-                                        제안 받기
-                                    </button>
+                                    <form id="acceptForm" action="/offer/update" method="post">
+                                        <input name="status" type="hidden" value="1">
+                                        <input name="id" id="statusInput" type="hidden">
+                                        <button class="btn btn-primary" onclick="setAcceptStatus()">
+                                            수락
+                                        </button>
+                                    </form>
+                                    <form id="rejectForm" action="/offer/update" method="post">
+                                        <input name="status" type="hidden" value="0">
+                                        <input name="id" id="statusInput" type="hidden">
+                                        <button class="btn btn-outline-danger" onclick="setRejectStatus()">
+                                            거절
+                                        </button>
+                                    </form>
+                                    <script>
+                                        function setAcceptStatus() {
+                                            let inputValue = document.getElementById("offerId").value;
+                                            let statusInput = document.getElementById("statusInput");
+                                            statusInput.value = inputValue;
+                                            document.getElementById("acceptForm").submit();
+                                        }
+
+                                        function setRejectStatus() {
+                                            let inputValue = document.getElementById("offerId").value;
+                                            let statusInput = document.getElementById("statusInput");
+                                            statusInput.value = inputValue;
+                                            document.getElementById("rejectForm").submit();
+                                        }
+                                    </script>
                                 {{/status}}
                             </div>
                         </td>
@@ -60,7 +83,7 @@
             {{#offerList}}
                 <tr>
                     <td><a href="/boards/{{boardId}}">{{boardTitle}}</a></td>
-                    <td>{{applicantName}}</td>
+                    <td>{{username}}</td>
                     <td><a href="/resumes/{{resumeId}}">{{resumeTitle}}</a></td>
                     <td>{{createdAt}}</td>
                     <td>

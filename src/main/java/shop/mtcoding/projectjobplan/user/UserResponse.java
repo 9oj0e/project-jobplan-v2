@@ -240,6 +240,7 @@ public class UserResponse {
             private String boardTitle;
             private String position;
             private String field;
+            private String businessName;
 
             // 지원 정보
             private Integer id;
@@ -255,6 +256,7 @@ public class UserResponse {
                 this.boardTitle = offer.getBoard().getTitle();
                 this.position = offer.getBoard().getPosition();
                 this.field = offer.getBoard().getField();
+                this.businessName = offer.getBoard().getUser().getBusinessName();
                 this.id = offer.getId();
                 this.status = offer.getStatus();
                 this.createdAt = offer.getCreatedAt();
@@ -270,8 +272,8 @@ public class UserResponse {
 
             public String getStatus() {
                 try {
-                    if (this.status) return "제안 받기";
-                    else if (!this.status) return "삭제";
+                    if (this.status) return "수락";
+                    else if (!this.status) return "거절";
                     else return null;
                 } catch (Exception e) {
                     return null;
