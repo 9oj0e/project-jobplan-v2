@@ -19,6 +19,15 @@ public class OfferResponse {
         // 공고 리스트
         private List<BoardDTO> boardList = new ArrayList<>();
 
+        // 제안 폼 DTO
+        OfferFormDTO(Resume resume, List<Board> boardList) {
+            this.resumeId = resume.getId();
+            this.title = resume.getTitle();
+            this.username = resume.getUser().getName();
+            this.career = resume.getCareer();
+            this.boardList = boardList.stream().map(board -> new BoardDTO(board)).toList();
+        }
+
         // 공고 정보
         public class BoardDTO {
             private Integer boardId;
@@ -34,14 +43,6 @@ public class OfferResponse {
             }
         }
 
-        // 제안 폼 DTO
-        OfferFormDTO(Resume resume, List<Board> boardList) {
-            this.resumeId = resume.getId();
-            this.title = resume.getTitle();
-            this.username = resume.getUser().getName();
-            this.career = resume.getCareer();
-            this.boardList = boardList.stream().map(board -> new BoardDTO(board)).toList();
-        }
     }
 }
 

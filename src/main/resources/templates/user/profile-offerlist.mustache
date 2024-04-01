@@ -16,7 +16,7 @@
                 </tr>
                 {{#offerList}}
                     <tr>
-                        <td><a href="/resumes/{{resumeId}}">{{resumeTitle}}</a></td>
+                        <td><a href="/resumes/{{resumeId}}">{{title}}</a></td>
                         <td>{{businessName}}</td>
                         <td><a href="/boards/{{boardId}}">{{boardTitle}}</a></td>
                         <td>
@@ -25,13 +25,16 @@
                                     <div>{{status}}</div>
                                 {{/status}}
                                 {{^status}}
-                                    <input type="hidden" id="offerId" value="{{id}}">
-                                    <button class="btn btn-outline-danger">
-                                        삭제
-                                    </button>
-                                    <button class="btn btn-primary">
-                                        제안 받기
-                                    </button>
+                                        <form action="/offer/update" method="post">
+                                            <input type="hidden" name="id" value="{{id}}">
+                                            <input type="hidden" name="status" value="0">
+                                            <button type="submit" class="btn btn-outline-danger">거절</button>
+                                        </form>
+                                        <form action="/offer/update" method="post">
+                                            <input type="hidden" name="id" value="{{id}}">
+                                            <input type="hidden" name="status" value="1">
+                                            <button type="submit" class="btn btn-primary">수락</button>
+                                        </form>
                                 {{/status}}
                             </div>
                         </td>
@@ -72,7 +75,7 @@
                     {{/status}}
                     {{^status}}
                         <td>
-                            <form action="/offers/{{id}}/delete" method="post">
+                            <form action="/offer/{{id}}/delete" method="post">
                                 <button class="btn btn-outline-danger">제안 취소</button>
                             </form>
                         </td>

@@ -287,6 +287,7 @@ INSERT INTO apply_tb
 VALUES (4, 5, now());
 
 
+
 -- 제안
 -- offer_tb
 INSERT INTO offer_tb
