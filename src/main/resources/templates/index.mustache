@@ -20,7 +20,7 @@
         </div>
         <div class="div-recommendation-box">
             {{#boardList}}
-                <div>
+                <div onclick="location.href='/boards/{{id}}'">
                     <div>
                         <img class="div-company-img" src="../images/{{businessName}}.jpg"
                              alt="/images/business.png" style="width:100%">
@@ -29,11 +29,8 @@
                         <div class="div-recommendation-text-1">{{field}}
                             <span><a href="" class="text-body"><i class="fa-regular fa-star"></i></a></span>
                         </div>
-
                         <div class="div-recommendation-text-2">
-                            <a href="/boards/{{id}}" class="text-body">
                                 {{businessName}}
-                            </a>
                         </div>
                     </div>
                 </div>

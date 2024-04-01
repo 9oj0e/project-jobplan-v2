@@ -102,11 +102,18 @@ public class BoardResponse {
     public static class ListingsDTO {
         Page<BoardDTO> boardList;
         List<Integer> pageList;
+        String skill;
+        String address;
+        String keyword;
 
-        public ListingsDTO(Pageable pageable, List<Board> boards) {
+        public ListingsDTO(Pageable pageable, List<Board> boards, String skill, String address, String keyword) {
             List<BoardDTO> boardList = boards.stream().map(board -> new BoardDTO(board)).toList();
             this.boardList = PagingUtil.pageConverter(pageable, boardList);
             this.pageList = PagingUtil.getPageList(this.boardList);
+            this.skill = skill;
+            this.address = address;
+            this.keyword = keyword;
+            System.out.println("2. DTO : " + address);
         }
 
         public class BoardDTO {
