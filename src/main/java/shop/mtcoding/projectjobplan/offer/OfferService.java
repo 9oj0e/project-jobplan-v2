@@ -3,6 +3,7 @@ package shop.mtcoding.projectjobplan.offer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import shop.mtcoding.projectjobplan._core.errors.exception.Exception403;
 import shop.mtcoding.projectjobplan._core.errors.exception.Exception404;
 import shop.mtcoding.projectjobplan.board.Board;
 import shop.mtcoding.projectjobplan.board.BoardJpaRepository;
@@ -50,7 +51,7 @@ public class OfferService {
     @Transactional
     public void removeOffer(int id) {
         Offer offer = offerJpaRepository.findById(id)
-                .orElseThrow(() -> new Exception404("취소할 제안이 없습니다."));
+                        .orElseThrow(() -> new Exception404("취소할 제안이 없습니다."));
         offerJpaRepository.delete(offer);
     }
 }

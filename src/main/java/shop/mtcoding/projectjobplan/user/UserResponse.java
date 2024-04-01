@@ -242,7 +242,7 @@ public class UserResponse {
             private String field;
             private String businessName;
 
-            // 지원 정보
+            // 제안 정보
             private Integer id;
             private Boolean status;
             private String createdAt;

@@ -46,6 +46,7 @@ public class BoardService {
         return board;
     }
 
+    @Transactional(readOnly = true)
     public BoardResponse.DetailDTO getBoardInDetail(int boardId, Integer sessionUserId) {
         Board board = boardJpaRepository.findById(boardId).orElseThrow(() -> new Exception404("조회된 게시글이 없습니다."));
         Double rating = ratingJpaRepository.findRatingAvgByUserId(board.getUser().getId()).orElse(0.0);
@@ -64,8 +65,8 @@ public class BoardService {
         return new BoardResponse.DetailDTO(board, rating, isBoardOwner, hasSubscribed, hasRated);
     }
 
-    // board/listings
-    public BoardResponse.ListingsDTO getAllBoard(Pageable pageable, String skill, String address, String keyword) {
+    @Transactional(readOnly = true)
+    public BoardResponse.ListingsDTO getAllBoard(Pageable pageable, String skill, String address, String keyword) { // board/listings
         List<Board> boardList;
         if (skill != null) { // 기술별 검색시
             boardList = boardJpaRepository.findAllJoinUserWithSkill(skill).orElseThrow(() -> new Exception404("조회된 게시글이 없습니다."));
@@ -76,7 +77,8 @@ public class BoardService {
         } else { // 모든 페이지
             boardList = boardJpaRepository.findAllJoinUser().orElseThrow(() -> new Exception404("조회된 게시글이 없습니다."));
         }
-        return new BoardResponse.ListingsDTO(pageable, boardList);
+        System.out.println("1. service : " + address);
+        return new BoardResponse.ListingsDTO(pageable, boardList, skill, address, keyword);
     }
 
     public List<BoardResponse.IndexDTO> getAllBoardOnIndex(int limit) { // index

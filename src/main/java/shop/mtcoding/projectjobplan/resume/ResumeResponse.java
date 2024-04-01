@@ -116,13 +116,30 @@ public class ResumeResponse {
     public static class ListingsDTO {
         Page<ResumeDTO> resumeList;
         List<Integer> pageList;
-        List<User> userList;
+        List<UserDTO> userList;
+        String keyword;
+        String skill;
+        String address;
 
-        public ListingsDTO(Pageable pageable, List<Resume> resumes, List<User> userList) {
+        public ListingsDTO(Pageable pageable, List<Resume> resumes, List<User> users, String skill, String address, String keyword) {
             List<ResumeDTO> resumeList = resumes.stream().map(resume -> new ResumeDTO(resume)).toList();
             this.resumeList = PagingUtil.pageConverter(pageable, resumeList);
             this.pageList = PagingUtil.getPageList(this.resumeList);
-            this.userList = userList;
+            this.userList = users.stream().map(user -> new UserDTO(user)).toList();
+            this.skill = skill;
+            this.address = address;
+            this.keyword = keyword;
+        }
+
+        public class UserDTO {
+            private int id;
+            private String name;
+            private String schoolName;
+            public UserDTO(User user) {
+                this.id = user.getId();
+                this.name = user.getName();
+                this.schoolName = user.getSchoolName();
+            }
         }
 
         public class ResumeDTO {
