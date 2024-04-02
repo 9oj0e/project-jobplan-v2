@@ -407,6 +407,66 @@ INSERT INTO skill_tb(board_id, user_id, name)
 VALUES (5, null, 'HTML');
 INSERT INTO skill_tb(board_id, user_id, name)
 VALUES (6, null, 'Spring');
+INSERT INTO skill_tb(board_id, user_id, name)
+VALUES (20, null, 'java');
+INSERT INTO skill_tb(board_id, user_id, name)
+VALUES (20, null, 'Python');
+INSERT INTO skill_tb(board_id, user_id, name)
+VALUES (19, null, 'Basic');
+INSERT INTO skill_tb(board_id, user_id, name)
+VALUES (19, null, 'Linux');
+INSERT INTO skill_tb(board_id, user_id, name)
+VALUES (18, null, 'React');
+INSERT INTO skill_tb(board_id, user_id, name)
+VALUES (18, null, 'javaScript');
+INSERT INTO skill_tb(board_id, user_id, name)
+VALUES (17, null, 'java');
+INSERT INTO skill_tb(board_id, user_id, name)
+VALUES (17, null, 'MySQL');
+INSERT INTO skill_tb(board_id, user_id, name)
+VALUES (17, null, 'AWS');
+INSERT INTO skill_tb(board_id, user_id, name)
+VALUES (17, null, 'Linux');
+INSERT INTO skill_tb(board_id, user_id, name)
+VALUES (16, null, 'Linux');
+INSERT INTO skill_tb(board_id, user_id, name)
+VALUES (16, null, 'Python');
+INSERT INTO skill_tb(board_id, user_id, name)
+VALUES (15, null, 'AWS');
+INSERT INTO skill_tb(board_id, user_id, name)
+VALUES (15, null, 'Python');
+INSERT INTO skill_tb(board_id, user_id, name)
+VALUES (15, null, 'MySQL');
+INSERT INTO skill_tb(board_id, user_id, name)
+VALUES (14, null, 'C');
+INSERT INTO skill_tb(board_id, user_id, name)
+VALUES (14, null, 'Linux');
+INSERT INTO skill_tb(board_id, user_id, name)
+VALUES (14, null, 'Python');
+INSERT INTO skill_tb(board_id, user_id, name)
+VALUES (13, null, 'C');
+INSERT INTO skill_tb(board_id, user_id, name)
+VALUES (13, null, 'java');
+INSERT INTO skill_tb(board_id, user_id, name)
+VALUES (12, null, 'Linux');
+INSERT INTO skill_tb(board_id, user_id, name)
+VALUES (12, null, 'Python');
+INSERT INTO skill_tb(board_id, user_id, name)
+VALUES (11, null, 'java');
+INSERT INTO skill_tb(board_id, user_id, name)
+VALUES (11, null, 'javaScript');
+INSERT INTO skill_tb(board_id, user_id, name)
+VALUES (11, null, 'Spring');
+INSERT INTO skill_tb(board_id, user_id, name)
+VALUES (11, null, 'HTML');
+INSERT INTO skill_tb(board_id, user_id, name)
+VALUES (11, null, 'jQuery');
+INSERT INTO skill_tb(board_id, user_id, name)
+VALUES (11, null, 'MySQL');
+INSERT INTO skill_tb(board_id, user_id, name)
+VALUES (11, null, 'React');
+INSERT INTO skill_tb(board_id, user_id, name)
+VALUES (11, null, 'AWS');
 
 -- skill_tb (스킬 보유 회원)
 INSERT INTO skill_tb(board_id, user_id, name)
