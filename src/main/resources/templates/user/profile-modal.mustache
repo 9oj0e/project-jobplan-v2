@@ -350,21 +350,21 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">합격 처리</h5>
+                <h5 class="modal-title">제안 수락</h5>
             </div>
             <div class="modal-body">
-                해당 지원자를 '합격' 처리 하시겠습니까?
+                해당 제안을 '수락' 하시겠습니까?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">취소</button>
-                <form action="/apply/update" method="post">
+                <form action="/offer/update" method="post">
                     <input name="status" type="hidden" value="1">
                     <input name="id" id="statusInput" type="hidden">
                     <button class="btn btn-outline-primary">합격</button>
                 </form>
                 <script>
-                    function getApplyId() {
-                        let inputValue = document.getElementById("applyId").value;
+                    function getOfferId() {
+                        let inputValue = document.getElementById("offerId").value;
                         let statusInput = document.getElementById("statusInput");
                         statusInput.value = inputValue;
                     }
@@ -379,22 +379,22 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">불합격 처리</h5>
+                <h5 class="modal-title">제안 거절</h5>
             </div>
             <div class="modal-body">
-                해당 지원자를 '불합격' 처리 하시겠습니까?
+                해당 제안을 '거절' 처리 하시겠습니까?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">취소</button>
-                <form action="/apply/update" method="post">
+                <form action="/offer/update" method="post">
                     <input name="status" type="hidden" value="0">
                     <input name="id" id="statusInput" type="hidden">
-                    <button class="btn btn-outline-danger">불합격</button>
+                    <button class="btn btn-outline-danger">거절</button>
                 </form>
             </div>
             <script>
-                function getApplyId() {
-                    let inputValue = document.getElementById("applyId").value;
+                function getOfferId() {
+                    let inputValue = document.getElementById("offerId").value;
                     let statusInput = document.getElementById("statusInput");
                     statusInput.value = inputValue;
                 }
