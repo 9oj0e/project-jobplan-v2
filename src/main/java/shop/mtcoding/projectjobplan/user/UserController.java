@@ -18,13 +18,6 @@ public class UserController {
     private final HttpSession session;
     private final UserService userService;
 
-    /* modal로 대체
-    @GetMapping("/users/join-type")
-    public String joinType() {
-
-        return "user/join-type";
-    }
-    */
     @PostMapping("/users/join-form")
     public String joinForm(boolean isEmployer, HttpServletRequest request) {
         request.setAttribute("isEmployer", isEmployer);
@@ -39,13 +32,6 @@ public class UserController {
         return "redirect:/";
     }
 
-    /* modal로 대체
-    @GetMapping("/login-form")
-    public String loginForm() {
-
-        return "/user/login-form";
-    }
-    */
     @PostMapping("/login")
     public String login(UserRequest.LoginDTO requestDTO) {
         User sessionUser = userService.getUser(requestDTO);
@@ -61,16 +47,6 @@ public class UserController {
         return "redirect:/";
     }
 
-    /* modal 로 대체
-    @GetMapping("/users/{userId}/update-form")
-    public String updateForm(@PathVariable Integer userId, HttpServletRequest request) {
-        User sessionUser = (User) session.getAttribute("sessionUser");
-        UserResponse.UpdateFormDTO user = userService.getUser(sessionUser.getId());
-        request.setAttribute("user", user);
-
-        return "user/update-form";
-    }
-    */
     @PostMapping("/users/{userId}/update")
     public String update(@PathVariable Integer userId, @Valid UserRequest.UpdateDTO requestDTO, Errors errors) {
         User sessionUser = (User) session.getAttribute("sessionUser");
