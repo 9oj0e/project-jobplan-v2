@@ -1,6 +1,5 @@
 package shop.mtcoding.projectjobplan.subscribe;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,7 +10,6 @@ import shop.mtcoding.projectjobplan.resume.Resume;
 import shop.mtcoding.projectjobplan.user.User;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 
 public class SubscribeResponse {

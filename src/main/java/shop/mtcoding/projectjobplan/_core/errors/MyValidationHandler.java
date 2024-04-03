@@ -13,18 +13,17 @@ import shop.mtcoding.projectjobplan._core.errors.exception.Exception400;
 public class MyValidationHandler {
 
     @Before("@annotation(org.springframework.web.bind.annotation.PostMapping) || @annotation(org.springframework.web.bind.annotation.PutMapping)")
-    public void validationHandler(JoinPoint jp){
+    public void validationHandler(JoinPoint jp) {
         Object[] args = jp.getArgs();
-        for(Object arg : args){
-            if(arg instanceof Errors){
+        for (Object arg : args) {
+            if (arg instanceof Errors) {
                 Errors errors = (Errors) arg;
-                if(errors.hasErrors()){
-                    for(FieldError error : errors.getFieldErrors()){
-                        throw new Exception400(error.getDefaultMessage()+ " : "+error.getField());
+                if (errors.hasErrors()) {
+                    for (FieldError error : errors.getFieldErrors()) {
+                        throw new Exception400(error.getDefaultMessage() + " : " + error.getField());
                     }
                 }
             }
         }
-
     }
 }

@@ -169,6 +169,7 @@ public class UserResponse {
             public String getTitle() {
                 return FormatUtil.stringFormatter(this.title);
             }
+
             public String getOgTitle() {
                 return this.title;
             }

@@ -1,8 +1,6 @@
 package shop.mtcoding.projectjobplan.user;
 
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.Data;
 
 public class UserRequest {
@@ -10,7 +8,7 @@ public class UserRequest {
     @Data
     public static class JoinDTO {
         // 회원 정보
-        @Size(min = 3, max = 10 ,message = "유저네임은 3자 미만,10자를 초과할 수 없습니다.")
+        @Size(min = 3, max = 10, message = "유저네임은 3자 미만, 10자를 초과할 수 없습니다.")
         @NotEmpty
         private String username;
         @Size(min = 4, max = 20)
@@ -19,7 +17,11 @@ public class UserRequest {
         // 개인 정보
         private String name;
         private String birthdate;
+        @Pattern(regexp = "^M|F$")
         private Character gender; // 'M' or 'F'
+        @Min(value = 9, message = "유효한 번호를 입력하세요.")
+        @Max(value = 11, message = "유효한 번호를 입력하세요.")
+        @Pattern(regexp = "[0-9]", message = "번호만 입력해주세요.")
         private String phoneNumber;
         private String address;
         @NotEmpty

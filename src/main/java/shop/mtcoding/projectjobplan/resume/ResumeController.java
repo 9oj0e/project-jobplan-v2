@@ -73,7 +73,7 @@ public class ResumeController {
     }
     */
     @PostMapping("/resumes/{resumeId}/update") // 이력서수정
-    public String update(@PathVariable int resumeId,@Valid ResumeRequest.UpdateDTO requestDTO, Errors errors) {
+    public String update(@PathVariable int resumeId, @Valid ResumeRequest.UpdateDTO requestDTO, Errors errors) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         resumeService.setResume(resumeId, requestDTO, sessionUser);
 
