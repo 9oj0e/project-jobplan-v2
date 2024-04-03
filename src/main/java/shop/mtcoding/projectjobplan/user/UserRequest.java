@@ -3,6 +3,9 @@ package shop.mtcoding.projectjobplan.user;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class UserRequest {
 
     @Data
@@ -38,6 +41,12 @@ public class UserRequest {
     }
 
     @Data
+    public static class LoginDTO {
+        private String username;
+        private String password;
+    }
+
+    @Data
     public static class UpdateDTO {
         // 회원 정보
         @Size(min = 4, max = 20)
@@ -60,8 +69,12 @@ public class UserRequest {
     }
 
     @Data
-    public static class LoginDTO {
-        private String username;
-        private String password;
+    public static class SkillDTO {
+        private List<@Pattern(
+                regexp = "^(C|Java|Python|Linux|MySQL|Spring" +
+                        "|HTML|javaScript|jQuery|AWS|JSP" +
+                        "|Flutter|React|Node.js|Vue.js" +
+                        "|Swift|Kotlin)$"
+        ) String> skill = new ArrayList<>();
     }
 }

@@ -74,4 +74,11 @@ public class UserController {
 
         return "user/profile";
     }
+
+    @PostMapping("/users/{userId}/skill/add") // 스킬 추가/수정/삭제
+    public String skillAdd(@PathVariable int userId, UserRequest.SkillDTO requestDTO) {
+        userService.createSkillList(requestDTO, userId);
+
+        return "redirect:/users/" + userId;
+    }
 }
