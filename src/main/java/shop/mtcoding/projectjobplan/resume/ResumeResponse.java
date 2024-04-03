@@ -135,11 +135,13 @@ public class ResumeResponse {
 
         public class UserDTO {
             private int id;
+            private String username;
             private String name;
             private String schoolName;
 
             public UserDTO(User user) {
                 this.id = user.getId();
+                this.username = user.getUsername();
                 this.name = user.getName();
                 this.schoolName = user.getSchoolName();
             }

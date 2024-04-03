@@ -75,9 +75,9 @@ public class BoardService {
             boards = boardJpaRepository.findAllJoinUser().orElseThrow(() -> new Exception404("조회된 게시글이 없습니다."));
         }
         List<Object[]> recommendations = new ArrayList<>();
-        if (sessionUserId != null) {
-            List<Skill> skills = skillJpaRepository.findByUserId(sessionUserId)
-                    .orElseThrow(() -> new Exception404("가진 스킬이 없습니다."));
+        List<Skill> skills = skillJpaRepository.findByUserId(sessionUserId)
+                .orElseThrow(() -> new Exception404("가진 스킬이 없습니다."));
+        if (!skills.isEmpty()) {
             recommendations = boardQueryRepository.findWithSkill(skills);
         }
         return new BoardResponse.ListingsDTO(pageable, boards, recommendations, skill, address, keyword);
