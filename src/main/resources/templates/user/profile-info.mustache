@@ -60,7 +60,7 @@
                         <img class="card-img" src="/upload/{{imgFilename}}" style="width:100%">
                     {{/pic}}
                     {{^pic}}
-                        <img class="card-img" src="/../images/avatar.png" style="width:100%">
+                        <img class="card-img" src="/../images/{{username}}.jpg" onerror="this.onerror=null; this.src='/../images/avatar.png'" style="width:100%">
                     {{/pic}}
                     <div class="card-body">
                         <h4>{{name}}</h4>
