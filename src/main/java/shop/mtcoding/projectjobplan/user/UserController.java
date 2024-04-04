@@ -81,4 +81,11 @@ public class UserController {
 
         return "redirect:/users/" + userId;
     }
+
+    @GetMapping("/users/{userId}/pic-post-form")
+    public String picPostForm(@PathVariable int userId){
+        User sessionUser = (User) session.getAttribute("sessionUser");
+
+        return "user/pic-post-form";
+    }
 }

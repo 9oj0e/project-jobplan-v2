@@ -68,7 +68,7 @@
                     <div class="card-footer">
                         <div style="display: grid; grid-template-columns: 1fr 1fr; grid-column-gap: 10px">
                             {{^pic}}
-                                <form action="/upload-form/{{id}}" method="get"> <!-- 사진 등록 -->
+                                <form action="/users/{{sessionUser.id}}/pic-post-form" method="get"> <!-- 사진 등록 -->
                                     <button class="btn btn-primary">
                                         <i class="fa-solid fa-plus icon-size"></i>
                                     </button>
