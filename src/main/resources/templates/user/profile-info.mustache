@@ -46,7 +46,7 @@
                                 </form>
                             {{/pic}}
                             {{^pic}}
-                                <form action="/post-form/{{sessionUser.id}}" method="get">
+                                <form action="/users/{{sessionUser.id}}/pic-post-form" method="get">
                                     <button class="btn btn-outline-primary">
                                         <i class="fa-solid fa-plus icon-size"></i>
                                     </button>
