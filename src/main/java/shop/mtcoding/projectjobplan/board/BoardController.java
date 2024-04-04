@@ -43,7 +43,7 @@ public class BoardController {
     }
 
     @PostMapping("/boards/post")
-    public String post(@Valid BoardRequest.SaveDTO requestDTO, Errors errors) {
+    public String post(@Valid BoardRequest.SaveDTO requestDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         Board board = boardService.createBoard(requestDTO, sessionUser);
 
