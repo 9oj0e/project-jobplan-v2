@@ -2,6 +2,7 @@ package shop.mtcoding.projectjobplan.user;
 
 import jakarta.validation.constraints.*;
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,6 +63,7 @@ public class UserRequest {
         // 회사 정보
         private String employerIdNumber; // 사업자번호
         private String businessName; // 기업이름
+
     }
 
     @Data
@@ -73,4 +75,10 @@ public class UserRequest {
                         "|Swift|Kotlin)$"
         ) String> skill = new ArrayList<>();
     }
+
+    @Data
+    public static class PicDTO{
+        private MultipartFile imgFilename;
+    }
+
 }

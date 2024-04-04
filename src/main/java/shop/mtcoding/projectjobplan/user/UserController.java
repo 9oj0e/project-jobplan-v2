@@ -84,8 +84,15 @@ public class UserController {
 
     @GetMapping("/users/{userId}/pic-post-form")
     public String picPostForm(@PathVariable int userId){
-        User sessionUser = (User) session.getAttribute("sessionUser");
-
         return "user/pic-post-form";
     }
+
+    @PostMapping("/users/{userId}/pic-post")
+    public String picPost(@PathVariable int userId,UserRequest.PicDTO requestDTO){
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        userService.picPost(requestDTO, sessionUser);
+
+        return "redirect:/users/"+userId ;
+    }
+
 }
