@@ -20,11 +20,7 @@ public class UserRequest {
         // 개인 정보
         private String name;
         private String birthdate;
-        @Pattern(regexp = "^M|F$")
         private Character gender; // 'M' or 'F'
-        @Min(value = 9, message = "유효한 번호를 입력하세요.")
-        @Max(value = 11, message = "유효한 번호를 입력하세요.")
-        @Pattern(regexp = "[0-9]", message = "번호만 입력해주세요.")
         private String phoneNumber;
         private String address;
         @NotEmpty
