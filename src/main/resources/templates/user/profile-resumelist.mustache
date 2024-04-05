@@ -2,9 +2,20 @@
 <div class="div-layout">
     <div class="div-header d-flex justify-content-between">
         <h2><b>나의 이력서</b></h2>
-        <form action="/resumes/post-form" method="get">
-            <button class="btn btn-primary">추가</button>
-        </form>
+        <div>
+            <button class="btn btn-outline-primary" id="flip-applyList">지원 현황</button>
+            <button class="btn btn-primary" id="flip-offerList">제안 현황</button>
+        </div>
+        <script>
+            $(document).ready(function () {
+                $("#flip-applyList").click(function () {
+                    $("#applyList").slideToggle("slow");
+                });
+                $("#flip-offerList").click(function () {
+                    $("#offerList").slideToggle("slow");
+                });
+            });
+        </script>
     </div>
     <div class="div-resume">
         <table class="table table-hover" style="text-align: center">
@@ -20,7 +31,7 @@
                     <td>
                         <div style="display: flex; justify-content: center">
                             <form action="/users/{{sessionUser.id}}/resumes/{{id}}" method="get">
-                                <button class="btn btn-primary">지원 현황</button>
+                                <button class="btn btn-primary">지원/제안</button>
                             </form>
                         </div>
                     </td>
