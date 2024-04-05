@@ -2,8 +2,8 @@
     <div class="div-recommendation mb-20">추천 채용 정보</div>
     <div class="div-recommendation-img">
         {{#page.recommendationList}}
-            <div onclick="location.href='/boards/{{boardId}}'">
-                <img class="card-img" src="/upload/{{imgFilename}}" style="width:100%;">
+            <div onclick="location.href='/boards/{{boardId}}'" style="cursor: pointer">
+                <img class="card-img" src="/upload/{{imgFilename}}">
                 <div class="div-recommendation-text-1">{{field}}
                     <span><i class="fa-regular fa-star"></i></span>
                 </div>

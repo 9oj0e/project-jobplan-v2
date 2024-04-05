@@ -96,8 +96,7 @@ public class User {
         this.businessName = requestDTO.getBusinessName();
     }
 
-    public void picPost(UserRequest.PicDTO requestDTO, String webImgPath) {
+    public void picPost(String webImgPath) {
         this.imgFilename = webImgPath;
-
     }
 }
