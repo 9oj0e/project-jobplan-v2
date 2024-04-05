@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.io.IOException;
+
 @RequiredArgsConstructor
 @Controller
 public class UserController {
@@ -84,7 +86,7 @@ public class UserController {
     }
 
     @PostMapping("/users/{userId}/pic") // 사진 업로드
-    public String picUpload(@PathVariable int userId, UserRequest.PicDTO requestDTO) {
+    public String picUpload(@PathVariable int userId, UserRequest.PicDTO requestDTO) throws IOException {
         User sessionUser = (User) session.getAttribute("sessionUser");
         userService.picUpload(requestDTO, sessionUser.getId());
 

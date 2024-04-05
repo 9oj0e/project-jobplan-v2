@@ -5,6 +5,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import shop.mtcoding.projectjobplan._core.ImageConstants;
 import shop.mtcoding.projectjobplan._core.errors.exception.Exception400;
 import shop.mtcoding.projectjobplan._core.errors.exception.Exception401;
 import shop.mtcoding.projectjobplan._core.errors.exception.Exception404;
@@ -121,40 +122,38 @@ public class UserService {
     }
 
     @Transactional
-    public void picUpload(UserRequest.PicDTO requestDTO, Integer sessionUserId) {
+    public void picUpload(UserRequest.PicDTO requestDTO, Integer sessionUserId) throws IOException {
+        // byte[] img = Base64.getDecoder().decode(); // base64 확장자, 파싱하는 법 gpt...
         User user = userJpaRepository.findById(sessionUserId)
                 .orElseThrow(() -> new Exception404("찾을 수 없는 유저입니다."));
-        // byte[] img = Base64.getDecoder().decode();
-        // base64 확장자, 파싱하는 법 gpt...
-        MultipartFile imgFilename = requestDTO.getImgFilename();
-        // 사진이 변경되었는지 여부 확인
-        boolean hasImgChanged = imgFilename != null && !imgFilename.isEmpty();
-        // 이미지 파일의 저장 경로 설정
-        String webImgPath = null;
-        if (hasImgChanged) { // 변경된 경로가 넘어올 경우
-            String userImgFilename = UUID.randomUUID() + "_" + imgFilename.getOriginalFilename();
-            Path imgPath = Paths.get("./upload/" + userImgFilename);
-            try {
-                Files.write(imgPath, imgFilename.getBytes());
-                webImgPath = imgPath.toString().replace("\\", "/");
-                webImgPath = webImgPath.substring(webImgPath.lastIndexOf("/") + 1);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            // 새로운 이미지 파일 경로와 함께 업데이트
-            user.picPost(webImgPath);
-        } else { // 빈 경로가 넘어올 경우
-            // 현재 경로를 가져와서 삭제하고 기본 프로필 사진 경로로 초기화
-            Path currentPath = Paths.get("./upload/" + user.getImgFilename());
-            webImgPath = user.getIsEmployer() ? "default/business.png" : "default/avatar.png";
-            if (!currentPath.equals(webImgPath)) {
-                try {
-                    Files.delete(currentPath); // todo : 기존 파일 삭제하는 위험이 있음. (user1, user2)
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
+        // 기본 파일 이름 설정
+        String defaultImgFilename = user.getIsEmployer() ? "default/business.png" : "default/avatar.png";
+        // 기존의 파일 이름, 경로 확보
+        String currentImgFilename = user.getImgFilename();
+        Path currentFilePath = Paths.get("./upload/" + user.getImgFilename());
+        // 삭제 요청 여부, 실질적 삭제 여부 확인 및 동일 파일 여부 확인
+        boolean isEmpty = requestDTO.getImgFile() == null || requestDTO.getImgFile().isEmpty();
+        boolean isSameFile = currentImgFilename.equals(requestDTO.getImgFile().getOriginalFilename());
+        boolean isDefaultFile = ImageConstants.getDefaultImgFilenameMap().containsValue(currentImgFilename);
+        if (!isEmpty) { // 이미지 업로드 요청
+            if (!isSameFile) { // 동일 파일 여부 확인
+                if (!isDefaultFile) { // 기본 파일은 삭제 X
+                    System.out.println("............삭제 요청");
+                    Files.delete(currentFilePath);
                 }
+                MultipartFile imgFile = requestDTO.getImgFile();
+                String newImgFilename = UUID.randomUUID() + "_" + imgFile.getOriginalFilename(); // 파일 이름
+                Path newFilePath = Paths.get("./upload/" + newImgFilename); // 파일 저장 경로
+                Files.write(newFilePath, imgFile.getBytes());
+                // 새로운 이미지 파일 경로를 업데이트
+                user.picPost(newImgFilename);
             }
-            user.picPost(webImgPath);
+        } else { // 이미지 삭제 요청
+            if (!isDefaultFile) { // 기본 파일은 삭제 X
+                System.out.println("............삭제 요청");
+                Files.delete(currentFilePath);
+            }
+            user.picPost(defaultImgFilename); // 기본 파일로 재설정 (실질적 삭제)
         }
     }
 }
