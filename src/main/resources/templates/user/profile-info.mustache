@@ -27,12 +27,12 @@
                 {{/rating}}
                 {{#isEmployer}}
                     <div>
-                        {{#pic}}
+                        {{#profileDTO.imgFilename}}
                             <img class="card-img" src="/upload/{{imgFilename}}" style="width:100%;">
-                        {{/pic}}
-                        {{^pic}}
+                        {{/profileDTO.imgFilename}}
+                        {{^profileDTO.imgFilename}}
                             <img class="card-img" src="/../images/{{businessName}}.jpg" onerror="this.onerror=null; this.src='/../images/business.png'" style="width:100%;">
-                        {{/pic}}
+                        {{/profileDTO.imgFilename}}
                     </div>
                     <div class="card-body">
                         <h4>{{businessName}}</h4>
