@@ -1,5 +1,6 @@
 package shop.mtcoding.projectjobplan.board;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -52,21 +53,15 @@ public class BoardResponse {
         private String phoneNumber;
         private String email;
         private String businessName;
+        private String imgFilename;
         // 기타 정보
         private Double rating; // 평점
         private boolean isBoardOwner; // 공고 주인 여부
         private boolean hasSubscribed; // 구독 여부
         private boolean hasRated; // 평가 여부
 
+        @Builder
         public DetailDTO(Board board, Double rating, boolean isBoardOwner, boolean hasSubscribed, boolean hasRated) {
-            this.address = board.getUser().getAddress();
-            this.phoneNumber = board.getUser().getPhoneNumber();
-            this.email = board.getUser().getEmail();
-            this.businessName = board.getUser().getBusinessName();
-            this.isBoardOwner = isBoardOwner;
-            this.hasSubscribed = hasSubscribed;
-            this.hasRated = hasRated;
-            this.rating = rating;
             this.id = board.getId();
             this.title = board.getTitle();
             this.content = board.getContent();
@@ -76,8 +71,18 @@ public class BoardResponse {
             this.skillList = board.getSkillList().stream().map(skill -> new SkillDTO(skill.getName())).toList();
             this.openingDate = board.getOpeningDate();
             this.closingDate = board.getClosingDate();
+            this.address = board.getUser().getAddress();
+            this.phoneNumber = board.getUser().getPhoneNumber();
+            this.email = board.getUser().getEmail();
+            this.businessName = board.getUser().getBusinessName();
+            this.imgFilename = board.getUser().getImgFilename();
+            this.isBoardOwner = isBoardOwner;
+            this.hasSubscribed = hasSubscribed;
+            this.hasRated = hasRated;
+            this.rating = rating;
         }
 
+        @Data
         public class SkillDTO {
             private String skillName;
 
@@ -109,6 +114,7 @@ public class BoardResponse {
         String address;
         String keyword;
 
+        @Builder
         public ListingsDTO(Pageable pageable, List<Board> boards, List<Object[]> recommendations, String skill, String address, String keyword) {
             List<BoardDTO> boardList = boards.stream().map(board -> new BoardDTO(board)).toList();
             this.boardList = PagingUtil.pageConverter(pageable, boardList);
@@ -118,24 +124,18 @@ public class BoardResponse {
             this.keyword = keyword;
             for (Object[] result : recommendations) {
                 RecommendationDTO dto
-                        = new RecommendationDTO(
-                        (Integer) result[0], (String) result[1], (String) result[2], (String) result[3]
-                );
+                        = RecommendationDTO.builder()
+                        .boardId((Integer) result[0])
+                        .title((String) result[1])
+                        .field((String) result[2])
+                        .businessName((String) result[3])
+                        .imgFilename((String) result[4])
+                        .build();
                 this.recommendationList.add(dto);
             }
         }
 
-        public List<RecommendationDTO> getRecommendationList() {
-            if (!recommendationList.isEmpty()) {
-                return this.recommendationList;
-            } else { // sessionUser가 없으면, 최근 공고 3개 띄우기
-                return boardList.stream()
-                        .map(boardDTO -> new RecommendationDTO(boardDTO.id, boardDTO.title, boardDTO.field, boardDTO.businessName))
-                        .limit(3)
-                        .toList();
-            }
-        }
-
+        @Data
         public class BoardDTO {
             // board_tb
             private Integer id;
@@ -147,6 +147,7 @@ public class BoardResponse {
             // user_tb
             private String address;
             private String businessName;
+            private String imgFilename;
 
             public BoardDTO(Board board) {
                 this.id = board.getId();
@@ -156,13 +157,12 @@ public class BoardResponse {
                 this.closingDate = board.getClosingDate();
                 this.address = board.getUser().getAddress();
                 this.businessName = board.getUser().getBusinessName();
+                this.imgFilename = board.getUser().getImgFilename();
             }
-
             public String getClosingDate() {
                 return FormatUtil.timeFormatter(closingDate);
             }
         }
-
 
         @NoArgsConstructor
         @Data
@@ -171,12 +171,32 @@ public class BoardResponse {
             private String title;
             private String field;
             private String businessName;
+            private String imgFilename;
 
-            public RecommendationDTO(Integer boardId, String title, String field, String businessName) {
+            @Builder
+            public RecommendationDTO(Integer boardId, String title, String field, String businessName, String imgFilename) {
                 this.boardId = boardId;
                 this.title = title;
                 this.field = field;
                 this.businessName = businessName;
+                this.imgFilename = imgFilename;
+            }
+        }
+        public List<RecommendationDTO> getRecommendationList() {
+            if (!recommendationList.isEmpty()) {
+                return this.recommendationList;
+            } else { // sessionUser가 없으면, 최근 공고 3개 띄우기
+                return boardList.stream()
+                        .map(boardDTO ->
+                                RecommendationDTO.builder()
+                                        .boardId(boardDTO.getId())
+                                        .title(boardDTO.getTitle())
+                                        .field(boardDTO.getField())
+                                        .businessName(boardDTO.getBusinessName())
+                                        .imgFilename(boardDTO.getImgFilename())
+                                        .build())
+                        .limit(3)
+                        .toList();
             }
         }
     }
@@ -192,6 +212,7 @@ public class BoardResponse {
         // 게시자 정보 (기업)
         private Integer userId;
         private String businessName;
+        private String imgFilename;
 
         public IndexDTO(Board board) {
             this.id = board.getId();
@@ -200,6 +221,7 @@ public class BoardResponse {
             this.position = board.getPosition();
             this.userId = board.getUser().getId();
             this.businessName = board.getUser().getBusinessName();
+            this.imgFilename = board.getUser().getImgFilename();
         }
     }
 }

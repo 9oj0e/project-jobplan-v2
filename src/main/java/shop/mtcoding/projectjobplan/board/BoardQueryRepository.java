@@ -28,7 +28,7 @@ public class BoardQueryRepository {
         skills.forEach(skill -> skillNameList.add(skill.getName()));
         System.out.println("skill input test : " + skillNameList);
         String queryStart = """
-                SELECT b.id, b.title, b.field, u.business_name FROM
+                SELECT b.id, b.title, b.field, u.business_name, u.img_filename FROM
                 (SELECT s.board_id, COUNT(s.name) AS name_count
                 FROM skill_tb AS s
                 WHERE s.board_id IS NOT NULL

@@ -403,4 +403,26 @@
     </div>
 </div>
 <!-- modal :: offerRejectForm end -->
+<!-- modal :: picUploadForm -->
+<div class="modal" id="picUploadForm" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form action="/users/{{sessionUser.id}}/pic" method="post" enctype="multipart/form-data">
+                <div class="modal-header">
+                    <h1 class="card-title">사진 업로드</h1>
+                </div>
+                <div class="modal-body">
+                    <input type="file" class="btn btn-outline-primary form-control" id="customFileLang" lang="ko"
+                           name="imgFilename">
+                    <label class="custom-file-label" for="customFileLang"></label>
+                </div>
+                <div class="modal-footer card-title">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                    <button class="btn btn-outline-primary" type="submit">업로드</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- modal :: picUploadForm -->
 <!-- modal end -->

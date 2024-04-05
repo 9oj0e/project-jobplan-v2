@@ -1,1 +1,2 @@
-upload commit시 업로드된 파일 지우기
+upload commit 시 업로드 된 파일 지우기
+(default, emp1~5, user1~6 제외)

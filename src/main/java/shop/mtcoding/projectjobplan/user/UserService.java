@@ -20,10 +20,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @RequiredArgsConstructor
 @Service
@@ -90,11 +87,9 @@ public class UserService {
     public User setUser(int userId, UserRequest.UpdateDTO requestDTO) {
         User user = userJpaRepository.findById(userId)
                 .orElseThrow(() -> new Exception404("회원 정보를 찾을 수 없습니다."));
-
         user.update(requestDTO);
 
         return user;
-
     }
 
     @Transactional
@@ -122,22 +117,21 @@ public class UserService {
         if (skillFound != null) {
             skillJpaRepository.deleteAll(skillFound);
         }
-
         skillJpaRepository.saveAll(skillList);
     }
 
     @Transactional
-    public void picPost(UserRequest.PicDTO requestDTO, User sessionUser) {
-
-        User user = userJpaRepository.findById(sessionUser.getId())
+    public void picUpload(UserRequest.PicDTO requestDTO, Integer sessionUserId) {
+        User user = userJpaRepository.findById(sessionUserId)
                 .orElseThrow(() -> new Exception404("찾을 수 없는 유저입니다."));
+        // byte[] img = Base64.getDecoder().decode();
+        // base64 확장자, 파싱하는 법 gpt...
         MultipartFile imgFilename = requestDTO.getImgFilename();
         // 사진이 변경되었는지 여부 확인
-        boolean isImgChanged = imgFilename != null && !imgFilename.isEmpty();
-
+        boolean hasImgChanged = imgFilename != null && !imgFilename.isEmpty();
         // 이미지 파일의 저장 경로 설정
         String webImgPath = null;
-        if (isImgChanged) {
+        if (hasImgChanged) { // 변경된 경로가 넘어올 경우
             String userImgFilename = UUID.randomUUID() + "_" + imgFilename.getOriginalFilename();
             Path imgPath = Paths.get("./upload/" + userImgFilename);
             try {
@@ -147,16 +141,20 @@ public class UserService {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+            // 새로운 이미지 파일 경로와 함께 업데이트
+            user.picPost(webImgPath);
+        } else { // 빈 경로가 넘어올 경우
+            // 현재 경로를 가져와서 삭제하고 기본 프로필 사진 경로로 초기화
+            Path currentPath = Paths.get("./upload/" + user.getImgFilename());
+            webImgPath = user.getIsEmployer() ? "default/business.png" : "default/avatar.png";
+            if (!currentPath.equals(webImgPath)) {
+                try {
+                    Files.delete(currentPath); // todo : 기존 파일 삭제하는 위험이 있음. (user1, user2)
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            user.picPost(webImgPath);
         }
-
-        // 사진이 변경되었는지 여부에 따라 프로필 업데이트 진행
-        if (isImgChanged) {
-            // 사진이 변경된 경우: 새로운 이미지 파일 경로와 함께 업데이트
-            user.picPost(requestDTO, webImgPath);
-        } else {
-            // 사진이 변경되지 않은 경우: 이전의 이미지 파일 경로를 유지하고 업데이트
-            user.picPost(requestDTO, user.getImgFilename());
-        }
-
     }
 }

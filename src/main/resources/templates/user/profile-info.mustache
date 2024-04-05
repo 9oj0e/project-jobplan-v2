@@ -15,91 +15,20 @@
         </div>
     </div>
     <div class="div-information">
-        <div class="div-information-grid">
-            <div class="card mt-5" style="width:200px">
-                {{#rating}}
-                    <table class="table borderless">
-                        <tr>
-                            <td style="text-align: end; padding-bottom: 0; padding-top: 0">평점 ⭐</td>
-                            <td style="text-align: start; padding-bottom: 0; padding-top: 0">{{rating}}</td>
-                        </tr>
-                    </table>
-                {{/rating}}
-                {{#isEmployer}}
-                    <div>
-                        {{#profileDTO.imgFilename}}
-                            <img class="card-img" src="/upload/{{imgFilename}}" style="width:100%;">
-                        {{/profileDTO.imgFilename}}
-                        {{^profileDTO.imgFilename}}
-                            <img class="card-img" src="/../images/{{businessName}}.jpg" onerror="this.onerror=null; this.src='/../images/business.png'" style="width:100%;">
-                        {{/profileDTO.imgFilename}}
-                    </div>
-                    <div class="card-body">
-                        <h4>{{businessName}}</h4>
-                    </div>
-                    <div class="card-footer">
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; grid-column-gap: 10px">
-                            {{#pic}}
-                                <form action="/deleteImg" method="post">
-                                    <input type="hidden" name="userId" value="{{pic.userId}}">
-                                    <button class="btn btn-primary">삭제</button>
-                                </form>
-                            {{/pic}}
-                            {{^pic}}
-                                <form action="/users/{{sessionUser.id}}/pic-post-form" method="get">
-                                    <button class="btn btn-outline-primary">
-                                        <i class="fa-solid fa-plus icon-size"></i>
-                                    </button>
-                                </form>
-                            {{/pic}}
-                        </div>
-                    </div>
-                {{/isEmployer}}
-                {{^isEmployer}}
-                    {{#profileDTO.imgFilename}}
-                        <img class="card-img" src="/upload/{{imgFilename}}" style="width:100%">
-                    {{/profileDTO.imgFilename}}
-                    {{^profileDTO.imgFilename}}
-                        <img class="card-img" src="/../images/{{username}}.jpg" onerror="this.onerror=null; this.src='/../images/avatar.png'" style="width:100%">
-                    {{/profileDTO.imgFilename}}
-                    <div class="card-body">
-                        <h4>{{name}}</h4>
-                    </div>
-                    <div class="card-footer">
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; grid-column-gap: 10px">
-                            {{^pic}}
-                                <form action="/users/{{sessionUser.id}}/pic-post-form" method="get"> <!-- 사진 등록 -->
-                                    <button class="btn btn-primary">
-                                        <i class="fa-solid fa-plus icon-size"></i>
-                                    </button>
-                                </form>
-                            {{/pic}}
-                            {{#pic}}
-                                <form action="/deleteImg" method="post"> <!-- 사진 삭제 -->
-                                    <input type="hidden" name="userId" value="{{userPic.userId}}">
-                                    <button class="btn btn-outline-primary">
-                                        <i class="fa-solid fa-minus icon-size"></i>
-                                    </button>
-                                </form>
-                            {{/pic}}
-                        </div>
-                    </div>
-                {{/isEmployer}}
-            </div>
-        </div>
+        {{>user/profile-card}}
         <div>
             <table class="table">
                 <thead>
-                {{#isEmployer}}
-                    <tr>
-                        <th><h3>기업정보</h3></th>
-                    </tr>
-                {{/isEmployer}}
-                {{^isEmployer}}
-                    <tr>
-                        <th><h3>개인정보</h3></th>
-                    </tr>
-                {{/isEmployer}}
+                <tr>
+                    <th>
+                        {{#isEmployer}}
+                            <h3>기업정보</h3>
+                        {{/isEmployer}}
+                        {{^isEmployer}}
+                            <h3>개인정보</h3>
+                        {{/isEmployer}}
+                    </th>
+                </tr>
                 </thead>
                 <tbody>
                 <tr>
