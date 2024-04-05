@@ -3,6 +3,7 @@ package shop.mtcoding.projectjobplan.user;
 import lombok.Data;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.multipart.MultipartFile;
 import shop.mtcoding.projectjobplan._core.utils.FormatUtil;
 import shop.mtcoding.projectjobplan._core.utils.PagingUtil;
 import shop.mtcoding.projectjobplan.apply.Apply;
@@ -87,6 +88,7 @@ public class UserResponse {
         private Page<OfferDTO> offerList;
         // Integer applyCount = applyList.getSize(); // 지원자 및 지원 갯수
         // Integer offerCount = offerList.getSize(); // 제안 갯수
+        private String imgFilename ;
 
         private Boolean hasSkill() {
             if (this.skillList.isEmpty()) {
@@ -109,6 +111,8 @@ public class UserResponse {
             this.educationLevel = user.getEducationLevel();
             this.schoolName = user.getSchoolName();
             this.major = user.getMajor();
+            this.imgFilename = user.getImgFilename();
+
             this.rating = rating;
             if (user.getIsEmployer()) {
                 this.isEmployer = user.getIsEmployer();

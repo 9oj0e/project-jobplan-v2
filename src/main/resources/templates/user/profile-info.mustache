@@ -27,12 +27,12 @@
                 {{/rating}}
                 {{#isEmployer}}
                     <div>
-                        {{#pic}}
+                        {{#profileDTO.imgFilename}}
                             <img class="card-img" src="/upload/{{imgFilename}}" style="width:100%;">
-                        {{/pic}}
-                        {{^pic}}
+                        {{/profileDTO.imgFilename}}
+                        {{^profileDTO.imgFilename}}
                             <img class="card-img" src="/../images/{{businessName}}.jpg" onerror="this.onerror=null; this.src='/../images/business.png'" style="width:100%;">
-                        {{/pic}}
+                        {{/profileDTO.imgFilename}}
                     </div>
                     <div class="card-body">
                         <h4>{{businessName}}</h4>
@@ -46,7 +46,7 @@
                                 </form>
                             {{/pic}}
                             {{^pic}}
-                                <form action="/post-form/{{sessionUser.id}}" method="get">
+                                <form action="/users/{{sessionUser.id}}/pic-post-form" method="get">
                                     <button class="btn btn-outline-primary">
                                         <i class="fa-solid fa-plus icon-size"></i>
                                     </button>
@@ -56,19 +56,19 @@
                     </div>
                 {{/isEmployer}}
                 {{^isEmployer}}
-                    {{#pic}}
+                    {{#profileDTO.imgFilename}}
                         <img class="card-img" src="/upload/{{imgFilename}}" style="width:100%">
-                    {{/pic}}
-                    {{^pic}}
+                    {{/profileDTO.imgFilename}}
+                    {{^profileDTO.imgFilename}}
                         <img class="card-img" src="/../images/{{username}}.jpg" onerror="this.onerror=null; this.src='/../images/avatar.png'" style="width:100%">
-                    {{/pic}}
+                    {{/profileDTO.imgFilename}}
                     <div class="card-body">
                         <h4>{{name}}</h4>
                     </div>
                     <div class="card-footer">
                         <div style="display: grid; grid-template-columns: 1fr 1fr; grid-column-gap: 10px">
                             {{^pic}}
-                                <form action="/upload-form/{{id}}" method="get"> <!-- 사진 등록 -->
+                                <form action="/users/{{sessionUser.id}}/pic-post-form" method="get"> <!-- 사진 등록 -->
                                     <button class="btn btn-primary">
                                         <i class="fa-solid fa-plus icon-size"></i>
                                     </button>
