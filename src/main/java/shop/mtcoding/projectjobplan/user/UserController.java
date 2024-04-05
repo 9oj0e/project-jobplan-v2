@@ -70,6 +70,7 @@ public class UserController {
         // todo: NullPointException
         User sessionUser = (User) session.getAttribute("sessionUser");
         UserResponse.ProfileDTO profileDTO = userService.getUser(sessionUser.getId(), boardId, resumeId, pageable);
+        System.out.println(profileDTO.getImgFilename());
         request.setAttribute("profileDTO", profileDTO);
 
         return "user/profile";

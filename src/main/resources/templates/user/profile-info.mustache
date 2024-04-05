@@ -56,12 +56,12 @@
                     </div>
                 {{/isEmployer}}
                 {{^isEmployer}}
-                    {{#pic}}
+                    {{#profileDTO.imgFilename}}
                         <img class="card-img" src="/upload/{{imgFilename}}" style="width:100%">
-                    {{/pic}}
-                    {{^pic}}
+                    {{/profileDTO.imgFilename}}
+                    {{^profileDTO.imgFilename}}
                         <img class="card-img" src="/../images/{{username}}.jpg" onerror="this.onerror=null; this.src='/../images/avatar.png'" style="width:100%">
-                    {{/pic}}
+                    {{/profileDTO.imgFilename}}
                     <div class="card-body">
                         <h4>{{name}}</h4>
                     </div>
