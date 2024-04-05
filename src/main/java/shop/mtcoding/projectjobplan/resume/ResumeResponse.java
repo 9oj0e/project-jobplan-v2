@@ -1,5 +1,6 @@
 package shop.mtcoding.projectjobplan.resume;
 
+import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -73,12 +74,14 @@ public class ResumeResponse {
         private String schoolName;
         private String major; // 전공
         private List<SkillDTO> skillList; // 보유 스킬
+        private String imgFilename;
         // 기타 정보
         private Double rating; // 평점
         private boolean isResumeOwner; // 이력서 주인 여부
         private boolean hasSubscribed; // 구독 여부
         private boolean hasRated; // 평가 여부
 
+        @Builder
         public DetailDTO(Resume resume, Double rating, boolean isResumeOwner, boolean hasSubscribed, boolean hasRated) {
             this.id = resume.getId();
             this.career = resume.getCareer();
@@ -95,12 +98,14 @@ public class ResumeResponse {
             this.schoolName = resume.getUser().getSchoolName();
             this.major = resume.getUser().getMajor();
             this.skillList = resume.getUser().getSkills().stream().map(skill -> new SkillDTO(skill.getName())).toList();
+            this.imgFilename = resume.getUser().getImgFilename();
             this.rating = rating;
             this.isResumeOwner = isResumeOwner;
             this.hasSubscribed = hasSubscribed;
             this.hasRated = hasRated;
         }
 
+        @Data
         public class SkillDTO {
             private String skillName;
 
@@ -116,37 +121,42 @@ public class ResumeResponse {
 
     @Data
     public static class ListingsDTO {
-        Page<ResumeDTO> resumeList;
-        List<Integer> pageList;
-        List<UserDTO> userList;
+        Page<ResumeDTO> resumeList; // 이력서 목록
+        List<Integer> pageList; // 페이지 번호
+        List<UserDTO> referenceList; // 추천 인재
         String keyword;
         String skill;
         String address;
 
-        public ListingsDTO(Pageable pageable, List<Resume> resumes, List<User> users, String skill, String address, String keyword) {
+        @Builder
+        public ListingsDTO(Pageable pageable, List<Resume> resumes, List<User> references, String skill, String address, String keyword) {
             List<ResumeDTO> resumeList = resumes.stream().map(resume -> new ResumeDTO(resume)).toList();
             this.resumeList = PagingUtil.pageConverter(pageable, resumeList);
             this.pageList = PagingUtil.getPageList(this.resumeList);
-            this.userList = users.stream().map(user -> new UserDTO(user)).toList();
+            this.referenceList = references.stream().map(user -> new UserDTO(user)).toList();
             this.skill = skill;
             this.address = address;
             this.keyword = keyword;
         }
 
+        @Data
         public class UserDTO {
             private int id;
             private String username;
             private String name;
             private String schoolName;
+            private String imgFilename;
 
             public UserDTO(User user) {
                 this.id = user.getId();
                 this.username = user.getUsername();
                 this.name = user.getName();
                 this.schoolName = user.getSchoolName();
+                this.imgFilename = user.getImgFilename();
             }
         }
 
+        @Data
         public class ResumeDTO {
             // resume_tb
             private Integer id;

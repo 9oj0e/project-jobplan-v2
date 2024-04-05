@@ -1,61 +1,61 @@
 -- user_tb (기업 유저)
 INSERT INTO user_tb
 (username, password, name, birthdate, gender, phone_number, address, email,
- is_employer, employer_id_number, business_name, created_at)
+ is_employer, employer_id_number, business_name, img_filename, created_at)
 VALUES ('emp1', '1234', '이해진', '1967-06-22', 'M', '01012345678', '전북', 'lhj@naver.com',
-        true, '0128275512', '네이버', now());
+        true, '0128275512', '네이버', 'emp1.jpg', now());
 INSERT INTO user_tb
 (username, password, name, birthdate, gender, phone_number, address, email,
- is_employer, employer_id_number, business_name, created_at)
+ is_employer, employer_id_number, business_name, img_filename, created_at)
 VALUES ('emp2', '1234', '김범수', '1966-03-27', 'M', '01012345678', '전남', 'briankim@kakao.com',
-        true, '0128275512', '카카오', now());
+        true, '0128275512', '카카오', 'emp2.jpg', now());
 INSERT INTO user_tb
 (username, password, name, birthdate, gender, phone_number, address, email,
- is_employer, employer_id_number, business_name, created_at)
+ is_employer, employer_id_number, business_name, img_filename, created_at)
 VALUES ('emp3', '1234', '켄타로', '1900-01-01', 'M', '01012345678', '서울', 'ly@yahoo.com',
-        true, '0128275512', '라인', now());
+        true, '0128275512', '라인', 'emp3.jpg', now());
 INSERT INTO user_tb
 (username, password, name, birthdate, gender, phone_number, address, email,
- is_employer, employer_id_number, business_name, created_at)
+ is_employer, employer_id_number, business_name, img_filename, created_at)
 VALUES ('emp4', '1234', '김범', '1978-10-07', 'M', '01012345678', '서울', 'beomkim@coupang.com',
-        true, '0128275512', '쿠팡', now());
+        true, '0128275512', '쿠팡', 'emp4.jpg', now());
 INSERT INTO user_tb
 (username, password, name, birthdate, gender, phone_number, address, email,
- is_employer, employer_id_number, business_name, created_at)
+ is_employer, employer_id_number, business_name, img_filename, created_at)
 VALUES ('emp5', '1234', '김봉진', '1976-10-10', 'M', '01012345678', '전남', 'bongjhin@baemin.com',
-        true, '0128275512', '배달의민족', now());
+        true, '0128275512', '배달의민족', 'emp5.jpg', now());
 
 -- user_tb (개인 유저)
 INSERT INTO user_tb
 (username, password, name, birthdate, gender, phone_number, address, email, education_level, school_name, major,
- is_employer, created_at)
+ is_employer, img_filename, created_at)
 VALUES ('user1', '1234', '류재성', '2000-01-01', 'M', '01012345678', '서울', 'hgd456@domain.com', '대졸', '서울대학교', '컴퓨터공학',
-        false, now());
+        false, 'user1.jpg', now());
 INSERT INTO user_tb
 (username, password, name, birthdate, gender, phone_number, address, email, education_level, school_name, major,
- is_employer, created_at)
+ is_employer, img_filename, created_at)
 VALUES ('user2', '1234', '장현정', '2000-01-01', 'M', '01012345678', '울산', 'lgt456@domain.com', '대졸', '영남대학교', '컴퓨터공학',
-        false, now());
+        false, 'user2.jpg', now());
 INSERT INTO user_tb
 (username, password, name, birthdate, gender, phone_number, address, email, education_level, school_name, major,
- is_employer, created_at)
+ is_employer, img_filename, created_at)
 VALUES ('user3', '1234', '김성재', '2000-01-01', 'M', '01012345678', '인천', 'hgb456@domain.com', '초대졸', '구미대학교', '소프트웨어공학',
-        false, now());
+        false, 'user3.jpg', now());
 INSERT INTO user_tb
 (username, password, name, birthdate, gender, phone_number, address, email, education_level, school_name, major,
- is_employer, created_at)
+ is_employer, img_filename, created_at)
 VALUES ('user4', '1234', '이서현', '2000-01-01', 'M', '01012345678', '제주', 'kdb456@domain.com', '초대졸', '부천대학교', '소프트웨어공학',
-        false, now());
+        false, 'user4.jpg', now());
 INSERT INTO user_tb
 (username, password, name, birthdate, gender, phone_number, address, email, education_level, school_name, major,
- is_employer, created_at)
+ is_employer, img_filename, created_at)
 VALUES ('user5', '1234', '조정현', '1996-04-01', 'M', '01012345678', '진주', 'hmc456@domain.com', '대졸', '경상국립대학교', '무역통상',
-        false, now());
+        false, 'user5.jpg', now());
 INSERT INTO user_tb
 (username, password, name, birthdate, gender, phone_number, address, email, education_level, school_name,
- is_employer, created_at)
+ is_employer, img_filename, created_at)
 VALUES ('user6', '1234', '전두광', '1931-01-18', 'M', '01012345678', '대전', 'jdg456@domain.com', '고졸', '하나고등학교',
-        false, now());
+        false, 'default/avatar.png', now());
 
 -- board_tb
 INSERT INTO board_tb

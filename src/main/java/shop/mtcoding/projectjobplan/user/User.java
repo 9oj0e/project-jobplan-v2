@@ -39,9 +39,8 @@ public class User {
     private Boolean isEmployer; // 사업자인지 userId, employerId
     private String employerIdNumber; // 사업자번호
     private String businessName; // 기업이름
-
-    private String imgFilename; // 파일 패스
-
+    // 이미지 파일 경로
+    private String imgFilename;
     // 참조 Entity
     @OrderBy("id desc")
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
@@ -50,16 +49,16 @@ public class User {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<Resume> resumes = new ArrayList<>();
 
-
-    // 사진이 null로 들어올때 디폴트 값 설정하기
     @PrePersist // 엔티티가 저장되기 전에 실행되는 메서드, 필드에 기본값 설정
     public void setDefaultImgFilename() {
-        if(imgFilename == null) {
-            imgFilename = "default.png";
+        if (imgFilename == null) { // null 일 때, 기본 경로
+            if (isEmployer) {
+                imgFilename = "default/business.png";
+            } else {
+                imgFilename = "default/avatar.png";
+            }
         }
     }
-
-
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Skill> skills = new ArrayList<>();
@@ -97,8 +96,8 @@ public class User {
         this.businessName = requestDTO.getBusinessName();
     }
 
-    public void picPost(UserRequest.PicDTO requestDTO, String webImgPath){
-        this.imgFilename = webImgPath ;
+    public void picPost(UserRequest.PicDTO requestDTO, String webImgPath) {
+        this.imgFilename = webImgPath;
 
     }
 }

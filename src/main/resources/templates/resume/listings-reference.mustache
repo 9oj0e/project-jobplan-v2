@@ -1,14 +1,14 @@
 <section class="section-body">
     <div class="div-recommendation mb-20">추천 인재</div>
 <div class="div-reference">
-    {{#page.userList}}
+    {{#page.referenceList}}
         <div onclick="location.href='?userid={{id}}'">
-        <img class="card-img" src="/../images/{{username}}.jpg" onerror="this.onerror=null; this.src='/../images/avatar.png'" style="width:75%; height: 75%">
+        <img class="card-img" src="/upload/{{imgFilename}}" style="width:75%; height: 75%">
         <div class="div-recommendation-text-1">{{schoolName}}</div>
         <!--<span><a href="" class="text-body"><i class="fa-regular fa-star"></i></a></span>-->
         <div class="div-recommendation-text-2">{{name}}</div>
     </div>
-    {{/page.userList}}
+    {{/page.referenceList}}
     </div>
     </div>
 </section>

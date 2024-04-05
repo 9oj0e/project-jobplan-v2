@@ -231,42 +231,42 @@ a {
 }
 
 .div-company-img-네이버 {
-    background-image: url(images/네이버.jpg);
+    background-image: url(../../../../upload/emp1.jpg);
     height: 180px;
     background-size: 100% 100%;
     border-radius: 20px;
 }
 
 .div-company-img-카카오 {
-    background-image: url(images/카카오.jpg);
+    background-image: url(../../../../upload/emp2.jpg);
     height: 180px;
     background-size: 100% 100%;
     border-radius: 20px;
 }
 
 .div-company-img-라인 {
-    background-image: url(images/라인.jpg);
+    background-image: url(../../../../upload/emp3.jpg);
     height: 180px;
     background-size: 100% 100%;
     border-radius: 20px;
 }
 
 .div-company-img-쿠팡 {
-    background-image: url(images/쿠팡.jpg);
+    background-image: url(../../../../upload/emp4.jpg);
     height: 180px;
     background-size: 100% 100%;
     border-radius: 20px;
 }
 
 .div-company-img-배달의민족 {
-    background-image: url(images/배달의민족.jpg);
+    background-image: url(../../../../upload/emp5.jpg);
     height: 180px;
     background-size: 100% 100%;
     border-radius: 20px;
 }
 
 .user-image1 {
-    background-image: url(images/user1.jpg);
+    background-image: url(../../../../upload/user1.jpg);
     width: 150px;
     height: 180px;
     background-size: 100% 100%;
@@ -274,7 +274,7 @@ a {
 }
 
 .user-image2 {
-    background-image: url(images/user2.jpg);
+    background-image: url(../../../../upload/user2.jpg);
     width: 150px;
     height: 180px;
     background-size: 100% 100%;
@@ -282,7 +282,7 @@ a {
 }
 
 .user-image3 {
-    background-image: url(images/user3.jpg);
+    background-image: url(../../../../upload/user3.jpg);
     width: 150px;
     height: 180px;
     background-size: 100% 100%;
@@ -290,7 +290,7 @@ a {
 }
 
 .user-image4 {
-    background-image: url(images/user4.jpg);
+    background-image: url(../../../../upload/user4.jpg);
     width: 150px;
     height: 180px;
     background-size: 100% 100%;
@@ -298,7 +298,7 @@ a {
 }
 
 .user-image5 {
-    background-image: url(images/user5.jpg);
+    background-image: url(../../../../upload/user5.jpg);
     width: 150px;
     height: 180px;
     background-size: 100% 100%;

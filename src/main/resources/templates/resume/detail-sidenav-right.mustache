@@ -16,12 +16,9 @@
                     <!-- 평점 end -->
                 </div>
                 <!-- 사진 start -->
-                {{#profileDTO.imgFilename}}
-                    <img class="card-img" src="/upload/{{imgFilename}}" style="width:100%">
-                {{/profileDTO.imgFilename}}
-                {{^profileDTO.imgFilename}}
-                    <img class="card-img" src="/../images/{{username}}.jpg" onerror="this.onerror=null; this.src='/../images/avatar.png'" alt="Card image" style="width:100%">
-                {{/profileDTO.imgFilename}}
+                <div>
+                    <img class="card-img" src="/upload/{{imgFilename}}" style="width:100%;">
+                </div>
                 <!-- 사진 end -->
                 <h4 class="card-title text-center">{{name}}</h4>
             </div>
