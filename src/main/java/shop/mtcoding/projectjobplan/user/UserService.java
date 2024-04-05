@@ -139,7 +139,7 @@ public class UserService {
         String webImgPath = null;
         if (isImgChanged) {
             String userImgFilename = UUID.randomUUID() + "_" + imgFilename.getOriginalFilename();
-            Path imgPath = Paths.get("./src/main/resources/static/upload/" + userImgFilename);
+            Path imgPath = Paths.get("./images/" + userImgFilename);
             try {
                 Files.write(imgPath, imgFilename.getBytes());
                 webImgPath = imgPath.toString().replace("\\", "/");
