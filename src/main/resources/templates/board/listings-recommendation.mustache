@@ -3,11 +3,13 @@
     <div class="div-recommendation-img">
         {{#page.recommendationList}}
             <div onclick="location.href='/boards/{{boardId}}'" style="cursor: pointer">
-                <img class="card-img" src="/upload/{{imgFilename}}">
-                <div class="div-recommendation-text-1">{{field}}
+                <div style="height: 80%; align-content: center">
+                    <img class="card-img" style="height: 100%" src="/upload/{{imgFilename}}">
+                </div>
+                <div class="div-recommendation-text-1" style="margin-left: 10%">{{field}}
                     <span><i class="fa-regular fa-star"></i></span>
                 </div>
-                <div class="div-recommendation-text-2">{{businessName}}</div>
+                <div class="div-recommendation-text-2" style="margin-left: 10%">{{businessName}}</div>
             </div>
         {{/page.recommendationList}}
         <!--

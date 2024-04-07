@@ -1,5 +1,5 @@
 {{^isEmployer}}
-    <div class="div-layout">
+    <div class="div-layout" id="offerList" style="display: none">
         <div class="div-header d-flex justify-content-between" style="text-align: end">
             <h2><b>받은 제안</b></h2>
             <form action="/users/{{sessionUser.id}}/resumes" method="get" class="justify-content-end">
@@ -45,7 +45,7 @@
     </div>
 {{/isEmployer}}
 {{#isEmployer}}
-    <div class="div-layout">
+    <div class="div-layout" id="offerList" style="display: none">
         <div class="div-header d-flex justify-content-between">
             <h3><b>나의 제안 현황</b></h3>
             <form action="/users/{{sessionUser.id}}/boards" method="get" class="justify-content-end">
