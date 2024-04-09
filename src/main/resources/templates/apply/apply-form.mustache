@@ -18,11 +18,6 @@
                     <table class="table table-hover" style="margin-bottom: 0px; text-align: center">
                         {{#resumeList}}
                             <tr>
-                                <td>
-                                    <form action="/resumes/{{resumeId}}/update-form" method="get">
-                                        <button class="btn btn-outline-primary">수정</button>
-                                    </form>
-                                </td>
                                 <td><small>{{createdAt}}</small></td>
                                 <td style="text-align: center">
                                     <a href="/resumes/{{resumeId}}"><small>{{resumeTitle}}</small></a>
