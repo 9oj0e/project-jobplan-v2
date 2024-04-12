@@ -3,7 +3,9 @@
 
 # 시연
 ## PPT
-[KDT 1차 미니프로젝트 4조 완성.pptx](https://github.com/9oj0e/project-job-plan/files/14553267/KDT.1.4.pptx)
+[KDT 2차 미니프로젝트 4조 최종(마무리).pdf](https://github.com/9oj0e/project-jobplan-v2/files/14957270/KDT.2.4.pdf)
+
+
 
 # 진행상황 확인
 (이미지를 클릭하시면 링크로 이동합니다.)
@@ -40,10 +42,7 @@
 </span>
 <br>
 
-## 프로젝트 아키텍쳐 : MVC 설계
-
-![image (1)](https://github.com/9oj0e/project-job-plan/assets/153602328/4a1059d5-6080-4683-921d-bd0a92a4197f)
-
+## 프로젝트 아키텍쳐 : RestAPI 설계
 
 ## 테이블 설계
 ![Screenshot_6](https://github.com/9oj0e/project-job-plan/assets/153602328/09a3287a-b0d2-48da-960a-96ddb952d411)
