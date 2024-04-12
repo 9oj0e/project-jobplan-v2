@@ -42,7 +42,7 @@
 </span>
 <br>
 
-## 프로젝트 아키텍쳐 : RestAPI 설계
+## 프로젝트 아키텍쳐 : MVC(SSR + Service) 설계
 
 ## 테이블 설계
 ![Screenshot_6](https://github.com/9oj0e/project-job-plan/assets/153602328/09a3287a-b0d2-48da-960a-96ddb952d411)
